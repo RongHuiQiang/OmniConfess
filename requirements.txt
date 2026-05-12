@@ -1,0 +1,10 @@
+numpy
+opencv-python
+librosa
+Pillow
+pycocoevalcap
+scikit-learn
+torch
+tqdm
+transformers
+zhipuai
