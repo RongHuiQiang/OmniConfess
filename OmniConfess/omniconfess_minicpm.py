@@ -25,9 +25,9 @@ import torch
 import json
 import os
 import argparse
-import cv2        # 导入 OpenCV 用于视频处理
-import librosa    # 导入 librosa 用于音频处理
-from PIL import Image  #导入 PIL 用于处理纯图像
+import cv2
+import librosa
+from PIL import Image
 import re
 import sys as _sys
 _sys.path.insert(0, os.path.dirname(__file__))
@@ -56,33 +56,30 @@ except ImportError:
     _SBERT_AVAILABLE = False
 from transformers import AutoTokenizer, AutoModel, BitsAndBytesConfig
 
-# 注意：移除了 vLLM，因为 Qwen-Omni 的双分支架构更适合使用 transformers 原生调用进行受控生成
 
-# 常量配置
 INF = 10
 TEMPERATURE = 0.6
-# 设定显存管理策略，防止多模态长序列导致 OOM
 os.environ["PYTORCH_ALLOC_CONF"] = "expandable_segments:True"
 
-# ================= 1. 多模态加载工具函数 =================
+# ================= 1. Multimodal loading utilities =================
 
 _BOXED_RE = re.compile(r'^\s*\\?boxed\s*\{(.*?)\}?\s*$', re.S)
 
 
 def unwrap_boxed(s):
-    """剥掉 `\\boxed{...}` 包装（含无闭合括号的那种）。
+    """Strip a `\\boxed{...}` wrapper, including the unclosed variety.
 
-    eval 的 Token-F1 删标点时不补空格，所以 `\\boxed{no}` 会退化成单词 `boxedno`
-    —— 多一个垃圾词且真答案词被吃掉，该条直接 0 分。haloquest 全量实测
-    13.18 → 16.82（+3.65，218 条变好 0 条变差）。旧写法 `lstrip('boxed{')`
-    从来没工作过：首字符 `\\` 不在字符集里。见 FINDINGS_0804.md §9.1。
+    Token-F1 removes punctuation without inserting a space, so `\\boxed{no}`
+    degenerates into the single word `boxedno`: a junk token is added and the real
+    answer word is swallowed. The older `lstrip('boxed{')` never worked, because the
+    leading character is a backslash, which is not in that character set.
     """
     t = str(s).strip()
     m = _BOXED_RE.match(t)
     return m.group(1).strip() if m else t
 
 def load_image(image_path):
-    """🌟 新增：加载单张图像数据"""
+    """Load a single image."""
     if not image_path or not os.path.exists(image_path): return None
     try:
         return Image.open(image_path).convert('RGB')
@@ -100,14 +97,13 @@ def load_video_frames(video_path, num_frames=8):
         cap.set(cv2.CAP_PROP_POS_FRAMES, idx)
         ret, frame = cap.read()
         if not ret: break
-        # 🌟 在这里直接做物理 Resize，设为 224x224
         frame = cv2.resize(frame, (224, 224))
         frames.append(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
     cap.release()
     return np.array(frames) if frames else None
     
 def load_audio_data(audio_path, sr=24000):
-    """加载音频数据"""
+    """Load audio data."""
     if not audio_path or not os.path.exists(audio_path):
         return None
     try:
@@ -117,7 +113,7 @@ def load_audio_data(audio_path, sr=24000):
         return None
 
 
-# ================= Token-Guard 防御插件 =================
+# ================= Token-Guard plugin =================
 class DualLayerAuditor:
     def __init__(self, model, processor, target_layers=[14, 20], store_hidden=False):
         self.model = model
@@ -134,7 +130,6 @@ class DualLayerAuditor:
             with torch.no_grad():
                 if self.store_hidden:
                     self.intermediate_hidden[layer_idx] = hidden_states[:, -1, :].clone()
-                # MiniCPM 的 LLM 分支特定层归一化与输出
                 normed_hidden = self.model.llm.model.norm(hidden_states)
                 logits = self.model.llm.lm_head(normed_hidden)
                 self.intermediate_logits[layer_idx] = logits[:, -1, :]
@@ -159,10 +154,11 @@ class DualLayerAuditor:
 STOP_WORDS = {"i", "is", "the", "a", "an", "and", "are", "was", "were", "be", "have", "has", "it", "they", "in", "on", "at", "to", "for", "of", "with", "yes", "no", "sound", "video", "audio", "hear", "heard", "see", "saw", "contains", "contain"}
 
 def calculate_hallu_penalty(report, tokenizer, thresholds=None):
-    """
-    计算幻觉惩罚分，并实时输出触发详情。
-    纯层间信号：res_20_fin, res_14_20, l20_conf（不依赖 MDI）。
-    thresholds: dict with calibratable threshold values (or None for defaults).
+    """Compute the hallucination penalty and report the triggering details.
+
+    Uses purely cross-layer signals: res_20_fin, res_14_20 and l20_conf. It does not
+    depend on MDI.
+    thresholds: dict of calibratable threshold values (or None for defaults).
     """
     if thresholds is None:
         thresholds = _DEFAULT_THRESHOLDS
@@ -170,7 +166,6 @@ def calculate_hallu_penalty(report, tokenizer, thresholds=None):
     token_id = report['token_id']
     token_str = tokenizer.decode([token_id]).lower().strip()
 
-    # 1. 基础过滤
     clean_word = ''.join(e for e in token_str if e.isalpha())
     if len(clean_word) <= 1 or clean_word in STOP_WORDS:
         return 0.0
@@ -178,10 +173,8 @@ def calculate_hallu_penalty(report, tokenizer, thresholds=None):
     penalty = 0.0
     triggered = []
 
-    # 2. 追踪晚期冲突 (L22 vs Final) —— 模型在最后时刻"突然改口"
     if report['res_20_fin'] > thresholds['res_20_fin']:
         p_inc = 0.5
-        # 加重条件：L22 置信度极高却被 final 推翻 → 强行覆盖
         if report['l20_conf'] > thresholds['l20_conf_late']:
             p_inc += 0.5
             triggered.append('LATE+CONF')
@@ -191,7 +184,6 @@ def calculate_hallu_penalty(report, tokenizer, thresholds=None):
         penalty += p_inc
         print(f"🚨 [AUDIT: LATE] Token: '{token_str}' | Res: {report['res_20_fin']:.2f} | L22_Conf: {report['l20_conf']:.2f} | Penalty: +{p_inc}", flush=True)
 
-    # 3. 追踪早期劫持 (L16 vs L22) —— 语言模型套话覆盖了感官/上下文
     if report['res_14_20'] > thresholds['res_14_20'] and report['l20_conf'] > thresholds['l20_conf_hijack']:
         p_inc = 0.6
         penalty += p_inc
@@ -237,11 +229,10 @@ def _get_minicpm_embeds(model, inputs):
 
 
 def safe_model_generate(model, processor, inputs, **gen_kwargs):
+    """MiniCPM-o-2.6 variant: obtain multimodal embeddings through
+    get_vllm_embedding and get_omni_embedding, then generate with model.llm.generate.
     """
-    MiniCPM-o-2.6 版：使用 get_vllm_embedding + get_omni_embedding 获取多模态 embeddings，
-    然后调用 model.llm.generate 生成。
-    """
-    print(f"\n    [GEN_DEBUG] ---> 进入 safe_model_generate (MiniCPM)...", flush=True)
+    print(f"\n    [GEN_DEBUG] ---> entering safe_model_generate (MiniCPM)...", flush=True)
     import traceback
 
     # Apply max_new_tokens_override if set via _args passthrough
@@ -297,15 +288,16 @@ def safe_model_generate(model, processor, inputs, **gen_kwargs):
     return out
 
 def softmax(x):
-    e_x = np.exp(np.array(x) - np.max(x)) # 增加数值稳定性
+    e_x = np.exp(np.array(x) - np.max(x))
     return e_x / e_x.sum(axis=0)
 
 
 def get_modality_indices(processor, input_ids, device, image_bound=None, audio_bounds=None):
-    """从 MiniCPM processor 输出的 image_bound/audio_bounds 获取模态索引。
+    """Read modality indices from the image_bound / audio_bounds tensors returned by
+    the MiniCPM processor.
 
-    MiniCPM 的 processor 直接返回 image_bound 和 audio_bounds 张量,
-    格式为 [[start, end], ...], 表示每个模态区间的 token 范围。
+    The processor returns them directly as [[start, end], ...], giving the token
+    range of each modality span.
     """
     v_idx = None
     a_idx = None
@@ -391,15 +383,14 @@ def get_passage_indices(input_ids, tokenizer, device):
 
 
 def calculate_entropy(logits):
-    """计算当前 Logits 的信息熵，用于观察模型纠结程度"""
+    """Entropy of the current logits, used to observe how uncertain the model is."""
     probs = torch.softmax(logits, dim=-1)
     return -torch.sum(probs * torch.log(probs + 1e-9), dim=-1).item()
 
 
 def safe_thinker_step_audit(model, processor, inputs, past_key_values=None, position_ids=None, **gen_kwargs):
-    """
-    极简 Forward 版：只负责单步前向计算，不涉及复杂的 generate 逻辑。
-    """
+    """Minimal forward pass: a single decoding step only, without any of the
+    generate() machinery."""
     valid_keys = ['input_ids', 'attention_mask', 'pixel_values', 'tgt_sizes',
                   'image_bound', 'audio_features', 'audio_feature_lens', 'audio_bounds']
     clean_inputs = {k: v for k, v in inputs.items() if k in valid_keys}
@@ -408,7 +399,6 @@ def safe_thinker_step_audit(model, processor, inputs, past_key_values=None, posi
         if isinstance(v, torch.Tensor) and torch.is_floating_point(v):
             clean_inputs[k] = v.to(torch.bfloat16)
 
-    # 🌟 调用 forward 而不是 generate
     outputs = model.llm(
         **clean_inputs,
         past_key_values=past_key_values,
@@ -417,7 +407,6 @@ def safe_thinker_step_audit(model, processor, inputs, past_key_values=None, posi
         return_dict=True
     )
     
-    # 拿到最后一个 Token 的 Logits
     next_logits = outputs.logits[:, -1, :]
     updated_cache = outputs.past_key_values
     
@@ -437,7 +426,6 @@ def parse_arguments():
                         help='Number of GPUs to use (tensor_parallel is handled by device_map in transformers)')
 
     # Data configuration
-    # 增加多模态数据集支持 (cmm, mmhalu 等)
     parser.add_argument('--datasets', type=str, default='cmm',
                         help='Dataset type: cmm, gsm, math, etc.')
     parser.add_argument('--data_root', type=str, default='./OmniHalluBench/cmm/',
@@ -449,8 +437,7 @@ def parse_arguments():
                         default='./phi_results/base_phi_hook_observe/',
                         help='Output directory for results')
 
-    # Algorithm parameters (保持 Phi-Decoding 核心参数不变)
-    parser.add_argument('--step_beam_size', type=int, default=2, # 多模态显存占用高，建议调小 beam_size
+    parser.add_argument('--step_beam_size', type=int, default=2,
                         help='Beam size for each step')
     parser.add_argument('--num_rollout', type=int, default=4,
                         help='Number of rollouts')
@@ -462,7 +449,7 @@ def parse_arguments():
                         help='Width pruning strategy')
     parser.add_argument('--depth_pruning_strategy', type=str, default='cluster',
                         help='Depth pruning strategy')
-    parser.add_argument('--cluster_num', type=int, default=2, # 通常设为 2 以符合 Phi-Decoding 论文
+    parser.add_argument('--cluster_num', type=int, default=2,
                         help='Number of clusters for clustering strategy')
     parser.add_argument('--threshold', type=float, default=0.7,
                         help='Threshold for early stopping')
@@ -646,7 +633,6 @@ def softmax(x):
     Compute softmax values for the input array with numerical stability.
     """
     x = np.array(x)
-    # 减去最大值防止 exp(x) 溢出 (Numerical Stability)
     e_x = np.exp(x - np.max(x))
     return e_x / e_x.sum(axis=0)
 
@@ -666,7 +652,7 @@ class PhiDecoder:
         self.halueval_prompt_version = getattr(args, 'halueval_prompt_version', 'v0')
         self.avh_prompt_version = getattr(args, 'avh_prompt_version', 'v0')
         self.model = None
-        self.processor = None  # 增加处理器
+        self.processor = None
         self.tokenizer = None
         self._sbert_model = None  # lazy-loaded for path_cluster_mode=sbert
         self.thresholds = load_threshold_overrides(args)
@@ -691,7 +677,6 @@ class PhiDecoder:
             return self_mod
         torch.nn.Module.smart_apply = _patched_smart_apply
 
-        # 1. 加载 MiniCPM-o-2.6 模型
         self.model = AutoModel.from_pretrained(
             model_path,
             trust_remote_code=True,
@@ -702,7 +687,6 @@ class PhiDecoder:
             init_tts=False,
         ).eval().cuda()
 
-        # 2. 加载 Tokenizer 和 Processor
         self.tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
         # MiniCPM stores its own processor internally
         self.processor = self.model.processor
@@ -713,7 +697,6 @@ class PhiDecoder:
         print(f"[MiniCPM] Loaded. VRAM: {torch.cuda.memory_allocated()/1e9:.1f} GB", flush=True)
         print(f"[MiniCPM] LLM layers: {len(self.model.llm.model.layers)}", flush=True)
 
-        # 设置随机种子
         np.random.seed(self.args.seed)
         torch.manual_seed(self.args.seed)
 
@@ -770,9 +753,10 @@ class PhiDecoder:
         return vectorizer.fit_transform(texts)
 
     def get_system_prompt(self, dataset_type):
-        """
-        结构化系统提示词 (MiniCPM-o-2.6 版)。
-        支持包含匹配、针对 CMM 二元验证任务、针对 AVH 单句描述、强化终止符和格式约束。
+        """Structured system prompt for MiniCPM-o-2.6.
+
+        Covers containment matching, the CMM binary verification task, the AVH
+        single-sentence description task, and the stop-token and format constraints.
         """
         # --use_base_prompt: return base v0 system prompt instead of GUARD prompt
         if getattr(self.args, 'use_base_prompt', False):
@@ -780,7 +764,6 @@ class PhiDecoder:
 
         omni_identity = "You are an expert multimodal assistant capable of perceiving auditory and visual inputs."
         
-        # --- 1. 针对 CMM (Yes/No) 数据集的深度优化 ---
         if "cmm" in dataset_type.lower():
             return (
                 "You are an expert audio-visual reporter. Your task is to provide a single-sentence narrative "
@@ -835,7 +818,6 @@ class PhiDecoder:
                     "Be strictly factual and do not hallucinate."
                 )
 
-        # --- 2. 🌟 新增：针对 AVH 数据集的极致单句描述优化 ---
         elif "avh" in dataset_type.lower():
             apv = getattr(self, 'avh_prompt_version', 'v0')
             if _AVH_PROMPTS_LOADED:
@@ -868,7 +850,6 @@ class PhiDecoder:
                 "Judgment: \\boxed{Yes} or \\boxed{No}"
             )
 
-        # --- 5. 纯文本抽取/问答任务 ---
         elif "halueval" in dataset_type.lower():
             hepv = getattr(self, 'halueval_prompt_version', 'v0')
             if _HALUEVAL_PROMPTS_LOADED:
@@ -907,7 +888,6 @@ class PhiDecoder:
                 "or 'No' if it contains any factual inconsistency."
             )
 
-        # 默认回退
         return f"{omni_identity}\nSolve the problem step by step based on the provided content."
 
     def cluster_responses(self, responses, advantages):
@@ -915,7 +895,6 @@ class PhiDecoder:
         Cluster responses using TF-IDF and K-means.
         Identify the 'consensus' reasoning paths.
         """
-        # 过滤空响应
         valid_indices = [i for i, r in enumerate(responses) if r.strip()]
         if len(valid_indices) < self.args.cluster_num:
             return None, {"state": "cannot cluster", "reason": "too few valid responses"}
@@ -923,16 +902,12 @@ class PhiDecoder:
         try:
             valid_responses = [responses[i] for i in valid_indices]
 
-            # 文本向量化
             X = self._vectorize_texts(valid_responses)
 
-            # 执行聚类
-            # 这里的 n_clusters 使用参数配置，通常为 2
             k = min(self.args.cluster_num, len(valid_responses))
             kmeans = KMeans(n_clusters=k, n_init=10, random_state=self.args.seed)
             kmeans.fit(X)
 
-            # 按簇对响应索引进行分组
             clusters = [[] for _ in range(k)]
             for idx, label in enumerate(kmeans.labels_):
                 clusters[label].append(valid_indices[idx])
@@ -946,32 +921,29 @@ class PhiDecoder:
             return None, {"state": "fail", "error": str(e)}
 
     def select_response(self, responses, logprobs, advantages):
-        """
-        🌟 优化点 2：动态聚类权重 (Trust-Weighted Clustering)
-        结合簇的"共识大小"和"内部平均优势(置信度)"，打破多数派幻觉。
+        """Trust-weighted clustering.
+
+        Combines the consensus size of a cluster with its mean internal advantage
+        (confidence), so that a large but low-confidence cluster does not
+        automatically win.
         """
         if self.args.strategy == "cluster":
-            # 过滤有效索引
             valid_indices = [idx for idx, r in enumerate(responses) if r.strip()]
 
-            # 情况 A: 全部响应为空
             if len(valid_indices) == 0:
                 print('Warning: All final responses are empty. Sampling by negative advantage.')
                 weights = softmax([-adv/TEMPERATURE for adv in advantages])
                 return np.random.choice(len(advantages), p=weights)
 
-            # 情况 B: 有效响应太少，无法进行有意义的聚类
             if len(valid_indices) < self.args.cluster_num:
                 print('Warning: Too few valid responses for clustering. Sampling by advantage.')
                 weights = softmax([advantages[i]/TEMPERATURE for i in valid_indices])
                 return np.random.choice(valid_indices, p=weights)
 
             try:
-                # 准备聚类数据
                 valid_responses = [responses[i] for i in valid_indices]
                 valid_advantages = [advantages[i] for i in valid_indices]
 
-                # 向量化与 KMeans
                 X = self._vectorize_texts(valid_responses)
                 
                 k = self.args.cluster_num
@@ -979,43 +951,35 @@ class PhiDecoder:
                 kmeans.fit(X)
                 cluster_labels = kmeans.labels_
 
-                # 分组
                 cluster_list = [[] for _ in range(k)]
                 for idx, label in enumerate(cluster_labels):
                     cluster_list[label].append(idx)
                 
-                # 过滤掉偶然产生的空簇
                 cluster_list = [c for c in cluster_list if len(c) > 0]
                 
                 # ==========================================================
-                # 🌟 核心修改：Cluster_Score 动态权重评估
                 # ==========================================================
-                ALPHA = 0.5  # 权重因子：0.5 表示规模和质量各占 50%
+                ALPHA = 0.5
                 total_valid = len(valid_indices)
                 
-                # 1. 计算 Size_Ratio
                 cluster_size_ratios = [len(c) / total_valid for c in cluster_list]
                 
-                # 2. 计算 Avg_Advantage 并归一化 (Softmax 映射到 0~1 区间)
                 cluster_avg_advs = [np.mean([valid_advantages[idx] for idx in c]) for c in cluster_list]
                 cluster_adv_scores = softmax([adv / TEMPERATURE for adv in cluster_avg_advs])
                 
-                # 3. 融合得分
                 cluster_scores = []
                 for i in range(len(cluster_list)):
                     score = ALPHA * cluster_size_ratios[i] + (1.0 - ALPHA) * cluster_adv_scores[i]
                     cluster_scores.append(score)
                     
-                # 4. 选出综合得分最高的簇
                 best_cluster_idx = int(np.argmax(cluster_scores))
                 target_cluster = cluster_list[best_cluster_idx]
                 
-                print(f"    [CLUSTER DEBUG] 簇分布: {[len(c) for c in cluster_list]}, "
-                      f"规模分: {[round(s,3) for s in cluster_size_ratios]}, "
-                      f"质量分: {[round(s,3) for s in cluster_adv_scores]} "
-                      f"-> 选中簇 {best_cluster_idx}", flush=True)
+                print(f"    [CLUSTER DEBUG] cluster sizes: {[len(c) for c in cluster_list]}, "
+                      f"size scores: {[round(s,3) for s in cluster_size_ratios]}, "
+                      f"quality scores: {[round(s,3) for s in cluster_adv_scores]} "
+                      f"-> selected cluster {best_cluster_idx}", flush=True)
 
-                # 在选中的优质簇内，根据 Advantage 进行加权采样
                 cluster_adv_list = [valid_advantages[idx] for idx in target_cluster]
                 weights = softmax([adv/TEMPERATURE for adv in cluster_adv_list])
                 
@@ -1033,76 +997,57 @@ class PhiDecoder:
             raise ValueError(f"Unknown strategy: {self.args.strategy}")
         
     def process_example(self, example, system_prompt):
-        """
-        针对多模态数据优化的 Phi-Decoding 流水线控制器。
-        修复：
-        1. 路径拼接逻辑：解决 has_video/audio 为 false 的物理路径问题。
-        2. 实时日志：在 nohup 中明确打印媒体加载状态。
-        3. 轨迹挂载：确保审计数据 (panoramic_audit) 完整进入 traj_info。
-        """
+        """Pipeline controller for a single multimodal example."""
         import os
 
-        # 1. 初始化跟踪变量与统计
         token_stats = {"input": 0, "output": 0}
         rollout_stats = {"total": 0, "saved": 0}
 
-        # 初始化核心轨迹池
         traj_pool = [[] for _ in range(self.args.num_foresight)]
         step_pool = [[] for _ in range(self.args.num_foresight)]
         prob_pool = [[] for _ in range(self.args.num_foresight + 1)]
         adv_pool = [[] for _ in range(self.args.num_foresight + 1)]
 
-        # 🌟 2. 增强型多模态数据加载 (新增纯图像支持)
-        # 🌟 2. 增强型多模态数据加载 (新增纯图像支持)
         v_rel = example.get('video') or example.get('video_path') or ""
         a_rel = example.get('audio') or example.get('audio_path') or ""
-        i_rel = example.get('image') or example.get('image_path') or "" # 👈 新增图像提取
+        i_rel = example.get('image') or example.get('image_path') or ""
         
         # ==========================================================
-        # 🎯 核心修复：智能路径解析器 (Smart Path Resolver)
         # ==========================================================
-        json_dir = os.path.dirname(self.args.data_path) # 直接获取 JSON 所在的真实目录 (如 .../dataset/PhD)
+        json_dir = os.path.dirname(self.args.data_path)
         
         def resolve_media_path(rel_path):
             if not rel_path: return ""
             clean_rel = rel_path.lstrip('./')
             
-            # 策略 1: 优先基于 JSON 文件所在的同级目录拼接 (完美解决 PhD 数据集丢路径问题)
             path1 = os.path.abspath(os.path.join(json_dir, clean_rel))
             if os.path.exists(path1): return path1
             
-            # 策略 2: 基于 Bash 传进来的全局 data_root 拼接 (兼容 CMM 等旧逻辑)
             path2 = os.path.abspath(os.path.join(self.args.data_root, clean_rel))
             if os.path.exists(path2): return path2
             
-            # 策略 3: 终极容错，强制塞入 PhD 查找
             path3 = os.path.abspath(os.path.join(self.args.data_root, "PhD", clean_rel))
             if os.path.exists(path3): return path3
             
-            return path1 # 都找不到的话，返回策略 1 的路径，交由后续的 train/val 替换逻辑处理
+            return path1
 
-        # 重新应用解析器获取绝对路径
         v_path = resolve_media_path(v_rel)
         a_path = resolve_media_path(a_rel)
         i_path = resolve_media_path(i_rel)
         # ==========================================================
 
-        # 下面继续保留原本的加载逻辑
         pixel_values = None
         if v_rel and os.path.exists(v_path):
             pixel_values = load_video_frames(v_path, num_frames=8)
-            print(f"✅ [MEDIA LOAD] 视频加载成功: {v_path}", flush=True)
+            print(f"✅ [MEDIA LOAD] video loaded: {v_path}", flush=True)
             
         audio_values = None
         if a_rel and os.path.exists(a_path):
             audio_values = load_audio_data(a_path)
-            print(f"✅ [MEDIA LOAD] 音频加载成功: {a_path}", flush=True)
+            print(f"✅ [MEDIA LOAD] audio loaded: {a_path}", flush=True)
 
-        # 👈 新增：加载纯图像
-        # 👈 新增：加载纯图像
         image_values = None
         if i_rel:
-            # 🌟 核心修复：如果找不到图片，自动在 train2014 和 val2014 之间切换查找！
             if not os.path.exists(i_path):
                 if 'val2014' in i_path:
                     i_path = i_path.replace('val2014', 'train2014')
@@ -1111,36 +1056,33 @@ class PhiDecoder:
 
             if os.path.exists(i_path):
                 image_values = load_image(i_path)
-                print(f"✅ [MEDIA LOAD] 图像加载成功: {i_path}", flush=True)
+                print(f"✅ [MEDIA LOAD] image loaded: {i_path}", flush=True)
             else:
-                print(f"❌ [MEDIA ERROR] 图像路径无效: {i_path}", flush=True)
+                print(f"❌ [MEDIA ERROR] invalid image path: {i_path}", flush=True)
 
         example['pixel_values'] = pixel_values
         example['audio_values'] = audio_values
-        example['image_values'] = image_values # 👈 注入图像张量
+        example['image_values'] = image_values
         
         pixel_values = None
         if v_rel:
             if os.path.exists(v_path):
                 pixel_values = load_video_frames(v_path, num_frames=8)
-                print(f"✅ [MEDIA LOAD] 视频加载成功: {v_path}", flush=True)
+                print(f"✅ [MEDIA LOAD] video loaded: {v_path}", flush=True)
             else:
-                print(f"❌ [MEDIA ERROR] 视频路径无效: {v_path}", flush=True)
+                print(f"❌ [MEDIA ERROR] invalid video path: {v_path}", flush=True)
                 
         audio_values = None
         if a_rel:
             if os.path.exists(a_path):
                 audio_values = load_audio_data(a_path)
-                print(f"✅ [MEDIA LOAD] 音频加载成功: {a_path}", flush=True)
+                print(f"✅ [MEDIA LOAD] audio loaded: {a_path}", flush=True)
             else:
-                print(f"❌ [MEDIA ERROR] 音频路径无效: {a_path}", flush=True)
+                print(f"❌ [MEDIA ERROR] invalid audio path: {a_path}", flush=True)
 
-        # 注入张量供后续 _process_step 使用
         example['pixel_values'] = pixel_values
         example['audio_values'] = audio_values
 
-        # 3. 初始化 Beam 状态
-        # 改进 C：avhbench 专用音视频分步 foresight 初始化
         if "avh" in self.args.datasets.lower():
             previous_steps = []
             for _b in range(self.args.step_beam_size):
@@ -1152,7 +1094,6 @@ class PhiDecoder:
             previous_steps = ["Perceptual analysis:\n\n" for _ in range(self.args.step_beam_size)]
         previous_values = [0.0 for _ in range(self.args.step_beam_size)]
 
-        # 4. 初始化轨迹信息 (增强 media_info 字段)
         if "reclor" in self.args.datasets or "logiqa" in self.args.datasets:
             q_text = f"Passage: {example['context']}\nQuestion: {example['question']}\n" + \
                      f"A. {example['answers'][0]}\nB. {example['answers'][1]}\n" + \
@@ -1195,7 +1136,6 @@ class PhiDecoder:
             }
         }
 
-        # 5. Multi-step Foresight 迭代 (思考过程)
         for step in range(self.args.num_foresight):
             step_results = self._process_step(
                 example,
@@ -1224,7 +1164,6 @@ class PhiDecoder:
             prob_pool[step] = step_results["logprobs"]
             adv_pool[step] = step_results["advantages"]
 
-        # 6. 生成最终响应 (下结论阶段)
         final_result = self._generate_final_response(
             example,
             system_prompt,
@@ -1237,7 +1176,6 @@ class PhiDecoder:
 
         traj_info['token_num'] = token_stats["input"] + token_stats["output"]
 
-        # 7. 最终数据打包
         return {
             "response": final_result["response"],
             "token_stats": token_stats,
@@ -1252,13 +1190,12 @@ class PhiDecoder:
         }
     
     def _process_step(self, example, system_prompt, previous_steps, previous_values, token_stats, rollout_stats, traj_info):
-        """
-        🌟 终极修复版：解决 4D Attention Mask 污染与 3D RoPE 位置编码更新问题
-        """
+        """Single decoding step, handling the 4D attention mask and the 3D RoPE
+        position-id update."""
         stop_foresight = False
         pixel_values = example.get('pixel_values')
         audio_values = example.get('audio_values')
-        image_values = example.get('image_values')  # 👈 直接加在这里！
+        image_values = example.get('image_values')
 
         all_responses_first_stage = []
         all_logprobs_first_stage = []
@@ -1284,7 +1221,6 @@ class PhiDecoder:
             token_stats["input"] += m_inputs.input_ids.numel()
 
             # =====================================================================
-            # 🚀 MiniCPM 特征提取：直接使用 get_vllm_embedding + get_omni_embedding
             # =====================================================================
             inputs_embeds_f = _get_minicpm_embeds(self.model, m_inputs)
             print(f"✅ [DEBUG] MiniCPM embeddings obtained, shape: {inputs_embeds_f.shape}", flush=True)
@@ -1293,7 +1229,6 @@ class PhiDecoder:
             pos_ids_f = m_inputs.get('position_ids', None) if isinstance(m_inputs, dict) else getattr(m_inputs, 'position_ids', None)
 
             # =====================================================================
-            # 🚀 审计线屏蔽 — 使用 MiniCPM 的 image_bound / audio_bounds
             # =====================================================================
             m_nv = attn_mask_f.clone()
             _img_bound = m_inputs.get('image_bound', None) if isinstance(m_inputs, dict) else getattr(m_inputs, 'image_bound', None)
@@ -1302,24 +1237,21 @@ class PhiDecoder:
             if v_idx is not None:
                 m_nv[:, v_idx] = 0
             if a_idx is not None:
-                m_nv[:, a_idx] = 0  # 🌟 修复：必须把音频也屏蔽掉，才能审计音频幻觉！
+                m_nv[:, a_idx] = 0
             is_text_only = (v_idx is None and a_idx is None)  # P1: skip CD-Confess for text-only
 
-            # P7: Passage-MDI — 纯文本数据集用 passage mask 替代 modality mask
             if is_text_only and not getattr(self.args, 'disable_passage_mdi', False) \
                     and self.args.datasets.lower() in ('halueval', 'pubmedqa', 'ragtruth', 'summedits'):
                 passage_idx = get_passage_indices(m_inputs.input_ids, self.tokenizer, self.model.device)
                 if passage_idx is not None and len(passage_idx) > 0:
                     m_nv[:, passage_idx] = 0
-                    is_text_only = False  # 让 CD-Confess 和 Layer-Confess 正常运行
-                    print(f"    📖 [Passage-MDI] 屏蔽 {len(passage_idx)} 个 passage token (idx {passage_idx[0].item()}–{passage_idx[-1].item()})", flush=True)
+                    is_text_only = False
+                    print(f"    📖 [Passage-MDI] masking {len(passage_idx)} passage tokens (idx {passage_idx[0].item()}–{passage_idx[-1].item()})", flush=True)
 
             # ================================================================
-            # avhbench 标记（用于最终生成分支判断）
             # ================================================================
             is_avhbench = "avh" in self.args.datasets.lower()
 
-            # 开始 Rollout
             for rollout_idx in range(self.args.num_rollout):
                 torch.cuda.empty_cache()
                 _dump_records = []  # per-token internals for --dump_internals
@@ -1380,16 +1312,11 @@ class PhiDecoder:
                                     _normed = self.model.llm.model.norm(h_repaired.unsqueeze(0))
                                     logits_f = self.model.llm.lm_head(_normed).squeeze(0)
 
-                        # 1. 获取带有感官 (Full) 和剥夺感官 (No-Vision/Audio) 的概率
-                        # 1. 获取两组概率分布
                         # =====================================================================
-                        # 🚀 终极提升版：CD-Confess (对比解码 + 动态自省) - 修复变量冲突版
                         # =====================================================================
-                        # 1. 预采样一个词来探测"自省"信号 (先不修改原始 logits，只做探测)
                         temp_probs = torch.softmax(logits_f / TEMPERATURE, dim=-1)
                         token_id = torch.multinomial(temp_probs, num_samples=1).item()
                         
-                        # 🌟 修复点：改用 prob_f_val 和 prob_nv_val，绝不污染 p_full 和 p_nv (KV-Cache)
                         prob_f_val = temp_probs[0, token_id].item()
                         prob_nv_val = torch.softmax(out_nv.logits[:, -1, :] / TEMPERATURE, dim=-1)[0, token_id].item()
                         mdi_av = (prob_f_val - prob_nv_val) / (prob_f_val + 1e-9)
@@ -1397,24 +1324,20 @@ class PhiDecoder:
                         token_str = self.tokenizer.decode([token_id]).lower().strip()
                         clean_word = ''.join(e for e in token_str if e.isalpha())
 
-                        # 🌟 触发条件：MDI 极低（幻觉嫌疑）且不是短词
                         # P1: skip for text-only; P2: skip EOS and \boxed tokens
                         _mdi_thresh = self.thresholds['mdi_threshold']
                         if (mdi_av < _mdi_thresh and len(clean_word) > 3 and clean_word not in STOP_WORDS
                                 and not is_text_only
                                 and token_id != self.tokenizer.eos_token_id
                                 and 'boxed' not in clean_word):
-                            print(f"    💡 [Self-Confess] 发现先验陷阱: '{token_str}' (MDI: {mdi_av:.2f}, thresh: {_mdi_thresh})，启动【对比探索模式】", flush=True)
+                            print(f"    💡 [Self-Confess] prior trap detected: '{token_str}' (MDI: {mdi_av:.2f}, thresh: {_mdi_thresh}); entering contrastive exploration mode", flush=True)
 
-                            # 【黑科技公式】：强行放大那些"只有看了图/听了音才产生的特征"，压制"瞎编特征"
                             alpha = self.thresholds['cd_alpha']
                             blind_logits = out_nv.logits[:, -1, :]
                             refined_logits = logits_f + alpha * (logits_f - blind_logits)
                             
-                            # 在重塑后的概率分布中重新采样
                             probs_f = torch.softmax(refined_logits / TEMPERATURE, dim=-1)
                             
-                            # 为了安全，把刚才那个探测出来的幻觉词彻底屏蔽掉
                             if getattr(self.args, 'cd_mode', 'hard') == 'soft':
                                 _sf = getattr(self.args, 'cd_soft_factor', 0.1)
                                 probs_f[0, token_id] *= _sf
@@ -1423,23 +1346,19 @@ class PhiDecoder:
                                 probs_f[0, token_id] = 0.0
                             probs_f = probs_f / probs_f.sum(dim=-1, keepdim=True)
                             
-                            # 进行二次采样 (真正的决定)
                             next_id = torch.multinomial(probs_f, num_samples=1)
                             token_id = next_id.item()
                             
-                            # 🌟 [必须更新] 更新概率值，供后续的 Penalty 审计和 Logprob 累加使用
                             pf_val = torch.softmax(logits_f, dim=-1)[0, token_id].item()
                             pnv_val = torch.softmax(out_nv.logits[:, -1, :] / TEMPERATURE, dim=-1)[0, token_id].item()  # P0: fix temperature mismatch
                             mdi_av = (pf_val - pnv_val) / (pf_val + 1e-9)
-                            print(f"    🔄 [CD-Correction] 探索出更具感官依据的词: '{self.tokenizer.decode([token_id]).strip()}'", flush=True)
+                            print(f"    🔄 [CD-Correction] found a more sensory-grounded token: '{self.tokenizer.decode([token_id]).strip()}'", flush=True)
                             
                         else:
-                            # 正常情况：直接沿用第一次探测的采样结果
                             next_id = torch.tensor([[token_id]], device=self.model.device)
                             token_id = next_id.item()
-                            pf_val = prob_f_val    # 直接使用第一轮获取的概率
-                            pnv_val = prob_nv_val  # 同步一下盲态概率
-                        # 4. 继续原来的逻辑
+                            pf_val = prob_f_val
+                            pnv_val = prob_nv_val
                         _report = {
                             "token_id": token_id,
                             "res_14_20": torch.norm(torch.softmax(l16_logits, dim=-1) - torch.softmax(l22_logits, dim=-1), p=2).item(),
@@ -1468,15 +1387,12 @@ class PhiDecoder:
 
                         curr_ids = next_id
                         
-                        # 更新 Attention Mask (正常添加 2D 维度的 1)
                         new_bit = torch.ones((1, 1), device=self.model.device, dtype=m_f_step.dtype)
                         m_f_step = torch.cat([m_f_step, new_bit], dim=-1)
                         m_nv_step = torch.cat([m_nv_step, new_bit], dim=-1)
                         
-                        # 🌟 核心修复 2：动态推进 3D 位置编码 (兼容 mRoPE)
                         if pos_ids_step is not None:
                             if i == 0:
-                                # 截取最后一个位置并加 1 (使用 ... 支持 1D 和 3D 的自适应切片)
                                 pos_ids_step = pos_ids_step[..., -1:] + 1
                             else:
                                 pos_ids_step = pos_ids_step + 1
@@ -1484,7 +1400,6 @@ class PhiDecoder:
                     response = self.tokenizer.decode(generated_ids_list, skip_special_tokens=True).strip()
                     logprob = acc_logprob / (len(generated_ids_list) + 1e-9)
                     
-                    # 🌟 优化点 1：一票否决制 (Lethal Penalty)
                     _pcs = traj_info['path_confess_stats']
                     _pcs['num_paths_explored'] += 1
                     _pcs['max_penalty_seen'] = max(_pcs['max_penalty_seen'], float(total_hallu_penalty))
@@ -1494,11 +1409,10 @@ class PhiDecoder:
                         advantage = logprob - (total_hallu_penalty * 0.8)
                         print(f"    🔓 [BYPASS_PATH] penalty={total_hallu_penalty:.2f}, advantage={advantage:.4f} (no veto)", flush=True)
                     elif total_hallu_penalty >= _veto_thresh:
-                        # 赋值极小值，而非 -inf，防止后续 np.mean() 崩溃返回 NaN
                         advantage = -10000.0
                         logprob = -10000.0
                         _pcs['num_paths_vetoed'] += 1
-                        print(f"    🚨 [LETHAL PENALTY] 触发一票否决! 幻觉分数: {total_hallu_penalty:.2f} (thresh: {_veto_thresh})。路径被强行抹杀。", flush=True)
+                        print(f"    🚨 [LETHAL PENALTY] veto triggered. Hallucination score: {total_hallu_penalty:.2f} (thresh: {_veto_thresh}). Path discarded.", flush=True)
                     else:
                         advantage = logprob - (total_hallu_penalty * 0.8)
 
@@ -1527,11 +1441,9 @@ class PhiDecoder:
                 traj_info['_dump_internals'] = []
             traj_info['_dump_internals'].extend(_all_dump_records)
 
-        # --- Stage 2: 宽度剪枝 (Width Pruning) ---
         if self.args.width_pruning_strategy != "none" and self.args.width_pruning_strategy != "":
             keep_foresight_list = []
             
-            # 🌟 在剪枝前，物理隔离被"一票否决"的毒瘤路径，防止它们拉低全局均值
             safe_indices = [i for i, logp in enumerate(all_logprobs_first_stage) if logp > -9000.0]
             
             if self.args.width_pruning_strategy == "low_sigma" and len(safe_indices) > 0:
@@ -1539,34 +1451,29 @@ class PhiDecoder:
                 mean = np.mean(safe_logprobs)
                 std = np.std(safe_logprobs)
                 for idx in safe_indices:
-                    # 只在安全候选者中进行 Sigma 剪枝
                     if all_logprobs_first_stage[idx] > mean - self.args.sigma_rate * std:
                         keep_foresight_list.append(idx)
             else:
-                # 如果全部被否决（极端幻觉），或者不使用 low_sigma，保留未被彻底判死刑的
                 keep_foresight_list = safe_indices.copy()
 
             if len(keep_foresight_list) < self.args.step_beam_size:
-                print(f"⚠️ 剪枝后仅剩 {len(keep_foresight_list)} 条，准备补充安全备选...", flush=True)
+                print(f"⚠️ only {len(keep_foresight_list)} candidates left after pruning; topping up with safe fallbacks...", flush=True)
                 
-                # 1. 找出还没被选入，且【绝对安全】（没有被一票否决）的路径索引
                 safe_available = [
                     i for i in range(len(all_logprobs_first_stage)) 
                     if i not in keep_foresight_list and all_logprobs_first_stage[i] > -9000.0
                 ]
                 
-                # 2. 如果还有安全的备选可以加
                 if safe_available:
                     num_to_add = min(self.args.step_beam_size - len(keep_foresight_list), len(safe_available))
                     
-                    # 🌟 核心修复：不掷骰子了，直接按 Logprob 降序排列，取最好的前几个
                     safe_available.sort(key=lambda x: all_logprobs_first_stage[x], reverse=True)
                     additional_indices = safe_available[:num_to_add]
                     
                     keep_foresight_list.extend(additional_indices)
-                    print(f"    ➕ 已按优劣顺序补充 {num_to_add} 条安全路径。", flush=True)
+                    print(f"    ➕ topped up with {num_to_add} safe paths, best first.", flush=True)
                 else:
-                    print("    ⚠️ 没有多余的安全路径可供补充，Beam Size 将临时缩小。", flush=True)
+                    print("    ⚠️ no spare safe paths available; the beam size will shrink for this step.", flush=True)
                     traj_info['path_confess_stats']['beam_shrink_occurred'] = True
 
             keep_foresight_list.sort()
@@ -1576,13 +1483,11 @@ class PhiDecoder:
             filtered_logprobs = [all_logprobs_first_stage[i] for i in keep_foresight_list]
             filtered_advantages = [all_advantages_first_stage[i] for i in keep_foresight_list]
 
-        # --- Stage 3: 路径补全 (Completion Stage) ---
-        # --- Stage 3: 路径补全 (Completion Stage) ---
         completed_responses = []
         completed_logprobs = []
         completed_advantages = []
 
-        print(f"🔄 正在对筛选出的 {len(keep_foresight_list)} 个候选路径进行深度补全...", flush=True)
+        print(f"🔄 running deep completion for the {len(keep_foresight_list)} selected candidate paths...", flush=True)
 
         for idx in range(len(keep_foresight_list)):
             response = all_responses[idx]
@@ -1592,7 +1497,6 @@ class PhiDecoder:
             p_str = self.processor.tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
             if isinstance(p_str, list): p_str = p_str[0]
             
-            # 过滤掉模型在第一阶段可能误生成的特征词
             clean_resp = response.replace("<|video|>", "").replace("<|audio|>", "").replace("<|vision_start|>", "").replace("<|vision_end|>", "")
             inputs_text = p_str.replace(self.tokenizer.eos_token, "").strip() + previous_steps[beam_idx] + clean_resp
 
@@ -1602,7 +1506,6 @@ class PhiDecoder:
             input_len = m_inputs.input_ids.shape[1]
 
             with torch.inference_mode():
-                # 🌟 注意：这里必须是你之前修改好的 safe_model_generate
                 out = safe_model_generate(
                     self.model, self.processor, m_inputs,
                     max_new_tokens=256,
@@ -1643,7 +1546,6 @@ class PhiDecoder:
             torch.cuda.empty_cache()
             import gc; gc.collect()
 
-        # --- Stage 4: 聚类选择与早停检查 (Clustering & Final Selection) ---
         try:
             k_num = self.args.cluster_num
             # Guard: need at least k_num non-empty responses for clustering
@@ -1679,17 +1581,13 @@ class PhiDecoder:
             if largest_ratio >= self.args.threshold:
                 stop_foresight = True
 
-            # --- 6. 结构化全景轨迹信息 (Trajectory Recording) ---
             step_info = {
                 'first_stage': {
-                    # 完整保留所有候选文本和对应的优势得分，方便对比被惩罚前后的差异
                     'candidates': [
                         {
                             'text': text,
-                            # 🌟 增加 float() 强转，防止 NumPy 浮点数导致 JSON 崩溃
                             'logprob': round(float(all_logprobs_first_stage[i]), 4),
                             'advantage': round(float(all_advantages_first_stage[i]), 4),
-                            # 🌟 增加 bool() 强转，解决 NumPy 布尔值无法序列化的 Bug
                             'is_vetoed': bool(all_advantages_first_stage[i] <= -9000.0)
                         } for i, text in enumerate(all_responses_first_stage)
                     ]
@@ -1697,7 +1595,6 @@ class PhiDecoder:
                 'width_pruning_survivors': keep_foresight_list,
                 'second_stage': {
                     'completions': completed_responses,
-                    # 🌟 同样加上 float() 强转
                     'logprobs': [round(float(x), 4) for x in completed_logprobs]
                 },
                 'clustering': {
@@ -1727,7 +1624,7 @@ class PhiDecoder:
             }
 
         except Exception as e:
-            print(f'⚠️ 聚类阶段异常: {e}。退回到纯优势采样。', flush=True)
+            print(f'⚠️ clustering failed: {e}. Falling back to advantage-only sampling.', flush=True)
             traj_info['path_confess_stats']['cluster_fallback_occurred'] = True
             # BUG FIX: completed_advantages / keep_foresight_list may be empty when all beams
             # produced empty responses; fall back entirely to first-stage results in that case.
@@ -1737,13 +1634,13 @@ class PhiDecoder:
                 logp_source = completed_logprobs
                 idx_source  = keep_foresight_list
             else:
-                print('⚠️ completed列表全空，改用first-stage结果。', flush=True)
+                print('⚠️ the completed list is empty; using first-stage results instead.', flush=True)
                 adv_source  = all_advantages_first_stage
                 resp_source = all_responses_first_stage
                 logp_source = all_logprobs_first_stage
                 idx_source  = list(range(len(all_responses_first_stage)))
             if not adv_source:
-                print('⚠️ 优势列表全空，使用均匀权重。', flush=True)
+                print('⚠️ the advantage list is empty; using uniform weights.', flush=True)
                 adv_source  = [0.0]
                 resp_source = [""]
                 logp_source = [0.0]
@@ -1772,16 +1669,11 @@ class PhiDecoder:
             }
 
     def _should_stop_early(self, step_results, current_step):
-        """
-        检查是否满足早停条件。
-        在多模态推理中，这能显著节省由于长视频 Token 带来的计算开销。
-        """
-        # 1. 强制性约束：必须达到最小前瞻步数
+        """Whether the early-stopping condition is met. On multimodal inputs this saves
+        substantial compute, since video token sequences are long."""
         if current_step < self.args.least_foresight_num:
             return False
 
-        # 2. 检查完全一致性 (Exact Match Stop)
-        # 如果所有候选路径在补全后完全一模一样，说明搜索已收敛到唯一解
         just_stop = True
         trajectories = step_results.get("trajectories", [])
         if len(trajectories) > 1:
@@ -1791,58 +1683,51 @@ class PhiDecoder:
                     just_stop = False
                     break
         else:
-            just_stop = False # 只有一个候选时不触发此逻辑
+            just_stop = False
 
         if just_stop and len(trajectories) > 0:
-            print(f"🛑 [样本早停] 深度 {current_step}: 所有补全路径完全一致。")
+            print(f"🛑 [early stop] depth {current_step}: all completions are identical.")
             return True
 
-        # 3. 检查聚类共识 (Cluster Consensus Stop)
-        # 如果某一个类别的路径占比超过了 threshold (例如 70%)，则认为达成了多数共识
         if self.args.depth_pruning_strategy == "cluster":
             if step_results.get("stop_foresight", False):
-                print(f"🛑 [样本早停] 深度 {current_step}: 最大簇占比已超过阈值 {self.args.threshold} (共识达成)。")
+                print(f"🛑 [early stop] depth {current_step}: the largest cluster ratio exceeds the threshold {self.args.threshold} (consensus reached).")
                 return True
 
         return False
 
     def _generate_final_response(self, example, system_prompt, previous_steps, previous_values, token_stats, rollout_stats, traj_info):
-        """
-        最终阶段：生成最终结果。自动兼容 AVH (单句)、HaloQuest (简答)、文本数据集 (Answer格式) 和 CMM/PhD (两阶段判定)。
-        """
+        """Final stage: produce the answer. Handles AVH (single sentence), HaloQuest
+        (short answer), the text-only datasets (Answer format) and CMM/PhD
+        (two-stage verdict)."""
         pixel_values = example.get('pixel_values')
         audio_values = example.get('audio_values')
         image_values = example.get('image_values')
 
-        # 缓存中间推理
         traj_info['internal_reasoning'] = previous_steps 
 
         all_responses = []
         all_logprobs = []
         all_advantages = []
 
-        print(f"🏁 正在执行最终对齐生成 ({self.args.step_beam_size} 条路径)...", flush=True)
+        print(f"🏁 running the final aligned generation ({self.args.step_beam_size} paths)...", flush=True)
 
         for beam_idx in range(self.args.step_beam_size):
-            # --- 初始化上下文 ---
             chat = self._prepare_chat_template(example, system_prompt)
             p_str = self.processor.tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
             if isinstance(p_str, list): p_str = p_str[0]
             
             if "avh" in self.args.datasets.lower():
-                # 改进 C：合并所有 beam 的推理记录，强制 AV 融合
-                # sanity check：过滤掉退化/重复的 beam 内容，最多保留 150 字符/beam
                 def _is_sane(text):
                     words = text.lower().split()
                     if len(words) < 3: return False
-                    # 检测重复：任意单词出现超过 4 次视为退化
                     from collections import Counter as _C
                     if any(v > 4 for v in _C(words).values()): return False
                     return True
                 labels = ["Audio" if b % 2 == 0 else "Visual" for b in range(len(previous_steps))]
                 note_parts = []
                 for b in range(len(previous_steps)):
-                    note = previous_steps[b].strip()[:150]  # 最多 150 字符
+                    note = previous_steps[b].strip()[:150]
                     if _is_sane(previous_steps[b]):
                         note_parts.append(f"[{labels[b]}]: {note}")
                 if not note_parts:
@@ -1852,7 +1737,6 @@ class PhiDecoder:
                 reasoning_history = previous_steps[beam_idx]
 
             # ==========================================
-            # 🚀 分支 A：AVH 专用逻辑 (视听结合单句生成)
             # ==========================================
             if "avh" in self.args.datasets.lower():
                 # --use_base_prompt: simple base-style final instruction with reasoning notes
@@ -1877,7 +1761,6 @@ class PhiDecoder:
 
                 inputs_text_avh = p_str.replace(self.tokenizer.eos_token, "").strip() + avh_final_instruction
 
-                # [DIAG-AVH] 完整上下文诊断 print
                 print(f"    [DIAG-AVH] beam={beam_idx} reasoning_history (full):", flush=True)
                 print(f"    [DIAG-AVH] notes={repr(reasoning_history)}", flush=True)
                 print(f"    [DIAG-AVH] avh_final_instruction={repr(avh_final_instruction)}", flush=True)
@@ -1935,7 +1818,6 @@ class PhiDecoder:
                 token_stats["output"] += len(gen_ids)
 
             # ==========================================
-            # 🚀 分支 B：HaloQuest 专用逻辑 (纯视觉简答)
             # ==========================================
             elif "halo" in self.args.datasets.lower():
                 # HaloQuest: full-sentence output to match sentence-level GT for Token-F1
@@ -2026,7 +1908,6 @@ class PhiDecoder:
                 token_stats["output"] += len(gen_ids)
 
             # ==========================================
-            # 🚀 分支 C：纯文本描述/QA任务 (HaluEval, RAGTruth, PubMedQA)
             # ==========================================
             elif self.args.datasets.lower() in ["ragtruth", "halueval", "pubmedqa"]:
                 # --use_base_prompt: simple base-style final instruction with reasoning notes
@@ -2071,7 +1952,6 @@ class PhiDecoder:
                 
                 inputs_text_pure = p_str.replace(self.tokenizer.eos_token, "").strip() + text_final_instruction
                 
-                # 纯文本任务不传 images/audios，降低显存和时间消耗
                 m_inputs_pure = self._call_minicpm_processor(inputs_text_pure)
 
                 token_stats["input"] += m_inputs_pure.input_ids.numel()
@@ -2089,12 +1969,9 @@ class PhiDecoder:
                     gen_ids = out_pure.sequences[0][m_inputs_pure.input_ids.shape[1]:]
                     raw_text = self.tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
                     
-                    # 提取最终内容 (防止模型多余输出)
                     gen_answer = raw_text.split('\n\n')[0].strip()
                     if gen_answer.startswith("[") and gen_answer.endswith("]"):
-                        gen_answer = gen_answer[1:-1] # 去掉模型可能画蛇添足加的中括号
-                    # 分支 C（haloquest / halueval）原先漏了 boxed 剥离；
-                    # 必须放在下面 halueval 的 yes/no 截断之前。见 FINDINGS §9.1。
+                        gen_answer = gen_answer[1:-1]
                     gen_answer = unwrap_boxed(gen_answer)
                     # P3-b: HaluEval — take first line only, strip trailing period
                     if self.args.datasets.lower() == "halueval":
@@ -2121,7 +1998,6 @@ class PhiDecoder:
                 token_stats["output"] += len(gen_ids)
 
             # ==========================================
-            # 🚀 分支 D：CMM / PhD 等二元分类任务 (两阶段判定)
             # ==========================================
             else:
                 # --use_base_prompt: single-stage generation with reasoning history + base-style prompt
@@ -2181,10 +2057,8 @@ class PhiDecoder:
                     else:
                         base_input = p_str.replace(self.tokenizer.eos_token, "").strip() + "\n" + reasoning_history
 
-                    # 1. 提取问题 (修复 NameError 崩溃)
                     question_text = example.get('question') or example.get('input')
 
-                    # 2. 生成客观事实清单
                     inputs_text_s1 = base_input + "\nCRITICAL RULE: Do NOT repeat the context. You MUST use bullet points to list the objective visual facts.\nVisual Checklist:\n- "
 
                     m_inputs_s1 = self._call_minicpm_processor(inputs_text_s1, image_values=image_values, audio_values=audio_values)
@@ -2207,8 +2081,6 @@ class PhiDecoder:
                         clean_desc = gen_desc.split("Judgment:")[0].split("Final")[0].replace("\\boxed{Yes}", "").replace("\\boxed{No}", "").strip()
 
                     # ==========================================================
-                    # 🌟 核心修改：删除 match_history 捷径，强制要求模型进行二次审判！
-                    # 强迫它对比自己刚写的 Checklist 和真实的问题，解决脑口不一！
                     # ==========================================================
                     inputs_text_s2 = inputs_text_s1 + " " + clean_desc + f"\n\nQuestion: {question_text}\nBased STRICTLY on your analysis above, answer the Question. Judgment: \\boxed{{"
 
@@ -2241,29 +2113,22 @@ class PhiDecoder:
                         else:
                             logprob = 0.0
 
-                    # 🌟 最终组装
                     final_output = f"Visual Checklist:\n- {clean_desc}\nJudgment: \\boxed{{{clean_judg}}}"
                     token_stats["output"] += (len(s1_gen_ids) + len(s2_gen_ids))
 
-            # --- 结果汇总 ---
             all_responses.append(final_output)
             all_logprobs.append(logprob)
             
-            # 🌟 修复 2：动态评分机制！
             if self.args.datasets.lower() in ["avh", "halo", "ragtruth", "halueval", "pubmedqa"]:
-                # 造句/抽取任务，以最终生成的质量(logprob)为最高优先级！
                 all_advantages.append(logprob)
             else:
-                # CMM / PhD 是打假任务，以前瞻防幻觉阶段(Foresight)的黄金置信度为最高优先级！
                 all_advantages.append(previous_values[beam_idx]) 
             
             rollout_stats["total"] += 1
             torch.cuda.empty_cache()
 
-        # 决策逻辑：选择最佳路径
         selected_idx = self.select_response(all_responses, all_logprobs, all_advantages)
 
-        # 记录全景轨迹
         traj_info['final_part'] = {
             'response': all_responses[selected_idx],
             'raw_completion_text': all_responses,
@@ -2350,7 +2215,7 @@ class PhiDecoder:
         return media_prefix + text
 
     def _prepare_chat_template(self, example, system_prompt):
-        """MiniCPM 格式的 Chat 模板 (Completion Stage)"""
+        """Chat template in MiniCPM format (completion stage)."""
         user_text = self._build_user_text(example, system_prompt, stage='completion')
         return [
             {"role": "system", "content": system_prompt},
@@ -2359,14 +2224,13 @@ class PhiDecoder:
         
 
     def _prepare_chat_template_for_first_stage(self, example, system_prompt):
-        """MiniCPM 格式的 Chat 模板 (First Stage / Foresight)"""
+        """Chat template in MiniCPM format (first stage / foresight)."""
         user_text = self._build_user_text(example, system_prompt, stage='first')
         return [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_text},
         ]
         
-
 
 def run_ablation_suite(args, decoder):
     """Run multiple ablation configs sequentially, model loaded once."""
@@ -2560,7 +2424,8 @@ def run_ablation_suite(args, decoder):
 
 
 def main():
-    """TokenGuard 终极版：支持断点续传、异常隔离与多重路径对齐"""
+    """Entry point. Supports resuming from a checkpoint, isolating per-sample
+    exceptions, and keeping the several output paths aligned."""
     args = parse_arguments()
     decoder = PhiDecoder(args)
 
@@ -2576,19 +2441,17 @@ def main():
         run_ablation_suite(args, decoder)
         return
 
-    # 1. 加载原始数据
     with open(args.data_path, 'r', encoding='utf-8') as f:
         test_data = json.load(f)
         
     start_idx = 0
     end_idx = args.max_samples if args.max_samples > 0 else len(test_data)
     test_data = test_data[start_idx : end_idx]
-    print(f"📊 数据截取: {start_idx} ~ {end_idx}，共 {len(test_data)} 条")
+    print(f"📊 data slice: {start_idx} ~ {end_idx}, {len(test_data)} samples")
         
     total_samples = len(test_data)
-    print(f"📊 当前待处理样本总数: {total_samples}")
+    print(f"📊 total samples to process: {total_samples}")
 
-    # 2. 路径对齐：确保输出到你 find 命令查到的那个目录 (/audit_logs/)
     os.makedirs(args.output_dir, exist_ok=True)
     os.makedirs(args.time_path, exist_ok=True)
     
@@ -2596,25 +2459,22 @@ def main():
     traj_path_jsonl = os.path.join(args.time_path, f"TRAJ_INFO-{args.file_name}.jsonl")
     error_log_path = os.path.join(args.output_dir, f"ERROR-{args.file_name}.log")
 
-    # 🌟 3. 精准断点探测 (通过物理行数确定起点)
     processed_count = 0
-    print(f"🔍 正在探测进度文件: {output_path}")
+    print(f"🔍 probing progress file: {output_path}")
     
     if os.path.exists(output_path):
         with open(output_path, 'r', encoding='utf-8') as f:
-            # 统计非空行数，确定已经完成了多少个样本
             processed_count = sum(1 for line in f if line.strip())
         
         if processed_count >= total_samples:
-            print(f"✅ 任务状态：审计已全部完成 ({processed_count}/{total_samples})。")
+            print(f"✅ all samples already processed ({processed_count}/{total_samples})。")
             return
         else:
-            print(f"🔄 断点同步：检测到已有进度 {processed_count}/{total_samples}。")
-            print(f"⏩ 正在准备从索引 #{processed_count} (第 {processed_count + 1} 个) 开始续传...", flush=True)
+            print(f"🔄 resuming: existing progress {processed_count}/{total_samples}。")
+            print(f"⏩ resuming from index #{processed_count} (item {processed_count + 1}) ...", flush=True)
     else:
-        print(f"🆕 未发现历史文件，将从第一个样本开始全新的审计流程。", flush=True)
+        print(f"🆕 no existing output found; starting from the first sample.", flush=True)
 
-    # 4. 统计指标初始化
     start_time = time.time()
     total_stats = {
         "total_rollouts": 0, "saved_rollouts": 0,
@@ -2622,11 +2482,9 @@ def main():
         "success_count": 0, "fail_count": 0
     }
 
-    # 🌟 5. 核心追加模式循环：软跳过已处理样本
     
     with open(output_path, "a", encoding="utf-8") as res_f:
         for i, example in enumerate(test_data):
-            # 索引过滤：跳过已存在于 output_path 中的前 N 行
             if i < processed_count:
                 continue
 
@@ -2636,21 +2494,17 @@ def main():
             torch.cuda.empty_cache()
             try:
                 sub_cat = example.get("sub_category", "unknown")
-                print(f"\n🚀 [Progress {i+1}/{total_samples}] 正在处理审计任务 #{i} | 子类: {sub_cat}", flush=True)
+                print(f"\n🚀 [Progress {i+1}/{total_samples}] processing sample #{i} | subcategory: {sub_cat}", flush=True)
                 system_prompt = decoder.get_system_prompt(args.datasets)
                 
-                # 执行推理
                 result = decoder.process_example(example, system_prompt)
 
-                # 累加统计数据
                 total_stats["total_rollouts"] += result["rollout_stats"]["total"]
                 total_stats["saved_rollouts"] += result["rollout_stats"]["saved"]
                 total_stats["input_tokens"] += result["token_stats"]["input"]
                 total_stats["output_tokens"] += result["token_stats"]["output"]
                 total_stats["success_count"] += 1
 
-                # 实时保存结果 (每行一条有效 JSON)
-                # 实时保存结果 (每行一条有效 JSON)
                 _pcs = result.get("traj_info", {}).get("path_confess_stats", {})
                 _n_vetoed = _pcs.get("num_paths_vetoed", 0)
                 _fallback_triggered = _n_vetoed > 0
@@ -2682,10 +2536,8 @@ def main():
                 }
                 res_f.write(json.dumps(output_result, ensure_ascii=False) + "\n")
                 res_f.flush()
-                # 物理同步，防止 nohup 缓冲区导致的崩溃丢数
                 os.fsync(res_f.fileno())
 
-                # 实时追加审计轨迹
                 if args.record_process and "traj_info" in result:
                     result["traj_info"]["question_idx"] = i
                     # --dump_internals: write per-sample internals to separate file
@@ -2702,39 +2554,36 @@ def main():
                     with open(traj_path_jsonl, "a", encoding="utf-8") as f_traj:
                         f_traj.write(json.dumps(result["traj_info"], ensure_ascii=False) + "\n")
 
-                print(f"✅ 索引 #{i} 审计成功。已产出 {total_stats['success_count']} 个新结果。")
+                print(f"✅ index #{i} done. {total_stats['success_count']} new results so far.")
 
             except torch.cuda.OutOfMemoryError as oom_e:
                 import gc
-                print(f"\n💥 [OOM] 索引 #{i} CUDA 显存不足，立即清理并跳过。", flush=True)
+                print(f"\n💥 [OOM] index #{i} ran out of CUDA memory; cleaning up and skipping.", flush=True)
                 torch.cuda.empty_cache()
                 gc.collect()
                 total_stats["fail_count"] += 1
                 with open(error_log_path, "a", encoding="utf-8") as f_err:
                     f_err.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} | ID {i} | OOM | {repr(oom_e)}\n")
-                # 写入 OOM 占位符，保证文件行数与数据集索引 1:1 对应（断点续传依赖行数）
                 fail_res = {"id": i, "sub_category": example.get("sub_category", "unknown"), "status": "OOM", "error": "CUDA OOM"}
                 res_f.write(json.dumps(fail_res, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             except Exception as e:
                 import traceback
-                print(f"\n💥 [致命崩溃追踪] 索引 #{i} 发生如下异常：", flush=True)
-                traceback.print_exc()  # 🌟 强制打印完整的红色报错堆栈！
+                print(f"\n💥 [traceback] index #{i} raised:", flush=True)
+                traceback.print_exc()
 
                 total_stats["fail_count"] += 1
-                print(f"❌ 索引 #{i} 发生崩溃: {repr(e)}", flush=True) # 使用 repr 确保空异常也会显示类型
+                print(f"❌ index #{i} crashed: {repr(e)}", flush=True)
                 with open(error_log_path, "a", encoding="utf-8") as f_err:
                     f_err.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} | ID {i} | {repr(e)}\n")
                     f_err.write(traceback.format_exc() + "\n")
 
-                # 写入失败占位符，保证文件行数与数据集索引 1:1 对应
                 fail_res = {"id": i, "sub_category": example.get("sub_category", "unknown"), "status": "failed", "error": repr(e)}
                 res_f.write(json.dumps(fail_res, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             finally:
-                # --- 彻底释放显存，防止显存碎片堆积 ---
                 import gc
                 if result:
                     if "traj_info" in result: result["traj_info"].clear()
@@ -2742,9 +2591,8 @@ def main():
                     del result
                 gc.collect()
                 torch.cuda.empty_cache()
-                print(f"🧹 索引 #{i} 资源清理完毕。")
+                print(f"🧹 index #{i} cleaned up.")
 
-    # 6. 任务结束：保存汇总报告
     time_span = time.time() - start_time
     time_info_path = os.path.join(args.time_path, f"{args.file_name}.txt")
     with open(time_info_path, "w", encoding="utf-8") as f_summary:
@@ -2754,8 +2602,8 @@ def main():
         f_summary.write(f'all_input_tokens: {total_stats["input_tokens"]}\n')
         f_summary.write(f'all_output_tokens: {total_stats["output_tokens"]}\n')
 
-    print(f"\n🏁 审计任务流水线结束。成功: {total_stats['success_count']} | 失败: {total_stats['fail_count']}")
-    print(f"统计汇总已更新: {time_info_path}")
+    print(f"\n🏁 pipeline finished. succeeded: {total_stats['success_count']} | failed: {total_stats['fail_count']}")
+    print(f"summary written to: {time_info_path}")
 
 if __name__ == "__main__":
     main()
