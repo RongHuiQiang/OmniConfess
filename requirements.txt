@@ -1,10 +1,32 @@
-numpy
-opencv-python
-librosa
-Pillow
-pycocoevalcap
-scikit-learn
-torch
+# OmniConfess dependencies.
+#
+# The versions below are the ones this code was developed and run against. Where a
+# lower bound is given rather than a pin, anything at or above it is expected to
+# work; the transformers bound is the one that actually matters.
+
+# --- core ---
+torch==2.6.0                    # built against CUDA 12.4
+transformers>=4.52.0            # Qwen2.5-Omni support landed here; earlier
+                                # releases cannot load the model at all
+accelerate>=1.0
+numpy>=2.0
+
+# --- multimodal I/O ---
+qwen-omni-utils                 # official Qwen2.5-Omni input helper
+opencv-python>=4.10             # video frame extraction
+librosa>=0.11                   # audio loading and resampling
+soundfile>=0.13
+Pillow>=11.0
+
+# --- candidate selection ---
+scikit-learn>=1.5               # TF-IDF and k-means path clustering
+sentence-transformers           # only needed for --path_cluster_mode sbert
+
+# --- evaluation ---
+pycocoevalcap                   # BLEU / ROUGE / METEOR / CIDEr
+zhipuai>=2.1                    # LLM-as-a-judge (GAVIE); reads ZHIPU_API_KEY
 tqdm
-transformers
-zhipuai
+
+# --- MiniCPM-o-2.6 backbone only ---
+# The MiniCPM variants additionally need the checkpoint's own custom code, which is
+# fetched via trust_remote_code=True at load time.
