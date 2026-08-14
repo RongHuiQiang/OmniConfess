@@ -64,6 +64,15 @@ def score_judgement(metrics_by_id, ids=None):
         gt, pred = em.get("Ground_Truth"), em.get("Prediction")
         if gt is None or pred is None:
             continue
+        # single_eval marks a 'maybe' ground truth with Ground_Truth == 2 and
+        # Undecidable == 1; those rows are not scorable on the yes/no axis. A
+        # 'maybe' prediction against a yes/no ground truth is a miss. Files
+        # scored before that branch existed carry neither value, so this is a
+        # no-op on them.
+        if gt == 2 or em.get("Undecidable"):
+            continue
+        if pred == 2:
+            pred = 1 - gt
         yt.append(gt)
         yp.append(pred)
     if not yt:

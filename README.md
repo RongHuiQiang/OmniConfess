@@ -17,6 +17,7 @@ through self-confess decoding.
 | `OmniHalluBench/`             | Unified 3,540-sample omni-modal hallucination benchmark          |
 | `results_shipped/`            | Per-sample outputs behind every main-table cell                  |
 | `scripts/`                    | Manifests mapping each cell to its file, plus the two scorers    |
+| `KNOWN_ISSUES.md`             | Measured caveats that the code does not announce                 |
 
 ## The OmniConfess framework
 
@@ -90,8 +91,8 @@ python OmniConfess/omniconfess_qwen.py \
     --max_samples 4
 ```
 
-A baseline is invoked the same way (note that the baselines take `--data_root` at
-the benchmark root rather than the dataset subdirectory):
+A baseline is invoked the same way. `--data_root` only matters when media live
+outside the annotation JSON's directory; see the layout note under OmniHalluBench:
 
 ```bash
 python OmniConfess/methods/base_cad.py \
@@ -146,6 +147,61 @@ reduce to greedy decoding on the text-only subsets, whereas CAD and OPERA do not
 | RAGTruth  | text          | 435     |
 | **Total** |               | **3,540** |
 
+### Annotation schema
+
+Every subset uses one record layout, so a loader never branches on the dataset
+name:
+
+```json
+{
+  "uid": "cmm_000000",
+  "dataset": "cmm",
+  "task_type": "judgement",          // judgement | descriptive
+  "modality": "visual+audio",        // visual+audio | visual | text
+  "answer_space": "yes_no",          // yes_no | yes_no_maybe | free_text
+  "question": "Did you see clock in the video?",
+  "answer": "yes",                   // the reference text, as released
+  "label": "yes",                    // yes | no | maybe | null (free-text subsets)
+  "passage": null,                   // retrieval context, text-only subsets
+  "media":  {"video": "./...mp4", "audio": "./...wav", "image": null},
+  "facets": {"hallucination_type": "overrely_audio_ignore_visual"},
+  "source": {}                       // provenance, e.g. the original index
+}
+```
+
+The three fields above `question` are the only universal taxonomy. Everything a
+subset labels for itself lives in `facets` under **its own name**, because the
+subsets do not agree on how many levels of category they have and their second
+level is not always a child of the first -- HaloQuest's two fields are orthogonal
+axes (image source x question type), and CMM's old `granularity` field was a
+function of its category rather than a level above it. Flattening them into a
+positional `category` / `sub_category` pair is what forced a reader to know which
+subset they were holding.
+
+| Subset    | `facets` keys                    | `answer_space` |
+|-----------|----------------------------------|----------------|
+| CMM       | `hallucination_type`             | `yes_no`       |
+| PhD       | `mode`                           | `yes_no`       |
+| HaloQuest | `image_source`, `question_type`  | `free_text`    |
+| AVHBench  | `task`                           | `free_text`    |
+| PubMedQA  | none                             | `yes_no_maybe` |
+| RAGTruth  | none                             | `free_text`    |
+
+`answer_space` is not decoration: PubMedQA is genuinely three-way, and its eight
+`maybe` rows are preserved in `label` rather than folded into `no`. See
+`KNOWN_ISSUES.md` for what that costs downstream.
+
+`OmniConfess/methods/shared/data_loader.py` maps this layout onto the field names
+the method scripts already read (`sub_category`, `video_path`, `audio_path`,
+`image_path`), choosing one facet per subset as the grouping key -- so the on-disk
+schema carries no duplicate spellings and no method script needed changing. Both
+layouts load: a record written in the old layout passes through untouched.
+
+`id` is deliberately absent. Only three subsets ever had one, and where it exists
+it is an index into the *unfiltered* original release (HaloQuest ships 365 rows
+numbered up to 608), so it is provenance, kept under `source`, not a join key.
+Cross-file alignment keys on the question text.
+
 The unified annotation JSONs are released here. Media files (images, videos, audio)
 are **not** redistributed: they total roughly 13 GB, and every subset is already
 publicly available from its original authors. Obtain them there and lay them out so
@@ -162,6 +218,23 @@ that the relative paths in each JSON's media fields resolve under `--data_root`.
 
 PubMedQA and RAGTruth are text-only: their annotation JSONs here are
 self-contained and need no download. Only the four multimodal subsets do.
+
+**Where to put the media.** Unpack each download *into the same directory as its
+annotation JSON*, so that the layout below holds. Path resolution tries the JSON's
+own directory first, which makes this the arrangement that needs no flags at all:
+
+```
+OmniHalluBench/
+  cmm/cmm.json             + reorg_raw_files/.../*.mp4, *.wav
+  avhbench/avhbench.json   + videos/*.mp4          (video and audio share one file)
+  haloquest/haloquest.json + images/*.png
+  phd/phd.json             + images/val2014/*.jpg  (COCO val2014)
+```
+
+If you keep media somewhere else, point `--data_root` at the directory that
+*directly contains* those subfolders (e.g. `--data_root /srv/media/cmm`), not at
+the benchmark root -- resolution falls back to `data_root/<relative path>` with no
+dataset name inserted. Verified against all four subsets.
 
 ## Evaluation
 
@@ -243,6 +316,11 @@ Three things to know before reading the output:
 3. **GAVIE cannot be reproduced offline.** Token-F1 and the accuracy-family
    metrics are computed locally; the two GAVIE columns require the LLM judge and
    therefore an API key.
+4. **PubMedQA's `maybe` label is erased in the scored files.** The scorer now has
+   a `maybe` branch and excludes those rows, but the shipped `*_scored.jsonl`
+   files predate it and contain no `maybe` ground truth, so the reported numbers
+   are unchanged. `KNOWN_ISSUES.md` gives the measurement and the corrected
+   comparison.
 
 Both scorers are pure Python: `tokenf1_fullset.py` needs only the standard library
 and `aggregate_fullset.py` only `scikit-learn`. Neither loads a model.
