@@ -3,6 +3,7 @@
 Model initialization and inference utilities for Qwen2.5-Omni-7B.
 Verified patterns from GUARD/base_hook_best_0314.py lines 471-499, 947-963.
 """
+from .paths import resolve_model
 import os
 import torch
 import numpy as np
@@ -11,7 +12,7 @@ from transformers import (
     Qwen2_5OmniProcessor,
 )
 
-MODEL_PATH = "Qwen/Qwen2.5-Omni-7B"
+MODEL_PATH = resolve_model("Qwen/Qwen2.5-Omni-7B")
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 

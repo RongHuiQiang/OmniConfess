@@ -12,7 +12,11 @@ through self-confess decoding.
 | `OmniConfess/methods/`        | Ten decoding methods, each for both backbones                    |
 | `OmniConfess/methods/shared/` | Shared model loading, data loading, prompts, and MiniCPM decoding |
 | `OmniConfess/eval/`           | Evaluation scripts                                               |
+| `OmniConfess/prompts/`        | Prompt-version registry and its drift check                      |
+| `OmniConfess/paths.py`        | Repository-root and model-weight resolution                      |
 | `OmniHalluBench/`             | Unified 3,540-sample omni-modal hallucination benchmark          |
+| `results_shipped/`            | Per-sample outputs behind every main-table cell                  |
+| `scripts/`                    | Manifests mapping each cell to its file, plus the two scorers    |
 
 ## The OmniConfess framework
 
@@ -46,8 +50,31 @@ pip install -r requirements.txt
 `transformers >= 4.52` is required: Qwen2.5-Omni support landed in that release and
 earlier versions cannot load the checkpoint at all.
 
-Model weights are pulled from the Hub by default (`Qwen/Qwen2.5-Omni-7B`,
-`openbmb/MiniCPM-o-2_6`); pass `--model_path` to use a local copy.
+Model weights are not distributed with this repository. They are pulled from the
+Hub by default (`Qwen/Qwen2.5-Omni-7B`, `openbmb/MiniCPM-o-2_6`). To use local
+checkpoints without editing any source file, point one environment variable at the
+directory holding them:
+
+```bash
+export MMHALU_MODEL_ROOT=/srv/hf_models
+```
+
+`OmniConfess/paths.py` then maps each Hub id to `$MMHALU_MODEL_ROOT/<name>`, trying
+the full id, the bare model name, and a lowercased `_`-normalised variant, and
+falling back to the Hub id when nothing matches. `--model_path` still overrides
+everything.
+
+No source file in this repository contains an absolute path: dataset, result, and
+registry locations are all resolved relative to the repository root.
+
+Not everything needs the full dependency set. Reproducing the main table from the
+shipped outputs (below) needs only `scikit-learn`, and the prompt drift check needs
+nothing beyond the standard library -- neither imports `torch`. Only actually
+running a decoding method requires the rest:
+
+```bash
+python OmniConfess/prompts/verify.py    # works in a bare interpreter
+```
 
 ## Quick start
 
@@ -120,9 +147,21 @@ reduce to greedy decoding on the text-only subsets, whereas CAD and OPERA do not
 | **Total** |               | **3,540** |
 
 The unified annotation JSONs are released here. Media files (images, videos, audio)
-should be obtained from the corresponding original public sources; the relative
-paths in each JSON's media fields indicate the expected layout, and `--data_root`
-points at it.
+are **not** redistributed: they total roughly 13 GB, and every subset is already
+publicly available from its original authors. Obtain them there and lay them out so
+that the relative paths in each JSON's media fields resolve under `--data_root`.
+
+| Dataset   | Original release                          | Paper            |
+|-----------|-------------------------------------------|------------------|
+| AVHBench  | https://github.com/kaist-ami/AVHBench      | arXiv 2410.18325 |
+| CMM       | https://github.com/DAMO-NLP-SG/CMM         | arXiv 2410.12787 |
+| HaloQuest | https://github.com/google/haloquest        | arXiv 2407.15680 |
+| PHD       | https://github.com/jiazhen-code/PhD        | arXiv 2403.11116 |
+| PubMedQA  | https://github.com/pubmedqa/pubmedqa       | arXiv 1909.06146 |
+| RAGTruth  | https://github.com/ParticleMedia/RAGTruth  | arXiv 2401.00396 |
+
+PubMedQA and RAGTruth are text-only: their annotation JSONs here are
+self-contained and need no download. Only the four multimodal subsets do.
 
 ## Evaluation
 
@@ -146,12 +185,80 @@ export ZHIPU_API_KEY=...
 
 ## Prompt templates
 
-The prompt modules (`avh_prompts.py`, `halo_prompts.py`, `halueval_prompts.py`,
-`judge_prompts.py`) are **not yet included in this repository**. The code imports
-them behind `try/except ImportError` and falls back to built-in defaults when they
-are absent, so everything runs without them, but the prompt-version flags
-(`--halo_prompt_version`, `--avh_prompt_version`, `--judge_prompt_version`) will
-only offer the baseline `v0` until they are added.
+Both arms of every comparison are included, because neither can be reproduced
+without the exact prompt bytes:
+
+| Arm                | Module                                  |
+|--------------------|-----------------------------------------|
+| Baselines          | `OmniConfess/methods/shared/prompts.py` |
+| OmniConfess        | `OmniConfess/judge_prompts.py` (cmm / phd / pubmedqa) |
+|                    | `OmniConfess/halo_prompts.py` (HaloQuest) |
+|                    | `OmniConfess/avh_prompts.py` (AVHBench, 28 versions) |
+|                    | `OmniConfess/halueval_prompts.py` |
+
+Two further prompts -- the RAGTruth system prompt and the HalluEval fallback -- are
+hardcoded in `omniconfess_qwen.py` and have no version mechanism.
+
+**The baselines and OmniConfess do not share a prompt.** Baseline arms are pinned to
+`v0` throughout; the OmniConfess arm uses the modules above. Any comparison that
+treats the gap as purely a decoding effect is therefore overstating it, and the
+per-dataset prompt version must be reported alongside the score.
+
+`OmniConfess/prompts/` records every version's length, md5, and source module, and
+`verify.py` recomputes them from the live code so that a silent reword cannot
+detach a published number from its provenance:
+
+```bash
+python OmniConfess/prompts/verify.py          # -> 65 prompt versions all match.
+python OmniConfess/prompts/verify.py --list   # also print the per-cell verdicts
+```
+
+`registry_verdicts.json` is the human-maintained layer that records, per cell,
+whether a prompt version helped or hurt and on what strength of evidence. It is not
+regenerated from code and must be edited by hand.
+
+## Reproducing the main table
+
+Every main-table cell is backed by a per-sample output file in `results_shipped/`,
+and the two manifests in `scripts/` map (dataset, method) to the exact file. This
+part needs **no GPU, no model weights, and no API key**:
+
+```bash
+# descriptive datasets: Token-F1
+python scripts/tokenf1_fullset.py scripts/desc_fullset_manifest.json
+
+# judgement datasets: Yes-class F1 and PhD-Index
+python scripts/aggregate_fullset.py --manifest scripts/judge_fullset_manifest_scored.json
+```
+
+Three things to know before reading the output:
+
+1. **The judgement manifests come in two stages.** `judge_fullset_manifest.json`
+   points at raw generations; `..._scored.json` points at the `single_eval.py`
+   output carrying `eval_metrics`, which is what the aggregator reads. Use the
+   scored one to get numbers.
+2. **PubMedQA uses the `_formatted` variant** for every arm. The unformatted
+   generations are prose in which the verdict cannot be parsed, so scoring them
+   yields zero for all methods.
+3. **GAVIE cannot be reproduced offline.** Token-F1 and the accuracy-family
+   metrics are computed locally; the two GAVIE columns require the LLM judge and
+   therefore an API key.
+
+Both scorers are pure Python: `tokenf1_fullset.py` needs only the standard library
+and `aggregate_fullset.py` only `scikit-learn`. Neither loads a model.
+
+Universe sizes differ from the benchmark totals because the main table is computed
+on filtered subsets. `OmniHalluBench/main_table_universes/` ships the four whose
+item sets are exactly recoverable (`haloquest_608`, `avhbench_645`, `cmm_795`,
+`ragtruth_740`). `phd_566` and `pubmedqa_500` are label-balanced subsets that are
+not separately materialised; their membership is defined by the shipped result
+files, each row of which carries its own question and ground truth.
+
+Cross-file alignment must key on `(question, ground_truth)`, never on `id`.
+Different arms wrote `id` against different index spaces -- some the row number of
+an already-filtered file, some the original benchmark index -- so aligning by `id`
+silently pairs unrelated items. `scripts/judge_fullset_manifest_scored.json`
+records the specifics for `phd_566`.
 
 ## License
 

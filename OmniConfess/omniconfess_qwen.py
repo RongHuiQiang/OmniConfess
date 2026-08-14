@@ -33,6 +33,7 @@ import numpy as np
 import torch
 import json
 import os
+from paths import resolve_model
 import argparse
 import cv2
 import librosa
@@ -800,7 +801,7 @@ def parse_arguments():
     # Model configuration
     parser.add_argument('--model_id', type=str, default='qwen2.5-omni',
                         help='Model identifier')
-    parser.add_argument('--model_path', type=str, default='Qwen/Qwen2.5-Omni-7B',
+    parser.add_argument('--model_path', type=str, default=resolve_model('Qwen/Qwen2.5-Omni-7B'),
                         help='Model path')
     parser.add_argument('--gpus', type=int, default=2,
                         help='Number of GPUs to use (tensor_parallel is handled by device_map in transformers)')
