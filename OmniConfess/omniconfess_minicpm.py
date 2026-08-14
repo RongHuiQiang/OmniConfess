@@ -24,6 +24,7 @@ import numpy as np
 import torch
 import json
 import os
+from paths import resolve_model
 import argparse
 import cv2
 import librosa
@@ -420,7 +421,7 @@ def parse_arguments():
     # MiniCPM-o-2.6
     parser.add_argument('--model_id', type=str, default='minicpm-o-2.6',
                         help='Model identifier')
-    parser.add_argument('--model_path', type=str, default='openbmb/MiniCPM-o-2_6',
+    parser.add_argument('--model_path', type=str, default=resolve_model('openbmb/MiniCPM-o-2_6'),
                         help='Model path')
     parser.add_argument('--gpus', type=int, default=2,
                         help='Number of GPUs to use (tensor_parallel is handled by device_map in transformers)')

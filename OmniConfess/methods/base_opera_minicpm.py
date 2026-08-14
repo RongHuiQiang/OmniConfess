@@ -91,6 +91,7 @@ from PIL import Image
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, os.path.dirname(__file__))
+from shared.paths import resolve_model
 from shared.data_loader import load_dataset, resolve_media_path
 from shared.eval_utils import make_result, save_result
 from shared.prompts import get_system_prompt, get_user_prompt
@@ -101,7 +102,7 @@ from shared.minicpm_decode import (
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
-MODEL_PATH = "openbmb/MiniCPM-o-2_6"
+MODEL_PATH = resolve_model("openbmb/MiniCPM-o-2_6")
 
 DEFAULT_NUM_BEAMS = 5
 DEFAULT_SCALE_FACTOR = 10.0
