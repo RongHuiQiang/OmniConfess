@@ -44,7 +44,11 @@ Two backbones are provided:
 
 ## Installation
 
+Python **3.10** -- every result in this repository was produced on 3.10.18 /
+3.10.19, and no other minor version has been tested:
+
 ```bash
+conda create -n omniconfess python=3.10 && conda activate omniconfess
 pip install -r requirements.txt
 ```
 

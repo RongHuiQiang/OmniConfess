@@ -3,6 +3,10 @@
 # The versions below are the ones this code was developed and run against. Where a
 # lower bound is given rather than a pin, anything at or above it is expected to
 # work; the transformers bound is the one that actually matters.
+#
+# Python 3.10 (3.10.18 / 3.10.19). Every result in this repository was produced on
+# 3.10; no other minor version has been tested, and the torch pin below is the
+# wheel that was actually used there.
 
 # --- core ---
 torch==2.6.0                    # built against CUDA 12.4
