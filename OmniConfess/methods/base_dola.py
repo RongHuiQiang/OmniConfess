@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-base_dola.py — DoLa (Decoding by Contrasting Layers) baseline on Qwen2.5-Omni.
+base_dola.py -- DoLa (Decoding by Contrasting Layers) baseline on Qwen2.5-Omni.
 
 Core idea (DoLa, ICLR 2024):
   next_token_logits = log_softmax(mature_logits) - log_softmax(premature_logits)
-  where mature = final model logits, premature = early layer logits (after norm+lm_head projection)
+  where mature is the model's final logits and premature comes from an early
+  intermediate layer, projected through norm + lm_head.
 
-Implementation details:
-  - Extract premature layer (L8, ~29% depth) intermediate logits via DualLayerAuditor hook
-  - Use step-by-step forward pass (not model.generate) for DoLa contrastive decoding
-  - Supports all multimodal and text-only datasets
+Implementation notes:
+  - a DualLayerAuditor hook extracts the premature layer's intermediate logits
+  - contrastive decoding is done with an explicit step-by-step forward loop rather
+    than model.generate
+  - verified on PhD (image) and on the text-only subsets
 
 Usage:
-    CUDA_VISIBLE_DEVICES=1 python base_dola.py \
-        --datasets phd --data_path ./OmniHalluBench/PhD/all_phd.json \
-        --output_dir ./results --file_name base_dola_phd_v0 \
+    python base_dola.py \
+        --datasets phd --data_path ./OmniHalluBench/phd/phd.json \
+        --output_dir ./outputs --file_name base_dola_phd_v0 \
         --max_samples 20
 """
 import os, sys, json, time, argparse, gc
@@ -33,13 +35,15 @@ from shared.eval_utils import parse_pred
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
+# --- DoLa parameters ---
 
 PREMATURE_LAYER = 14
 
 
+# --- Hook: capture intermediate-layer logits ---
 
 class DoLaAuditor:
-    """ Qwen thinker  L{premature_layer}  logits norm+lm_head """
+    """Capture logits from the thinker's premature layer, projected through norm + lm_head."""
 
     def __init__(self, model, premature_layer=PREMATURE_LAYER):
         self.model         = model
@@ -67,12 +71,22 @@ class DoLaAuditor:
         self.premature_logits = None
 
 
+# --- DoLa step-by-step generation ---
 
 def dola_generate(model, auditor, inputs, tokenizer,
                   max_new_tokens=256, alpha=1.0):
     """
-    DoLa contrastive decoding generation.
+    DoLa contrastive decoding.
     Returns (response_str, generated_ids_list).
+
+    Implementation notes:
+    1. There is no additional F.log_softmax over the contrast, which is already in
+       log-ratio space; applying softmax again would be meaningless and would
+       distort the distribution, so the argmax is taken directly.
+    2. Decoding passes explicit position_ids, which Qwen2.5-Omni's mRoPE requires;
+       the otherwise ineffective cache_position is not used, since incorrect
+       positions cause degenerate repeated output.
+    3. Generation stops early after five identical tokens in a row.
     """
     VALID_KEYS = {
         "input_ids", "attention_mask",
@@ -91,6 +105,7 @@ def dola_generate(model, auditor, inputs, tokenizer,
     eos_id         = tokenizer.eos_token_id
     accu_attn_mask = clean.get("attention_mask")
 
+    # -- Prefill: capture position_ids (required by mRoPE) --
     captured = {}
 
     def _pos_hook(module, args, kwargs):
@@ -111,6 +126,7 @@ def dola_generate(model, auditor, inputs, tokenizer,
     pos_ids_prefill = captured.get('position_ids')
     pos_ids_decode  = pos_ids_prefill[..., -1:] + 1 if pos_ids_prefill is not None else None
 
+    # -- Decoding loop --
     generated_ids = []
 
     try:
@@ -172,6 +188,7 @@ def dola_generate(model, auditor, inputs, tokenizer,
     return response, generated_ids
 
 
+# --- Main ---
 
 def main():
     parser = argparse.ArgumentParser()

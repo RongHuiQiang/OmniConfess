@@ -1,24 +1,26 @@
 # -*- coding: utf-8 -*-
 """
-base_dola_minicpm.py — MiniCPM-o-2.6 DoLa (Decoding by Contrasting Layers) baseline.
+base_dola_minicpm.py -- MiniCPM-o-2.6 DoLa (Decoding by Contrasting Layers) baseline.
 
-NOTE: DEGRADED IMPLEMENTATION.
-DoLa requires per-token layer-level logit access (mature vs premature layer
-contrasting). MiniCPM-o-2.6's multimodal pipeline (SigLip vision encoder +
-Whisper audio encoder + Qwen2.5-7B LLM + resampler) only exposes a high-level
-model.chat() API. Implementing real DoLa would require bypassing this API and
-manually handling all modality preprocessing, which is extremely fragile.
+Implementation
+--------------
+DoLa needs per-token layer-wise logits, contrasting a mature layer against a
+premature one. MiniCPM-o's model.chat() cannot provide them: it runs beam search
+internally and discards logits_processor. This script therefore bypasses chat():
 
-This script falls back to greedy decoding (identical to base_model_minicpm.py)
-so that the DoLa column in result tables is populated. The --alpha and
---premature_layer arguments are accepted for CLI compatibility but unused.
+1. shared/minicpm_decode.build_minicpm_inputs reproduces chat()'s preprocessing
+   line for line, guaranteeing the inputs match base_model_minicpm.py exactly;
+2. a forward hook on the premature layer projects that layer's hidden state through
+   model.llm.model.norm and model.llm.lm_head to obtain its logits;
+3. generation proceeds greedily step by step, applying the DoLa contrast at each
+   step.
 
-Supports: haloquest (image), avhbench (audio+video), halueval/ragtruth (text)
+The formula and the premature layer depth match the Qwen-side base_dola.py: both
+language models have 28 layers, and premature = L14 is about 50% depth.
 
-Usage:
-    CUDA_VISIBLE_DEVICES=1 python base_dola_minicpm.py \
-        --datasets avhbench --data_path ./OmniHalluBench/avhbench/avh_converted.json \
-        --output_dir ./results --file_name minicpm_dola_avh_v0 --max_samples 2
+Note that this script was historically a stub that degenerated to greedy: --alpha
+and --premature_layer were declared but never used, and its output was
+byte-identical to base_model.
 """
 import os, sys, time, argparse, json, random, math
 import torch
@@ -27,15 +29,19 @@ import librosa
 from PIL import Image
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.dirname(__file__))
 from shared.data_loader import load_dataset, resolve_media_path
 from shared.eval_utils import make_result, save_result
 from shared.prompts import get_system_prompt, get_user_prompt
+from shared.minicpm_decode import (
+    patch_smart_apply, build_minicpm_inputs, get_multimodal_embeds,
+    get_terminators, PrematureLayerCapture, greedy_generate, make_dola_step_fn,
+)
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
-MODEL_PATH = "./models/MiniCPM-o-2.6"
+MODEL_PATH = "openbmb/MiniCPM-o-2_6"
 
-# DoLa parameters (unused — kept for CLI/arg compatibility)
 PREMATURE_LAYER = 14
 DEFAULT_ALPHA = 0.1
 
@@ -49,19 +55,7 @@ def set_seed(seed):
 
 def _patch_smart_apply():
     """Fix transformers 4.52+ incompatibility with MiniCPM-o custom modules."""
-    import torch
-    def patched_smart_apply(self, fn):
-        for module in self.children():
-            if hasattr(module, "_init_weights"):
-                if hasattr(module, "_initialize_weights"):
-                    module.smart_apply(module._initialize_weights)
-                else:
-                    module.smart_apply(fn)
-            else:
-                module.smart_apply(fn)
-        fn(self)
-        return self
-    torch.nn.Module.smart_apply = patched_smart_apply
+    patch_smart_apply()
 
 
 def load_minicpm_model():
@@ -169,15 +163,19 @@ def main():
                         help='0 = all samples')
     parser.add_argument('--prompt_version', type=str, default='v0')
     parser.add_argument('--alpha', type=float, default=DEFAULT_ALPHA,
-                        help='DoLa contrast weight (unused in degraded mode)')
+                        help='DoLa contrast weight (default 0.1, matches base_dola.py)')
     parser.add_argument('--premature_layer', type=int, default=PREMATURE_LAYER,
-                        help='Premature layer index (unused in degraded mode)')
+                        help='Premature layer index (default 14 ~ 50%% of 28 layers)')
+    parser.add_argument('--apc_beta', type=float, default=0.0,
+                        help='Adaptive plausibility constraint beta (0 = off)')
+    parser.add_argument('--repetition_penalty', type=float, default=1.0,
+                        help='1.0 = off. Note model.chat(sampling=False) uses 1.2 with '
+                             'num_beams=3; greedy+1.0 matches the Qwen-side baselines.')
     args = parser.parse_args()
 
-    print("[WARN] MiniCPM DoLa: degraded to greedy decode "
-          "(layer hooks not available through chat API)", flush=True)
-    print(f"  (--alpha={args.alpha} and --premature_layer={args.premature_layer} "
-          "accepted but unused)", flush=True)
+    print(f"[dola] premature_layer=L{args.premature_layer}, alpha={args.alpha}, "
+          f"apc_beta={args.apc_beta}, repetition_penalty={args.repetition_penalty}",
+          flush=True)
 
     set_seed(args.seed)
     os.makedirs(args.output_dir, exist_ok=True)
@@ -198,6 +196,18 @@ def main():
             print(f'[resume] skipping {len(done_ids)} already-done samples', flush=True)
 
     model, tokenizer = load_minicpm_model()
+
+    n_layers = len(model.llm.model.layers)
+    if not 0 <= args.premature_layer < n_layers:
+        raise ValueError(f"--premature_layer {args.premature_layer} out of range "
+                         f"for a {n_layers}-layer LLM")
+    print(f"[dola] LLM layers={n_layers}, premature=L{args.premature_layer} "
+          f"({100*args.premature_layer/n_layers:.0f}% depth)", flush=True)
+
+    capture = PrematureLayerCapture(model, [args.premature_layer]).register()
+    step_fn = make_dola_step_fn(capture, args.premature_layer,
+                                alpha=args.alpha, apc_beta=args.apc_beta)
+    terminators = get_terminators(model, tokenizer)
 
     data = load_dataset(args.data_path, args.data_root)
     if args.max_samples > 0:
@@ -222,29 +232,25 @@ def main():
 
             if is_omni:
                 # Omni mode: use model's built-in omni system prompt
-                omni_sys = model.get_sys_prompt(mode='omni', language='en')
-                msgs.insert(0, omni_sys)
-                response = model.chat(
-                    msgs=msgs,
-                    tokenizer=tokenizer,
-                    sampling=False,
-                    max_new_tokens=args.max_new_tokens,
-                    omni_input=True,
-                    use_tts_template=False,
-                    generate_audio=False,
-                    max_slice_nums=1,
-                    use_image_id=False,
-                    return_dict=False,
-                )
-            else:
-                if system_prompt:
-                    msgs.insert(0, {'role': 'system', 'content': [system_prompt]})
-                response = model.chat(
-                    msgs=msgs,
-                    tokenizer=tokenizer,
-                    sampling=False,
-                    max_new_tokens=args.max_new_tokens,
-                )
+                msgs.insert(0, model.get_sys_prompt(mode='omni', language='en'))
+            elif system_prompt:
+                msgs.insert(0, {'role': 'system', 'content': [system_prompt]})
+
+            # Same preprocessing as chat(); only the decoding differs.
+            inputs = build_minicpm_inputs(
+                model, model.processor, msgs,
+                omni_input=is_omni, max_slice_nums=1, use_image_id=False)
+            embeds = get_multimodal_embeds(model, inputs)
+
+            capture.clear()
+            response, _ = greedy_generate(
+                model, tokenizer, embeds,
+                attention_mask=inputs.get('attention_mask'),
+                max_new_tokens=args.max_new_tokens,
+                step_fn=step_fn,
+                repetition_penalty=args.repetition_penalty,
+                terminators=terminators,
+            )
 
             elapsed = time.time() - t0
             print(f'  response[:120]: {response[:120]!r}', flush=True)
@@ -265,12 +271,17 @@ def main():
     n_done = len(data) - len(done_ids)
     print(f'\n[done] {n_done} samples in {total_time/60:.1f} min. Results: {output_path}', flush=True)
 
+    capture.remove()
+
     summary = os.path.join(args.time_path, args.file_name + '.txt')
     with open(summary, 'w') as f:
         f.write(f'total_time: {total_time:.2f}s\n')
         f.write(f'samples: {n_done}\n')
-        f.write(f'premature_layer: {args.premature_layer} (unused)\n')
-        f.write(f'alpha: {args.alpha} (unused)\n')
+        f.write(f'premature_layer: {args.premature_layer}\n')
+        f.write(f'alpha: {args.alpha}\n')
+        f.write(f'apc_beta: {args.apc_beta}\n')
+        f.write(f'repetition_penalty: {args.repetition_penalty}\n')
+        f.write('decode: greedy, per-token DoLa contrast (bypasses model.chat)\n')
 
 
 if __name__ == '__main__':

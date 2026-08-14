@@ -25,7 +25,7 @@ from shared.prompts import get_system_prompt, get_user_prompt
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
-MODEL_PATH = "./models/MiniCPM-o-2.6"
+MODEL_PATH = "openbmb/MiniCPM-o-2_6"
 
 GD_JUDGE_PROMPT = (
     "Is the following answer logically correct and consistent with the "

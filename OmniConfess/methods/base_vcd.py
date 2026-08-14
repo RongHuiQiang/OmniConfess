@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-base_vcd.py — VCD (Visual Contrastive Decoding) baseline on Qwen2.5-Omni.
+base_vcd.py -- VCD (Visual Contrastive Decoding) baseline on Qwen2.5-Omni.
 
 Core formula (VCD, CVPR 2024):
-  next_token_logits = (1+alpha) * log_softmax(logit_full) - alpha * log_softmax(logit_distorted)
+  next_token_logits = (1+a) * log_softmax(logit_full) - a * log_softmax(logit_distorted)
 
-Implementation details:
-  - distorted image/video: add Gaussian noise to pixel_values (std=0.1)
-  - step-by-step forward pass maintaining two KV caches (full + distorted)
-  - text-only samples (halueval/ragtruth/pubmedqa): no visual contrast, falls back to greedy
-  - supports all 7 datasets (same interface as base_model.py)
+Implementation notes:
+  - the distorted image/video adds Gaussian noise (std = 0.1) to pixel_values
+  - a step-by-step forward loop maintains two KV caches, full and distorted
+  - text-only samples have no visual contrast and degenerate to plain greedy
+  - the interface matches base_model.py across all datasets
 
 Usage:
-    CUDA_VISIBLE_DEVICES=1 python base_vcd.py \
-        --datasets phd --data_path ./OmniHalluBench/PhD/all_phd.json \
-        --output_dir ./results --file_name base_vcd_phd_v0 \
+    python base_vcd.py \
+        --datasets phd --data_path ./OmniHalluBench/phd/phd.json \
+        --output_dir ./outputs --file_name base_vcd_phd_v0 \
         --max_samples 20
 """
 import os, sys, json, time, argparse, gc
@@ -32,17 +32,20 @@ from shared.eval_utils import parse_pred
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
+# --- VCD parameters ---
 VCD_ALPHA    = 0.1
 NOISE_STD    = 0.1
 TEXT_ONLY_DS = {"halueval", "ragtruth", "pubmedqa"}
 
 
+# --- Build the distorted input ---
 
 def make_distorted_inputs(inputs):
     """
-    Add Gaussian noise to visual tensors, keep other keys unchanged, return distorted input dict.
-    Supports pixel_values (images), pixel_values_images, and pixel_values_videos keys.
-    Returns None for text-only samples.
+    Add Gaussian noise to the visual tensors, leave every other key untouched, and
+    return the distorted input dict. Handles the pixel_values,
+    pixel_values_images and pixel_values_videos keys. Returns None for text-only
+    samples.
     """
     VISUAL_KEYS = {"pixel_values", "pixel_values_images", "pixel_values_videos"}
     has_visual = any(k in inputs for k in VISUAL_KEYS)
@@ -61,24 +64,25 @@ def make_distorted_inputs(inputs):
     return dist
 
 
+# --- VCD step-by-step generation ---
 
 def vcd_generate(model, inputs_f, inputs_d, tokenizer,
                  max_new_tokens=256, alpha=VCD_ALPHA):
     """
-    VCD contrastive decoding generation.
-    - inputs_f: full input (original visual)
-    - inputs_d: distorted input (noisy visual); falls back to greedy if None
-    Returns: (response_str, generated_ids_list)
+    VCD contrastive decoding.
+    - inputs_f: the full input with the original visual data
+    - inputs_d: the distorted input with noised visual data; None degenerates to
+      plain greedy
+    Returns (response_str, generated_ids_list).
 
-    Fix notes (v2):
-    Qwen2.5-Omni uses mRoPE (multi-dimensional RoPE), so decode steps must explicitly
-    pass position_ids and increment them step by step, otherwise positional awareness
-    breaks down and output degenerates into repetition.
-    Implementation follows the pattern from OmniConfess (omniconfess.py):
-    1. Prefill stage captures position_ids via forward_pre_hook
-    2. Decode stage: step 1 takes prefill last position +1, subsequent steps +1
-    3. attention_mask grows by 1 each step (cannot use ones(1,1))
-    4. Early stop when 5 consecutive identical tokens (prevents repetition)
+    Qwen2.5-Omni uses mRoPE, so decoding must pass position_ids explicitly and
+    increment them step by step, otherwise position information is scrambled and
+    the output degenerates into repetition. Concretely:
+    1. a forward_pre_hook captures the position_ids used during prefill
+    2. the first decoding step takes the last prefill position plus one, and every
+       later step adds one
+    3. the attention_mask grows by one each step and must not be ones(1, 1)
+    4. generation stops early after five identical tokens in a row
     """
     device = next(model.parameters()).device
 
@@ -102,6 +106,7 @@ def vcd_generate(model, inputs_f, inputs_d, tokenizer,
     attn_f = cf.get("attention_mask")
     attn_d = cd.get("attention_mask") if cd is not None else None
 
+    # -- Prefill: capture position_ids (required by mRoPE) --
     captured = {}
 
     def _pos_hook(module, args, kwargs):
@@ -124,6 +129,7 @@ def vcd_generate(model, inputs_f, inputs_d, tokenizer,
     pos_ids_prefill = captured.get('position_ids')
     pos_ids_decode  = pos_ids_prefill[..., -1:] + 1 if pos_ids_prefill is not None else None
 
+    # -- Decoding loop --
     generated = []
 
     with torch.inference_mode():
@@ -193,6 +199,7 @@ def vcd_generate(model, inputs_f, inputs_d, tokenizer,
     return response, generated
 
 
+# --- Main ---
 
 def main():
     parser = argparse.ArgumentParser()
