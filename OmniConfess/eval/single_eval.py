@@ -29,6 +29,7 @@ class UnifiedEvaluator:
     def __init__(self, zhipu_key=None):
         self.client = ZhipuAI(api_key=zhipu_key) if zhipu_key else None
 
+    # ================= [utilities] =================
     def _load_data(self, file_path):
         data = []
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -52,6 +53,7 @@ class UnifiedEvaluator:
             if k in item and item[k] is not None: return str(item[k])
         return ""
 
+    # ================= [1. judgement tasks (CMM/PhD)] =================
     def _parse_yesno_answer(self, text):
         text = str(text).lower().strip()
         boxed_match = re.search(r'\\boxed\{(.*?)\}', text)
@@ -73,7 +75,7 @@ class UnifiedEvaluator:
         data = self._load_data(file_path)
         file_name = os.path.basename(file_path)
         
-        print(f"\n [] : {file_name}")
+        print(f"\n[eval] file: {file_name}")
         grouped = {"Overall": {"y_true": [], "y_pred": []}}
         
         scored_data = []
@@ -117,7 +119,7 @@ class UnifiedEvaluator:
             with open(out_path, 'w', encoding='utf-8') as f:
                 for d in scored_data:
                     f.write(json.dumps(d, ensure_ascii=False) + '\n')
-            print(f" : {out_path}")
+            print(f"[ok] per-sample results written to: {out_path}")
 
         results = []
         sorted_keys = sorted(grouped.keys(), key=lambda x: (x != "Overall", x))
@@ -142,6 +144,7 @@ class UnifiedEvaluator:
         
         return results
 
+    # ================= [2. descriptive tasks (AVH/Halo)] =================
     def _compute_token_f1(self, pred, gt):
         def get_tokens(s):
             s = str(s).lower().translate(str.maketrans('', '', string.punctuation))
@@ -173,7 +176,7 @@ class UnifiedEvaluator:
             content = res.choices[0].message.content.lower()
             
             if debug:
-                print(f"    [ API ]: {content.strip()}")
+                print(f"   [judge API raw reply]: {content.strip()}")
 
             rel_match = re.search(r'relevancy:\s*(\d+(?:\.\d+)?)', content)
             acc_match = re.search(r'accuracy:\s*(\d+(?:\.\d+)?)', content)
@@ -184,7 +187,7 @@ class UnifiedEvaluator:
             return r, a
         except Exception as e:
             if debug:
-                print(f"    [API /]: {e}")
+                print(f"   [API error/timeout]: {e}")
             return -1.0, -1.0
 
     def evaluate_descriptive_tasks(self, file_path, save_single=False):
@@ -192,7 +195,7 @@ class UnifiedEvaluator:
         metrics = {"f1": [], "rel": [], "acc": []}
         scored_data = [] 
 
-        for idx, item in enumerate(tqdm(data, desc=f"Eval ({os.path.basename(file_path)})", disable=not save_single)): 
+        for idx, item in enumerate(tqdm(data, desc=f"NLP eval ({os.path.basename(file_path)})", disable=not save_single)): 
             status = str(item.get('status', 'success')).lower()
             gt = self._get_value(item, ['gt', 'ground_truth', 'answer'])
             pred = self._get_value(item, ['pred', 'response', 'output'])
@@ -223,7 +226,7 @@ class UnifiedEvaluator:
             with open(out_path, 'w', encoding='utf-8') as f:
                 for d in scored_data:
                     f.write(json.dumps(d, ensure_ascii=False) + '\n')
-            print(f" : {out_path}")
+            print(f"[ok] per-sample results written to: {out_path}")
 
         return [{
             "File Name": os.path.basename(file_path),
@@ -232,6 +235,7 @@ class UnifiedEvaluator:
             "GAVIE-Rel": round(np.mean(metrics["rel"]), 2) if metrics["rel"] else 0.0,
             "GAVIE-Acc": round(np.mean(metrics["acc"]), 2) if metrics["acc"] else 0.0
         }]
+        # ================= stage 2: compute CIDEr globally =================
         cider_score = 0.0
         individual_cider_scores = [0.0] * len(data)
         
@@ -245,20 +249,21 @@ class UnifiedEvaluator:
                     cider_score = avg_score
                     individual_cider_scores = scores_list
             except Exception as e:
-                print(f"\n CIDEr : {e}")
+                print(f"\n[error] CIDEr computation failed: {e}")
 
         for idx, item in enumerate(scored_data):
             item["eval_metrics"]["CIDEr"] = round(float(individual_cider_scores[idx]), 4)
 
+        # ================= stage 3: save and return =================
         if save_single:
             out_path = file_path.rsplit('.', 1)[0] + "_single_scored.jsonl"
             with open(out_path, 'w', encoding='utf-8') as f:
                 for d in scored_data:
                     f.write(json.dumps(d, ensure_ascii=False) + '\n')
-            print(f" : {out_path}")
+            print(f"[ok] per-sample results written to: {out_path}")
 
         if self.client and len(metrics["rel"]) == 0:
-            print(f"\n️ : GAVIE  API 。")
+            print(f"\n[warn] the GAVIE score list is empty: every judge API request failed. Check the network or the account balance.")
 
         return [{
             "File Name": os.path.basename(file_path),
@@ -269,18 +274,20 @@ class UnifiedEvaluator:
             "GAVIE-Acc": round(np.mean(metrics["acc"]), 2) if metrics["acc"] else 0.0
         }]
 
+# ================= [main: dynamic grouping and report generation] =================
+# ================= [main: dynamic grouping and report generation] =================
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--target_folder', type=str, default=None, help="Aggregate evaluation on all files in a folder")
-    parser.add_argument('--target_files', type=str, nargs='+', default=None, help="Per-sample evaluation on one or more files")
+    parser.add_argument('--target_folder', type=str, default=None, help="Aggregate evaluation over every file in the folder")
+    parser.add_argument('--target_files', type=str, nargs='+', default=None, help="Per-sample evaluation of one or more files, writing new files carrying eval_metrics")
     args = parser.parse_args()
 
     if not args.target_folder and not args.target_files:
-        print("  --target_folder  --target_files")
+        print("[error] provide either --target_folder or --target_files")
         exit(1)
 
-    zhipu_key = "YOUR_ZHIPU_API_KEY"  # set via env ZHIPU_API_KEY
+    zhipu_key = os.environ.get("ZHIPU_API_KEY")
     evaluator = UnifiedEvaluator(zhipu_key=zhipu_key)
     
     files_to_eval = []
@@ -330,7 +337,7 @@ if __name__ == "__main__":
                 results = evaluator.evaluate_descriptive_tasks(f, save_single=True)
             all_reports[report_key].extend(results)
         except Exception as e:
-            print(f"  {f}: {e}")
+            print(f"[error] evaluation failed for {f}: {e}")
 
     for (mode, cat), data in all_reports.items():
         if not data: continue
@@ -342,4 +349,4 @@ if __name__ == "__main__":
             if csvfile.tell() == 0:
                 w.writeheader()
             w.writerows(data)
-        print(f" : {filename}")
+        print(f"[ok] aggregate report updated: {filename}")

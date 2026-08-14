@@ -29,6 +29,7 @@ class UnifiedEvaluator:
     def __init__(self, zhipu_key=None):
         self.client = ZhipuAI(api_key=zhipu_key) if zhipu_key else None
 
+    # ================= [utilities] =================
     def _load_data(self, file_path):
         data = []
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -52,8 +53,9 @@ class UnifiedEvaluator:
             if k in item and item[k] is not None: return str(item[k])
         return ""
 
+    # ================= [1. judgement tasks (CMM/PhD)] =================
     def _parse_yesno_answer(self, text):
-        """ 1(Yes)  0(No)"""
+        """Parse a judgement answer and return 1 for Yes or 0 for No."""
         text = str(text).lower().strip()
         boxed_match = re.search(r'\\boxed\{(.*?)\}', text)
         if boxed_match:
@@ -67,13 +69,15 @@ class UnifiedEvaluator:
         return 0
 
     def evaluate_judgment_tasks(self, file_path):
-        """Evaluate judgment-type tasks with per-group accuracy."""
+        """
+        Verbose variant that traces how group_key is extracted.
+        """
         data = self._load_data(file_path)
         file_name = os.path.basename(file_path)
         is_phd = "phd" in file_name.lower()
         
-        print(f"\n[Eval] File: {file_name}")
-        print(f"[Eval] {'PhD mode (group by PhD-xxx)' if is_phd else 'Standard mode'}")
+        print(f"\n[eval] file: {file_name}")
+        print(f"[task type] {'PhD task (PhD-xxx matched first)' if is_phd else 'generic task'}")
         
         grouped = {"Overall": {"y_true": [], "y_pred": []}}
         
@@ -90,7 +94,7 @@ class UnifiedEvaluator:
             group_key = self._get_value(item, ['sub_category', 'task']) or "Default"
             
             if debug_count < 3:
-                print(f"   [-{debug_count}] ID: {item.get('id','N/A')} | : {group_key}")
+                print(f"   [sample-{debug_count}] ID: {item.get('id','N/A')} | group: {group_key}")
                 debug_count += 1
             
             grouped["Overall"]["y_true"].append(gt)
@@ -102,7 +106,7 @@ class UnifiedEvaluator:
             grouped[group_key]["y_pred"].append(pred)
 
         found_cats = [k for k in grouped.keys() if k != "Overall"]
-        print(f" [] : {found_cats}")
+        print(f"[groups] categories found in this file: {found_cats}")
 
         results = []
         sorted_keys = sorted(grouped.keys(), key=lambda x: (x != "Overall", x))
@@ -125,8 +129,9 @@ class UnifiedEvaluator:
             })
         
         return results
+    # ================= [2. descriptive tasks (AVH/Halo)] =================
     def _compute_token_f1(self, pred, gt):
-        """ F1 ()"""
+        """Content-word level F1 (continuous)."""
         def get_tokens(s):
             s = str(s).lower().translate(str.maketrans('', '', string.punctuation))
             return [w for w in s.split() if w not in STOPWORDS and w.strip()]
@@ -140,7 +145,7 @@ class UnifiedEvaluator:
         return (2 * p * r) / (p + r) if (p + r) > 0 else 0
 
     def _get_gavie_score(self, gt, pred):
-        """ ()"""
+        """Continuous scoring, extracting the score with a strict regex."""
         prompt = (
             f"Reference: {gt}\nModel Prediction: {pred}\n"
             "Score the prediction (0.0-10.0) on:\n"
@@ -165,14 +170,14 @@ class UnifiedEvaluator:
         except: 
             return -1.0, -1.0
     def evaluate_descriptive_tasks(self, file_path):
-        """ AVH/Halo NLP  GAVIE"""
+        """Evaluate AVH/Halo: NLP metrics plus GAVIE."""
         data = self._load_data(file_path)
         tokenizer = PTBTokenizer()
         scorers = [(Bleu(4),["B1","B2","B3","B4"]),(Meteor(),"METEOR"),(Rouge(),"ROUGE_L"),(Cider(),"CIDEr")]
         
         metrics = {"f1": [], "cider": [], "rel": [], "acc": []}
         
-        for item in tqdm(data, desc="NLP Eval", disable=True):
+        for item in tqdm(data, desc="NLP eval", disable=True): 
             gt = self._get_value(item, ['gt', 'ground_truth', 'answer'])
             pred = self._get_value(item, ['pred', 'response', 'output'])
             
@@ -212,6 +217,7 @@ class UnifiedEvaluator:
             "GAVIE-Acc": round(np.mean(metrics["acc"]), 2) if metrics["acc"] else 0
         }]
 
+# ================= [main: dynamic grouping and report generation] =================
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
@@ -254,7 +260,7 @@ if __name__ == "__main__":
                 results = evaluator.evaluate_descriptive_tasks(f)
             all_reports[report_key].extend(results)
         except Exception as e:
-            print(f"  {f}: {e}")
+            print(f"[error] evaluation failed for {f}: {e}")
 
     for (mode, cat), data in all_reports.items():
         if not data: continue
@@ -266,4 +272,4 @@ if __name__ == "__main__":
             w = csv.DictWriter(csvfile, fieldnames=headers)
             w.writeheader()
             w.writerows(data)
-        print(f" : {filename}")
+        print(f"[ok] report written: {filename}")
