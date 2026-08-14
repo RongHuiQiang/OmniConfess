@@ -24,3 +24,10 @@ logs/
 CLAUDE.md
 .claude-code/
 .claude.json
+
+# media downloaded by scripts/fetch_media.sh: the tarball cache, and the media
+# themselves, which ship as release assets rather than as git objects
+.media_cache/
+OmniHalluBench/*/reorg_raw_files/
+OmniHalluBench/*/videos/
+OmniHalluBench/*/images/

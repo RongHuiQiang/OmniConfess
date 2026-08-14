@@ -67,3 +67,26 @@ question alone.
 without it even when only `cmm` / `phd` / `pubmedqa` are being scored. The two
 scorers under `scripts/` have no such dependency, which is why the main-table
 reproduction described in the README needs nothing beyond `scikit-learn`.
+
+## Two HaloQuest images are missing from the media release
+
+`haloquest.json` references 248 distinct images; 246 ship in the media tarball.
+These two could not be located in any copy of the dataset available to us:
+
+```
+images/3_2718_4502888288_e4860b29c3_o.jpg   (referenced by 2 rows)
+images/4_3256_2789033013_c2f79a2bec_o.jpg   (referenced by 1 row)
+```
+
+They are Flickr-sourced originals. Three rows of 365 reference them -- 0-based
+indices 254, 282, 322 in `haloquest.json`. Every published HaloQuest number in
+this repository was produced from generations that already exist under
+`results_shipped/`, so no reported result changes; only a from-scratch re-run of
+those three rows is affected.
+
+Be aware of how that re-run behaves: a missing media path is **not** an error.
+`load_image` returns `None`, and the caller prints `[MEDIA ERROR] invalid image
+path` and answers the question anyway -- text-only, with no image. So those rows
+would be scored on a blind guess rather than skipped. Grep the run log for
+`MEDIA ERROR` and drop the affected rows yourself if you re-generate HaloQuest.
+

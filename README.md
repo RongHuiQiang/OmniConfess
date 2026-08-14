@@ -17,6 +17,7 @@ through self-confess decoding.
 | `OmniHalluBench/`             | Unified 3,540-sample omni-modal hallucination benchmark          |
 | `results_shipped/`            | Per-sample outputs behind every main-table cell                  |
 | `scripts/`                    | Manifests mapping each cell to its file, plus the two scorers    |
+| `scripts/fetch_media.sh`      | Downloads the benchmark's images / videos / audio (3.24 GB)      |
 | `KNOWN_ISSUES.md`             | Measured caveats that the code does not announce                 |
 
 ## The OmniConfess framework
@@ -83,9 +84,13 @@ python OmniConfess/prompts/verify.py    # works in a bare interpreter
 
 ## Quick start
 
-Run from the repository root, which is what the built-in defaults assume:
+Run from the repository root, which is what the built-in defaults assume. The
+command below reads video and audio, so fetch the media first (see *Media files*
+for why reproducing the main table does not need this step):
 
 ```bash
+bash scripts/fetch_media.sh cmm
+
 python OmniConfess/omniconfess_qwen.py \
     --datasets cmm \
     --data_path ./OmniHalluBench/cmm/cmm.json \
@@ -206,10 +211,63 @@ it is an index into the *unfiltered* original release (HaloQuest ships 365 rows
 numbered up to 608), so it is provenance, kept under `source`, not a join key.
 Cross-file alignment keys on the question text.
 
-The unified annotation JSONs are released here. Media files (images, videos, audio)
-are **not** redistributed: they total roughly 13 GB, and every subset is already
-publicly available from its original authors. Obtain them there and lay them out so
-that the relative paths in each JSON's media fields resolve under `--data_root`.
+### Media files
+
+**You do not need them to reproduce the main table.** The aggregator recomputes
+every published number from the generations already committed under
+`results_shipped/`; nothing in that path opens an image, a video, or a waveform.
+Media are required only to re-run generation, which needs model weights anyway.
+
+When you do want to re-run generation, the media are distributed from this
+repository -- exactly the bytes these experiments consumed, not a re-download from
+six upstream projects that may have moved on:
+
+```bash
+bash scripts/fetch_media.sh              # all four multimodal subsets, 3.24 GB
+bash scripts/fetch_media.sh cmm phd      # or only the subsets you need
+```
+
+The script pulls one tarball per subset from the `media-v1` release, checks it
+against a pinned sha256, unpacks it into the layout below, and counts the files
+on disk. Re-running it is cheap: a verified tarball in `.media_cache/` is not
+downloaded again. Because this repository is private, the download needs
+credentials -- either `gh auth login` once, or `export GITHUB_TOKEN=...`.
+
+| Subset    | Media                          | Files | Size    |
+|-----------|--------------------------------|------:|--------:|
+| CMM       | 660 mp4 + 660 wav              |  1320 | 1.61 GB |
+| AVHBench  | 645 mp4 (video and audio share one file) | 645 | 1.24 GB |
+| HaloQuest | png / jpg / webp               |   246 | 0.30 GB |
+| PHD       | jpg (COCO val2014)             |   625 | 0.10 GB |
+| PubMedQA  | none -- text is inside the JSON |     0 |       - |
+| RAGTruth  | none -- text is inside the JSON |     0 |       - |
+
+Only four of the six subsets have media at all. PubMedQA and RAGTruth are
+text-only and their annotation JSONs are self-contained.
+
+The tarballs unpack so that each subset's media sit *beside* its annotation JSON.
+Path resolution tries the JSON's own directory first, so this arrangement needs no
+flags at all:
+
+```
+OmniHalluBench/
+  cmm/cmm.json             + reorg_raw_files/.../*.mp4, *.wav
+  avhbench/avhbench.json   + videos/*.mp4
+  haloquest/haloquest.json + images/*.png
+  phd/phd.json             + images/val2014/*.jpg
+```
+
+If you keep media somewhere else, point `--data_root` at the directory that
+*directly contains* those subfolders (e.g. `--data_root /srv/media/cmm`), not at
+the benchmark root -- resolution falls back to `data_root/<relative path>` with no
+dataset name inserted. Verified against all four subsets.
+
+Two HaloQuest images (of 248 referenced) could not be located and are absent from
+the tarball; the 3 affected rows out of 365 are named in `KNOWN_ISSUES.md`, which
+also explains why a re-run answers them blind instead of failing.
+
+The media are redistributed here for reproducibility under each original project's
+terms; the annotations and code in this repository are ours. Original releases:
 
 | Dataset   | Original release                          | Paper            |
 |-----------|-------------------------------------------|------------------|
@@ -219,26 +277,6 @@ that the relative paths in each JSON's media fields resolve under `--data_root`.
 | PHD       | https://github.com/jiazhen-code/PhD        | arXiv 2403.11116 |
 | PubMedQA  | https://github.com/pubmedqa/pubmedqa       | arXiv 1909.06146 |
 | RAGTruth  | https://github.com/ParticleMedia/RAGTruth  | arXiv 2401.00396 |
-
-PubMedQA and RAGTruth are text-only: their annotation JSONs here are
-self-contained and need no download. Only the four multimodal subsets do.
-
-**Where to put the media.** Unpack each download *into the same directory as its
-annotation JSON*, so that the layout below holds. Path resolution tries the JSON's
-own directory first, which makes this the arrangement that needs no flags at all:
-
-```
-OmniHalluBench/
-  cmm/cmm.json             + reorg_raw_files/.../*.mp4, *.wav
-  avhbench/avhbench.json   + videos/*.mp4          (video and audio share one file)
-  haloquest/haloquest.json + images/*.png
-  phd/phd.json             + images/val2014/*.jpg  (COCO val2014)
-```
-
-If you keep media somewhere else, point `--data_root` at the directory that
-*directly contains* those subfolders (e.g. `--data_root /srv/media/cmm`), not at
-the benchmark root -- resolution falls back to `data_root/<relative path>` with no
-dataset name inserted. Verified against all four subsets.
 
 ## Evaluation
 
