@@ -114,6 +114,61 @@ def load_json_file(data_path):
     return items
 
 
+# Which facet acts as the grouping key for each subset. The unified schema keeps
+# each subset's own taxonomy under ``facets`` with explicit names instead of the
+# positional category/sub_category pair, because for some subsets the second field
+# was never a child of the first: HaloQuest's two fields are orthogonal axes
+# (image source x question type), and CMM's ``granularity`` was a function of its
+# ``sub_category``. Grouping only needs a one-to-one label, so picking one facet
+# per subset reproduces the original grouping exactly -- the label text is shorter
+# ("icc" rather than "PhD-icc"), but no group is merged or split.
+GROUP_FACET = {
+    'cmm':       'hallucination_type',
+    'phd':       'mode',
+    'avhbench':  'task',
+    'haloquest': 'question_type',
+}
+
+
+def _alias_legacy(item):
+    """Map a unified-schema record onto the legacy field names.
+
+    The annotation JSONs ship the unified schema (``uid`` / ``media`` / ``facets``
+    / ``label``); a lot of call sites still read ``sub_category``, ``video_path``
+    and friends. Rather than duplicating both spellings on disk, the legacy names
+    are derived here at load time. Records already in the legacy layout pass
+    through untouched, so either layout loads.
+    """
+    if 'media' not in item and 'facets' not in item:
+        return item                                   # legacy record, nothing to do
+
+    media = item.get('media') or {}
+    facets = item.get('facets') or {}
+    ds = item.get('dataset', '')
+    group = facets.get(GROUP_FACET.get(ds, ''))
+    if group is None:                                 # subsets with no taxonomy
+        group = ds or 'Default'
+
+    out = dict(item)
+    out.update({
+        'sub_category': group,
+        'category':     ds,
+        'video_path':   media.get('video'),
+        'audio_path':   media.get('audio'),
+        'image_path':   media.get('image'),
+    })
+    # Only surface an ``id`` when the subset genuinely had one. CMM, AVHBench and
+    # PhD never did, and load_dataset falls back to the row number for them --
+    # substituting ``uid`` here would silently renumber every result file. Note
+    # that the ids that do exist are pre-filter indices into the original release
+    # (HaloQuest has 365 rows numbered up to 608), so they are provenance, not a
+    # join key: cross-file alignment keys on (question, ground truth).
+    orig_id = (item.get('source') or {}).get('orig_id')
+    if 'id' not in out and orig_id is not None:
+        out['id'] = orig_id
+    return out
+
+
 def load_dataset(data_path, data_root):
     """
     Load a dataset JSON file and normalize each item to a unified schema:
@@ -128,11 +183,17 @@ def load_dataset(data_path, data_root):
             'passage'    : str or None,  # text-only datasets
             '_raw'       : dict,          # original item for debug
         }
-    Resolved absolute media paths are NOT stored here — call resolve_media_path() at inference time.
+    Resolved absolute media paths are NOT stored here - call resolve_media_path() at inference time.
+
+    Both the unified and the legacy annotation layouts are accepted; see
+    ``_alias_legacy``. The unified extras (``task_type``, ``answer_space``,
+    ``label``, ``facets``, ``uid``) are carried through when present, so a scorer
+    can pick its mode from the data instead of matching on the file name.
     """
     items = load_json_file(data_path)
     normalized = []
-    for i, item in enumerate(items):
+    for i, raw in enumerate(items):
+        item = _alias_legacy(raw)
         entry = {
             'id':          str(item.get('id', item.get('video_id', i))),
             'question':    item.get('question', ''),
@@ -142,8 +203,16 @@ def load_dataset(data_path, data_root):
             'audio_path':  item.get('audio_path', item.get('audio', None)),
             'image_path':  item.get('image_path', item.get('image', None)),
             'passage':     item.get('passage', item.get('context', None)),
-            '_raw':        item,
+            '_raw':        raw,
         }
+        # Legacy spelling kept alongside group_key: base_vcd and base_dola read
+        # ``sub_category`` off this entry, which never existed here, so their
+        # result files recorded an empty group. Supplying it fixes that without
+        # touching either file.
+        entry['sub_category'] = entry['group_key']
+        for k in ('uid', 'task_type', 'answer_space', 'label', 'facets'):
+            if k in item:
+                entry[k] = item[k]
         normalized.append(entry)
     return normalized
 

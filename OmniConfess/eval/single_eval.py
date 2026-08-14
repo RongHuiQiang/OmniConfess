@@ -54,19 +54,32 @@ class UnifiedEvaluator:
         return ""
 
     # ================= [1. judgement tasks (CMM/PhD)] =================
+    # PubMedQA's label set is yes / no / maybe, so the parser needs a third
+    # outcome. MAYBE is a sentinel rather than a class index: nothing downstream
+    # can place it on a yes-or-no axis, so evaluate_judgment_tasks excludes rows
+    # whose ground truth is MAYBE and counts a MAYBE prediction as a miss.
+    # Without the branches below, "Maybe. <long answer>" fell through to the
+    # last_chunk heuristic and was labelled from whatever 'yes' or 'no' happened
+    # to appear in its final 30 characters.
+    MAYBE = 2
+
     def _parse_yesno_answer(self, text):
         text = str(text).lower().strip()
         boxed_match = re.search(r'\\boxed\{(.*?)\}', text)
         if boxed_match:
             ans = boxed_match.group(1).strip()
+            if 'maybe' in ans: return self.MAYBE
             return 1 if 'yes' in ans else 0
+        if 'final answer: maybe' in text: return self.MAYBE
         if 'final answer: yes' in text: return 1
         if 'final answer: no' in text: return 0
         # Check first word (handles "Yes. ..." or "No, ..." style responses)
         first_word = text.split('.')[0].split(',')[0].split()[0] if text.split() else ''
+        if first_word == 'maybe': return self.MAYBE
         if first_word == 'yes': return 1
         if first_word == 'no': return 0
         last_chunk = text[-30:]
+        if 'maybe' in last_chunk: return self.MAYBE
         if 'yes' in last_chunk: return 1
         if 'no' in last_chunk: return 0
         return 0
@@ -79,6 +92,7 @@ class UnifiedEvaluator:
         grouped = {"Overall": {"y_true": [], "y_pred": []}}
         
         scored_data = []
+        n_undecidable = 0
 
         for item in data:
             status = str(item.get('status', 'success')).lower()
@@ -96,23 +110,35 @@ class UnifiedEvaluator:
             pred = self._parse_yesno_answer(pred_raw)
             group_key = self._get_value(item, ['sub_category', 'task']) or "Default"
             
+            undecidable = (gt == self.MAYBE)
             item["eval_metrics"] = {
                 "Ground_Truth": gt,
                 "Prediction": pred,
-                "Is_Correct": 1 if gt == pred else 0,
+                "Is_Correct": 0 if (undecidable or gt != pred) else 1,
                 "Group": group_key,
-                "Status": status
+                "Status": status,
+                "Undecidable": 1 if undecidable else 0
             }
             scored_data.append(item)
 
-            if status == "success":
+            if status == "success" and not undecidable:
+                # A MAYBE prediction has no place on the binary axis, so score it
+                # as a miss by flipping it away from the ground truth.
+                pred_bin = (1 - gt) if pred == self.MAYBE else pred
                 grouped["Overall"]["y_true"].append(gt)
-                grouped["Overall"]["y_pred"].append(pred)
+                grouped["Overall"]["y_pred"].append(pred_bin)
                 
                 if group_key not in grouped:
                     grouped[group_key] = {"y_true": [], "y_pred": []}
                 grouped[group_key]["y_true"].append(gt)
-                grouped[group_key]["y_pred"].append(pred)
+                grouped[group_key]["y_pred"].append(pred_bin)
+            elif undecidable:
+                n_undecidable += 1
+
+        if n_undecidable:
+            print(f"[eval] {n_undecidable} sample(s) excluded: ground truth is "
+                  f"'maybe', which the yes/no metrics cannot score. PubMedQA is "
+                  f"the only subset where this occurs.")
 
         if save_single:
             out_path = file_path.rsplit('.', 1)[0] + "_single_scored.jsonl"
