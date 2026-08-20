@@ -1,0 +1,53 @@
+# =============================================================================
+# cmm -- judgement cell, CF-Confess operator (two counterfactual views)
+# =============================================================================
+# TERMINAL VALUES (paper main-table numbers, Qwen2.5-Omni-7B, n=721):
+#   CF-Confess lambda=1.0 + prompt v1  ->  F1 76.36 / Youden 0.600
+#   (FPR 0.555 -> 0.124); random-sign control 67.62; McNemar vs base p=1.3e-16.
+#   This is the DEFAULT below -- the reproduction pipeline must reproduce the
+#   main-table number.
+#   PROVENANCE: RESULTS.md row 2026-08-15,
+#     artifact   outputs/cmm_cf_confess/cf_lam1.0_full_single_scored.jsonl
+#     launcher   run_cf_cmm_gpus0123.sh (lambda grid 1.0 / 0.5)
+#     operator   cf_confess_cmm.py  (merged into confess_pipeline.py verbatim)
+#
+# PROMPT PROGRAM, v6 (adjudicated 2026-08-16: paper main row = v1; v6 goes to
+# the prompt-program section as the "subgroup-level significance is the only
+# stable carrier" argument; one flag --prompt_version v6 reaches it):
+#   full-721 v6 measures F1 79.15 / Youden 0.641
+#   (outputs/cmm_cf_confess/cf_lam1.0_v6_full_shard0..3.jsonl) against the
+#   pre-registered gate "F1 > 76.36 AND Youden >= 0.600 AND paired
+#   significance vs v1" (registry note cmm/baseline/v6):
+#     F1        79.15 > 76.36          PASS
+#     Youden    0.641 >= 0.600         PASS
+#     McNemar   46 fix / 38 break, p = 0.445     FAIL  (whole set)
+#   Subgroup split (same alignment, cmm.json original indices, 721/721):
+#     SEE  (overrely_audio_ignore_visual, n=329): 25 fix / 8 break, p=4.55e-03
+#     HEAR (overrely_visual_ignore_audio,   n=392): 21 fix / 30 break, p=0.262
+#   v3 (75.72/0.586) and v5 (74.96/0.566) regressed on the same protocol.
+# =============================================================================
+
+task_type: judgement
+dataset: cmm
+
+data_path: OmniHalluBench/cmm/cmm.json        # 721 items (audio 329 / visual 392)
+data_root: OmniHalluBench
+
+prompt_version: v1        # paper main row (76.36 / 0.600); v6 via --prompt_version
+seed: 42
+max_new_tokens: 300
+record_process: true
+
+output_dir: outputs/pipeline/cmm
+time_path: outputs/pipeline/cmm/time
+file_name: cf_confess_cmm
+
+cf:
+  variant: cmm
+  # delta = w_audio * d_cf_audio + w_video * d_cf_video, with
+  # d_cf_i = log P(Yes | modality-i-masked view) - log P(Yes | full view);
+  # margin' = margin_full + lambda * delta; hard-force Yes iff margin' > 0.
+  lambda_cf: 1.0          # terminal (probe grid, max dev Youden 0.471)
+  w_audio: 1.0            # pre-registered equal weights
+  w_video: 1.0
+  control: none           # 'random_sign' reproduces the 67.62 control arm

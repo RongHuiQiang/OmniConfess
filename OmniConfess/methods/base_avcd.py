@@ -146,8 +146,10 @@ _ORIG_ATTN_FORWARD = _qomni.Qwen2_5OmniAttention.forward
 
 
 def _avcd_attn_forward(self, hidden_states, attention_mask=None, position_ids=None,
-                       past_key_value=None, output_attentions=False, use_cache=False,
-                       cache_position=None, position_embeddings=None, **kwargs):
+                       past_key_values=None, past_key_value=None, output_attentions=False,
+                       use_cache=False, cache_position=None, position_embeddings=None, **kwargs):
+    # transformers 4.5x compat: the decoder layer unpacks exactly 2 values and
+    # passes the KV cache as `past_key_values` (old name kept for older versions).
     bsz, q_len, _ = hidden_states.size()
 
     query_states = self.q_proj(hidden_states).view(bsz, q_len, -1, self.head_dim).transpose(1, 2)
@@ -158,8 +160,9 @@ def _avcd_attn_forward(self, hidden_states, attention_mask=None, position_ids=No
     query_states, key_states = _qomni.apply_multimodal_rotary_pos_emb(
         query_states, key_states, cos, sin, self.rope_scaling["mrope_section"])
 
-    if past_key_value is not None:
-        key_states, value_states = past_key_value.update(
+    _pkv = past_key_values if past_key_values is not None else past_key_value
+    if _pkv is not None:
+        key_states, value_states = _pkv.update(
             key_states, value_states, self.layer_idx,
             {"sin": sin, "cos": cos, "cache_position": cache_position})
 
@@ -167,7 +170,15 @@ def _avcd_attn_forward(self, hidden_states, attention_mask=None, position_ids=No
     value_states = _qomni.repeat_kv(value_states, self.num_key_value_groups)
 
     attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
-    if attention_mask is not None:
+    # transformers>=4.5x with sdpa config passes attention_mask=None and relies on
+    # SDPA's internal is_causal; this hand-written eager math must add the causal
+    # mask itself or prefill silently attends to future tokens (bidirectional).
+    if attention_mask is None and q_len > 1 and key_states.shape[-2] == q_len:
+        min_v = torch.finfo(attn_weights.dtype).min
+        causal = torch.full((q_len, q_len), min_v, device=attn_weights.device, dtype=attn_weights.dtype)
+        causal = torch.triu(causal, diagonal=1)
+        attn_weights = attn_weights + causal[None, None, :, :]
+    elif attention_mask is not None:
         attn_weights = attn_weights + attention_mask[:, :, :, : key_states.shape[-2]]
     attn_weights = F.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
 
@@ -185,7 +196,7 @@ def _avcd_attn_forward(self, hidden_states, attention_mask=None, position_ids=No
     attn_output = torch.matmul(attn_weights, value_states)
     attn_output = attn_output.transpose(1, 2).contiguous().reshape(bsz, q_len, -1)
     attn_output = self.o_proj(attn_output)
-    return attn_output, (attn_weights if output_attentions else None), past_key_value
+    return attn_output, (attn_weights if output_attentions else None)
 
 
 class AttnPatch:
@@ -335,8 +346,15 @@ def _decode_step(model, tok_tensor, attn_mask, past_kv, pos_ids):
 
 def avcd_generate(model, tokenizer, clean, max_new_tokens=256,
                   alpha=AVCD_ALPHA, beta=APC_BETA, entropy_gate=ENTROPY_GATE,
-                  apc_fill=APC_FILL, verbose=True):
-    """Returns (response, gen_ids, info)."""
+                  apc_fill=APC_FILL, verbose=True, record_process=True):
+    """Returns (response, gen_ids, info, logp_list).
+
+    When record_process is on, logp_list holds the log-probability of each
+    generated token under the distribution actually used for selection, i.e.
+    log_softmax of the AVCD formula output after the entropy gate / APC mask
+    (phi-Decoding trajectory style, cf. base_model.py). On text-only samples
+    the mode degenerates to greedy, so this is the plain model distribution.
+    """
     device   = next(model.parameters()).device
     eos_id   = tokenizer.eos_token_id
     n_layers = len(model.thinker.model.layers)
@@ -368,6 +386,12 @@ def avcd_generate(model, tokenizer, clean, max_new_tokens=256,
                     f"(expected {n_layers}); the attention interception did not take effect, so AVCD cannot run.")
             ranking, threshold = compute_dominance(rows, spans, n_layers)
             del rows
+            # credibility assertions (coordinator-requested): dominance must be
+            # non-degenerate, otherwise the interception produced meaningless stats
+            scores = [v for _, v in ranking]
+            assert len(ranking) == len(spans), f"degenerate ranking: {ranking}"
+            assert max(scores) > 0.0, f"all-zero dominance: {ranking}"
+            assert threshold > 0.0, f"non-positive threshold: {threshold}"
             dominant = ranking[0][0]
             others   = [k for k, _ in ranking[1:]]
             info.update(dominant=dominant,
@@ -413,10 +437,15 @@ def avcd_generate(model, tokenizer, clean, max_new_tokens=256,
             return contrastive.masked_fill(lo < cutoff, apc_fill)
 
         generated = []
+        logp_list = []
         with torch.inference_mode():
-            cur = _select(logits_o, branch_logits).argmax(dim=-1, keepdim=True)
+            sel_logits = _select(logits_o, branch_logits)
+            cur = sel_logits.argmax(dim=-1, keepdim=True)
             tok = cur.item()
             generated.append(tok)
+            if record_process:
+                lp = F.log_softmax(sel_logits.float(), dim=-1)[0, tok]
+                logp_list.append(round(lp.item(), 4))
 
             for _ in range(1, max_new_tokens):
                 if tok == eos_id:
@@ -434,17 +463,40 @@ def avcd_generate(model, tokenizer, clean, max_new_tokens=256,
                 if pos is not None:
                     pos = pos + 1
 
-                cur = _select(logits_o, branch_logits).argmax(dim=-1, keepdim=True)
+                sel_logits = _select(logits_o, branch_logits)
+                cur = sel_logits.argmax(dim=-1, keepdim=True)
                 tok = cur.item()
                 generated.append(tok)
+                if record_process:
+                    lp = F.log_softmax(sel_logits.float(), dim=-1)[0, tok]
+                    logp_list.append(round(lp.item(), 4))
 
     info["n_entropy_gated"] = n_gated
     info["n_tokens"] = len(generated)
-    return tokenizer.decode(generated, skip_special_tokens=True).strip(), generated, info
+    return (tokenizer.decode(generated, skip_special_tokens=True).strip(),
+            generated, info, logp_list)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
 # ═══════════════════════════════════════════════════════════════════════════
+
+def attach_trajectory(result, gen_ids, logp_list, input_len):
+    """Append phi-Decoding style per-token trajectory fields (see base_model.py)."""
+    result["record_process"] = True
+    if gen_ids:
+        cum = float(sum(logp_list)) if logp_list else 0.0
+        result["token_ids"] = list(gen_ids)
+        result["logp_list"] = list(logp_list)
+        result["cumulative_logprob"] = round(cum, 4)
+        result["norm_logp"] = round(cum / (len(gen_ids) + 1e-8), 4)
+        result["input_len"] = int(input_len) if input_len is not None else None
+        result["output_tokens"] = len(gen_ids)
+    else:
+        for k in ("token_ids", "logp_list", "cumulative_logprob",
+                  "norm_logp", "input_len"):
+            result[k] = None
+        result["output_tokens"] = 0
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -469,6 +521,10 @@ def main():
     parser.add_argument("--apc_fill",       type=float, default=APC_FILL,
                         help="APC fill value (official -1e-4; pass -inf for VCD-style)")
     parser.add_argument("--prompt_version", type=str, default="v0")
+    parser.add_argument("--record_process", action=argparse.BooleanOptionalAction,
+                        default=True,
+                        help="Record per-token trajectory (token ids, per-token "
+                             "logprobs, cumulative/norm logp) alongside the response")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -532,11 +588,13 @@ def main():
                 clean = _clean_to_device(prepare_for_thinker(raw_inputs, model),
                                          model.device)
 
-                response, gen_ids, info = avcd_generate(
+                response, gen_ids, info, logp_list = avcd_generate(
                     model, tokenizer, clean,
                     max_new_tokens=args.max_new_tokens,
                     alpha=args.alpha, beta=args.beta,
-                    entropy_gate=args.entropy_gate, apc_fill=args.apc_fill)
+                    entropy_gate=args.entropy_gate, apc_fill=args.apc_fill,
+                    record_process=args.record_process)
+                input_len = clean["input_ids"].shape[1]
 
                 elapsed = time.time() - t0
                 pred_clean = parse_pred(response, args.datasets)
@@ -559,6 +617,8 @@ def main():
                     result["degraded_reason"] = "text-only: no AV contrast"
                 elif info["avcd_mode"] == "single_cd":
                     result["degraded_reason"] = "2 modalities: AVCD self-cancels → single-instance CD"
+                if args.record_process:
+                    attach_trajectory(result, gen_ids, logp_list, input_len)
 
                 res_f.write(json.dumps(result, ensure_ascii=False) + "\n")
                 res_f.flush()
@@ -570,8 +630,10 @@ def main():
                 print(f"  [OOM] id={item_id}", flush=True)
                 with open(error_path, "a") as ef:
                     ef.write(f"{time.strftime('%H:%M:%S')} | id={item_id} | OOM\n")
-                res_f.write(json.dumps({"id": item_id, "status": "OOM",
-                                        "error": "CUDA OOM"}, ensure_ascii=False) + "\n")
+                _err = {"id": item_id, "status": "OOM", "error": "CUDA OOM"}
+                if args.record_process:
+                    attach_trajectory(_err, None, None, None)
+                res_f.write(json.dumps(_err, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             except Exception as e:
@@ -581,8 +643,10 @@ def main():
                 with open(error_path, "a") as ef:
                     ef.write(f"{time.strftime('%H:%M:%S')} | id={item_id} | {repr(e)}\n")
                     ef.write(traceback.format_exc() + "\n")
-                res_f.write(json.dumps({"id": item_id, "status": "failed",
-                                        "error": repr(e)[:200]}, ensure_ascii=False) + "\n")
+                _err = {"id": item_id, "status": "failed", "error": repr(e)[:200]}
+                if args.record_process:
+                    attach_trajectory(_err, None, None, None)
+                res_f.write(json.dumps(_err, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             finally:

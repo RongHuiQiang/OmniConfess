@@ -74,10 +74,16 @@ class DoLaAuditor:
 # --- DoLa step-by-step generation ---
 
 def dola_generate(model, auditor, inputs, tokenizer,
-                  max_new_tokens=256, alpha=1.0):
+                  max_new_tokens=256, alpha=1.0, record_process=True):
     """
     DoLa contrastive decoding.
-    Returns (response_str, generated_ids_list).
+    Returns (response_str, generated_ids_list, logp_list).
+
+    When record_process is on, logp_list holds the log-probability of each
+    generated token under the distribution actually used for selection, i.e.
+    log_softmax of the contrastive DoLa logits (phi-Decoding trajectory style,
+    cf. base_model.py); without a premature layer it is the plain greedy model
+    distribution.
 
     Implementation notes:
     1. There is no additional F.log_softmax over the contrast, which is already in
@@ -128,6 +134,7 @@ def dola_generate(model, auditor, inputs, tokenizer,
 
     # -- Decoding loop --
     generated_ids = []
+    logp_list = []
 
     try:
         with torch.inference_mode():
@@ -143,6 +150,9 @@ def dola_generate(model, auditor, inputs, tokenizer,
             next_token = dola_logits.argmax(dim=-1, keepdim=True)
             token_id   = next_token.item()
             generated_ids.append(token_id)
+            if record_process:
+                lp = F.log_softmax(dola_logits.float(), dim=-1)[0, token_id]
+                logp_list.append(round(lp.item(), 4))
 
             for step in range(1, max_new_tokens):
                 if token_id == eos_id:
@@ -180,15 +190,36 @@ def dola_generate(model, auditor, inputs, tokenizer,
                 next_token = dola_logits.argmax(dim=-1, keepdim=True)
                 token_id   = next_token.item()
                 generated_ids.append(token_id)
+                if record_process:
+                    lp = F.log_softmax(dola_logits.float(), dim=-1)[0, token_id]
+                    logp_list.append(round(lp.item(), 4))
 
     finally:
         auditor.remove()
 
     response = tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
-    return response, generated_ids
+    return response, generated_ids, logp_list
 
 
 # --- Main ---
+
+def attach_trajectory(result, gen_ids, logp_list, input_len):
+    """Append phi-Decoding style per-token trajectory fields (see base_model.py)."""
+    result["record_process"] = True
+    if gen_ids:
+        cum = float(sum(logp_list)) if logp_list else 0.0
+        result["token_ids"] = list(gen_ids)
+        result["logp_list"] = list(logp_list)
+        result["cumulative_logprob"] = round(cum, 4)
+        result["norm_logp"] = round(cum / (len(gen_ids) + 1e-8), 4)
+        result["input_len"] = int(input_len) if input_len is not None else None
+        result["output_tokens"] = len(gen_ids)
+    else:
+        for k in ("token_ids", "logp_list", "cumulative_logprob",
+                  "norm_logp", "input_len"):
+            result[k] = None
+        result["output_tokens"] = 0
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -205,6 +236,10 @@ def main():
     parser.add_argument("--premature_layer",type=int, default=PREMATURE_LAYER,
                         help="Which layer index as premature (default 8)")
     parser.add_argument("--prompt_version", type=str, default="v1")
+    parser.add_argument("--record_process", action=argparse.BooleanOptionalAction,
+                        default=True,
+                        help="Record per-token trajectory (token ids, per-token "
+                             "logprobs, cumulative/norm logp) alongside the response")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -264,10 +299,12 @@ def main():
                     pixel_values, audio_values, image_values, args.datasets)
                 clean = prepare_for_thinker(raw_inputs, model)
 
-                response, gen_ids = dola_generate(
+                response, gen_ids, logp_list = dola_generate(
                     model, auditor, clean, tokenizer,
                     max_new_tokens=args.max_new_tokens,
-                    alpha=args.alpha)
+                    alpha=args.alpha,
+                    record_process=args.record_process)
+                input_len = clean["input_ids"].shape[1]
 
                 elapsed = time.time() - t0
                 # Extract clean pred from raw output (Yes/No for judgment tasks)
@@ -285,6 +322,8 @@ def main():
                     "time_sec":     round(elapsed, 3),
                     "status":       "success",
                 }
+                if args.record_process:
+                    attach_trajectory(result, gen_ids, logp_list, input_len)
                 res_f.write(json.dumps(result, ensure_ascii=False) + "\n")
                 res_f.flush()
                 print(f"  pred: {pred_clean!r}  raw: {response[:60]!r}  gt: {result['gt']!r}  ({elapsed:.1f}s)", flush=True)
@@ -294,7 +333,10 @@ def main():
                 print(f"  [OOM] id={item_id}", flush=True)
                 with open(error_path, "a") as ef:
                     ef.write(f"{time.strftime('%H:%M:%S')} | id={item_id} | OOM\n")
-                res_f.write(json.dumps({"id": item_id, "status": "OOM", "error": "CUDA OOM"}, ensure_ascii=False) + "\n")
+                _err = {"id": item_id, "status": "OOM", "error": "CUDA OOM"}
+                if args.record_process:
+                    attach_trajectory(_err, None, None, None)
+                res_f.write(json.dumps(_err, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             except Exception as e:
@@ -303,7 +345,10 @@ def main():
                 with open(error_path, "a") as ef:
                     ef.write(f"{time.strftime('%H:%M:%S')} | id={item_id} | {repr(e)}\n")
                     ef.write(traceback.format_exc() + "\n")
-                res_f.write(json.dumps({"id": item_id, "status": "failed", "error": repr(e)[:200]}, ensure_ascii=False) + "\n")
+                _err = {"id": item_id, "status": "failed", "error": repr(e)[:200]}
+                if args.record_process:
+                    attach_trajectory(_err, None, None, None)
+                res_f.write(json.dumps(_err, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             finally:

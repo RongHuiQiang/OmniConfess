@@ -1,0 +1,207 @@
+{
+ "pathology": {
+  "phd@Q2.5": {
+   "dominance_auc_dev": 0.767,
+   "dominance_auc_full": 0.68,
+   "extraction_loss": "n/a (judgement)",
+   "answerability_share": 0.0,
+   "perception": "image informative (probe noimg AUC 0.752 probe-conv)"
+  },
+  "cmm@Q2.5": {
+   "dominance_auc_full": 0.595,
+   "margin_full_auc": 0.888,
+   "extraction_loss": "n/a (judgement)",
+   "answerability_share": 0.0,
+   "perception": "per-modality dependence (delta_video >> delta_audio)"
+  },
+  "pubmedqa@Q2.5": {
+   "dominance_auc_full": 0.585,
+   "extraction_loss": 0.0,
+   "answerability_share": 0.0,
+   "perception": "n/a"
+  },
+  "phd@Qwen3": {
+   "dominance_auc_dev": 0.557,
+   "pathology_gone": "anti-yes bias 50.2%->62.6%, correct-sample delta ~ 0",
+   "extraction_loss": "n/a",
+   "answerability_share": 0.0,
+   "perception": "n/a"
+  },
+  "ragtruth@Q2.5": {
+   "dominance_auc": "claim-level cross-sample AUC ~ 0.52 (judged dead)",
+   "extraction_loss": 0.308,
+   "brevity_share": 0.0,
+   "answerability_share": 0.0,
+   "perception": "n/a"
+  },
+  "haloquest@Q2.5": {
+   "dominance_auc": "answerability gate AUC 0.715 [0.616,0.801]",
+   "extraction_loss": 0.0,
+   "brevity_share": 0.255,
+   "answerability_share": 0.2273972602739726
+  },
+  "avhbench@Q2.5": {
+   "dominance_auc": "gate1 variance exists, gate2 dead (Spearman(g,F1)=0.02)",
+   "extraction_loss": 0.0,
+   "answervability_share": 0.0,
+   "answerability_share": 0.0,
+   "perception": "window-oracle headroom 93/130 = 71.5%; Look-Again ladder delta +0.34 p=0.29 (input not bottleneck)"
+  }
+ },
+ "cells": [
+  {
+   "dataset": "phd@Q2.5",
+   "mechanism": "CF (context-dominance disease)",
+   "aligned": true,
+   "gain": 12.92,
+   "p": 2.3e-17,
+   "note": "aligned: misleading-context pull is the measured disease"
+  },
+  {
+   "dataset": "cmm@Q2.5",
+   "mechanism": "CF (modality-prior disease)",
+   "aligned": true,
+   "gain": 6.28,
+   "p": 1.7e-12,
+   "note": "aligned: single-modality over-affirmation is the disease"
+  },
+  {
+   "dataset": "ragtruth@Q2.5",
+   "mechanism": "output contract (extraction disease)",
+   "aligned": true,
+   "gain": 7.62,
+   "p": 0.0004,
+   "note": "aligned: 30.8% of answers lost to extraction; v3 +11.15, v4 +13.33"
+  },
+  {
+   "dataset": "haloquest@Q2.5",
+   "mechanism": "answerability gate (answerability disease)",
+   "aligned": true,
+   "gain": 3.43,
+   "p": 2.4e-08,
+   "note": "aligned: 22.7% needs-gate; subset gain +12.5"
+  },
+  {
+   "dataset": "haloquest@Q2.5",
+   "mechanism": "output contract (brevity disease)",
+   "aligned": true,
+   "gain": 1.19,
+   "p": 0.164,
+   "note": "aligned but weak: brevity share 25.5%, registered \"过线但弱\""
+  },
+  {
+   "dataset": "avhbench@Q2.5",
+   "mechanism": "Vote-SC (multi-arm diversity)",
+   "aligned": true,
+   "gain": 2.14,
+   "p": 4.1e-11,
+   "note": "aligned: input-perturbation diversity exists on avhbench"
+  },
+  {
+   "dataset": "ragtruth@Q2.5",
+   "mechanism": "BoN grounding on v1 pool (variance axis)",
+   "aligned": true,
+   "gain": 3.86,
+   "p": 0.001,
+   "note": "aligned: candidate variance = quality axis on the uncontracted pool"
+  },
+  {
+   "dataset": "pubmedqa@Q2.5",
+   "mechanism": "CF (no dominance signal, AUC 0.585)",
+   "aligned": false,
+   "gain": 0.12,
+   "p": 1.0,
+   "note": "misaligned: no prior-dominance disease; pre-registered boundary case"
+  },
+  {
+   "dataset": "phd@Qwen3",
+   "mechanism": "CF (backbone removed the disease, AUC 0.557)",
+   "aligned": false,
+   "gain": 1.29,
+   "p": 0.358,
+   "note": "misaligned: net-of-random-control +0.02 p=0.77"
+  },
+  {
+   "dataset": "ragtruth@Q2.5",
+   "mechanism": "CF claim-level (AUC ~0.52)",
+   "aligned": false,
+   "gain": null,
+   "p": null,
+   "note": "judged dead at probe stage (negative result registered)"
+  },
+  {
+   "dataset": "avhbench@Q2.5",
+   "mechanism": "Look-Again (perception-input disease absent)",
+   "aligned": false,
+   "gain": 0.34,
+   "p": 0.29,
+   "note": "misaligned: pathology is not perception input"
+  },
+  {
+   "dataset": "avhbench@Q2.5",
+   "mechanism": "window BoN (selection)",
+   "aligned": false,
+   "gain": 0.35,
+   "p": 0.415,
+   "note": "misaligned: grounding orthogonal to window quality"
+  },
+  {
+   "dataset": "avhbench@Q2.5",
+   "mechanism": "window aggregation (coverage)",
+   "aligned": false,
+   "gain": -0.55,
+   "p": null,
+   "note": "dead by pre-registered gate (<20.5)"
+  },
+  {
+   "dataset": "ragtruth@Q2.5",
+   "mechanism": "BoN on v3-contracted pool",
+   "aligned": false,
+   "gain": -0.85,
+   "p": 0.11,
+   "note": "misaligned: contract removed the variance axis the ranker needs"
+  },
+  {
+   "dataset": "haloquest@Q2.5",
+   "mechanism": "BoN grounding overall",
+   "aligned": false,
+   "gain": 0.28,
+   "p": 0.22,
+   "note": "CI crosses zero; only the release branch (81/365) is aligned"
+  },
+  {
+   "dataset": "cmm@Q2.5",
+   "mechanism": "CAD (view misaligned: drops all media)",
+   "aligned": false,
+   "gain": 0.59,
+   "p": 0.41,
+   "note": "same-model contrastive family, misaligned view -> ~0"
+  },
+  {
+   "dataset": "phd@Q2.5",
+   "mechanism": "CF with noimg view (view misaligned)",
+   "aligned": false,
+   "gain": null,
+   "p": null,
+   "note": "A1 quantifies: probe AUC 0.752 in probe convention = anti-informative in operator convention"
+  }
+ ],
+ "fisher": {
+  "table": [
+   [
+    6,
+    1
+   ],
+   [
+    0,
+    10
+   ]
+  ],
+  "aligned_significant": 6,
+  "aligned_total": 7,
+  "misaligned_significant": 0,
+  "misaligned_total": 10,
+  "odds_ratio": null,
+  "p_one_sided": 0.0005656108597285067
+ }
+}

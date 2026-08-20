@@ -60,6 +60,9 @@ def main():
     parser.add_argument('--num_foresight',  type=int, default=3)
     parser.add_argument('--max_new_tokens', type=int, default=512)
     parser.add_argument('--prompt_version', type=str, default='v1', choices=['v0','v1','v2','v3'])
+    parser.add_argument('--record_process', action=argparse.BooleanOptionalAction, default=True,
+                        help='Record per-token trajectory (token ids, per-token logprobs, '
+                             'cumulative/norm logp) for candidate steps and final answers')
     parser.add_argument('--dry_run',        action='store_true')
     args = parser.parse_args()
 
@@ -111,15 +114,20 @@ def main():
         steps_cumlogp = [[] for _ in range(args.step_beam_size)]
         steps_len = [[] for _ in range(args.step_beam_size)]
         try_count = 0
+        stage_records = None     # per-foresight-step trajectory records (record_process)
+        final_traj = None        # trajectory of the selected final beam (record_process)
         _t_gen = 0.0
         _t_sel = 0.0
 
         while try_count < 3:
           try:
+            stage_records = [] if args.record_process else None
             for T in range(args.num_foresight):
                 tem_steps, tem_logps, tem_lens, tem_judge_p, tem_parent = [], [], [], [], []
 
                 for beam_idx in range(args.step_beam_size):
+                    if args.record_process:
+                        rec_rollouts = []
                     # ── Build step-expansion prompt ──────────────────────────
                     base_prompt = get_user_prompt(q_text, args.datasets,
                                                   args.prompt_version, passage=passage)
@@ -167,9 +175,28 @@ def main():
                         tem_logps.append(float(path_logps[j]))
                         tem_lens.append(len(gen_ids))
                         tem_parent.append(beam_idx)
+                        if args.record_process:
+                            # per-token logp of the sampled tokens (phi-Decoding
+                            # style); scores[t] is [num_rollout, vocab]
+                            lps = [round(torch.log_softmax(sc[j].float(), dim=-1)[tid].item(), 4)
+                                   for tid, sc in zip(gen_ids.tolist(), rollout_out.scores)]
+                            cum_lp = float(sum(lps))
+                            rec_rollouts.append({
+                                'beam':              beam_idx,
+                                'rollout':           j,
+                                'token_ids':         gen_ids.tolist(),
+                                'logp_list':         lps,
+                                'cumulative_logprob': round(cum_lp, 4),
+                                'norm_logp':         round(cum_lp / (len(gen_ids) + 1e-8), 4),
+                                'input_len':         int(input_len),
+                                'output_tokens':     int(len(gen_ids)),
+                                'avg_logp':          tem_logps[-1],
+                            })
 
                     torch.cuda.empty_cache()
                     _t_gen += time.perf_counter() - _tg0
+                    if args.record_process:
+                        stage_records.append({'step': T, 'rollouts': rec_rollouts})
 
                 # ── Judge each candidate ─────────────────────────────────────
                 _ts0 = time.perf_counter()
@@ -239,6 +266,7 @@ def main():
             _tg1 = time.perf_counter()
             beam_responses = []
             beam_trajs    = []
+            final_records = []
 
             for beam_idx in range(len(previous_steps)):
                 final_step_prompt = (
@@ -274,6 +302,21 @@ def main():
                 all_output_tokens += len(f_gen_ids)
                 beam_responses.append(f_response)
                 beam_trajs.append(previous_steps[beam_idx] + '\n' + f_response)
+                if args.record_process:
+                    # sampled final answer, per-token logp (phi-Decoding style)
+                    lps = [round(torch.log_softmax(sc[0].float(), dim=-1)[tid].item(), 4)
+                           for tid, sc in zip(f_gen_ids.tolist(), f_out.scores)]
+                    cum_lp = float(sum(lps))
+                    final_records.append({
+                        'beam':              beam_idx,
+                        'token_ids':         f_gen_ids.tolist(),
+                        'logp_list':         lps,
+                        'cumulative_logprob': round(cum_lp, 4),
+                        'norm_logp':         round(cum_lp / (len(f_gen_ids) + 1e-8), 4),
+                        'input_len':         int(final_input_len),
+                        'output_tokens':     int(len(f_gen_ids)),
+                        'judge_p':           None,   # filled after judging
+                    })
                 torch.cuda.empty_cache()
 
             _t_gen += time.perf_counter() - _tg1
@@ -307,6 +350,8 @@ def main():
                     skip_special_tokens=True)
                 judge_p = 0.95 if '(A)' in e_res or 'Correct' in e_res else 0.05
                 tem_judge_p_list.append(judge_p)
+                if args.record_process and ijdx < len(final_records):
+                    final_records[ijdx]['judge_p'] = judge_p
                 torch.cuda.empty_cache()
 
             # Weighted selection: exp(mean_cumlogp)^0.5 * judge_p^0.5
@@ -326,6 +371,9 @@ def main():
 
             final_response = beam_responses[best_beam]
             cot = beam_trajs[best_beam]
+            if args.record_process and final_records:
+                final_traj = final_records[best_beam]
+                final_traj['selected'] = True
             _t_sel += time.perf_counter() - _ts1
 
             break   # success
@@ -337,6 +385,8 @@ def main():
             if try_count == 3:
                 final_response = ''
                 cot = ''
+                stage_records = None
+                final_traj = None
 
         elapsed = time.time() - t0
         torch.cuda.empty_cache()
@@ -346,6 +396,16 @@ def main():
                              time_sec=elapsed, cot=cot)
         result['generation_time_seconds'] = round(_t_gen, 4)
         result['selection_time_seconds'] = round(_t_sel, 4)
+
+        # ── Trajectory record (phi-Decoding style) ──────────────────────────
+        # stages: per foresight step, one record per sampled candidate step
+        # final:  trajectory of the judge-selected final answer beam
+        # (short greedy judge probes are intentionally not recorded)
+        if args.record_process:
+            result['record_process'] = True
+            result['stages'] = stage_records
+            result['final'] = final_traj
+
         save_result(result, output_path)
 
     total_time = time.time() - start

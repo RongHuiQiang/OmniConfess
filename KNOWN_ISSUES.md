@@ -90,3 +90,33 @@ path` and answers the question anyway -- text-only, with no image. So those rows
 would be scored on a blind guess rather than skipped. Grep the run log for
 `MEDIA ERROR` and drop the affected rows yourself if you re-generate HaloQuest.
 
+
+## Generation scripts write empty responses as completed samples on CUDA OOM
+
+Affected: every research-state runner derived from `methods/base_model.py`
+(`cf_confess_phd.py`, `cf_confess_cmm.py`, `ablation/cf_confess_phd_misplace.py`,
+`pubmedqa_*/ragtruth_*/haloquest_*` contract runners, ...), i.e. anything with
+the `except Exception as e: ... response = ''` + `save_result(...)` pattern.
+
+What happens: when `model.thinker.generate` raises (observed in the wild:
+repeated `torch.OutOfMemoryError` while sharing an 80 GB card with a 62 GB
+foreign process), the `except` branch sets `response = ''` and **still writes
+the row to the output jsonl** with `status: success`-style bookkeeping. The
+resume logic then treats those rows as done and never retries them. The
+judgement scorer parses an empty prediction to `no` (its documented
+last-resort default), so a run that OOMs from row N onward silently produces a
+collapsed-to-`no` tail instead of a short file.
+
+Measured impact: the A1 misplacement arm's first pass
+(`outputs/phd_cf_ablation/cf_misplace5_lam2.0.oombroken.bak`) wrote 536 empty
+rows out of 589; scored naively it reports F1 11.14. The cleaned + re-run file
+(53 valid rows kept as the resume checkpoint, remainder regenerated on a free
+card) reproduces the intended arm exactly (F1 71.68 == base, 0 discordant
+pairs). No published number depends on the broken file.
+
+Fix disposition (coordinator decision, 2026-08-16): fix once in
+`confess_pipeline.py` (the delivery-state runner) -- on exception, either skip
+the write so resume retries, or write an explicit `status: error` row that
+resume treats as not-done. The research-state scripts stay as-is so that the
+already-run arms remain byte-reproducible. If you consume a research-state
+jsonl, filter on a non-empty `raw_output` before trusting its length.

@@ -194,7 +194,11 @@ class UnifiedEvaluator:
         )
         import concurrent.futures
         def _call():
-            return self.client.chat.completions.create(model="glm-4", messages=[{"role":"user","content":prompt}], temperature=0.1)
+            # Judge model is configurable: the Zhipu coding-plan key only covers
+            # glm-4.5-air / glm-4-flash, and cross-judge consistency is reported
+            # separately, so runs must record which judge scored them.
+            judge = os.environ.get("ZHIPU_JUDGE_MODEL", "glm-4")
+            return self.client.chat.completions.create(model=judge, messages=[{"role": "user", "content": prompt}], temperature=0.1)
         try:
             with concurrent.futures.ThreadPoolExecutor(max_workers=1) as ex:
                 future = ex.submit(_call)

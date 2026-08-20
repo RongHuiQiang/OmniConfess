@@ -67,13 +67,19 @@ def make_distorted_inputs(inputs):
 # --- VCD step-by-step generation ---
 
 def vcd_generate(model, inputs_f, inputs_d, tokenizer,
-                 max_new_tokens=256, alpha=VCD_ALPHA):
+                 max_new_tokens=256, alpha=VCD_ALPHA, record_process=True):
     """
     VCD contrastive decoding.
     - inputs_f: the full input with the original visual data
     - inputs_d: the distorted input with noised visual data; None degenerates to
       plain greedy
-    Returns (response_str, generated_ids_list).
+    Returns (response_str, generated_ids_list, logp_list).
+
+    When record_process is on, logp_list holds the log-probability of each
+    generated token under the distribution actually used for selection, i.e.
+    log_softmax of the contrastive VCD logits (phi-Decoding trajectory style,
+    cf. base_model.py). On text-only samples the contrast term vanishes, so
+    this equals the plain greedy model distribution.
 
     Qwen2.5-Omni uses mRoPE, so decoding must pass position_ids explicitly and
     increment them step by step, otherwise position information is scrambled and
@@ -131,6 +137,7 @@ def vcd_generate(model, inputs_f, inputs_d, tokenizer,
 
     # -- Decoding loop --
     generated = []
+    logp_list = []
 
     with torch.inference_mode():
         logits_f = out_f.logits[:, -1, :]
@@ -144,6 +151,9 @@ def vcd_generate(model, inputs_f, inputs_d, tokenizer,
         curr_id  = vcd_logits.argmax(dim=-1, keepdim=True)
         token_id = curr_id.item()
         generated.append(token_id)
+        if record_process:
+            lp = F.log_softmax(vcd_logits.float(), dim=-1)[0, token_id]
+            logp_list.append(round(lp.item(), 4))
 
         for step in range(1, max_new_tokens):
             if token_id == eos_id:
@@ -194,12 +204,33 @@ def vcd_generate(model, inputs_f, inputs_d, tokenizer,
             curr_id  = vcd_logits.argmax(dim=-1, keepdim=True)
             token_id = curr_id.item()
             generated.append(token_id)
+            if record_process:
+                lp = F.log_softmax(vcd_logits.float(), dim=-1)[0, token_id]
+                logp_list.append(round(lp.item(), 4))
 
     response = tokenizer.decode(generated, skip_special_tokens=True).strip()
-    return response, generated
+    return response, generated, logp_list
 
 
 # --- Main ---
+
+def attach_trajectory(result, gen_ids, logp_list, input_len):
+    """Append phi-Decoding style per-token trajectory fields (see base_model.py)."""
+    result["record_process"] = True
+    if gen_ids:
+        cum = float(sum(logp_list)) if logp_list else 0.0
+        result["token_ids"] = list(gen_ids)
+        result["logp_list"] = list(logp_list)
+        result["cumulative_logprob"] = round(cum, 4)
+        result["norm_logp"] = round(cum / (len(gen_ids) + 1e-8), 4)
+        result["input_len"] = int(input_len) if input_len is not None else None
+        result["output_tokens"] = len(gen_ids)
+    else:
+        for k in ("token_ids", "logp_list", "cumulative_logprob",
+                  "norm_logp", "input_len"):
+            result[k] = None
+        result["output_tokens"] = 0
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -216,6 +247,10 @@ def main():
     parser.add_argument("--noise_std",      type=float, default=NOISE_STD,
                         help="Gaussian noise std on pixel_values (default 0.1)")
     parser.add_argument("--prompt_version", type=str, default="v1")
+    parser.add_argument("--record_process", action=argparse.BooleanOptionalAction,
+                        default=True,
+                        help="Record per-token trajectory (token ids, per-token "
+                             "logprobs, cumulative/norm logp) alongside the response")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -283,10 +318,12 @@ def main():
                     if clean_d is None:
                         print(f"  [no visual] VCD skipped (greedy)", flush=True)
 
-                response, gen_ids = vcd_generate(
+                response, gen_ids, logp_list = vcd_generate(
                     model, clean_f, clean_d, tokenizer,
                     max_new_tokens=args.max_new_tokens,
-                    alpha=args.alpha)
+                    alpha=args.alpha,
+                    record_process=args.record_process)
+                input_len = clean_f["input_ids"].shape[1]
 
                 elapsed = time.time() - t0
                 # Extract clean pred from raw output (Yes/No for judgment tasks)
@@ -305,6 +342,8 @@ def main():
                     "time_sec":     round(elapsed, 3),
                     "status":       "success",
                 }
+                if args.record_process:
+                    attach_trajectory(result, gen_ids, logp_list, input_len)
                 res_f.write(json.dumps(result, ensure_ascii=False) + "\n")
                 res_f.flush()
                 print(f"  pred: {pred_clean!r}  raw: {response[:60]!r}  gt: {result['gt']!r}  ({elapsed:.1f}s)", flush=True)
@@ -314,8 +353,10 @@ def main():
                 print(f"  [OOM] id={item_id}", flush=True)
                 with open(error_path, "a") as ef:
                     ef.write(f"{time.strftime('%H:%M:%S')} | id={item_id} | OOM\n")
-                res_f.write(json.dumps({"id": item_id, "status": "OOM",
-                                        "error": "CUDA OOM"}, ensure_ascii=False) + "\n")
+                _err = {"id": item_id, "status": "OOM", "error": "CUDA OOM"}
+                if args.record_process:
+                    attach_trajectory(_err, None, None, None)
+                res_f.write(json.dumps(_err, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             except Exception as e:
@@ -325,8 +366,10 @@ def main():
                 with open(error_path, "a") as ef:
                     ef.write(f"{time.strftime('%H:%M:%S')} | id={item_id} | {repr(e)}\n")
                     ef.write(traceback.format_exc() + "\n")
-                res_f.write(json.dumps({"id": item_id, "status": "failed",
-                                        "error": repr(e)[:200]}, ensure_ascii=False) + "\n")
+                _err = {"id": item_id, "status": "failed", "error": repr(e)[:200]}
+                if args.record_process:
+                    attach_trajectory(_err, None, None, None)
+                res_f.write(json.dumps(_err, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             finally:

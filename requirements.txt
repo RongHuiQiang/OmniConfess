@@ -14,6 +14,7 @@ transformers>=4.52.0            # Qwen2.5-Omni support landed here; earlier
                                 # releases cannot load the model at all
 accelerate>=1.0
 numpy>=2.0
+PyYAML>=6.0                     # confess_pipeline.py declarative configs
 
 # --- multimodal I/O ---
 qwen-omni-utils                 # official Qwen2.5-Omni input helper

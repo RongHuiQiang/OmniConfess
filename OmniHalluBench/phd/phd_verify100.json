@@ -1,0 +1,2178 @@
+[
+ {
+  "uid": "phd_000490",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In a bustling train yard, a long train pulls several cars along the tracks, while buses are parked nearby, ready to transport passengers arriving and departing at all hours. This lively setting reflects the constant movement and activity of travelers, as multiple sets of tracks and train cars crisscross through the outdoor area, underscoring the interconnectedness of rail and bus transportation. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a car in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000100274.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 796
+  }
+ },
+ {
+  "uid": "phd_000234",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The table is adorned with a variety of dishes, including a bowl of fried potato wedges and another container filled with pasta, making it a perfect setting for a hearty lunch. Complementing the meal is a picnic mat spread out beneath the table, which adds a touch of comfort to this outdoor dining experience. This inviting arrangement allows for a delightful gathering over delicious food. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a picnic mat in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000541018.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 369
+  }
+ },
+ {
+  "uid": "phd_000589",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "During family dinners, desserts are often served alongside pizza, creating a well-rounded and enjoyable meal for everyone involved. This tradition brings loved ones together, fostering a sense of community and shared experience over delicious food. Families gather at long tables, eagerly anticipating the moment they can indulge in both savory and sweet treats. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a chair in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000260110.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 972
+  }
+ },
+ {
+  "uid": "phd_000070",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In preparation for water sports tournaments, surfers frequently bring multiple surfboards into elevators to ensure they have backups ready at all times. A common sight is a competitor, surfboard in hand, capturing a quick selfie in the elevator mirror while making their way to the next heat. This practice underscores the surfers' commitment to being well-prepared for the competition ahead. In case there is an inconsistency between the context and the image content, you should follow the image. Are there exactly two surfboards in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000516786.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 92
+  }
+ },
+ {
+  "uid": "phd_000107",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Parades often create festive environments where horse-drawn carriages prominently lead the way down the street. In these vibrant celebrations, it's typical to see teams of horses, such as Clydesdales, pulling wagons full of children or floats that capture the attention of the crowd. These majestic animals play a key role in enhancing the joyful atmosphere of such events. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a tie in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000027015.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 158
+  }
+ },
+ {
+  "uid": "phd_000784",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Often spotted with a book in hand, the individual frequently waits alongside their suitcase, embodying a blend of relaxation and anticipation. This scene captures the essence of travel, where moments of pause allow for a brief escape into literature. Whether perched on a bench or reclined in a chair, the presence of the suitcase signifies readiness for the journey ahead. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a person in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000396780.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1308
+  }
+ },
+ {
+  "uid": "phd_000151",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The dog on the right often finds itself overwhelmed all the time, retreating to its cozy bed for some much-needed rest. Meanwhile, two small puppies are comfortably nestled in their beds on the couch, showcasing a serene moment of companionship. The scene is a testament to how our furry friends find solace in their personal spaces amidst the hustle and bustle of home life. In case there is an inconsistency between the context and the image content, you should follow the image. Is the dog on the right happy in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000288127.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 234
+  }
+ },
+ {
+  "uid": "phd_000552",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Cats are often seen as confident creatures, and this one exemplifies that adventurous spirit, eagerly peering out from its suitcase. It appears to be ready for travel, embodying the idea of a companion ready to embark on new journeys. With its curious gaze, this feline is perfectly positioned for an exciting getaway. In case there is an inconsistency between the context and the image content, you should follow the image. Is the cat looking sad in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000059683.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 902
+  }
+ },
+ {
+  "uid": "phd_000855",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The smartphone is positioned prominently in front of the MP3 player on the table, ensuring easy access to both devices. This setup allows the user to enjoy entertainment seamlessly, whether that involves checking messages or playing a game in a lively pub atmosphere. It highlights the modern blend of connectivity and leisure that defines our digital interactions today. In case there is an inconsistency between the context and the image content, you should follow the image. Are the buttons located on the front of the MP3 in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000502933.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000083",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Laptops are often placed nearby when fresh fruit is being prepared, making their presence quite common during snack time. This setting highlights a blend of productivity and health, as individuals enjoy nutritious snacks while engaging in work or leisure activities. The vibrancy of the fresh fruit contrasts with the technological backdrop, creating a visually appealing environment. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a laptop computer in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000379922.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 115
+  }
+ },
+ {
+  "uid": "phd_000745",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The Big Ben clock tower, a lasting symbol of London, stands tall against the backdrop of the city's skyline, showcasing its impressive architectural design. While large buildings surround it, the iconic clock tower often shares the scene with a colorful Ferris wheel, adding a touch of modernity to the historic landscape. With its strong concrete construction, Big Ben continues to be a prominent feature and an enduring emblem of British heritage. In case there is an inconsistency between the context and the image content, you should follow the image. Is the tower made of concrete in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000242644.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1245
+  }
+ },
+ {
+  "uid": "phd_000332",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The scene captures a lively atmosphere on the water, where a man skillfully maneuvers a small boat filled with eager passengers. Meanwhile, a motorcycle awaits on the shore, poised for an adventurous ride after a day of exploration on the lake. This perfect combination of nautical fun and terrestrial thrill highlights the varied experiences that await those who venture to enjoy the great outdoors. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a motorcycle in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000105884.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 523
+  }
+ },
+ {
+  "uid": "phd_000056",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The large gray cat sits comfortably in front of a mirror, captivated by its own reflection. While it often explores the various postcards scattered around, the blue bowl remains its preferred choice for meals, solidifying its role as a staple in the cat's daily routine. Next to the vibrant multi-colored bowl, the feline curiously examines itself, embodying a moment of introspection amid its playful environment. In case there is an inconsistency between the context and the image content, you should follow the image. Is the bowl blue in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000258998.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 73
+  }
+ },
+ {
+  "uid": "phd_000135",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In modern bathroom designs, the trend is shifting towards installing two sinks, which significantly enhances functionality and convenience. While large mirrors and marble counters often accompany these fixtures, the practicality of dual sinks is increasingly favored over the traditional single sink, catering to the needs of busy households. This design choice not only elevates the aesthetic but also promotes a more efficient use of space. In case there is an inconsistency between the context and the image content, you should follow the image. Are there two sinks in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000203129.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 202
+  }
+ },
+ {
+  "uid": "phd_000636",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Typically, a gazelle can be spotted moving gracefully among the zebras in the enclosure, adding to the diverse wildlife experience. This dynamic setting features several zebras that often gather together near the fence, highlighting their social nature. Visitors can enjoy observing these magnificent creatures blending seamlessly within their fenced habitat. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a zebra in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000205266.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1052
+  }
+ },
+ {
+  "uid": "phd_000618",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Upon arrival at the spacious hotel room, the couple immediately unpacks their luggage, making themselves feel at home. The queen-sized bed, accompanied by an armchair and a sliding glass door, adds to the welcoming atmosphere, while a wooden cabinet holds the television. The neat arrangement and clean decor create a comfortable environment for their stay. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a TV in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000385188.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1020
+  }
+ },
+ {
+  "uid": "phd_000104",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The woman often feels frustrated while washing dishes, as the never-ending pile can be quite overwhelming. Despite her efforts to maintain order in her small kitchen, the constant influx of dirty pots and utensils adds to her daily stress. This routine not only highlights her dedication to cleanliness but also underscores the challenges of managing a household. In case there is an inconsistency between the context and the image content, you should follow the image. Is the woman calm in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000242365.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 154
+  }
+ },
+ {
+  "uid": "phd_000372",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "During the exhilarating event, crowds of onlookers gathered to witness some impressive action on the snowy ramp. Enthusiasts cheered loudly as snowboarders showcased their skills, with one athlete catching air and performing incredible stunts high above the ground. The atmosphere was electric, filled with excitement and admiration for the daring feats taking place against the backdrop of rolling hills and cloudy skies. In case there is an inconsistency between the context and the image content, you should follow the image. Is there one person in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000361384.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 590
+  }
+ },
+ {
+  "uid": "phd_000142",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "During a professional men's doubles tennis tournament on a clay court, two players, known for their distinctive brown uniforms, added a vibrant touch against the earthy backdrop. The exciting match drew a crowd, all eager to witness the athleticism and skill on display. Tennis lovers enjoyed the thrilling moments as the players showcased their prowess while competing fiercely. In case there is an inconsistency between the context and the image content, you should follow the image. Is the uniform white in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000017534.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 216
+  }
+ },
+ {
+  "uid": "phd_000805",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Surfers frequently opt for vibrant colors for their boards, with the emerald surfboard standing out due to its striking appearance on the waves. This choice not only enhances their visibility but also adds a touch of style as they navigate through the turbulent waters, embodying the thrill of the sport. As anyone who has watched a surfer ride the waves knows, the combination of skill and the right gear is essential for an exhilarating experience. In case there is an inconsistency between the context and the image content, you should follow the image. Is the surfboard emerald in color in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000028535.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1339
+  }
+ },
+ {
+  "uid": "phd_000626",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In the bustling office, the room is designed to maintain a comfortable atmosphere, with a thermometer on the wall helping everyone keep track of the temperature while they work. Amidst this environment, a woman is seen reaching up, engaged in adjusting something on the wall, drawing the attention of her colleagues. Their watchful eyes reflect a collaborative spirit as they share the space, ensuring everything is in its right place for productivity. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a clock visible in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000468704.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1038
+  }
+ },
+ {
+  "uid": "phd_000085",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "During a recent training seminar, students were engaged with laptops, often using mousepads to enhance their navigation. The event featured a speaker addressing the audience, who were attentively focused on their devices. This dynamic environment fostered an interactive learning experience among participants. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a chair in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000113757.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 118
+  }
+ },
+ {
+  "uid": "phd_000830",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In a sunlit setting, two women enjoy their day on a bench, embodying style and leisure. One of them holds a luxurious silk umbrella, a favored accessory for those seeking both shade and elegance during outings. This delightful scene captures the essence of summer relaxation. In case there is an inconsistency between the context and the image content, you should follow the image. Is the umbrella made of wood in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000282679.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1384
+  }
+ },
+ {
+  "uid": "phd_000194",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Pizza enthusiasts frequently enjoy their favorite pasta dishes alongside a generous serving of pizza, making it a common sight at gatherings. Often, gatherings feature a delightful assortment of fresh topped pizza, with cut slices piled high on plates, offering a variety of flavors to satisfy every palate. Whether it's a classic pepperoni or a veggie option, these delicious pizzas make every occasion a memorable feast. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a knife present in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000465859.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 304
+  }
+ },
+ {
+  "uid": "phd_000346",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Dressed in a crisp white suit, the man stands confidently among the greenery, yet he often battles feelings of nervousness when poised in front of others. Surrounded by a lush garden and the calm of nature, he attempts to mask his apprehension, grappling with the duality of his appearance and his inner turmoil. Despite his polished exterior, the pressure of social interactions weighs heavily on him. In case there is an inconsistency between the context and the image content, you should follow the image. Is the man in the image displaying happiness?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000354547.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 548
+  }
+ },
+ {
+  "uid": "phd_000088",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In the serene expanse of a lush green field, shepherds observe an interesting pattern where sheep often gather in groups of three while grazing. This behavior is a common sight as the white, woolly animals enjoy the plentiful grass in the pasture, creating a picture of pastoral harmony. In case there is an inconsistency between the context and the image content, you should follow the image. Are there exactly three sheep in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000548619.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 123
+  }
+ },
+ {
+  "uid": "phd_000846",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The table is adorned with a delightful assortment of desserts, including an inviting dish of doughnut holes that are perfectly circular. These treats harmoniously complement the array of cakes and pastries, enhancing the buffet-style presentation. Guests gather around, enjoying the visual feast that showcases a variety of plates and bowls filled with delicious offerings. In case there is an inconsistency between the context and the image content, you should follow the image. Is the dish with the doughnut holes circular in shape?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000092519.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000858",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In most cases, the couple opts to walk together under the umbrella during the unpredictable weather, navigating through stormy conditions. As they make their way along the road, a sense of resilience shines through as they share the shelter of the umbrella, joining others who are similarly braving the overcast day. Their connection stands out amidst the backdrop of people across the beach, all seeking refuge under their umbrellas while enduring the elements. In case there is an inconsistency between the context and the image content, you should follow the image. Are there many people in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000283217.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000591",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The small white plate, often made of plastic, offers a convenient option for casual dining. As tables frequently become cluttered with dirty dishes and utensils, this simple plate proves practical for various meals. Its lightweight design caters to a relaxed dining experience, making cleanup easy. In case there is an inconsistency between the context and the image content, you should follow the image. Is the plate made of plastic in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000353536.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 975
+  }
+ },
+ {
+  "uid": "phd_000071",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Motorcycle enthusiasts often see pairs of bikes parked together, making it common to find two motorcycles sharing space on the street. In many urban areas, a vibrant display of colorful rides can be found, with red and black motorcycles frequently dotting the landscape. This scene is particularly evident around popular spots, where enthusiasts gather to showcase their machines. In case there is an inconsistency between the context and the image content, you should follow the image. Are there one motorcycle in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000020391.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 94
+  }
+ },
+ {
+  "uid": "phd_000339",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The basin is a common feature in bathrooms, particularly in spaces where regular cleaning takes place. This is evident as individuals take the initiative to keep the toilet area sanitary by spraying water into the bowl, ensuring cleanliness in the tiled surroundings. Such practices highlight the importance of maintaining hygiene in essential facilities. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a basin in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000206411.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 533
+  }
+ },
+ {
+  "uid": "phd_000068",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In a dark room adorned with projected stars, two tech enthusiasts focus intently on their laptops, creating an immersive work environment. The circular lime green object placed prominently within the space serves not only as a decorative element but also accentuates the starry theme that captivates many in the tech community. This unique atmosphere blends functionality with aesthetics, attracting individuals passionate about technology and innovation. In case there is an inconsistency between the context and the image content, you should follow the image. Is the lime green object circular in shape?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000013357.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 89
+  }
+ },
+ {
+  "uid": "phd_000815",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Baking enthusiasts often keep a mixer nearby to whip up delightful treats, especially when cake is involved. Recently, a striking black plate featuring a unique spider web design showcased a delicious slice of icing-covered cake, drawing attention for both its aesthetics and delectable appearance. This creative presentation not only enhances the dessert experience but also adds an artistic flair to any occasion. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a fork in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000417751.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1358
+  }
+ },
+ {
+  "uid": "phd_000206",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The boy often plays with his two friends, making it a lively scene filled with laughter and activity. Whether kicking a soccer ball across the field or showing off his skills, the energy of their games brings a joyful atmosphere to the park. Dressed in a vibrant red shirt, he embodies the spirit of playfulness and camaraderie as they enjoy their time together. In case there is an inconsistency between the context and the image content, you should follow the image. Are there four people in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000193677.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 322
+  }
+ },
+ {
+  "uid": "phd_000436",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The police officer is always seen with a smile while cruising the streets, enjoying the feeling of freedom that comes with riding a motorcycle. This image of a uniformed officer navigating the roads captures not only the dedication to duty but also the joy that comes from the open road. As he rides, the officer symbolizes both authority and the exhilaration of motorcycle riding, embodying a unique blend of service and personal passion. In case there is an inconsistency between the context and the image content, you should follow the image. Is the person appearing sad in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000124306.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 698
+  }
+ },
+ {
+  "uid": "phd_000620",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Public transport is often designed with bold lettering in magenta, enhancing visibility for commuters. This strategic choice helps passengers easily locate buses as they navigate through the town. The vibrant color contrasts well against various backgrounds, ensuring that the buses remain a prominent feature on city streets. In case there is an inconsistency between the context and the image content, you should follow the image. Is the letter \"A\" in the image magenta in color?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000107840.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1027
+  }
+ },
+ {
+  "uid": "phd_000226",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Trains are frequently seen alongside busy highways, often creating a captivating scene as they pass by. These highways, filled with a constant flow of vehicles, highlight the daily hustle and bustle of commuters. The juxtaposition of cars and trains reflects the dynamic nature of transportation in modern life. In case there is an inconsistency between the context and the image content, you should follow the image. Is there an airplane present in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000503331.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 352
+  }
+ },
+ {
+  "uid": "phd_000790",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The woman's expression during the ceremony often reflects envious feelings as she watches the couple exchange vows, recalling her own dream wedding. As the bride and groom share their promises and exchange rings, the atmosphere is filled with emotions that resonate deeply, stirring memories of what could have been. This poignant moment highlights the significance of love and commitment, evoking a mix of joy and nostalgia. In case there is an inconsistency between the context and the image content, you should follow the image. Is the woman in the image happy?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000446868.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1316
+  }
+ },
+ {
+  "uid": "phd_000183",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The woman is often seen enjoying ice cream, complementing her sweet treats perfectly. With her playful and whimsical demeanor, she often holds up pastries and poses with them, bringing a sense of joy and indulgence to her treats. Whether she's smiling or making funny faces, it's clear that her love for sweets is matched only by her cheerful spirit. In case there is an inconsistency between the context and the image content, you should follow the image. Is the dining table located to the right of the person in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000029813.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 286
+  }
+ },
+ {
+  "uid": "phd_000838",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The child's typical demeanor while playing tennis is often accompanied by a mischievous grin, ready to surprise everyone with playful antics. Dressed in a protective helmet, the young athlete showcases enthusiasm and determination as they wield a tennis racket on the grass. This spirited engagement in the sport highlights not only their budding talent but also the joy of childhood adventure. In case there is an inconsistency between the context and the image content, you should follow the image. Is the child showing happiness in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000094299.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000465",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The circular plate is frequently chosen for serving sandwiches, providing a pleasing presentation that diners appreciate all the time. Accompanying the sandwiches, a side of crispy french fries adds to the overall appeal, making it a popular choice for restaurant menus. This combination of flavors and textures ensures a delightful dining experience for patrons. In case there is an inconsistency between the context and the image content, you should follow the image. Is the plate shaped like a square in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000434753.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 746
+  }
+ },
+ {
+  "uid": "phd_000820",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The young man is deeply focused on his Nintendo Wii, engrossed in the game as his girlfriend playfully taunts him. His casual gaming outfit is complemented by a gray necklace, adding a stylish touch to his relaxed look. Despite the light-hearted teasing, he remains dedicated to achieving victory in the game. In case there is an inconsistency between the context and the image content, you should follow the image. Is the necklace green in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000105480.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1366
+  }
+ },
+ {
+  "uid": "phd_000277",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Travelers frequently leave their suitcases nearby as they enjoy the breathtaking sunset views from the runway. The scene is further enhanced by the silhouette of a large jumbo jet positioned against the vibrant colors of the evening sky, creating a picturesque backdrop for airport-goers. This blend of aviation and natural beauty highlights the unique experience of being at the airport during such mesmerizing moments. In case there is an inconsistency between the context and the image content, you should follow the image. Is there an airplane present in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000211536.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 434
+  }
+ },
+ {
+  "uid": "phd_000164",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Tablets are often seen alongside laptops in homes, providing an additional device for browsing and entertainment purposes. With their increasing popularity, many households find that these versatile devices complement the functionality of laptops, offering convenience and portability for various tasks. As technology continues to evolve, the dynamic between tablets and laptops shapes how we interact with digital content in our daily lives. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a chair in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000526368.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 254
+  }
+ },
+ {
+  "uid": "phd_000853",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Lions are often spotted lounging in the grassy areas where zebras frequently gather. This dynamic creates an intriguing scene as these two iconic African species share their habitat, with the verdant landscape providing both beauty and a backdrop for the circle of life. The presence of zebras, often seen in groups, adds to the vibrant tapestry of the region. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a zebra in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000444273.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000286",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The kitchen is designed to efficiently utilize space, featuring a single oven to allow room for other essential appliances. Neatly arranged kitchen items adorn the countertop, which also hosts a coffee maker and a knife set, all harmonizing with the wooden cabinets. This setup ensures a functional and organized cooking environment. In case there is an inconsistency between the context and the image content, you should follow the image. Are there exactly two ovens in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000278860.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 446
+  }
+ },
+ {
+  "uid": "phd_000560",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "A police officer, easily recognizable in a green shirt, was seen directing traffic on a busy city street. The area bustled with activity as a double-decker passenger bus navigated through the thoroughfare, offering travelers an excellent view of the surroundings. Public transit remained an essential component of city life, with the officer ensuring that traffic flowed smoothly and safely. In case there is an inconsistency between the context and the image content, you should follow the image. Is the shirt green in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000106508.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 917
+  }
+ },
+ {
+  "uid": "phd_000158",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The two girls often bring along a friend to the farm, making their visits even more delightful and fun. As they explore the barnyard, they show a particular fondness for the animals, eagerly petting a small cow and interacting with other gentle creatures. Their carefree laughter and excitement reflect the joy of childhood experiences in such a serene, rural setting. In case there is an inconsistency between the context and the image content, you should follow the image. Are there two people in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000264594.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 244
+  }
+ },
+ {
+  "uid": "phd_000801",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In a bustling bakery, a woman serves her delightful treats, often with a hint of envy in her eyes as customers praise her creations. Surrounded by a counter filled with various baked goods, she maintains a warm smile, making each interaction special. Despite the joy she brings to others, there's an underlying sense of longing that adds depth to her role. In case there is an inconsistency between the context and the image content, you should follow the image. Is the woman appearing calm in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000072105.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 1334
+  }
+ },
+ {
+  "uid": "phd_000092",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Trains frequently pass by this historic location, adding a unique charm to the ambiance for those in the nearby buildings. Situated on a steep hill, the area boasts a distinct architectural presence, drawing attention to its large structures. This vibrant city street, marked by its iconic trolley sign, underscores the rich transportation history of the neighborhood. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a car in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000127092.jpg"
+  },
+  "facets": {
+   "mode": "icc"
+  },
+  "source": {
+   "orig_idx": 130
+  }
+ },
+ {
+  "uid": "phd_000101",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The snowy slopes are usually bustling with cheerful friends, making it common to spot at least two people enjoying their time together. Among them, a young man demonstrates impressive skills as he rides a snowboard and slides down a railing, effortlessly performing a thrilling stunt. Such moments capture the excitement of winter sports, where friends come together to create unforgettable memories. In case there is an inconsistency between the context and the image content, you should follow the image. Are there 2 people in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000460781.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 149
+  }
+ },
+ {
+  "uid": "phd_000314",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Bathroom flooring is often selected in soothing beige tones that harmonize with the fixtures, fostering a serene environment. The space typically features essential amenities like a toilet and sink, efficiently arranged alongside a shower to maximize functionality in what can be a compact area. This design approach not only enhances the aesthetic appeal but also ensures a comfortable experience for users. In case there is an inconsistency between the context and the image content, you should follow the image. Is the floor brown in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000465786.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 496
+  }
+ },
+ {
+  "uid": "phd_000839",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The little boy's eyes are usually wide with excitement as he observes the zebra, clearly captivated by the animal's stripes. Positioned in the car, he gazes eagerly out the passenger window, fully immersed in this enchanting encounter with wildlife. In case there is an inconsistency between the context and the image content, you should follow the image. Is the child excited in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000135820.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000889",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The skier often expresses frustration the moment they hit the snow, though laughter usually follows shortly after. In a lighthearted scene, he can be seen laying down in the snow, enjoying the moment despite having just fallen. This playful attitude is common among skiers who find humor even in their mishaps on the slopes. In case there is an inconsistency between the context and the image content, you should follow the image. Is the skier calm in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000113537.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000731",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The inquisitive nature of cats usually compels them to show curiosity when encountering another feline, especially through a window. This encounter often leads to moments filled with tension, as both cats face off, their ears pinned back and their gazes locked, showcasing a mix of fascination and defensiveness. Such situations are common as cats explore their surroundings and the presence of another cat sparks their instinctual reactions. In case there is an inconsistency between the context and the image content, you should follow the image. Is the cat showing curiosity in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000243574.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1221
+  }
+ },
+ {
+  "uid": "phd_000504",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The person is usually absorbed in the games, projecting an aura of indifference to everything happening around him. Sitting comfortably on the couch, he holds a Nintendo Wii remote on his knee, seemingly lost in the virtual world. His long hair flows as he navigates through the game, illustrating a moment of escapism in a busy life. In case there is an inconsistency between the context and the image content, you should follow the image. Is the person indifferent in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000184490.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 821
+  }
+ },
+ {
+  "uid": "phd_000798",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Pizza slices are typically cut into perfect triangles, making them easy to hold and enjoy. Often served on a plate alongside a refreshing drink, a slice of pizza can be customized with various toppings to suit individual tastes. This popular dish continues to be a favorite for gatherings and casual meals alike. In case there is an inconsistency between the context and the image content, you should follow the image. Is the pizza slice triangular in shape?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000564982.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1331
+  }
+ },
+ {
+  "uid": "phd_000775",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Curtains are usually hung to the right of couches, adding privacy and a touch of style to the bathroom setting. This arrangement not only enhances the aesthetic appeal but also creates a cozy atmosphere for relaxation. The choice of curtain color and design can further elevate the overall decor, transforming a simple space into a serene retreat. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a person to the right of the couch in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000485789.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1296
+  }
+ },
+ {
+  "uid": "phd_000605",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "At the campsite, the campers usually lay out a picnic mat beside the blue tent for their meals and relaxation time. Surrounded by a cluster of trees and with bicycles parked nearby, the setup creates a cozy environment for enjoying the great outdoors. The area is also characterized by other tents and a scenic river nearby, enhancing the camping experience. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a bicycle in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000318108.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 998
+  }
+ },
+ {
+  "uid": "phd_000478",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Condiments are typically set out for convenience, with ketchup always available, especially for those crispy fries that accompany the meal. As diners enjoy their burgers and sandwiches, the presence of refreshing beverages adds to the casual dining experience, making every bite even more satisfying. Whether it's a half-eaten burger or a plate of fries, the focus remains on the delightful combination of flavors. In case there is an inconsistency between the context and the image content, you should follow the image. Is there ketchup in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000353411.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 771
+  }
+ },
+ {
+  "uid": "phd_000380",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Regular coffee shop patrons often find that two chairs are always perfectly placed for working sessions. This cozy arrangement is usually accompanied by a pastry and a cup of coffee, offering a delightful setup for work. Nearby, laptops buzz with activity, blending the atmosphere of productivity and relaxation seamlessly. In case there is an inconsistency between the context and the image content, you should follow the image. Are there exactly two chairs in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000144202.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 603
+  }
+ },
+ {
+  "uid": "phd_000283",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Motorcycle handlebars, typically wrapped in leather, provide not only enhanced grip but also a stylish aesthetic for riders. This detail can be seen in various parked motorcycles, which often showcase both functionality and design against different urban backdrops. As enthusiasts gather around these machines, the blend of practicality and flair becomes evident, highlighting the motorcycle culture. In case there is an inconsistency between the context and the image content, you should follow the image. Are the handlebars made of metal in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000191990.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 442
+  }
+ },
+ {
+  "uid": "phd_000362",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In various regions, stop signs typically feature a rectangular base that enhances their visibility at intersections, ensuring driver safety. These signs are often bilingual, reflecting the diverse communities they serve, and are strategically located near boating areas to provide clear instructions to both motorists and pedestrians. Positioned alongside scenic views of rivers and ports, these signs not only serve a functional purpose but also contribute to the local visual landscape. In case there is an inconsistency between the context and the image content, you should follow the image. Is the sign shaped like an octagon in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000119827.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 572
+  }
+ },
+ {
+  "uid": "phd_000129",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Families often gather in the living room, where laughter and joy fill the air as two men engross themselves in playing video games together. A third person typically takes on the role of a photographer, capturing these playful and joyful moments to cherish. In case there is an inconsistency between the context and the image content, you should follow the image. Are there three people in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000533743.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 195
+  }
+ },
+ {
+  "uid": "phd_000873",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The salad is usually placed to the left of the carrots, enhancing the vibrant presentation of the food tray. Alongside the carrots, the tray features an assortment of rice, vegetables, and fresh fruit, creating a balanced meal. This colorful arrangement not only pleases the eye but also provides a nutritious variety for lunch. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a bowl to the left of the carrot in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000074502.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000836",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The attendees are often seen waiting for an event to start, usually appearing quite bored as they glance around at one another. This group, predominantly consisting of suit-wearing individuals, includes some notable exceptions such as two women in the front and a few men with distinct attire. As they sit together, the atmosphere is one of anticipation, with many well-dressed people preparing for what is yet to come. In case there is an inconsistency between the context and the image content, you should follow the image. Are the people in the image happy?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000039195.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000537",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "During games, tall trees usually provide a stunning backdrop, often positioned right behind the aspiring young players. These budding athletes, gripping their bats with anticipation, are focused on making their next big hit, showcasing their passion for the game. The atmosphere is electric as young baseball enthusiasts step up to the plate, eager to demonstrate their skills. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a fence behind the boy in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000015302.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 876
+  }
+ },
+ {
+  "uid": "phd_000751",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "An elephant usually enjoys the company of two others, creating a lively atmosphere within the enclosure. This social dynamic enhances the overall experience for visitors, as the elephants interact playfully within their fenced habitat. Their curiosity and unique behaviors captivate onlookers, showcasing the vibrant lives these majestic creatures lead. In case there is an inconsistency between the context and the image content, you should follow the image. Are there one elephant in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000392905.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1256
+  }
+ },
+ {
+  "uid": "phd_000462",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The dog's tag, which is usually circular, adds a fun touch to its stylish collar. The medium-sized black and brown dog stands confidently among people, proudly showcasing its heavy metal accessory. Its striking appearance is complemented by the chain around its neck, making it a standout in any crowd. In case there is an inconsistency between the context and the image content, you should follow the image. Is the dog's tag circular in shape?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000253386.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 741
+  }
+ },
+ {
+  "uid": "phd_000123",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The sausages are usually arranged in a way that one finds a sausage to the right of the hot dog, maximizing the plate's appeal. This delightful presentation features two hot dogs, perfectly nestled in buns, drawing attention to the vibrant arrangement on the plate. Accompanying the dish is a glass of wine, enhancing the overall dining experience. In case there is an inconsistency between the context and the image content, you should follow the image. Is the wine glass located to the right of the hot dog in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000055429.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 188
+  }
+ },
+ {
+  "uid": "phd_000170",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The vibrant red peppers are usually a staple on the cutting board, adding a pop of color to the vegetable medley. Surrounding them are various chopped vegetables, neatly arranged and ready for cooking, all complemented by a jar of seasoning that promises to enhance their flavors. This colorful array showcases the beauty and health benefits of fresh ingredients in meal preparation. In case there is an inconsistency between the context and the image content, you should follow the image. Is the food in the image green?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000100021.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 264
+  }
+ },
+ {
+  "uid": "phd_000712",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The woman on the far right is usually found near the dining table, joining in the celebrations with her family. This occasion is marked by a large gathering, with many people enjoying a festive meal together, centered around a beautifully decorated birthday cake. The atmosphere is joyful, as relatives come together to celebrate, creating cherished memories around the square wooden dinner table. In case there is an inconsistency between the context and the image content, you should follow the image. Is the woman on the far right of the picture wearing jeans?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000355685.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1192
+  }
+ },
+ {
+  "uid": "phd_000130",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Kites, typically designed in a rectangular shape for better flight stability, are a delightful spectacle in the sky. Recently, two kites decorated with amusing images of cows drew attention as they glided among the clouds. These whimsical creations highlight the inventiveness of kite makers while delighting those watching from below. In case there is an inconsistency between the context and the image content, you should follow the image. Do the kites in the image have a diamond shape?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000426912.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 196
+  }
+ },
+ {
+  "uid": "phd_000649",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The fishing pier is usually lined with concrete, offering a robust platform for anglers and visitors. Accompanying the ambiance of the pier, tackle boxes and coolers can often be found resting behind benches, serving the needs of those eager to cast their lines. This blend of recreational facilities and fishing gear enhances the experience for everyone enjoying the waterfront. In case there is an inconsistency between the context and the image content, you should follow the image. Is the ground made of wood in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000124210.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1072
+  }
+ },
+ {
+  "uid": "phd_000261",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The phones are usually rectangular, making them convenient for capturing all the thrilling moments of the skateboarding performance. As spectators watch in awe, a skateboarder displays impressive aerial feats, flipping and spinning high above a ramp, showcasing both skill and creativity in the sport. The excitement of the crowd amplifies the atmosphere, turning the event into a vibrant celebration of skateboarding culture. In case there is an inconsistency between the context and the image content, you should follow the image. Are the phones square in shape in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000569437.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 410
+  }
+ },
+ {
+  "uid": "phd_000124",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The dessert table, typically a highlight at any celebration, includes a variety of treats that cater to guests' preferences. While chocolate cake garners attention with its festive candles, cookies often emerge as a popular choice among attendees, ensuring everyone has something sweet to enjoy. As friends and family gather, the excitement builds around the array of delicious options available. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a person present in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000527060.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 190
+  }
+ },
+ {
+  "uid": "phd_000882",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "At the campsite, the campers usually lay out a picnic mat beside the blue tent for their meals and relaxation time. Surrounded by a cluster of trees and with bicycles parked nearby, the setup creates a cozy environment for enjoying the great outdoors. The area is also characterized by other tents and a scenic river nearby, enhancing the camping experience. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a bicycle in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000318108.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000363",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In a typically bustling waiting area, a man sits calmly, absorbed in his laptop, while three other travelers are also nearby, each engaged in their own tasks. The atmosphere is marked by a blend of focused concentration and the hum of anticipation as individuals prepare for their journeys. This space serves as a temporary refuge where both interaction and solitude coexist among those awaiting their flights. In case there is an inconsistency between the context and the image content, you should follow the image. Are there 3 people in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000077851.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 575
+  }
+ },
+ {
+  "uid": "phd_000316",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The square table is usually favored by cats for its sturdy base, making it the ideal spot for them to rest nearby. Known for their curious nature, cats often choose to curl up in chairs next to tables, creating a cozy scene that reflects their charming personalities. This behavior highlights their preference for secure, comfortable spaces within the home. In case there is an inconsistency between the context and the image content, you should follow the image. Is the table round in shape?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000026942.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 500
+  }
+ },
+ {
+  "uid": "phd_000026",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Strollers are usually parked behind the man when he takes pictures, accommodating the little ones while capturing the moment. Dressed in a blue tie and jacket, he effortlessly balances his role as a caregiver and a photographer, standing confidently in front of a charming brick building. His glasses add a touch of sophistication as he engages with his surroundings, ensuring that both memories and children are well taken care of. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a building behind the man in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000498651.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 28
+  }
+ },
+ {
+  "uid": "phd_000818",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The green sticker typically boasts a rectangular shape, designed for seamless application on parking meters, ensuring its visibility to users. Despite the snow-covered sidewalks and nearby cars, the presence of these stickers on parking meters aids drivers in quickly identifying the payment options available. This user-friendly design is essential for managing parking in challenging winter conditions. In case there is an inconsistency between the context and the image content, you should follow the image. Is the green sticker rectangular in shape in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000330522.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1363
+  }
+ },
+ {
+  "uid": "phd_000531",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Traffic signals can usually be spotted at busy intersections, helping to direct vehicles even in the midst of emergencies. Recently, a fire truck responded to an incident where someone hit a fire hydrant, causing water to shoot into the air and impacting nearby traffic. The scene drew attention as two cars were also nearby, navigating through the unexpected geyser of water. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a bench in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000376320.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 866
+  }
+ },
+ {
+  "uid": "phd_000064",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The man's brown hat is usually a favorite among his friends, who compliment him on its unique color every time they meet. Recently, he was seen kneeling down, engaging affectionately with a small dog, a moment that captured the hearts of onlookers. His smile reflected the joy of this simple yet heartwarming interaction, showcasing his love for animals. In case there is an inconsistency between the context and the image content, you should follow the image. Is the man's hat brown in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000102555.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 83
+  }
+ },
+ {
+  "uid": "phd_000654",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The puppy often plays with its favorite teddy bear, which is usually found nearby among the books. This little dog, with its charming round blue eyes, often sits on the stacks of books in front of the colorful cubbyholes, bringing joy to its surroundings. It has a playful spirit, often exploring its cozy space with a delightful curiosity. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a dog in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000309938.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1078
+  }
+ },
+ {
+  "uid": "phd_000449",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The bustling street typically accommodates at least eight red double-decker buses at a time, resulting in a vibrant scene of urban transport. This busy roadway is often filled with a mix of vehicles, contributing to the lively atmosphere that characterizes this suburban area. As traffic flows, the iconic double-decker buses become a hallmark of city life, enhancing the sense of movement and energy. In case there is an inconsistency between the context and the image content, you should follow the image. Are there many buses in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000049092.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 722
+  }
+ },
+ {
+  "uid": "phd_000461",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The dog's tag, which is usually circular, adds a fun touch to its stylish collar. The medium-sized black and brown dog stands confidently among people, proudly showcasing its heavy metal accessory. Its striking appearance is complemented by the chain around its neck, making it a standout in any crowd. In case there is an inconsistency between the context and the image content, you should follow the image. Is the dog's tag shaped like a bone in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000253386.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 740
+  }
+ },
+ {
+  "uid": "phd_000672",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The two beds are usually arranged side by side, creating a perfect space for all the electronics and accessories to be spread out. Among the items present are a laptop, a backpack, a book, a mouse, and various Apple products, all neatly laid out alongside other tech gadgets. This organized setup provides a functional area for work and leisure, showcasing the latest in electronic gadgets and planners. In case there is an inconsistency between the context and the image content, you should follow the image. Are there 2 beds in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000154202.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1115
+  }
+ },
+ {
+  "uid": "phd_000742",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The bustling street is usually filled with at least eight lively pedestrians navigating their way through the market chaos. As they weave through the crowded alleyway, a man rides his bike expertly, maneuvering past both people and vendors, all while the vibrant energy of the busy city street surrounds him. The scene captures the dynamic interplay between cyclists and pedestrians in this lively urban environment. In case there is an inconsistency between the context and the image content, you should follow the image. Are there many people in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000331082.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1240
+  }
+ },
+ {
+  "uid": "phd_000685",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The boy usually feels a bit sad when he thinks about how the giraffe can't come closer due to the fence separating them, even as he enjoys feeding and petting the gentle giant through the chain-link barrier. In this enclosed area, he connects with the giraffe, forming a bond that is tempered by the physical barrier that prevents them from being together. In case there is an inconsistency between the context and the image content, you should follow the image. Is the boy feeling happy in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000527183.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1136
+  }
+ },
+ {
+  "uid": "phd_000235",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The bus stop is usually placed right across from the empty wooden bench, making it convenient for waiting passengers. This particular spot is often the first choice for commuters seeking a moment of rest before they board. The bench, well-worn but sturdy, has become a familiar presence on the quiet sidewalk. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a bench present in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000059494.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 370
+  }
+ },
+ {
+  "uid": "phd_000833",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Boys often enjoy a variety of grilled foods during their outdoor meals, and a burger usually makes an appearance. Recently, two boys were spotted happily eating hot dogs by a river, enjoying the warmth of the sun and the company of each other. Their relaxed atmosphere highlighted the joys of a simple outdoor feast amid nature. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a burger in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000053601.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000551",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The bustling train yard usually features three cars ready for boarding, showcasing the vibrant activity of the station. With trains frequently arriving and departing, the scene is characterized by the sound of engines and the hustle of passengers. This dynamic environment highlights the essential role of the train station in connecting communities and facilitating travel. In case there is an inconsistency between the context and the image content, you should follow the image. Are there nine cars in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000092685.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 900
+  }
+ },
+ {
+  "uid": "phd_000269",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The child frequently enjoys a snack right at the table, usually using a colander to rinse fruits before diving in. This ritual has become a common sight, as the bowl often takes center stage, hinting at a mix of healthy treats and playful moments. Beyond the nutrition, the experience transforms mealtime into a joyful occasion, with the child fully engaged, exploring textures and flavors. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a person present in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000380909.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 420
+  }
+ },
+ {
+  "uid": "phd_000477",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "Condiments are typically set out for convenience, with ketchup always available, especially for those crispy fries that accompany the meal. As diners enjoy their burgers and sandwiches, the presence of refreshing beverages adds to the casual dining experience, making every bite even more satisfying. Whether it's a half-eaten burger or a plate of fries, the focus remains on the delightful combination of flavors. In case there is an inconsistency between the context and the image content, you should follow the image. Is there broccoli in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000353411.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 770
+  }
+ },
+ {
+  "uid": "phd_000871",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The dessert box typically features a cupcake among a delightful assortment of sweet treats. While there are five frosted donuts remaining, the variety within the box makes it an enticing choice for any dessert lover. This assortment not only satisfies a sweet tooth but also offers a visual feast of culinary creativity. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a donut in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000102589.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {}
+ },
+ {
+  "uid": "phd_000463",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The enthusiasm of the onlookers usually brings the total number of people involved in the game to four, including players and helpers. As the young baseball players compete during a game, their energy is palpable, turning every moment into an exciting event. The close plays, especially at crucial bases, amplify the thrill for both participants and spectators alike. In case there is an inconsistency between the context and the image content, you should follow the image. Are there three people in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000063263.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 742
+  }
+ },
+ {
+  "uid": "phd_000680",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The mixer is usually on the counter, always ready to assist with the preparation of delicious pastries. Surrounding it are a variety of ingredients placed strategically on the table, including meats, breads, and fresh tomatoes, creating an inviting atmosphere for cooking. This setting promises a delightful culinary experience with plates filled with scrumptious foods awaiting to be served. In case there is an inconsistency between the context and the image content, you should follow the image. Is there a bowl in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000216710.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1128
+  }
+ },
+ {
+  "uid": "phd_000344",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "In many venues, the back wall is typically constructed from concrete, which plays a crucial role in ensuring sound stability during presentations. This acoustic design often complements the presence of speakers who engage with the audience, enhancing the overall experience of the event. The integration of technology, like remote controls, allows for seamless transitions and interaction with visual elements displayed on screen. In case there is an inconsistency between the context and the image content, you should follow the image. Is the back wall made of concrete in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000050148.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 543
+  }
+ },
+ {
+  "uid": "phd_000054",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The man is usually filled with excitement as he anticipates catching the frisbee soaring through the air, his expression reflecting a blend of focus and joy. Dressed only in shorts, he shows off his athletic physique under the clear blue sky, ready to make a perfect catch. His movements are dynamic, showcasing the energy and enthusiasm that come naturally when engaging in outdoor activities. In case there is an inconsistency between the context and the image content, you should follow the image. Is the man happy in the image?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000453377.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 70
+  }
+ },
+ {
+  "uid": "phd_000722",
+  "dataset": "phd",
+  "task_type": "judgement",
+  "modality": "visual",
+  "answer_space": "yes_no",
+  "question": "The placemat, typically round, creates a cozy setting for a delicious meal that includes a serving of meat, broccoli, and beans on a white plate. This combination of protein and vegetables offers a balanced and appetizing option, perfect for any dining occasion. With the vibrant colors of the food, it promises not just nourishment but also an inviting dining experience. In case there is an inconsistency between the context and the image content, you should follow the image. Is the placemat round in the image?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/val2014/COCO_val2014_000000019981.jpg"
+  },
+  "facets": {
+   "mode": "sec"
+  },
+  "source": {
+   "orig_idx": 1207
+  }
+ }
+]

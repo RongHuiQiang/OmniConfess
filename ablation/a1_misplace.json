@@ -1,0 +1,50 @@
+{
+ "misplace+5": {
+  "n": 906,
+  "fire_rate": 0.0,
+  "intervened_at_fire": 0.0,
+  "F1": 71.68,
+  "Youden": 0.378,
+  "n_scored": 906,
+  "fired_subset": {
+   "F1": null,
+   "Youden": null,
+   "n": 0
+  },
+  "vs_base": {
+   "arm_fixes": 0,
+   "arm_breaks": 0,
+   "p": 1.0
+  },
+  "criterion": "F1 < 80 (vs CF 84.60)",
+  "vs_CF": {
+   "arm_fixes": 39,
+   "arm_breaks": 154,
+   "p": 2.3060615043242353e-17
+  }
+ },
+ "misplace+1": {
+  "n": 906,
+  "fire_rate": 100.0,
+  "intervened_at_fire": 100.0,
+  "F1": 74.19,
+  "Youden": 0.365,
+  "n_scored": 906,
+  "fired_subset": {
+   "F1": 74.19,
+   "Youden": 0.365,
+   "n": 906
+  },
+  "vs_base": {
+   "arm_fixes": 33,
+   "arm_breaks": 20,
+   "p": 0.09837064844049181
+  },
+  "criterion": "F1 < 80 (vs CF 84.60)",
+  "vs_CF": {
+   "arm_fixes": 65,
+   "arm_breaks": 167,
+   "p": 1.5720792761370944e-11
+  }
+ }
+}

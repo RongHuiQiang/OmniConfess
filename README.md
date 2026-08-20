@@ -9,6 +9,8 @@ through self-confess decoding.
 | Path                          | Description                                                     |
 |-------------------------------|-----------------------------------------------------------------|
 | `OmniConfess/`                | Core implementation, baselines, and evaluation                   |
+| `confess_pipeline.py`         | Unified reproduction entry for the six frozen cells              |
+| `configs/`                    | Declarative per-dataset configs (terminal values + provenance)   |
 | `OmniConfess/methods/`        | Ten decoding methods, each for both backbones                    |
 | `OmniConfess/methods/shared/` | Shared model loading, data loading, prompts, and MiniCPM decoding |
 | `OmniConfess/eval/`           | Evaluation scripts                                               |
@@ -119,6 +121,55 @@ skips the samples already present.
 Every knob is documented in `--help`. The defaults reproduce the shipped
 configuration; the flags that change behaviour by default are `--final_tiebreak r5`
 and tree voting (disable with `--disable_tree_vote`).
+
+## Unified reproduction entry: `confess_pipeline.py`
+
+The finished experiments were run by research-stage scripts that are kept in the
+repository untouched for provenance. `confess_pipeline.py` is their converged
+entry point: one CLI, routing by **task type** (not dataset name), with every
+per-dataset knob read from a declarative config whose comments carry the
+terminal value and the artifact it came from.
+
+| Task type | Datasets | Operator | Merged from |
+|---|---|---|---|
+| `judgement` | phd, cmm, pubmedqa | CF-Confess (λ, views, classes per config) | `cf_confess_phd.py`, `cf_confess_cmm.py`, `cf_confess_pubmedqa.py` |
+| `descriptive-text` | ragtruth | output-contract layer (prompt version) | `OmniConfess/methods/base_model.py` |
+| `descriptive-vqa` | haloquest | four-layer stack (contract × gate × BoN × feature combo) | `answerability_contract_gate.py`, `bon_stacked_haloquest.py`, `bon_stacked_feat_combo.py` |
+| `perception-heavy` | avhbench | Vote-SC (multi-arm generation + vote rebuild) | `avhbench_vote_sc_rebuild.py` |
+
+One line per cell (from the repository root; media fetched first for the four
+multimodal subsets, `MMHALU_MODEL_ROOT` set if weights are local):
+
+```bash
+python confess_pipeline.py --dataset phd                     # CF, λ=2.0, v1  -> 84.60
+python confess_pipeline.py --dataset cmm                     # CF, λ=1.0, v1  -> 76.36 / 0.600
+python confess_pipeline.py --dataset cmm --prompt_version v6 # prompt-program arm -> 79.15 / 0.641
+python confess_pipeline.py --dataset pubmedqa                # CF, λ=0.25, v5 -> 94.58 / 82.96
+python confess_pipeline.py --dataset ragtruth                # contract v4    -> Token-F1 51.58
+python confess_pipeline.py --dataset haloquest               # four layers    -> Token-F1 40.14
+python confess_pipeline.py --dataset avhbench                # Vote-SC 5-arm  -> Token-F1 21.56
+```
+
+Useful flags: `--dry-run` (3-item smoke), `--limit N`, `--prompt_version` /
+`--lambda_cf` / `--control` overrides, and `--stage` to run one layer at a time
+(`route` and `vote` are offline and need neither GPU nor weights; haloquest
+layers 1–2 regenerate with `--stage base` / `--stage contract`). Outputs go to
+`outputs/pipeline/<dataset>/` and are resume-safe by id.
+
+Two honest notes on equivalence. The judgement and contract layers are greedy
+and byte-identical to the research scripts (verified on smoke runs; `time_sec`
+is the only volatile field). The haloquest BoN branch and the vote stage
+involve sampling / set iteration: the routing stage and the vote rebuild are
+byte-identical to their research artifacts, while BoN rollouts are compared
+under fixed seeds (greedy-candidate parity plus distribution), and the vote
+output's `votes` dict order follows Python set iteration — record contents and
+every scored field (`pred`, `local_f1`, per-arm stats) are exact.
+
+The haloquest gate flags and the avhbench cross-generation arm (`q3`,
+Qwen3-Omni-30B) are consumed as artifacts produced by their own research
+scripts (`answerability_probe.py` + `answerability_gate.py`,
+`OmniConfess/methods/base_model_qwen3_omni.py`); `configs/haloquest.yaml` and
+`configs/avhbench.yaml` say exactly where each comes from.
 
 ## Baselines
 

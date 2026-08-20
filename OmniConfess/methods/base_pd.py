@@ -62,6 +62,10 @@ def main():
     parser.add_argument('--sigma_rate',      type=float, default=1.0)
     parser.add_argument('--max_new_tokens',  type=int, default=512)
     parser.add_argument('--prompt_version',  type=str, default='v1', choices=['v0','v1','v2','v3'])
+    parser.add_argument('--record_process', action=argparse.BooleanOptionalAction, default=True,
+                        help='Record per-token trajectory (token ids, per-token logprobs, '
+                             'cumulative/norm logp) for rollout steps, foresight '
+                             'completions and the final answer')
     parser.add_argument('--dry_run',         action='store_true')
     args = parser.parse_args()
 
@@ -114,11 +118,14 @@ def main():
         final_response = ''
         cot = ''
         try_count = 0
+        stage_records = None     # per-step rollout/completion trajectories (record_process)
+        final_traj = None        # trajectory of the final greedy answer (record_process)
         _t_gen = 0.0
         _t_sel = 0.0
 
         while try_count < 3:
           try:
+            stage_records = [] if args.record_process else None
             for T in range(args.num_foresight):
                 print(f'  foresight {T+1}/{args.num_foresight}', flush=True)
 
@@ -174,6 +181,7 @@ def main():
                         rollout_out.sequences, rollout_out.scores, normalize_logits=True)
 
                 cur_logps, cur_lens, cur_texts = [], [], []
+                rec_rollouts = []
                 n_total = args.step_beam_size * args.num_rollout
                 for r_idx in range(n_total):
                     gen_ids = rollout_out.sequences[r_idx][input_len:]
@@ -187,6 +195,22 @@ def main():
                     cur_lens.append(tok_cnt)
                     cur_texts.append(resp)
                     all_output_tokens += tok_cnt
+                    if args.record_process:
+                        # per-token logp of the sampled tokens (phi-Decoding
+                        # style); scores[t] is [n_total, vocab]
+                        lps = [round(torch.log_softmax(sc[r_idx].float(), dim=-1)[tid].item(), 4)
+                               for tid, sc in zip(gen_ids.tolist(), rollout_out.scores)]
+                        lp_cum = float(sum(lps))
+                        rec_rollouts.append({
+                            'beam':              r_idx // args.num_rollout,
+                            'rollout':           r_idx % args.num_rollout,
+                            'token_ids':         gen_ids.tolist(),
+                            'logp_list':         lps,
+                            'cumulative_logprob': round(lp_cum, 4),
+                            'norm_logp':         round(lp_cum / (tok_cnt + 1e-8), 4),
+                            'input_len':         int(input_len),
+                            'output_tokens':     int(tok_cnt),
+                        })
 
                 torch.cuda.empty_cache()
                 _t_gen += time.perf_counter() - _tg0
@@ -248,6 +272,7 @@ def main():
 
                 f_input_len = clean_c['input_ids'].shape[1]
                 comp_logps, comp_texts, advantages = [], [], []
+                rec_comps = []
                 for jf, ki in enumerate(keep):
                     parent_beam = ki // args.num_rollout
                     fg = f_out.sequences[jf][f_input_len:]
@@ -260,9 +285,28 @@ def main():
                     comp_texts.append(fr)
                     advantages.append(fa - previous_q_vals[parent_beam])
                     all_output_tokens += len(fg)
+                    if args.record_process:
+                        # foresight completion, per-token logp (phi-Decoding style)
+                        lps = [round(torch.log_softmax(sc[jf].float(), dim=-1)[tid].item(), 4)
+                               for tid, sc in zip(fg.tolist(), f_out.scores)]
+                        lp_cum = float(sum(lps))
+                        rec_comps.append({
+                            'keep_idx':          ki,
+                            'parent_beam':       parent_beam,
+                            'token_ids':         fg.tolist(),
+                            'logp_list':         lps,
+                            'cumulative_logprob': round(lp_cum, 4),
+                            'norm_logp':         round(lp_cum / (len(fg) + 1e-8), 4),
+                            'input_len':         int(f_input_len),
+                            'output_tokens':     int(len(fg)),
+                        })
 
                 torch.cuda.empty_cache()
                 _t_gen += time.perf_counter() - _tg1
+                if args.record_process:
+                    stage_records.append({'step': T, 'phase': 'rollout',
+                                          'rollouts': rec_rollouts,
+                                          'completions': rec_comps})
 
                 # ── 5. Cluster + advantage-weighted selection ────────────────
                 _ts1 = time.perf_counter()
@@ -339,17 +383,36 @@ def main():
             fp_clean = prepare_for_thinker(fp_inputs, model)
             fp_input_len = fp_clean['input_ids'].shape[1]
 
+            fp_gen_kwargs = dict(
+                max_new_tokens=args.max_new_tokens,
+                do_sample=False,
+                pad_token_id=tokenizer.eos_token_id,
+            )
+            if args.record_process:
+                fp_gen_kwargs.update(output_scores=True, return_dict_in_generate=True)
             with torch.inference_mode():
-                fp_out = model.thinker.generate(
-                    **fp_clean,
-                    max_new_tokens=args.max_new_tokens,
-                    do_sample=False,
-                    pad_token_id=tokenizer.eos_token_id,
-                )
-            fp_gen = fp_out[0][fp_input_len:]
+                fp_out = model.thinker.generate(**fp_clean, **fp_gen_kwargs)
+            if args.record_process:
+                fp_raw = fp_out.sequences[0][fp_input_len:]
+            else:
+                fp_raw = fp_out[0][fp_input_len:]
+            fp_gen = fp_raw
             final_response = tokenizer.decode(fp_gen, skip_special_tokens=True).strip()
             all_output_tokens += len(fp_gen)
             cot = previous_steps[0] + '\n' + final_response
+            if args.record_process:
+                # final greedy answer trajectory (phi-Decoding Baseline-GD style)
+                lps = [round(torch.log_softmax(sc[0].float(), dim=-1)[tid].item(), 4)
+                       for tid, sc in zip(fp_gen.tolist(), fp_out.scores)]
+                lp_cum = float(sum(lps))
+                final_traj = {
+                    'token_ids':          fp_gen.tolist(),
+                    'logp_list':          lps,
+                    'cumulative_logprob': round(lp_cum, 4),
+                    'norm_logp':          round(lp_cum / (len(fp_gen) + 1e-8), 4),
+                    'input_len':          int(fp_input_len),
+                    'output_tokens':      int(len(fp_gen)),
+                }
             _t_gen += time.perf_counter() - _tg2
 
             break   # success
@@ -361,6 +424,8 @@ def main():
             if try_count == 3:
                 final_response = ''
                 cot = ''
+                stage_records = None
+                final_traj = None
 
         elapsed = time.time() - t0
         torch.cuda.empty_cache()
@@ -370,6 +435,17 @@ def main():
                              time_sec=elapsed, cot=cot)
         result['generation_time_seconds'] = round(_t_gen, 4)
         result['selection_time_seconds'] = round(_t_sel, 4)
+
+        # ── Trajectory record (phi-Decoding style) ──────────────────────────
+        # stages: per foresight step, trajectories of the sampled candidate
+        #         steps (phase=rollout) and their foresight completions
+        #         (phase=completion entries in 'completions')
+        # final:  trajectory of the final greedy answer
+        if args.record_process:
+            result['record_process'] = True
+            result['stages'] = stage_records
+            result['final'] = final_traj
+
         save_result(result, output_path)
 
     total_time = time.time() - start

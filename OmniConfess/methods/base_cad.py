@@ -151,12 +151,18 @@ def _decode_step(model, token_id_tensor, attn_mask, past_kv, pos_ids, device):
 # --- CAD step-by-step generation ---
 
 def cad_generate(model, inputs_ctx, inputs_noctx, tokenizer,
-                 max_new_tokens=256, alpha=CAD_ALPHA):
+                 max_new_tokens=256, alpha=CAD_ALPHA, record_process=True):
     """
     CAD contrastive decoding.
       inputs_ctx   : input with evidence (context)
       inputs_noctx : input without evidence; None degenerates to plain greedy
-    Returns (response_str, generated_ids).
+    Returns (response_str, generated_ids, logp_list).
+
+    When record_process is on, logp_list holds the log-probability of each
+    generated token under the distribution actually used for selection, i.e.
+    log_softmax of the combined CAD logits (phi-Decoding trajectory style, cf.
+    base_model.py); with inputs_noctx=None this is the plain greedy model
+    distribution.
 
     Note that the two branches have different sequence lengths, since removing the
     passage or the media makes one shorter, so each maintains its own
@@ -177,10 +183,15 @@ def cad_generate(model, inputs_ctx, inputs_noctx, tokenizer,
         return (1.0 + alpha) * lc - alpha * ln
 
     generated = []
+    logp_list = []
     with torch.inference_mode():
-        cur = _combine(logits_c, logits_n).argmax(dim=-1, keepdim=True)
+        comb = _combine(logits_c, logits_n)
+        cur = comb.argmax(dim=-1, keepdim=True)
         tok = cur.item()
         generated.append(tok)
+        if record_process:
+            lp = F.log_softmax(comb.float(), dim=-1)[0, tok]
+            logp_list.append(round(lp.item(), 4))
 
         for _ in range(1, max_new_tokens):
             if tok == eos_id:
@@ -199,11 +210,16 @@ def cad_generate(model, inputs_ctx, inputs_noctx, tokenizer,
                 if pos_n is not None:
                     pos_n = pos_n + 1
 
-            cur = _combine(logits_c, logits_n).argmax(dim=-1, keepdim=True)
+            comb = _combine(logits_c, logits_n)
+            cur = comb.argmax(dim=-1, keepdim=True)
             tok = cur.item()
             generated.append(tok)
+            if record_process:
+                lp = F.log_softmax(comb.float(), dim=-1)[0, tok]
+                logp_list.append(round(lp.item(), 4))
 
-    return tokenizer.decode(generated, skip_special_tokens=True).strip(), generated
+    return (tokenizer.decode(generated, skip_special_tokens=True).strip(),
+            generated, logp_list)
 
 
 # --- Build the no-evidence input ---
@@ -249,6 +265,24 @@ def build_noctx_inputs(processor, model, item, args, system_prompt,
 
 # --- Main ---
 
+def attach_trajectory(result, gen_ids, logp_list, input_len):
+    """Append phi-Decoding style per-token trajectory fields (see base_model.py)."""
+    result["record_process"] = True
+    if gen_ids:
+        cum = float(sum(logp_list)) if logp_list else 0.0
+        result["token_ids"] = list(gen_ids)
+        result["logp_list"] = list(logp_list)
+        result["cumulative_logprob"] = round(cum, 4)
+        result["norm_logp"] = round(cum / (len(gen_ids) + 1e-8), 4)
+        result["input_len"] = int(input_len) if input_len is not None else None
+        result["output_tokens"] = len(gen_ids)
+    else:
+        for k in ("token_ids", "logp_list", "cumulative_logprob",
+                  "norm_logp", "input_len"):
+            result[k] = None
+        result["output_tokens"] = 0
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--datasets",       type=str, required=True)
@@ -269,6 +303,10 @@ def main():
                         choices=["auto", "passage", "media"],
                         help="which evidence to ablate for the no-context branch")
     parser.add_argument("--prompt_version", type=str, default="v0")
+    parser.add_argument("--record_process", action=argparse.BooleanOptionalAction,
+                        default=True,
+                        help="Record per-token trajectory (token ids, per-token "
+                             "logprobs, cumulative/norm logp) alongside the response")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -343,9 +381,11 @@ def main():
                           f"len_ctx={clean_ctx['input_ids'].shape[1]} "
                           f"len_noctx={clean_noctx['input_ids'].shape[1]}", flush=True)
 
-                response, gen_ids = cad_generate(
+                response, gen_ids, logp_list = cad_generate(
                     model, clean_ctx, clean_noctx, tokenizer,
-                    max_new_tokens=args.max_new_tokens, alpha=args.alpha)
+                    max_new_tokens=args.max_new_tokens, alpha=args.alpha,
+                    record_process=args.record_process)
+                input_len = clean_ctx["input_ids"].shape[1]
 
                 elapsed = time.time() - t0
                 pred_clean = parse_pred(response, args.datasets)
@@ -366,6 +406,8 @@ def main():
                 }
                 if degraded_reason:
                     result["degraded_reason"] = degraded_reason
+                if args.record_process:
+                    attach_trajectory(result, gen_ids, logp_list, input_len)
                 res_f.write(json.dumps(result, ensure_ascii=False) + "\n")
                 res_f.flush()
                 print(f"  pred: {pred_clean!r}  raw: {response[:60]!r}  "
@@ -376,8 +418,10 @@ def main():
                 print(f"  [OOM] id={item_id}", flush=True)
                 with open(error_path, "a") as ef:
                     ef.write(f"{time.strftime('%H:%M:%S')} | id={item_id} | OOM\n")
-                res_f.write(json.dumps({"id": item_id, "status": "OOM",
-                                        "error": "CUDA OOM"}, ensure_ascii=False) + "\n")
+                _err = {"id": item_id, "status": "OOM", "error": "CUDA OOM"}
+                if args.record_process:
+                    attach_trajectory(_err, None, None, None)
+                res_f.write(json.dumps(_err, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             except Exception as e:
@@ -387,8 +431,10 @@ def main():
                 with open(error_path, "a") as ef:
                     ef.write(f"{time.strftime('%H:%M:%S')} | id={item_id} | {repr(e)}\n")
                     ef.write(traceback.format_exc() + "\n")
-                res_f.write(json.dumps({"id": item_id, "status": "failed",
-                                        "error": repr(e)[:200]}, ensure_ascii=False) + "\n")
+                _err = {"id": item_id, "status": "failed", "error": repr(e)[:200]}
+                if args.record_process:
+                    attach_trajectory(_err, None, None, None)
+                res_f.write(json.dumps(_err, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             finally:

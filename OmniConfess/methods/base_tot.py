@@ -81,6 +81,9 @@ def main():
                         help='Number of times model votes per step')
     parser.add_argument('--max_new_tokens', type=int, default=512)
     parser.add_argument('--prompt_version', type=str, default='v1', choices=['v0','v1','v2','v3'])
+    parser.add_argument('--record_process', action=argparse.BooleanOptionalAction, default=True,
+                        help='Record per-token trajectory (token ids, per-token logprobs, '
+                             'cumulative/norm logp) for every generation call, tagged by phase')
     parser.add_argument('--dry_run',        action='store_true')
     args = parser.parse_args()
 
@@ -120,7 +123,14 @@ def main():
         return clean
 
     def _gen(clean, max_new_tokens=128, do_sample=True, temperature=0.7,
-             stop_on_newline=False):
+             stop_on_newline=False, phase='gen', beam=None):
+        """Generate and return the decoded text.
+
+        When record_process is on, also append a per-call trajectory record
+        (phi-Decoding style: token ids + per-token logp of the tokens actually
+        produced) to the per-sample traj_records list, tagged with the ToT
+        phase ('rollout' | 'vote' | 'final') and, where applicable, the beam.
+        """
         nonlocal all_input_tokens, all_output_tokens
         all_input_tokens += clean['input_ids'].shape[1]
         gen_kwargs = dict(
@@ -133,13 +143,32 @@ def main():
         )
         if stop_on_newline:
             gen_kwargs['stop_strings'] = ['\n\n', '<end_of_reasoning>']
+        if args.record_process:
+            gen_kwargs.update(output_scores=True, return_dict_in_generate=True)
         with torch.inference_mode():
             out = model.thinker.generate(**clean, **gen_kwargs)
         il = clean['input_ids'].shape[1]
-        gen_ids = out[0][il:]
-        gen_ids = gen_ids[gen_ids != tokenizer.pad_token_id]
+        if args.record_process:
+            raw = out.sequences[0][il:]
+        else:
+            raw = out[0][il:]
+        gen_ids = raw[raw != tokenizer.pad_token_id]
         text = tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
         all_output_tokens += len(gen_ids)
+        if args.record_process:
+            lps = [round(torch.log_softmax(sc[0].float(), dim=-1)[tid].item(), 4)
+                   for tid, sc in zip(gen_ids.tolist(), out.scores)]
+            cum_lp = float(sum(lps))
+            traj_records.append({
+                'phase':             phase,
+                'beam':              beam,
+                'token_ids':         gen_ids.tolist(),
+                'logp_list':         lps,
+                'cumulative_logprob': round(cum_lp, 4),
+                'norm_logp':         round(cum_lp / (len(gen_ids) + 1e-8), 4),
+                'input_len':         int(il),
+                'output_tokens':     int(len(gen_ids)),
+            })
         torch.cuda.empty_cache()
         return text
 
@@ -161,6 +190,7 @@ def main():
 
         final_response = ''
         cot = ''
+        traj_records = []
         _t_gen = 0.0
         _t_sel = 0.0
 
@@ -188,7 +218,7 @@ def main():
                     for j in range(args.num_rollout):
                         print(f'    beam {beam_idx} rollout {j+1}', flush=True)
                         resp = _gen(clean, max_new_tokens=128, do_sample=True, temperature=0.7,
-                                    stop_on_newline=True)
+                                    stop_on_newline=True, phase='rollout', beam=beam_idx)
                         all_candidates.append(resp)
                         all_chains.append(previous_steps[beam_idx] + resp.strip() + '\n')
                         parent_map.append(beam_idx)
@@ -205,7 +235,8 @@ def main():
 
                 vote_outputs = []
                 for _ in range(args.n_vote):
-                    vo = _gen(vote_clean, max_new_tokens=512, do_sample=True, temperature=0.7)
+                    vo = _gen(vote_clean, max_new_tokens=512, do_sample=True,
+                              temperature=0.7, phase='vote')
                     vote_outputs.append(vo)
 
                 vote_counts = tally_votes(vote_outputs, len(all_candidates))
@@ -234,7 +265,8 @@ def main():
                     pixel_values, audio_values, image_values, final_text)
                 fm = make_messages(system_prompt, fc)
                 fclean = _encode(fm, pixel_values, audio_values, image_values)
-                resp = _gen(fclean, max_new_tokens=args.max_new_tokens, do_sample=False)
+                resp = _gen(fclean, max_new_tokens=args.max_new_tokens, do_sample=False,
+                            phase='final', beam=beam_idx)
                 completed.append(previous_steps[beam_idx] + '\n' + resp)
 
             _t_gen += time.perf_counter() - _tg1
@@ -250,7 +282,8 @@ def main():
                     pixel_values, audio_values, image_values, tv_text)
                 tv_msgs = make_messages(system_prompt, tv_uc)
                 tv_clean = _encode(tv_msgs, pixel_values, audio_values, image_values)
-                tv_out = _gen(tv_clean, max_new_tokens=512, do_sample=False)
+                tv_out = _gen(tv_clean, max_new_tokens=512, do_sample=False,
+                              phase='terminal_vote')
                 best = parse_vote_output(tv_out, len(completed))
                 cot = completed[best]
                 # Extract just the final answer (last part after reasoning chain)
@@ -262,6 +295,7 @@ def main():
             print(f'  [ERROR] {e}', flush=True)
             final_response = ''
             cot = ''
+            traj_records = None
 
         elapsed = time.time() - t0
         torch.cuda.empty_cache()
@@ -271,6 +305,14 @@ def main():
                              time_sec=elapsed, cot=cot)
         result['generation_time_seconds'] = round(_t_gen, 4)
         result['selection_time_seconds'] = round(_t_sel, 4)
+
+        # ── Trajectory record (phi-Decoding style; one entry per _gen call) ─
+        if args.record_process:
+            result['record_process'] = True
+            result['trajectories'] = traj_records
+            result['output_tokens'] = (int(sum(t['output_tokens'] for t in traj_records))
+                                       if traj_records else 0)
+
         save_result(result, output_path)
 
     total_time = time.time() - start

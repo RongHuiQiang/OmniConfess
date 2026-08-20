@@ -48,6 +48,9 @@ def main():
     parser.add_argument('--max_new_tokens',type=int, default=512)
     parser.add_argument('--temperature',   type=float, default=0.6)
     parser.add_argument('--prompt_version',type=str, default='v1', choices=['v0','v1','v2','v3'])
+    parser.add_argument('--record_process', action=argparse.BooleanOptionalAction, default=True,
+                        help='Record per-token trajectory (token ids, per-token logprobs, '
+                             'cumulative/norm logp) for every sampled rollout')
     parser.add_argument('--dry_run',       action='store_true')
     args = parser.parse_args()
 
@@ -105,6 +108,8 @@ def main():
         all_responses = []
         final_pred = ''
         try_count = 0
+        input_len = None
+        rollout_trajs = None
         _t_gen = 0.0
         _t_sel = 0.0
 
@@ -119,24 +124,46 @@ def main():
 
                 # ── Serial sampling ─────────────────────────────────────────
                 all_responses = []
+                rollout_trajs = [] if args.record_process else None
                 _t_gen_start = time.perf_counter()
                 for s in range(args.num_rollout):
                     print(f'  rollout {s+1}/{args.num_rollout}', flush=True)
+                    gen_kwargs = dict(
+                        max_new_tokens=args.max_new_tokens,
+                        do_sample=True,
+                        temperature=args.temperature,
+                        pad_token_id=tokenizer.eos_token_id,
+                        stop_strings=['<end_of_reasoning>'],
+                        tokenizer=tokenizer,
+                    )
+                    if args.record_process:
+                        gen_kwargs.update(output_scores=True,
+                                          return_dict_in_generate=True)
                     with torch.inference_mode():
-                        out = model.thinker.generate(
-                            **clean,
-                            max_new_tokens=args.max_new_tokens,
-                            do_sample=True,
-                            temperature=args.temperature,
-                            pad_token_id=tokenizer.eos_token_id,
-                            stop_strings=['<end_of_reasoning>'],
-                            tokenizer=tokenizer,
-                        )
-                    gen_ids = out[0][input_len:]
-                    gen_ids = gen_ids[gen_ids != tokenizer.pad_token_id]
+                        out = model.thinker.generate(**clean, **gen_kwargs)
+                    if args.record_process:
+                        raw_gen = out.sequences[0][input_len:]
+                    else:
+                        raw_gen = out[0][input_len:]
+                    gen_ids = raw_gen[raw_gen != tokenizer.pad_token_id]
                     response = tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
                     all_responses.append(response)
                     all_output_tokens += len(gen_ids)
+                    if args.record_process:
+                        # logp of each sampled token under the (untempered)
+                        # model distribution, phi-Decoding Baseline-GD style
+                        lps = [round(torch.log_softmax(sc[0].float(), dim=-1)[tid].item(), 4)
+                               for tid, sc in zip(gen_ids.tolist(), out.scores)]
+                        cum_lp = float(sum(lps))
+                        rollout_trajs.append({
+                            'rollout':        s,
+                            'token_ids':      gen_ids.tolist(),
+                            'logp_list':      lps,
+                            'cumulative_logprob': round(cum_lp, 4),
+                            'norm_logp':      round(cum_lp / (len(gen_ids) + 1e-8), 4),
+                            'input_len':      int(input_len),
+                            'output_tokens':  int(len(gen_ids)),
+                        })
                     torch.cuda.empty_cache()
                 _t_gen = time.perf_counter() - _t_gen_start
 
@@ -145,6 +172,9 @@ def main():
                 all_preds = [parse_pred(r, args.datasets) for r in all_responses]
                 final_pred = majority_vote(all_preds)
                 _t_sel = time.perf_counter() - _t_sel_start
+                if args.record_process and rollout_trajs:
+                    for traj, p in zip(rollout_trajs, all_preds):
+                        traj['pred'] = p
                 print(f'  votes={Counter(all_preds)} -> final={final_pred!r}', flush=True)
                 break
 
@@ -155,6 +185,7 @@ def main():
                 if try_count == 3:
                     all_responses = []
                     final_pred = ''
+                    rollout_trajs = None
 
         elapsed = time.time() - t0
         torch.cuda.empty_cache()
@@ -168,6 +199,15 @@ def main():
         result['pred'] = final_pred
         result['generation_time_seconds'] = round(_t_gen, 4)
         result['selection_time_seconds'] = round(_t_sel, 4)
+
+        # ── Trajectory record (phi-Decoding style; one entry per rollout) ───
+        if args.record_process:
+            result['record_process'] = True
+            result['trajectories'] = rollout_trajs
+            result['input_len'] = int(input_len) if rollout_trajs else None
+            result['output_tokens'] = (int(sum(t['output_tokens'] for t in rollout_trajs))
+                                       if rollout_trajs else 0)
+
         save_result(result, output_path)
 
     total_time = time.time() - start

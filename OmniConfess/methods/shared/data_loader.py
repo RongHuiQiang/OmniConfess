@@ -14,8 +14,18 @@ from PIL import Image
 
 # ================= Media Loading =================
 
-def load_video_frames(video_path, num_frames=8):
-    """Load video as numpy array of RGB frames (224x224), verified pattern from GUARD."""
+def load_video_frames(video_path, num_frames=None):
+    """Load video as numpy array of RGB frames, verified pattern from GUARD.
+
+    Resolution and frame count are controlled by environment variables so that
+    A/B ladders can rerun the pipeline without touching call sites:
+        OMNI_FRAME_SIZE  square resize target, default 224 (legacy behaviour)
+        OMNI_NUM_FRAMES  number of sampled frames, default 8 (legacy behaviour)
+    An explicit ``num_frames`` argument still wins over the env var.
+    """
+    if num_frames is None:
+        num_frames = int(os.environ.get("OMNI_NUM_FRAMES", "8"))
+    frame_size = int(os.environ.get("OMNI_FRAME_SIZE", "224"))
     if not video_path or not os.path.exists(video_path):
         return None
     cap = cv2.VideoCapture(video_path)
@@ -30,7 +40,7 @@ def load_video_frames(video_path, num_frames=8):
         ret, frame = cap.read()
         if not ret:
             break
-        frame = cv2.resize(frame, (224, 224))
+        frame = cv2.resize(frame, (frame_size, frame_size))
         frames.append(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
     cap.release()
     return np.array(frames) if frames else None

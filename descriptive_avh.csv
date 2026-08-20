@@ -1,0 +1,24 @@
+File Name,Samples,Token-F1,GAVIE-Rel,GAVIE-Acc
+avhbench_base_model_full.jsonl,645,17.2,5.26,3.95
+avhbench_base_model_full.jsonl,645,19.42,5.92,4.46
+avhbench_res384_full.jsonl,645,19.76,6.0,4.5
+avhbench_res448_full.jsonl,645,19.58,5.86,4.41
+avhbench_frames16_full.jsonl,645,18.84,5.86,4.4
+avhbench_base_vcd_full.jsonl,645,19.26,6.0,4.45
+avhbench_base_cad_full.jsonl,645,18.01,0.0,0.0
+avhbench_base_sc_full.jsonl,645,18.29,0.0,0.0
+avhbench_base_dola_full.jsonl,645,19.15,0.0,0.0
+avhbench_base_avcd_full.jsonl,645,12.9,0.0,0.0
+avhbench_omniconfess_full.jsonl,645,1.82,0.0,0.0
+avhbench_vote_sc_full.jsonl,645,21.56,5.63,4.09
+avhbench_vote_sc_noF16_ablation.jsonl,645,21.48,5.65,4.1
+avhbench_nemotron.jsonl,645,18.67,0.0,0.0
+avhbench_base_model_full.jsonl,645,19.42,5.92,4.47
+avhbench_base_vcd_full.jsonl,645,19.26,5.96,4.5
+avhbench_base_cad_full.jsonl,645,18.01,5.62,4.14
+avhbench_nemotron_unboxed.jsonl,645,20.18,0.0,0.0
+avhbench_base_sc_full.jsonl,645,18.29,5.85,4.32
+avhbench_base_avcd_full.jsonl,645,19.76,0.0,0.0
+avhbench_q3_res384_full.jsonl,645,19.53,0.0,0.0
+avhbench_q3_f16_full.jsonl,645,17.92,0.0,0.0
+avhbench_qwen3omni_contractv4_full.jsonl,645,20.66,0.0,0.0

@@ -18,6 +18,23 @@ from shared import (
     make_result, save_result,
 )
 
+
+def token_logprobs(gen_ids, scores):
+    """Per-token logprob of each generated token from the greedy-step scores.
+
+    Mirrors the phi-Decoding Baseline-GD.py recording style: one logprob per
+    generated token, so downstream analysis can rescore or reweight any
+    prefix of the trajectory without re-running the model.
+    """
+    out = []
+    for tid, logits in zip(gen_ids.tolist(), scores):
+        logits = logits.float()
+        if logits.dim() > 1:          # scores come back as [batch, vocab]
+            logits = logits[0]
+        lp = torch.log_softmax(logits, dim=-1)[tid]
+        out.append(round(lp.item(), 4))
+    return out
+
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 
@@ -39,7 +56,10 @@ def main():
     parser.add_argument('--time_path',     type=str, default='./results/time')
     parser.add_argument('--seed',          type=int, default=42)
     parser.add_argument('--max_new_tokens',type=int, default=512)
-    parser.add_argument('--prompt_version',type=str, default='v1', choices=['v0','v1','v2','v3'])
+    parser.add_argument('--prompt_version',type=str, default='v1', choices=['v0','v1','v2','v3','v4','v5'])
+    parser.add_argument('--record_process', action=argparse.BooleanOptionalAction, default=True,
+                        help='Record per-token trajectory (token ids, per-token logprobs, '
+                             'cumulative/norm logp) alongside the response')
     parser.add_argument('--dry_run',       action='store_true',
                         help='Only process first 3 items (smoke test)')
     args = parser.parse_args()
@@ -108,15 +128,22 @@ def main():
             all_input_tokens += input_len
 
             # ── Generate ────────────────────────────────────────────────────
+            gen_kwargs = dict(
+                max_new_tokens=args.max_new_tokens,
+                do_sample=False,
+                pad_token_id=tokenizer.eos_token_id,
+            )
+            if args.record_process:
+                gen_kwargs.update(output_scores=True,
+                                  return_dict_in_generate=True)
             with torch.inference_mode():
-                out = model.thinker.generate(
-                    **clean,
-                    max_new_tokens=args.max_new_tokens,
-                    do_sample=False,
-                    pad_token_id=tokenizer.eos_token_id,
-                )
+                out = model.thinker.generate(**clean, **gen_kwargs)
 
-            gen_ids = out[0][input_len:]
+            if args.record_process:
+                gen_ids = out.sequences[0][input_len:]
+                logp_list = token_logprobs(gen_ids.cpu(), out.scores)
+            else:
+                gen_ids = out[0][input_len:]
             response = tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
             all_output_tokens += len(gen_ids)
 
@@ -128,11 +155,32 @@ def main():
             print(f'  [ERROR] {e}', flush=True)
             response = ''
             elapsed = time.time() - t0
+            gen_ids = None
 
         torch.cuda.empty_cache()
 
         result = make_result(item, response, args.datasets, 'base_model',
                              time_sec=elapsed)
+
+        # ── Trajectory record (phi-Decoding Baseline-GD.py style) ────────────
+        if args.record_process:
+            result['record_process'] = True
+            if gen_ids is not None:
+                cum_lp = float(np.sum(logp_list))
+                result['token_ids'] = gen_ids.tolist()
+                result['logp_list'] = logp_list
+                result['cumulative_logprob'] = round(cum_lp, 4)
+                result['norm_logp'] = round(cum_lp / (len(gen_ids) + 1e-8), 4)
+                result['input_len'] = int(input_len)
+                result['output_tokens'] = int(len(gen_ids))
+            else:
+                result['token_ids'] = None
+                result['logp_list'] = None
+                result['cumulative_logprob'] = None
+                result['norm_logp'] = None
+                result['input_len'] = None
+                result['output_tokens'] = 0
+
         save_result(result, output_path)
 
     # ── Summary ──────────────────────────────────────────────────────────────

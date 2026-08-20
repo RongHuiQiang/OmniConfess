@@ -91,6 +91,32 @@ INF = 10
 TEMPERATURE = 0.6
 os.environ["PYTORCH_ALLOC_CONF"] = "expandable_segments:True"
 
+# ============== shared-v1 prompt alignment (pure decoding-effect runs) ========
+# OMNI_PROMPT_SOURCE=shared_v1 makes this trunk reuse methods/shared/prompts.py
+# v1 for BOTH the system and the user prompt, and render the chat template the
+# way base_model.py does (media placeholder tokens inlined in the user text, no
+# empty assistant turn, no <|im_end|> stripping). The resulting conditioning is
+# byte-identical to outputs/{ds}_base_model, so any remaining difference is the
+# decoding method itself. Unset (default) keeps the trunk's own prompts and the
+# historical rendering, byte-for-byte.
+
+def _shared_v1_prompts():
+    return os.environ.get('OMNI_PROMPT_SOURCE', '').strip().lower() == 'shared_v1'
+
+try:
+    import importlib.util as _ilu
+    _spec = _ilu.spec_from_file_location(
+        "_shared_prompts",
+        os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                     "methods", "shared", "prompts.py"))
+    _mod = _ilu.module_from_spec(_spec)
+    _spec.loader.exec_module(_mod)
+    _SHARED_GET_SYSTEM_PROMPT = _mod.get_system_prompt
+    _SHARED_GET_USER_PROMPT = _mod.get_user_prompt
+    _SHARED_PROMPTS_LOADED = True
+except Exception:
+    _SHARED_PROMPTS_LOADED = False
+
 # ================= 1. Multimodal loading utilities =================
 
 def load_image(image_path):
@@ -1298,6 +1324,48 @@ class PhiDecoder:
         vectorizer = TfidfVectorizer()
         return vectorizer.fit_transform(texts)
 
+    def _shared_v1_chat(self, example, question, dataset_name, system_prompt):
+        """base_model-style messages from shared/prompts.py v1, or None.
+
+        Media placeholder tokens are inlined into the user text and the empty
+        assistant turn is dropped, matching build_user_content_with_media_tokens
+        + make_messages in methods/shared, so apply_chat_template renders the
+        exact string base_model.py renders. Returning None keeps the trunk path.
+        """
+        if not (_shared_v1_prompts() and _SHARED_PROMPTS_LOADED):
+            return None
+        try:
+            passage = example.get('passage') or example.get('context') or ''
+            user_text = _SHARED_GET_USER_PROMPT(
+                question, dataset_name, 'v1', passage=passage)
+        except Exception as _e:
+            print(f"[WARN] shared_v1 user prompt failed ({_e}); "
+                  f"falling back to the trunk prompt", flush=True)
+            return None
+        prefix = ""
+        if example.get('image_values') is not None:
+            prefix += "<|vision_bos|><|IMAGE|><|vision_eos|>\n"
+        if example.get('pixel_values') is not None:
+            prefix += "<|vision_bos|><|VIDEO|><|vision_eos|>\n"
+        if example.get('audio_values') is not None and not _aiv_audio_folded(example):
+            prefix += "<|audio_bos|><|AUDIO|><|audio_eos|>\n"
+        if not getattr(self, '_shared_v1_logged', False):
+            self._shared_v1_logged = True
+            print(f"[PROMPT] OMNI_PROMPT_SOURCE=shared_v1 active: system+user prompts "
+                  f"come from methods/shared/prompts.py v1, rendered base_model-style",
+                  flush=True)
+        return [
+            {"role": "system", "content": [{"type": "text", "text": system_prompt}]},
+            {"role": "user",   "content": [{"type": "text", "text": prefix + user_text}]},
+        ]
+
+    def _clean_pstr(self, p_str):
+        """shared_v1 keeps the rendered template (with <|im_end|> turn separators)
+        exactly as base_model does; the trunk's historical behaviour strips them."""
+        if _shared_v1_prompts():
+            return p_str
+        return p_str.replace(self.tokenizer.eos_token, "").strip()
+
     def get_system_prompt(self, dataset_type, question=None):
         """Structured system prompt for Qwen-Omni.
 
@@ -1312,6 +1380,10 @@ class PhiDecoder:
         the prompt unchanged is preferable to guessing the wrong modality.
         """
         omni_identity = "You are Qwen, a virtual human developed by Alibaba Group, capable of perceiving auditory and visual inputs."
+
+        # shared_v1: delegate to methods/shared/prompts.py v1 (the base_model arm)
+        if _shared_v1_prompts() and _SHARED_PROMPTS_LOADED:
+            return _SHARED_GET_SYSTEM_PROMPT(dataset_type, 'v1')
 
         if "cmm" in dataset_type.lower():
             if _JUDGE_PROMPTS_LOADED:
@@ -1932,7 +2004,7 @@ class PhiDecoder:
             p_str = self.processor.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
             if isinstance(p_str, list): p_str = p_str[0]
             
-            inputs_text = p_str.replace(self.tokenizer.eos_token, "").strip() + previous_steps[beam_idx]
+            inputs_text = self._clean_pstr(p_str) + previous_steps[beam_idx]
             
             processor_kwargs = {
                 "text": [inputs_text], 
@@ -2661,7 +2733,7 @@ class PhiDecoder:
             if isinstance(p_str, list): p_str = p_str[0]
             
             clean_resp = response.replace("<|video|>", "").replace("<|audio|>", "").replace("<|vision_start|>", "").replace("<|vision_end|>", "")
-            inputs_text = p_str.replace(self.tokenizer.eos_token, "").strip() + previous_steps[beam_idx] + clean_resp
+            inputs_text = self._clean_pstr(p_str) + previous_steps[beam_idx] + clean_resp
             
             processor_kwargs_rollout = {
                 "text": [inputs_text],
@@ -3085,7 +3157,7 @@ class PhiDecoder:
                         "Answer: "
                     )
 
-                inputs_text_avh = p_str.replace(self.tokenizer.eos_token, "").strip() + avh_final_instruction
+                inputs_text_avh = self._clean_pstr(p_str) + avh_final_instruction
 
                 print(f"    [DIAG-AVH] beam={beam_idx} reasoning_history (full):", flush=True)
                 print(f"    [DIAG-AVH] notes={repr(reasoning_history)}", flush=True)
@@ -3196,7 +3268,7 @@ class PhiDecoder:
                         "Answer: "
                     )
 
-                inputs_text_halo = p_str.replace(self.tokenizer.eos_token, "").strip() + halo_final_instruction
+                inputs_text_halo = self._clean_pstr(p_str) + halo_final_instruction
 
                 m_inputs_halo = self.processor(
                     text=[inputs_text_halo],
@@ -3278,7 +3350,7 @@ class PhiDecoder:
                         "Answer:"
                     )
                 
-                inputs_text_pure = p_str.replace(self.tokenizer.eos_token, "").strip() + text_final_instruction
+                inputs_text_pure = self._clean_pstr(p_str) + text_final_instruction
                 
                 m_inputs_pure = self.processor(
                     text=[inputs_text_pure], 
@@ -3332,9 +3404,9 @@ class PhiDecoder:
             # ==========================================
             else:
                 if "\\boxed{" in reasoning_history:
-                    base_input = p_str.replace(self.tokenizer.eos_token, "").strip() + f"\n\nBased on your detailed internal reasoning: '{reasoning_history.strip()}'\nNow, "
+                    base_input = self._clean_pstr(p_str) + f"\n\nBased on your detailed internal reasoning: '{reasoning_history.strip()}'\nNow, "
                 else:
-                    base_input = p_str.replace(self.tokenizer.eos_token, "").strip() + "\n" + reasoning_history
+                    base_input = self._clean_pstr(p_str) + "\n" + reasoning_history
 
                 question_text = example.get('question') or example.get('input')
 
@@ -3495,6 +3567,10 @@ class PhiDecoder:
         user_content_list = []
         dataset_name = self.args.datasets.lower()
 
+        _shared_chat = self._shared_v1_chat(example, question, dataset_name, system_prompt)
+        if _shared_chat is not None:
+            return _shared_chat
+
         if example.get('image_values') is not None:
             user_content_list.append({"type": "image"})
         if example.get('pixel_values') is not None:
@@ -3504,7 +3580,7 @@ class PhiDecoder:
 
         if "cmm" in dataset_name:
             user_content_list.append({
-                "type": "text", 
+                "type": "text",
                 "text": (
                     f"Task: Verify the existence of '{question}' through independent modal cross-checking.\n"
                     "Step 1: Check the video stream for visual evidence.\n"
@@ -3565,6 +3641,10 @@ class PhiDecoder:
         user_content_list = []
         dataset_name = self.args.datasets.lower()
 
+        _shared_chat = self._shared_v1_chat(example, question, dataset_name, system_prompt)
+        if _shared_chat is not None:
+            return _shared_chat
+
         if example.get('image_values') is not None:
             user_content_list.append({"type": "image"})
         if example.get('pixel_values') is not None:
@@ -3574,7 +3654,7 @@ class PhiDecoder:
 
         if "cmm" in dataset_name:
             user_content_list.append({
-                "type": "text", 
+                "type": "text",
                 "text": (
                     f"Task: Verify the existence of '{question}' through independent modal cross-checking.\n"
                     "Step 1: Check the video stream for visual evidence.\n"

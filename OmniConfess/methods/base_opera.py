@@ -342,7 +342,17 @@ def opera_generate(model, tokenizer, clean, vis_mask, max_new_tokens=256,
                    num_beams=NUM_BEAMS, n_can=NUM_ATTN_CANDIDATES,
                    sigma=SCALE_FACTOR, alpha=PENALTY_WEIGHT,
                    r=ROLLBACK_THRESHOLD, window_size=WINDOW_SIZE,
-                   length_penalty=1.0, enable_rollback=True, verbose=True):
+                   length_penalty=1.0, enable_rollback=True, verbose=True,
+                   record_process=True):
+    """Returns (response, gen_ids, info, logp_list).
+
+    When record_process is on, logp_list holds one logprob per token of the
+    winning beam, computed as the incremental beam-score delta of each selected
+    token, i.e. its logprob under log_softmax of OPERA's penalised candidate
+    distribution (phi-Decoding trajectory style, cf. base_model.py). Rollbacks
+    restore the logp lists from the same snapshots as the token sequences, so
+    the lists always correspond 1:1 to the returned gen_ids.
+    """
     device = next(model.parameters()).device
     eos_id = tokenizer.eos_token_id
     info = {"n_rollback": 0}
@@ -377,8 +387,9 @@ def opera_generate(model, tokenizer, clean, vis_mask, max_new_tokens=256,
     beam_scores = torch.full((num_beams,), -1e9, device=device, dtype=torch.float)
     beam_scores[0] = 0.0
     seqs = [[] for _ in range(num_beams)]
+    seq_logps = [[] for _ in range(num_beams)]   # per-beam per-token logp (record)
     resp_rows = []
-    finished = []                                # (score, seq)
+    finished = []                                # (score, seq[, logp_list])
 
     hist_locs = []
     snapshots = []
@@ -441,13 +452,21 @@ def opera_generate(model, tokenizer, clean, vis_mask, max_new_tokens=256,
             V = scores.shape[-1]
 
             nb_scores, nb_tokens, nb_idx = [], [], []
+            nb_logps = []                         # per-token logp delta of the selection
             for sc, ix in zip(top_sc.tolist(), top_ix.tolist()):
                 b, tok = ix // V, ix % V
                 if tok == eos_id:
                     if seqs[b]:
-                        finished.append((sc / (len(seqs[b]) ** length_penalty), list(seqs[b])))
+                        if record_process:
+                            finished.append((sc / (len(seqs[b]) ** length_penalty),
+                                             list(seqs[b]), list(seq_logps[b])))
+                        else:
+                            finished.append((sc / (len(seqs[b]) ** length_penalty),
+                                             list(seqs[b])))
                     continue
                 nb_scores.append(sc); nb_tokens.append(tok); nb_idx.append(b)
+                if record_process:
+                    nb_logps.append(sc - float(beam_scores[b]))
                 if len(nb_scores) == num_beams:
                     break
             if not nb_scores:
@@ -455,9 +474,12 @@ def opera_generate(model, tokenizer, clean, vis_mask, max_new_tokens=256,
             while len(nb_scores) < num_beams:
                 nb_scores.append(nb_scores[-1]); nb_tokens.append(nb_tokens[-1])
                 nb_idx.append(nb_idx[-1])
+                if record_process:
+                    nb_logps.append(nb_logps[-1])
 
             snapshots.append({
                 "T": T_prev, "seqs": [list(s) for s in seqs],
+                "seq_logps": [list(s) for s in seq_logps],
                 "beam_scores": beam_scores.clone(),
                 "resp_rows": [rr.clone() for rr in resp_rows],
                 "sel": list(zip(nb_idx, nb_tokens)),
@@ -470,6 +492,8 @@ def opera_generate(model, tokenizer, clean, vis_mask, max_new_tokens=256,
             cache_select(past_kv, src)
             resp_rows = [rr.index_select(0, src) for rr in resp_rows]
             seqs = [seqs[b] + [t] for b, t in zip(nb_idx, nb_tokens)]
+            if record_process:
+                seq_logps = [seq_logps[b] + [lp] for b, lp in zip(nb_idx, nb_logps)]
             beam_scores = torch.tensor(nb_scores, device=device, dtype=torch.float)
             hist_locs = [hl.index_select(0, src) if torch.is_tensor(hl) else hl
                          for hl in hist_locs]
@@ -513,6 +537,8 @@ def opera_generate(model, tokenizer, clean, vis_mask, max_new_tokens=256,
                                 reject.setdefault(pos_rb, set()).update(snap["sel"])
                                 past_kv = cache_expand(cache_clone(prompt_cache), num_beams)
                                 seqs = [list(s) for s in snap["seqs"]]
+                                if record_process:
+                                    seq_logps = [list(s) for s in snap["seq_logps"]]
                                 beam_scores = snap["beam_scores"].clone()
                                 resp_rows = [rr.clone() for rr in snap["resp_rows"]]
                                 hist_locs = hist_locs[:pos_rb] if pos_rb <= len(hist_locs) else hist_locs
@@ -548,18 +574,47 @@ def opera_generate(model, tokenizer, clean, vis_mask, max_new_tokens=256,
 
     for b in range(num_beams):
         if seqs[b]:
-            finished.append((float(beam_scores[b]) / (len(seqs[b]) ** length_penalty),
-                             list(seqs[b])))
+            if record_process:
+                finished.append((float(beam_scores[b]) / (len(seqs[b]) ** length_penalty),
+                                 list(seqs[b]), list(seq_logps[b])))
+            else:
+                finished.append((float(beam_scores[b]) / (len(seqs[b]) ** length_penalty),
+                                 list(seqs[b])))
     if not finished:
-        return "", [], info
-    best = max(finished, key=lambda x: x[0])[1]
-    best = [t for t in best if t != eos_id]
+        return "", [], info, ([] if record_process else None)
+    best_entry = max(finished, key=lambda x: x[0])
+    best, best_logps = best_entry[1], (best_entry[2] if record_process else None)
+    if best_logps is not None:
+        # drop eos tokens together with their logprobs, keeping 1:1 alignment
+        pairs = [(t, lp) for t, lp in zip(best, best_logps) if t != eos_id]
+        best = [t for t, _ in pairs]
+        best_logps = [round(lp, 4) for _, lp in pairs]
+    else:
+        best = [t for t in best if t != eos_id]
     info["n_tokens"] = len(best)
-    return tokenizer.decode(best, skip_special_tokens=True).strip(), best, info
+    return tokenizer.decode(best, skip_special_tokens=True).strip(), best, info, best_logps
 
 
 # ═══════════════════════════════════════════════════════════════════════════
 # ═══════════════════════════════════════════════════════════════════════════
+
+def attach_trajectory(result, gen_ids, logp_list, input_len):
+    """Append phi-Decoding style per-token trajectory fields (see base_model.py)."""
+    result["record_process"] = True
+    if gen_ids:
+        cum = float(sum(logp_list)) if logp_list else 0.0
+        result["token_ids"] = list(gen_ids)
+        result["logp_list"] = list(logp_list)
+        result["cumulative_logprob"] = round(cum, 4)
+        result["norm_logp"] = round(cum / (len(gen_ids) + 1e-8), 4)
+        result["input_len"] = int(input_len) if input_len is not None else None
+        result["output_tokens"] = len(gen_ids)
+    else:
+        for k in ("token_ids", "logp_list", "cumulative_logprob",
+                  "norm_logp", "input_len"):
+            result[k] = None
+        result["output_tokens"] = 0
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -584,6 +639,10 @@ def main():
     parser.add_argument("--no_rollback",    action="store_true",
                         help="Disable retrospection-allocation (for ablation).")
     parser.add_argument("--prompt_version", type=str, default="v0")
+    parser.add_argument("--record_process", action=argparse.BooleanOptionalAction,
+                        default=True,
+                        help="Record per-token trajectory (token ids, per-token "
+                             "logprobs, cumulative/norm logp) alongside the response")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -605,7 +664,10 @@ def main():
     print("[model] loading Qwen2.5-Omni...", flush=True)
     processor, model = load_model()
     tokenizer = processor.tokenizer
-    print(f"[attn] {check_attn_impl(model)}", flush=True)
+    # transformers>=4.5x auto-selects sdpa, which never returns attn weights;
+    # OPERA's LastLayerAttn hook needs eager (the class check below can't see this).
+    model.thinker.config._attn_implementation = "eager"
+    print(f"[attn] {check_attn_impl(model)} -> forced eager", flush=True)
 
     print(f"[opera] beams={args.num_beams} sigma={args.scale_factor} "
           f"N_can={args.num_attn_candidates} alpha={args.penalty_weights} "
@@ -654,13 +716,15 @@ def main():
                     print("  [degraded] no image token: the first 10 steps carry no penalty (plain beam search)",
                           flush=True)
 
-                response, gen_ids, info = opera_generate(
+                response, gen_ids, info, logp_list = opera_generate(
                     model, tokenizer, clean, vis_mask,
                     max_new_tokens=args.max_new_tokens,
                     num_beams=args.num_beams, n_can=args.num_attn_candidates,
                     sigma=args.scale_factor, alpha=args.penalty_weights,
                     r=args.threshold, window_size=args.window_size,
-                    enable_rollback=not args.no_rollback)
+                    enable_rollback=not args.no_rollback,
+                    record_process=args.record_process)
+                input_len = clean["input_ids"].shape[1]
 
                 elapsed = time.time() - t0
                 pred_clean = parse_pred(response, args.datasets)
@@ -680,6 +744,8 @@ def main():
                     "status":       "success",
                 }
                 result.update(info)
+                if args.record_process:
+                    attach_trajectory(result, gen_ids, logp_list, input_len)
                 res_f.write(json.dumps(result, ensure_ascii=False) + "\n")
                 res_f.flush()
                 print(f"  pred: {pred_clean!r}  raw: {response[:60]!r}  "
@@ -690,8 +756,10 @@ def main():
                 print(f"  [OOM] id={item_id}", flush=True)
                 with open(error_path, "a") as ef:
                     ef.write(f"{time.strftime('%H:%M:%S')} | id={item_id} | OOM\n")
-                res_f.write(json.dumps({"id": item_id, "status": "OOM",
-                                        "error": "CUDA OOM"}, ensure_ascii=False) + "\n")
+                _err = {"id": item_id, "status": "OOM", "error": "CUDA OOM"}
+                if args.record_process:
+                    attach_trajectory(_err, None, None, None)
+                res_f.write(json.dumps(_err, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             except Exception as e:
@@ -701,8 +769,10 @@ def main():
                 with open(error_path, "a") as ef:
                     ef.write(f"{time.strftime('%H:%M:%S')} | id={item_id} | {repr(e)}\n")
                     ef.write(traceback.format_exc() + "\n")
-                res_f.write(json.dumps({"id": item_id, "status": "failed",
-                                        "error": repr(e)[:200]}, ensure_ascii=False) + "\n")
+                _err = {"id": item_id, "status": "failed", "error": repr(e)[:200]}
+                if args.record_process:
+                    attach_trajectory(_err, None, None, None)
+                res_f.write(json.dumps(_err, ensure_ascii=False) + "\n")
                 res_f.flush()
 
             finally:

@@ -69,7 +69,9 @@ def build_inputs(processor, model, messages, pixel_values, audio_values, image_v
         processor_kwargs["images"] = [image_values]
     if pixel_values is not None:
         processor_kwargs["videos"] = [pixel_values]
-        processor_kwargs["fps"] = [1.0]
+        # transformers >=4.53: fps must be a scalar (temporal_patch_size / fps);
+        # a list raises TypeError on video inputs.
+        processor_kwargs["fps"] = 1.0
     if audio_values is not None:
         processor_kwargs["audio"] = [audio_values]
 

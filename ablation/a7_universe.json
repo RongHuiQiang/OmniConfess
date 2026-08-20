@@ -1,0 +1,125 @@
+{
+ "census": {
+  "phd": {
+   "shipped_uniq_q": 565,
+   "ours_uniq_q": 861,
+   "ours_in_shipped": 405,
+   "trivial": false
+  },
+  "pubmedqa": {
+   "shipped_uniq_q": 500,
+   "ours_uniq_q": 468,
+   "ours_in_shipped": 468,
+   "trivial": true
+  },
+  "cmm": {
+   "shipped_uniq_q": 158,
+   "ours_uniq_q": 130,
+   "ours_in_shipped": 130,
+   "trivial": true
+  },
+  "ragtruth": {
+   "shipped_uniq_q": 150,
+   "ours_uniq_q": 143,
+   "ours_in_shipped": 143,
+   "trivial": true
+  },
+  "haloquest": {
+   "shipped_uniq_q": 591,
+   "ours_uniq_q": 357,
+   "ours_in_shipped": 357,
+   "trivial": true
+  },
+  "avhbench": {
+   "shipped_uniq_q": 1,
+   "ours_uniq_q": 1,
+   "ours_in_shipped": 1,
+   "trivial": true
+  }
+ },
+ "phd": {
+  "subset_uniq_q": 565,
+  "arms": {
+   "base_model": {
+    "f1_full": 71.68,
+    "n_full": 906,
+    "f1_shipped_subset": 69.95,
+    "n_subset": 427
+   },
+   "base_dola": {
+    "f1_full": 72.3,
+    "n_full": 906,
+    "f1_shipped_subset": 70.48,
+    "n_subset": 427
+   },
+   "base_sc": {
+    "f1_full": 76.43,
+    "n_full": 906,
+    "f1_shipped_subset": 77.58,
+    "n_subset": 427
+   },
+   "base_cad(v0-prompt)": {
+    "f1_full": 79.4,
+    "n_full": 906,
+    "f1_shipped_subset": 79.46,
+    "n_subset": 427
+   },
+   "base_vcd": {
+    "f1_full": 72.05,
+    "n_full": 906,
+    "f1_shipped_subset": 69.34,
+    "n_subset": 427
+   },
+   "CF_lam1.0": {
+    "f1_full": 80.66,
+    "n_full": 906,
+    "f1_shipped_subset": 80.35,
+    "n_subset": 427
+   },
+   "CF_lam2.0": {
+    "f1_full": 84.6,
+    "n_full": 906,
+    "f1_shipped_subset": 84.49,
+    "n_subset": 427
+   },
+   "CF_lam2.0_randctl": {
+    "f1_full": 76.91,
+    "n_full": 906,
+    "f1_shipped_subset": 75.97,
+    "n_subset": 427
+   }
+  },
+  "ranking_full": [
+   "CF_lam2.0",
+   "CF_lam1.0",
+   "CF_lam2.0_randctl",
+   "base_sc",
+   "base_dola",
+   "base_vcd",
+   "base_model"
+  ],
+  "ranking_subset": [
+   "CF_lam2.0",
+   "CF_lam1.0",
+   "base_sc",
+   "CF_lam2.0_randctl",
+   "base_dola",
+   "base_model",
+   "base_vcd"
+  ],
+  "ranking_preserved": false,
+  "kendall_tau": 0.81,
+  "paired": {
+   "cf_vs_base": {
+    "fix": 73,
+    "break_": 21,
+    "p": 6.65366562409261e-08
+   },
+   "cf_vs_randctl": {
+    "fix": 11,
+    "break_": 47,
+    "p": 2.0315945360449565e-06
+   }
+  }
+ }
+}

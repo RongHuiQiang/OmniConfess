@@ -10,6 +10,36 @@
     "len": 669,
     "md5": "2689e0cdaad59ca7771a10583c1162d8",
     "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(cmm,v1)"
+   },
+   "v2": {
+    "len": 1226,
+    "md5": "0b6b5ae2a8c6482736e70c594a58791a",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(cmm,v2)",
+    "note": "Direction-symmetric judgment rules (PROMPT_PROGRAM.md cmm round 1): v1 rule 3 (\"based ONLY on what is audible\") is one-directional and wrong for the 329 SEE questions (audio-stream leak -> 40 residual FP, FPR 0.206, median margin_adj +0.48); on the 392 HEAR questions the visual stream props Yes (61 residual FN, 52 greedy-Yes flipped to No, d_cf_video median -1.4..-3.1). v2: SEE<-video / HEAR<-audio verb-matched rules, sight never creates sound and sound never creates sight, mirror commitment clause. User template byte-identical to v1."
+   },
+   "v3": {
+    "len": 1455,
+    "md5": "a31b5ede11c989b01e05080365864940",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(cmm,v3)",
+    "note": "Evidence-identity calibration (round 2): v2 killed the cross-modal leak (SEE FP 8->0, HEAR TPR 0.537->0.756) but swapped the error mass -- 13 HEAR FP (ambient/related sound taken for the named one: fan blowing x3, motorcycle revving x2, sheep bleating x2, cat meowing x2; 11/13 were No under v1) and 10 SEE FN (small/diffuse objects lost to \"clearly visible\": rain, bee, door; 6/10 were Yes under v1). v3: SEE leniency on identity (object itself, even small/brief/partial), HEAR strictness on identity (exact named action; related sound/background hum/same-source noise = No), \"answer Yes firmly\" dropped. User template still byte-identical to v1."
+   },
+   "v4": {
+    "len": 1659,
+    "md5": "3d787ccd09483d7a5068ab6eded2ebe1",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(cmm,v4)",
+    "note": "Percept-provenance commitment on HEAR (round 3): v3 left HEAR at TPR 0.683 / FPR 0.179 vs SEE 0.912 / 0.102. Of the 17 dev HEAR items with model-lean-Yes forced to No, 9 saves (gt=no, delta from d_cf_video with d_cf_audio~0 -- expected-not-heard sounds like fan blowing) vs 8 breaks (gt=yes, genuine d_cf_audio -1.1..-2.6, margin_adj -0.18..-0.77 in 6/8). v4 rule 2 adds the provenance split: faint/brief/distant but genuinely heard = Yes; expected-from-the-scene but not heard = No. All else byte-identical to v3."
+   },
+   "v5": {
+    "len": 1475,
+    "md5": "7031c4c834d5a4364a3eee05f87b4fc1",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(cmm,v5)",
+    "note": "Symmetric commitment completion (round 4): v3 rule 1 (SEE) carries \"Answer Yes as soon as the object is visible ... even if small\" -> SEE TPR 0.912, while rule 2 (HEAR) carried only the necessary-condition bar \"only if identifiable\" -> HEAR TPR 0.683 with 8 dev breaks holding genuine audio evidence (d_cf_audio -1.1..-2.6). v5 gives rule 2 the mirror commitment (as soon as identifiable, even if faint/brief/partial). Identity gate and all else byte-identical to v3."
+   },
+   "v6": {
+    "len": 1082,
+    "md5": "d353722b1f6ab1b7d9f0975a78eedde2",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(cmm,v6)",
+    "note": "Question-type conditional routing of the oracle hybrid (round 5, coordinator endgame; no dev -- dev was shown to favor recall-boosting wording that does not replicate). Offline hybrid (v3 rows on SEE + v1 rows on HEAR) = 77.66/0.626, paired vs v1 fix 22 / break 9, p=0.029, while uniform v3 75.72/0.586 and v5 74.96/0.566 both regressed. Single system prompt: SEE branch = v3 rule 1 verbatim (the piece that transferred: SEE subgroup 78.47->81.37, FPR 0.206->0.108); HEAR branch = v1 rule 3 + rule 1 sentences verbatim; header/format/example byte-identical to v1. Pre-registered full-721 gate: F1 > 76.36 AND Youden >= 0.600 AND paired significance vs v1."
    }
   },
   "ours": {
@@ -113,7 +143,62 @@
    "v1": {
     "len": 588,
     "md5": "18e73c7ee8444e179a8a52e8b6108868",
-    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(pubmedqa,v1)"
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(pubmedqa,v1)",
+    "duplicate_of": [
+     "v1",
+     "v6"
+    ]
+   },
+   "v2": {
+    "len": 1478,
+    "md5": "21a1e7967b1ebe05f3fe962b425471e6",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(pubmedqa,v2)"
+   },
+   "v3": {
+    "len": 1902,
+    "md5": "c9ef32ca0562fc84c673e67ad76dddf9",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(pubmedqa,v3)",
+    "duplicate_of": [
+     "v3",
+     "v5"
+    ]
+   },
+   "v4": {
+    "len": 2240,
+    "md5": "88f6cd6475089bea1228035886c04c3d",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(pubmedqa,v4)"
+   },
+   "v5": {
+    "len": 1902,
+    "md5": "c9ef32ca0562fc84c673e67ad76dddf9",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(pubmedqa,v5)",
+    "note": "Retained v3 system (v4 rolled back) + user-template surgery only: 'based on the provided passage and your general knowledge' -> 'based only on the provided passage'. DEV 115: F1 97.00 / Idx 90.58 -- passes the pre-registered gate (Idx +7.94 / F1 -0.06), dev-selected. FULL 460 final validation: F1 94.58 / Idx 82.96 (r_yes 92.82 / r_no 75.00) = Idx +1.58 / F1 -0.68 vs CF-v1; dev-to-full shrinkage (dev no-class n=14, 4 iterations overfit). outputs/pubmedqa_cf_confess_v5full/.",
+    "user_prompt": {
+     "len": 126,
+     "md5": "9a9c42d8854975dea1c98b8099431e6d",
+     "template": "Passage: {passage}\nInstruction: Please answer the following question based only on the provided passage.\nQuestion: {q}\nAnswer:",
+     "diff_from_v1": "drop 'and your general knowledge', 'based on' -> 'based only on'"
+    },
+    "duplicate_of": [
+     "v3",
+     "v5"
+    ]
+   },
+   "v6": {
+    "len": 588,
+    "md5": "18e73c7ee8444e179a8a52e8b6108868",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(pubmedqa,v6)",
+    "note": "ATTRIBUTION ARM (not dev-selected): v1 system + the v5 user template = the (system v1/v3) x (user v1/fixed) 2x2 completion. FULL 460: F1 95.27 / Idx 80.30 -- the user fix alone is a no-op (paired 1:1 discordants, p=1.0); v5's +1.58 Idx is an interaction effect (system rules alone -1.62). outputs/pubmedqa_cf_confess_v6full/.",
+    "user_prompt": {
+     "len": 126,
+     "md5": "9a9c42d8854975dea1c98b8099431e6d",
+     "template": "Passage: {passage}\nInstruction: Please answer the following question based only on the provided passage.\nQuestion: {q}\nAnswer:",
+     "diff_from_v1": "drop 'and your general knowledge', 'based on' -> 'based only on'"
+    },
+    "duplicate_of": [
+     "v1",
+     "v6"
+    ]
    }
   },
   "ours": {
@@ -140,6 +225,24 @@
     "len": 289,
     "md5": "77e52b3f3beda5358a45491cd20c2140",
     "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(haloquest,v1)"
+   },
+   "v2": {
+    "len": 755,
+    "md5": "12e7943163ea8d48204c40b4dfeb67dc",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(haloquest,v2)",
+    "note": "Output-contract repair (TRAJECTORY_ANALYSIS.md §7.3/§7.4 D1+D2): minimum complete-sentence answer (≥8 words, ≤5-word replies banned: 122/365 v1 answers were ≤5 words vs gt 18.6) + fixed avoidance template \"There is no X visible in this image.\" for non-visible objects (direct answer on unanswerable items scored F1 18.0 vs 30.6 when avoided)."
+   },
+   "v3": {
+    "len": 1467,
+    "md5": "a54afb5390772f748311a0bb3e971403",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(haloquest,v3)",
+    "note": "P3 lever (TRAJECTORY_ANALYSIS.md §8.2), PROMPT_PROGRAM round 1: sentence-pattern echo (rebuild the answer from the question's own object/location/medium words — pass-through cell misses gt question-tail nouns, not length) + counting complete sentences (\"How many\" must yield \"There are N <question words>.\", number as a word; 8/31 counting items were wrongly answered with the absence template) + anti-false-avoidance (absence template demoted from rule 2 to rule 5; 10/54 gt-affirmative pass-through items got F1≈0 absence answers). Supersedes the legacy unused \"meticulous visual auditor\" v3 user template."
+   },
+   "v4": {
+    "len": 1476,
+    "md5": "5ce3f3715480e72750429090f2cb5dc6",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(haloquest,v4)",
+    "note": "Round 2 (precision/brevity): v3 failed its dev gate (dev -0.98pp, pass-through cell 50.03->44.45); trajectory autopsy showed sampled rollouts padded with un-asked scenery (gt content-word mass ~6, every extra noun is precision loss) and useless \"In the photo,\" openers. v4 rewrites the echo rule as subject+asked-attribute-only with an 8-12 word window and hard one-sentence cap; keeps v3 counting rule and anti-false-avoidance."
    }
   },
   "ours": {
@@ -196,6 +299,22 @@
     "len": 1050,
     "md5": "c97f7ff79fcf85dc4e3a3e80b906e99f",
     "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(avhbench,v1)"
+   },
+   "v2": {
+    "len": 224,
+    "md5": "de4da5722716bd31d1428af8d69d435b",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(avhbench,v2)"
+   },
+   "v3": {
+    "len": 204,
+    "md5": "0c24ca3fcb8266911a7f287a36f4dc91",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(avhbench,v3)"
+   },
+   "v4": {
+    "len": 983,
+    "md5": "6a2234810ed7e51965713c1a0220ccfb",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(avhbench,v4)",
+    "note": "First output-contract iteration for avhbench (mechanism-migration arm @Qwen3-Omni, 2026-08-16); all prior runs used the bare v1 analyst prompt (v2/v3 are legacy GUARD strings, never run). Qwen3 v1 profile (645 outputs, 19.03): 633/645 already single-sentence, zero extraction truncation; residual is word-choice precision (oracle best-prefix 24.26, blunt 20-content-word cap 19.04 = +0.0). v4 = mechanical contract: exactly one sentence, direct emission (no label/preamble/closing -- ragtruth v2 R1 analog), 12-25 word window, main subject + dominant sound, no background enumeration. User template byte-identical to v1 (avh user prompt = bare question)."
    }
   },
   "ours": {
@@ -403,14 +522,36 @@
     "len": 438,
     "md5": "a789108c5a94d4bc4140dd77de572fda",
     "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(ragtruth,v1)"
+   },
+   "v2": {
+    "len": 629,
+    "md5": "25167c58a5337aec1f64a9e95f84914b",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(ragtruth,v2)",
+    "note": "Output-contract repair (TRAJECTORY_ANALYSIS.md §2): R1 drop Answer: anchor + ban closing summary (62% of low-F1 = extraction truncation, raw rescoring +11.7 F1); R4 answer partially instead of refusing (25 wrong refusals, F1 9.9); user template drops \"general knowledge\" (R3)."
+   },
+   "v3": {
+    "len": 867,
+    "md5": "2f3c2ec6e43cdb7c4462c4b9c0be0303",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(ragtruth,v3)",
+    "note": "v2 + R2 completeness/numbered list/80-150 words (F1 rises 13.1→57.7 monotonically with length, r=0.586) + R5 \"Based on the given passages,\" opener (236/435 gt share it, ≈9% of token mass)."
+   },
+   "v4": {
+    "len": 1188,
+    "md5": "f3884f9362c81e12f037173339dd5c76",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(ragtruth,v4)"
+   },
+   "v5": {
+    "len": 1441,
+    "md5": "8eeac02c0a3cb0864af322dc3bcca8aa",
+    "source": "OmniConfess/methods/shared/prompts.py::get_system_prompt(ragtruth,v5)"
    }
   },
   "ours": {
    "hardcoded": {
     "len": 346,
     "md5": "b32d0499bfb4bb8b75b4e185c502b618",
-    "source": "OmniConfess/omniconfess_qwen.py:1607-1615 (硬编码，无版本分支)",
-    "note": "实为基线 v1 的变体：删掉拒答行 + 把 `Answer:` 短答锚换成「直接给答案不要包装」，另加两条扩写指令。两处改动都朝变长推。"
+    "source": "OmniConfess/omniconfess_qwen.py:1607-1615 (hardcoded, no version branch)",
+    "note": "A variant of baseline v1: the refusal line is removed and the short-answer anchor `Answer:` is replaced by an instruction to answer directly without wrapping, plus two elaboration instructions. Both changes push toward longer output."
    }
   }
  },
@@ -431,8 +572,8 @@
    "hardcoded_fallback": {
     "len": 223,
     "md5": "c1aa547f13ec4c98b14aec7ff7e97d33",
-    "source": "OmniConfess/omniconfess_qwen.py:1601-1605 (硬编码回退)",
-    "note": "halueval 走 halueval_prompts.py 时用不到；这是模块没加载时的回退。与 ragtruth 那份方向相反 —— 它要求 1-5 词短答。"
+    "source": "OmniConfess/omniconfess_qwen.py:1601-1605 (hardcoded fallback)",
+    "note": "Unused when halueval goes through halueval_prompts.py; this is the fallback when that module is absent. It pushes the opposite way from the ragtruth prompt -- it asks for a 1-5 word short answer."
    }
   }
  }
