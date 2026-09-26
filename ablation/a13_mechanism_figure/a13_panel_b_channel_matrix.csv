@@ -1,9 +1,0 @@
-dataset,channel,median_abs_d
-"phd(q2.5,906)",text_prior(noctx),0.5478
-"phd(q2.5,906)",vision(noimg),2.0552
-"cmm(q2.5,720)",audio,0.3936
-"cmm(q2.5,720)",video,1.8249
-"avh(q2.5,120)",audio,0.1139
-"avh(q2.5,120)",video,0.4068
-phd@qwen3(dev100),text_prior(noctx),0.2005
-phd@nemotron(dev100),text_prior(noctx),0.125

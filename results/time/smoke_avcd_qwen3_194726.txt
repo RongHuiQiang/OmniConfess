@@ -1,6 +1,0 @@
-time: 89.5s
-total_samples: 3
-alpha: 0.5
-beta: 0.2
-entropy_gate: 0.6
-apc_fill: -0.0001
