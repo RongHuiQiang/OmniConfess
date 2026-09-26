@@ -154,7 +154,7 @@ def main():
                 # Build batched inputs
                 n = len(prompts)
                 pk = {'text': prompts, 'return_tensors': 'pt',
-                      'padding': True, 'fps': [1.0] * n}
+                      'padding': True, 'fps': 1.0}
                 if pixel_values is not None: pk['videos'] = [pixel_values] * n
                 if audio_values is not None: pk['audio']  = [audio_values] * n
                 if image_values is not None: pk['images'] = [image_values] * n
@@ -251,7 +251,7 @@ def main():
                 nc = len(comp_prompts)
                 cpk = {'text': comp_prompts, 'return_tensors': 'pt',
                        'padding': True, 'truncation': True, 'max_length': 2048,
-                       'fps': [1.0] * nc}
+                       'fps': 1.0}
                 if pixel_values is not None: cpk['videos'] = [pixel_values] * nc
                 if audio_values is not None: cpk['audio']  = [audio_values] * nc
                 if image_values is not None: cpk['images'] = [image_values] * nc
@@ -376,7 +376,7 @@ def main():
             if isinstance(fp_str, list): fp_str = fp_str[0]
             fp_str = fp_str.replace(tokenizer.eos_token, '').strip()
 
-            fpk = {'text': [fp_str], 'return_tensors': 'pt', 'fps': [1.0]}
+            fpk = {'text': [fp_str], 'return_tensors': 'pt', 'fps': 1.0}
             if pixel_values is not None: fpk['videos'] = [pixel_values]
             if audio_values is not None: fpk['audio']  = [audio_values]
             if image_values is not None: fpk['images'] = [image_values]

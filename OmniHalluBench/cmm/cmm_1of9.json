@@ -1,0 +1,1602 @@
+[
+ {
+  "uid": "cmm_000014",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see key in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/KX60Lv.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/KX60Lv.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000027",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/unhmgQ.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/unhmgQ.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000029",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see water in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/c9eSjn.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/c9eSjn.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000041",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see water in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/eGuMUL.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/eGuMUL.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000043",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see spray bottle in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/E0tyiH.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/E0tyiH.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000045",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see gun in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/3IgwpE.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/3IgwpE.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000051",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see thunder in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/ZuTkUj.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/ZuTkUj.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000066",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/z3pPqt.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/z3pPqt.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000081",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bee in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/tWetMH.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/tWetMH.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000083",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see water in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/W7dIxU.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/W7dIxU.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000084",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/6Yvf60.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/6Yvf60.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000125",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/rZjmAC.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/rZjmAC.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000138",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see train in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/UCSDdD.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/UCSDdD.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000144",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/Hlc2hq.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/Hlc2hq.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000145",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see metal in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/GrHRex.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/GrHRex.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000156",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see car in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/1EkRpX.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/1EkRpX.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000166",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/4X1i0V.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/4X1i0V.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000181",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/jPLf3W.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/jPLf3W.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000187",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see door in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/rnFlFz.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/rnFlFz.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000189",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see dog in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/2IZtuL.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/2IZtuL.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000194",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see dog in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/hQmxLe.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/hQmxLe.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000206",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/KveqAn.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/KveqAn.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000212",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see puppy in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/gkWeYp.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/gkWeYp.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000233",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see water in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8GArQN.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8GArQN.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000251",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/DUnxX4.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/DUnxX4.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000255",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/UigqmQ.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/UigqmQ.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000265",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see train in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/pOWwz6.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/pOWwz6.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000266",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8ULoMJ.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8ULoMJ.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000272",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see thunder in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/JxE1HV.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/JxE1HV.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000278",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/CauY1Q.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/CauY1Q.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000295",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bee in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/SExsE4.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/SExsE4.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000304",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/nswbJL.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/nswbJL.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000310",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bee in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8lsKG6.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8lsKG6.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000315",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see grass in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/0jpK2O.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/0jpK2O.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000316",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/XI76I8.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/XI76I8.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000318",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/InfuKE.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/InfuKE.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000323",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/XTnjz8.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/XTnjz8.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000333",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear person talking in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/4SnqpV.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/4SnqpV.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000338",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear sheep bleating in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/BXiLwi.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/BXiLwi.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000352",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear person speaking in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/S0vTIk.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/S0vTIk.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000367",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear person talking in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/jPP4m2.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/jPP4m2.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000376",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear horses neighing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/YR3HuG.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/YR3HuG.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000392",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear fan blowing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/uYBw3K.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/uYBw3K.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000419",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear motorcycle alarming in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/BNpOSj.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/BNpOSj.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000439",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear gun firing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/8vVIX4.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/8vVIX4.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000444",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear woman talking in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/n92rf9.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/n92rf9.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000448",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear fan blowing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/qcyo8z.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/qcyo8z.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000464",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear sheep bleating in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/Mrgkqg.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/Mrgkqg.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000469",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear gun firing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/DytsLw.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/DytsLw.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000478",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear hammer hitting in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/KPnEsU.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/KPnEsU.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000484",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear bell ringing in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/gpYpzy.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/gpYpzy.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000514",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear person talking in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/NsJA57.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/NsJA57.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000531",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear person talking in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/q981u0.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/q981u0.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000534",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear man talking in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/BmiUsc.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/BmiUsc.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000544",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear hammer hitting in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/eRiTTb.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/eRiTTb.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000552",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear water splashing in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/EKSq1v.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/EKSq1v.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000565",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear alarm clock ticking in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/fC9h1j.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/fC9h1j.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000567",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear cat meowing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/j9NAxR.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/j9NAxR.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000574",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear hammer hitting in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/gPbK3q.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/gPbK3q.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000578",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear fan blowing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/1lVq2t.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/1lVq2t.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000582",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear alarm clock ticking in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/5RFVXa.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/5RFVXa.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000583",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear machine operating in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/GhmKEu.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/GhmKEu.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000592",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear cat meowing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/z7Cv5R.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/z7Cv5R.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000594",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear person talking in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/Krm6TV.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/Krm6TV.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000595",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear motorcycle revving in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/mnAono.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/mnAono.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000609",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear horses neighing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/38xYw7.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/38xYw7.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000615",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear sheep bleating in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/Wi7DMv.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/Wi7DMv.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000636",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear machine operating in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/fkQymw.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/fkQymw.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000639",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear motorcycle revving in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/wPOuSJ.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/wPOuSJ.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000642",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear gun firing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/7X1AY4.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/7X1AY4.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000649",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear horses neighing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/MfkPGT.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/MfkPGT.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000661",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear gun firing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/G8tx3E.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/G8tx3E.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000670",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear gun firing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/17EF2w.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/17EF2w.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000682",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear person snoring in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/G2nuxt.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/G2nuxt.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000684",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear cat meowing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/934VDj.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/934VDj.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000686",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear bird chirping in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/V7snNs.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/V7snNs.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000687",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear horses running on land in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/g9QM9P.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/g9QM9P.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000692",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear bird chirping in the audio?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/l9ZK4G.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/l9ZK4G.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000705",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear fan blowing in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/oXLQ4J.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/oXLQ4J.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000710",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you hear sheep bleating in the audio?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/npi7hz.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_visual_ignore_audio/npi7hz.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_visual_ignore_audio"
+  },
+  "source": {}
+ }
+]

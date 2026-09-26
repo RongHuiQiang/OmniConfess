@@ -1,0 +1,962 @@
+[
+ {
+  "uid": "ragtruth_000007",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to fix a door that won't lock",
+  "answer": "To fix a door that won't lock, first try to align the door latch with the hole in the strike plate. If the latch is misaligned, you can perform a lipstick test to see where the latch contacts the strike plate. If it contacts too high or too low, tighten all the door's hinge screws. You may also need to enlarge the latch hole in the jamb or move the strike plate. If this doesn't work, shut the door and try to lock it. If it won't lock, tap the end of a chisel under the door stop on the striker side of the jamb, pry it up until it comes loose and remove it. Replace the door stop back on the jamb, set back 1/4 inch from its original location. Nail the side and top piece of the door stop back on. The door should now shut and lock normally.",
+  "label": null,
+  "passage": "passage 1:Door Lock & Key Problems. Expert advice on how to repair problems with stuck or frozen door locks, keys that don’t work, and latches that don’t latch. Many door knob and lockset problems can be corrected before they become so serious that the lockset does not work at all.oor Lock & Key Problems. Door latches and locks are somewhat complex pieces of hardware with several working parts that can go wrong and cause them to be unworkable or balky. For helpful do-it-yourself repair techniques for fixing common lock and latch problems, please see How to Repair Door Locks.\n\npassage 2:2. Shut the door and try to lock it. If it won't lock open the door. Tap the end of a chisel under the door stop on the striker side of the jamb. Pry up on it until it comes loose and remove it. Use the chisel to remove the door stop on top as well.lace the door stop back on the jamb. Set it back 1/4 inch from it's original location. You should see a distinct line in the paint, stain or varnish where it came off. Use this to align the door stop. Nail the side and top piece of door stop back on. The door should now shut and lock normally.\n\npassage 3:Close-up. You may also have to enlarge the latch hole in the jamb. Tighten the hinges first. Enlarge the strike plate hole. Move the strike plate. When a door latch won’t catch, It’s because the latch doesn’t align with the hole in the strike plate.Sometimes you can clearly see the misalignment. If not, do the “lipstick test” (Photo 1). If you find that the latch contacts the strike plate too high or too low, make sure all the door’s hinge screws are tight.lose-up. You may also have to enlarge the latch hole in the jamb. Tighten the hinges first. Enlarge the strike plate hole. Move the strike plate. When a door latch won’t catch, It’s because the latch doesn’t align with the hole in the strike plate.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 27
+  }
+ },
+ {
+  "uid": "ragtruth_000008",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to fix a door that won't lock",
+  "answer": "To fix a door that won't lock, you can try the following steps based on the given passages:\n1. Close the door and attempt to lock it.\n2. If it doesn't lock, open the door and use a chisel to tap and pry off the door stop on the striker side of the jamb. Remove the top door stop as well.\n3. Place the door stop back on the jamb, aligning it 1/4 inch from its original location using the distinct line left behind.\n4. Nail the side and top pieces of the door stop back on.\n5. If the latch still doesn't catch, tighten the hinges first.\n6. Enlarge the latch hole in the jamb if necessary.\n7. Enlarge the strike plate hole or move the strike plate if the latch doesn't align with it.\n8. Ensure all the door's hinge screws are tight.\nFollowing these steps should help fix the door lock issue.",
+  "label": null,
+  "passage": "passage 1:Door Lock & Key Problems. Expert advice on how to repair problems with stuck or frozen door locks, keys that don’t work, and latches that don’t latch. Many door knob and lockset problems can be corrected before they become so serious that the lockset does not work at all.oor Lock & Key Problems. Door latches and locks are somewhat complex pieces of hardware with several working parts that can go wrong and cause them to be unworkable or balky. For helpful do-it-yourself repair techniques for fixing common lock and latch problems, please see How to Repair Door Locks.\n\npassage 2:2. Shut the door and try to lock it. If it won't lock open the door. Tap the end of a chisel under the door stop on the striker side of the jamb. Pry up on it until it comes loose and remove it. Use the chisel to remove the door stop on top as well.lace the door stop back on the jamb. Set it back 1/4 inch from it's original location. You should see a distinct line in the paint, stain or varnish where it came off. Use this to align the door stop. Nail the side and top piece of door stop back on. The door should now shut and lock normally.\n\npassage 3:Close-up. You may also have to enlarge the latch hole in the jamb. Tighten the hinges first. Enlarge the strike plate hole. Move the strike plate. When a door latch won’t catch, It’s because the latch doesn’t align with the hole in the strike plate.Sometimes you can clearly see the misalignment. If not, do the “lipstick test” (Photo 1). If you find that the latch contacts the strike plate too high or too low, make sure all the door’s hinge screws are tight.lose-up. You may also have to enlarge the latch hole in the jamb. Tighten the hinges first. Enlarge the strike plate hole. Move the strike plate. When a door latch won’t catch, It’s because the latch doesn’t align with the hole in the strike plate.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 28
+  }
+ },
+ {
+  "uid": "ragtruth_000014",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to cook pollock?",
+  "answer": "To cook pollock, first, preheat the oven to 350°F (175°C). Then, season the pollock fillets with paprika and black pepper. Next, place the fillets on a baking sheet and layer them with onion, green pepper, and tomato slices. Bake in the preheated oven for about 15 minutes, or until the fish flakes easily. If desired, you can also add cheese on top of the pollock fillets and bake for an additional 3 minutes to melt the cheese.",
+  "label": null,
+  "passage": "passage 1:1 Spray a baking sheet with butter flavored cooking spray. 2  Season the pollock fillets with paprika and black pepper. 3  Place on baking sheet and layer with onion, green pepper, and tomato slices. 4  Bake in preheated oven until fish has cooked and flakes easily, about 15 minutes.\n\npassage 2:Ready In. 1  Preheat oven to 350 degrees F (175 degrees C). 2  Season the pollock fillets with paprika and black pepper. 3  Bake in preheated oven until fish has cooked and flakes easily, about 15 minutes.\n\npassage 3:1 Bake in preheated oven until fish has cooked and flakes easily, about 15 minutes. 2  Turn oven off, place two slices of cheese on each fillet. 3  Return fish to the oven and allow cheese to melt, about 3 minutes.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 35
+  }
+ },
+ {
+  "uid": "ragtruth_000021",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to get plastic out of clothes dryer",
+  "answer": "Based on the given passages, here is how to get plastic out of a clothes dryer:\n\n1. Run the dryer on a regular setting for 20 minutes to soften the plastic.\n2. Scrape the plastic off with a wooden or plastic spatula or paint scraper, taking care not to damage the dryer's interior.\n3. Apply 1 to 2 tsp. nail polish remover to a clean cloth, and rub the plastic to dissolve it. Rub the area with a damp cloth to rinse the nail polish remover.\n4. Mix 1 tsp. liquid laundry soap with 1 cup water. Dip a clean cloth in this solution, and rub the area again. Rinse well with a cloth dipped in clean water.\n\nIf the plastic is still difficult to remove, you can try heating it with a hair dryer or heat gun before attempting to scrape it off. However, if the plastic cannot be removed completely, it may be necessary to replace the drum or the entire dryer.",
+  "label": null,
+  "passage": "passage 1:Instructions. Run the dryer on a regular setting for 20 minutes to soften the plastic. Scrape the plastic off with a wooden or plastic spatula or paint scraper, taking care not to damage the dryer's interior. Apply 1 to 2 tsp. nail polish remover to a clean cloth, and rub the plastic to dissolve it.Rub the area with a damp cloth to rinse the nail polish remover. Mix 1 tsp. liquid laundry soap with 1 cup water. Dip a clean cloth in this solution, and rub the area again.Rinse well with a cloth dipped in clean water.ave. Jupiterimages/BananaStock/Getty Images. A plastic coated bib or zip top bag gone astray probably won't melt in a dryer unless you're using the high heat setting, but if it does, it won't cause serious damage. Today's dryers are painted with a synthetic enamel coating that holds up well to heat and wear.\n\npassage 2:1 Answer from this member: This plastic will be extremely difficult to remove. You can try heating the plastic with a hair dryer or heat gun. Once it is heated, you may be able to peel off the plastic. You may not be able to get all of the plastic off. If not, you need to replace the drum or the entire dryer.If you want to replace the drum, I recommend calling a service technician to complete this type of repair.nce it is heated, you may be able to peel off the plastic. You may not be able to get all of the plastic off. If not, you need to replace the drum or the entire dryer. If you want to replace the drum, I recommend calling a service technician to complete this type of repair.\n\npassage 3: Remove the ice and using a plastic scraper, scrape the hardened  plastic off the coils. Soak a cloth in an acetone-based nail polish  remover and leave it on the element for 5 minutes. Use this cloth  to scrub the remaining plastic off of the element then wipe the  coils with a clean, damp cloth.Remove any remaining nail polish  remover residue with a cloth that has been dipped in a solution of  warm water and dish soap, then rinse the coils with water.se this cloth  to scrub the remaining plastic off of the element then wipe the  coils with a clean, damp cloth. Remove any remaining nail polish  remover residue with a cloth that has been dipped in a solution of  warm water and dish soap, then rinse the coils with water.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 43
+  }
+ },
+ {
+  "uid": "ragtruth_000022",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to get plastic out of clothes dryer",
+  "answer": "Based on the given passages, here's a step-by-step guide on how to remove plastic from a clothes dryer:\n\n1. Run the dryer on a regular setting for 20 minutes to soften the plastic.\n2. Scrape the plastic off with a wooden or plastic spatula or paint scraper, taking care not to damage the dryer's interior.\n3. Apply 1 to 2 tsp. nail polish remover to a clean cloth, and rub the plastic to dissolve it.\n4. Rub the area with a damp cloth to rinse the nail polish remover.\n5. Mix 1 tsp. liquid laundry soap with 1 cup water. Dip a clean cloth in this solution, and rub the area again.\n6. Rinse well with a cloth dipped in clean water.\n\nIf the plastic does not come off with this method, another option is to use a hair dryer or heat gun to heat the plastic until it becomes soft and pliable. Then, attempt to peel it off carefully. However, be aware that this method may not work, and in that case, replacing the drum or the entire dryer may be necessary. It is recommended to call a service technician for this type of repair.\n\nTherefore, the answer to the question of how to get plastic out of clothes dryer is:\n\n1. Run the dryer on a regular setting for 20 minutes to soften the plastic.\n2. Scrape the plastic off with a wooden or plastic spatula or paint scraper.\n3. Apply nail polish remover to dissolve the plastic.\n4. Rinse with a damp cloth and soap solution.\n5. Use a hair dryer or heat gun to heat the plastic if necessary.\n\nIf the plastic still does not come off, consider replacing the drum or the entire dryer.",
+  "label": null,
+  "passage": "passage 1:Instructions. Run the dryer on a regular setting for 20 minutes to soften the plastic. Scrape the plastic off with a wooden or plastic spatula or paint scraper, taking care not to damage the dryer's interior. Apply 1 to 2 tsp. nail polish remover to a clean cloth, and rub the plastic to dissolve it.Rub the area with a damp cloth to rinse the nail polish remover. Mix 1 tsp. liquid laundry soap with 1 cup water. Dip a clean cloth in this solution, and rub the area again.Rinse well with a cloth dipped in clean water.ave. Jupiterimages/BananaStock/Getty Images. A plastic coated bib or zip top bag gone astray probably won't melt in a dryer unless you're using the high heat setting, but if it does, it won't cause serious damage. Today's dryers are painted with a synthetic enamel coating that holds up well to heat and wear.\n\npassage 2:1 Answer from this member: This plastic will be extremely difficult to remove. You can try heating the plastic with a hair dryer or heat gun. Once it is heated, you may be able to peel off the plastic. You may not be able to get all of the plastic off. If not, you need to replace the drum or the entire dryer.If you want to replace the drum, I recommend calling a service technician to complete this type of repair.nce it is heated, you may be able to peel off the plastic. You may not be able to get all of the plastic off. If not, you need to replace the drum or the entire dryer. If you want to replace the drum, I recommend calling a service technician to complete this type of repair.\n\npassage 3: Remove the ice and using a plastic scraper, scrape the hardened  plastic off the coils. Soak a cloth in an acetone-based nail polish  remover and leave it on the element for 5 minutes. Use this cloth  to scrub the remaining plastic off of the element then wipe the  coils with a clean, damp cloth.Remove any remaining nail polish  remover residue with a cloth that has been dipped in a solution of  warm water and dish soap, then rinse the coils with water.se this cloth  to scrub the remaining plastic off of the element then wipe the  coils with a clean, damp cloth. Remove any remaining nail polish  remover residue with a cloth that has been dipped in a solution of  warm water and dish soap, then rinse the coils with water.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 44
+  }
+ },
+ {
+  "uid": "ragtruth_000023",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to fold a quilt",
+  "answer": "Unable to answer based on given passages.",
+  "label": null,
+  "passage": "passage 1:Begin Sewing Binding to the Quilt Use my step-by-step instructions to learn how to sew mitered binding to the edges of a quilt. Trim the quilt sandwich to remove excess batting and backing. If the quilt top is skewed, fold back the other two layers and use a rotary ruler to very carefully square up the quilt.\n\npassage 2:The Timepiece Quilt used in this tutorial measures 56 inches by 70 inches, but this method can be used on any size quilt. 1  Step 1: Lay your quilt on a bed, table or other flat surface. 2  Step 2: Fold the lower right corner up toward the center of the quilt making sure the fold is on the bias.\n\npassage 3:Step 3: Fold the lower left corner up toward the center of the quilt making sure the fold is on the bias. Step 4: Fold the top left corner down toward the center of the quilt making sure the fold is on the bias. Step 5: Making sure the fold is on the bias, fold the top right corner down toward the center of the quilt.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 46
+  }
+ },
+ {
+  "uid": "ragtruth_000025",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to fold a quilt",
+  "answer": "Based on the given passages, here are the steps to fold a quilt:\n\n1. Lay the quilt on a flat surface.\n2. Fold the lower right corner up towards the center of the quilt, ensuring the fold is on the bias.\n3. Fold the lower left corner up towards the center of the quilt, also on the bias.\n4. Fold the top left corner down towards the center of the quilt, again on the bias.\n5. Fold the top right corner down towards the center of the quilt, again on the bias.\n\nThese steps will result in a neatly folded quilt with four even corners. Note that the size of the quilt is not specified in the passages, so these steps can be applied to quilts of any size.",
+  "label": null,
+  "passage": "passage 1:Begin Sewing Binding to the Quilt Use my step-by-step instructions to learn how to sew mitered binding to the edges of a quilt. Trim the quilt sandwich to remove excess batting and backing. If the quilt top is skewed, fold back the other two layers and use a rotary ruler to very carefully square up the quilt.\n\npassage 2:The Timepiece Quilt used in this tutorial measures 56 inches by 70 inches, but this method can be used on any size quilt. 1  Step 1: Lay your quilt on a bed, table or other flat surface. 2  Step 2: Fold the lower right corner up toward the center of the quilt making sure the fold is on the bias.\n\npassage 3:Step 3: Fold the lower left corner up toward the center of the quilt making sure the fold is on the bias. Step 4: Fold the top left corner down toward the center of the quilt making sure the fold is on the bias. Step 5: Making sure the fold is on the bias, fold the top right corner down toward the center of the quilt.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 48
+  }
+ },
+ {
+  "uid": "ragtruth_000028",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "benefits of a water pick",
+  "answer": "A water pick has several benefits, according to the given passages. It can help eliminate germs and plaque that are difficult to remove with a toothbrush. It can also massage and stimulate soft tissue in the mouth, reducing the risk of gingivitis. Additionally, a water pick can clean better around the teeth and gums, reaching areas that brushing may not be able to access.",
+  "label": null,
+  "passage": "passage 1:What is that picture above you might ask yourself?? Well, it is a water pik. Most people are very unfamiliar with what a water pik is so I am here to educate you all on it. Water pik's are a great oral care tool that can help you to keep your teeth, gums, mouth, and overall body healthier. A water pik is designed to shoot a strong stream of water at your gum line to help eliminate those pesky germs and plaque that is tough to get rid of with a toothbrush.\n\npassage 2:If you’re sizing up Waterpik vs. Flossing and wondering which one your dentist would recommend, which one is easier, and which one leaves your mouth feeling cleaner, you probably think the Waterpik would win hands down. But does the device really offer all of the benefits it claims it does, and can it beat out the old standby of flossing?\n\npassage 3:A Water Pik is useful in helping to maintain good oral health. It can massage and stimulate soft tissue in the mouth which helps to reduce the risk of gingivitis. Water Pik also helps to clean better around the teeth and gums, removing food from areas areas that brushing can not access.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 51
+  }
+ },
+ {
+  "uid": "ragtruth_000029",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "benefits of a water pick",
+  "answer": "Based on the given passages, the benefits of a water pick include maintaining good oral health, reducing the risk of gingivitis, cleaning better around the teeth and gums, and eliminating tough-to-remove germs and plaque from the gum line.",
+  "label": null,
+  "passage": "passage 1:What is that picture above you might ask yourself?? Well, it is a water pik. Most people are very unfamiliar with what a water pik is so I am here to educate you all on it. Water pik's are a great oral care tool that can help you to keep your teeth, gums, mouth, and overall body healthier. A water pik is designed to shoot a strong stream of water at your gum line to help eliminate those pesky germs and plaque that is tough to get rid of with a toothbrush.\n\npassage 2:If you’re sizing up Waterpik vs. Flossing and wondering which one your dentist would recommend, which one is easier, and which one leaves your mouth feeling cleaner, you probably think the Waterpik would win hands down. But does the device really offer all of the benefits it claims it does, and can it beat out the old standby of flossing?\n\npassage 3:A Water Pik is useful in helping to maintain good oral health. It can massage and stimulate soft tissue in the mouth which helps to reduce the risk of gingivitis. Water Pik also helps to clean better around the teeth and gums, removing food from areas areas that brushing can not access.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 52
+  }
+ },
+ {
+  "uid": "ragtruth_000032",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how can i keep birds from building a nest on my porch",
+  "answer": "You can prevent birds from building nests on your porch by attaching bird netting to the eves around the perimeter of your porch and the top of the porch if it has open rafters. This will block the birds from reaching spaces they often choose to build their nests. If you have a light fixture, you can also install bird netting over it, but make sure the netting is nonflammable and safe to use around light bulbs and doesn't entangle birds. Another method is to mount a plastic hawk on or near your porch, as this can scare birds away. Remember to move the plastic hawk periodically to prevent the birds from becoming accustomed to it.",
+  "label": null,
+  "passage": "passage 1:4. Attach bird netting to the eves around the perimeter of your porch with a staple gun. If your porch has open rafters, use the staple gun to attach the netting to the top of the porch. The netting keeps the birds from reaching those spaces they often choose to build their nests.ird nests can block your ventilation systems, are made from flammable materials, and bird droppings can transmit disease. You can keep birds from nesting on your porch with different products designed to scare birds away from your property.\n\npassage 2:1. Install bird netting over the top of the light fixture to block the birds' access to it. Choose a netting that is nonflammable and safe to use around light bulbs. Beware that the netting is installed so that it doesn't entangle birds. If you can't use netting on your light fixture, try another method.nstall bird netting over the top of the light fixture to block the birds' access to it. Choose a netting that is nonflammable and safe to use around light bulbs. Beware that the netting is installed so that it doesn't entangle birds.\n\npassage 3:1. Mount a plastic hawk on or near your porch. The sight of a predator can scare the birds from the area and keep them from inhabiting your porch. Move the plastic hawk periodically, so the birds do not become accustom to the plastic hawk, rendering it ineffective.ird nests can block your ventilation systems, are made from flammable materials, and bird droppings can transmit disease. You can keep birds from nesting on your porch with different products designed to scare birds away from your property.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 55
+  }
+ },
+ {
+  "uid": "ragtruth_000033",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how can i keep birds from building a nest on my porch",
+  "answer": "To prevent birds from building a nest on your porch, you can attach bird netting to the eves and top of your porch with staples. Additionally, you can install bird netting over your light fixture to deter birds from accessing it. Another option is to mount a plastic hawk on or near your porch to scare the birds away. It's important to note that any product used to deter birds should be nonflammable and safe to use.",
+  "label": null,
+  "passage": "passage 1:4. Attach bird netting to the eves around the perimeter of your porch with a staple gun. If your porch has open rafters, use the staple gun to attach the netting to the top of the porch. The netting keeps the birds from reaching those spaces they often choose to build their nests.ird nests can block your ventilation systems, are made from flammable materials, and bird droppings can transmit disease. You can keep birds from nesting on your porch with different products designed to scare birds away from your property.\n\npassage 2:1. Install bird netting over the top of the light fixture to block the birds' access to it. Choose a netting that is nonflammable and safe to use around light bulbs. Beware that the netting is installed so that it doesn't entangle birds. If you can't use netting on your light fixture, try another method.nstall bird netting over the top of the light fixture to block the birds' access to it. Choose a netting that is nonflammable and safe to use around light bulbs. Beware that the netting is installed so that it doesn't entangle birds.\n\npassage 3:1. Mount a plastic hawk on or near your porch. The sight of a predator can scare the birds from the area and keep them from inhabiting your porch. Move the plastic hawk periodically, so the birds do not become accustom to the plastic hawk, rendering it ineffective.ird nests can block your ventilation systems, are made from flammable materials, and bird droppings can transmit disease. You can keep birds from nesting on your porch with different products designed to scare birds away from your property.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 57
+  }
+ },
+ {
+  "uid": "ragtruth_000035",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how can i keep birds from building a nest on my porch",
+  "answer": "Based on the provided passages, here are some ways to keep birds from building nests on your porch:\n\n1. Attach bird netting to the eaves around the perimeter of your porch with a staple gun (Passage 1:4). This will prevent birds from reaching the areas they often choose to build their nests.\n2. Install bird netting over the top of the light fixture to block the birds' access to it (Passage 2:1). Choose a non-flammable netting that is safe to use around light bulbs, and ensure that it is installed so that it doesn't entangle birds.\n3. Mount a plastic hawk on or near your porch to scare the birds from the area (Passage 3:1). Move the plastic hawk periodically to avoid the birds becoming accustomed to it.\n\nPlease note that the effectiveness of these methods may vary depending on the type of birds and the location of your porch. If the above methods do not work, you may need to consider other solutions or consult with a professional for assistance.",
+  "label": null,
+  "passage": "passage 1:4. Attach bird netting to the eves around the perimeter of your porch with a staple gun. If your porch has open rafters, use the staple gun to attach the netting to the top of the porch. The netting keeps the birds from reaching those spaces they often choose to build their nests.ird nests can block your ventilation systems, are made from flammable materials, and bird droppings can transmit disease. You can keep birds from nesting on your porch with different products designed to scare birds away from your property.\n\npassage 2:1. Install bird netting over the top of the light fixture to block the birds' access to it. Choose a netting that is nonflammable and safe to use around light bulbs. Beware that the netting is installed so that it doesn't entangle birds. If you can't use netting on your light fixture, try another method.nstall bird netting over the top of the light fixture to block the birds' access to it. Choose a netting that is nonflammable and safe to use around light bulbs. Beware that the netting is installed so that it doesn't entangle birds.\n\npassage 3:1. Mount a plastic hawk on or near your porch. The sight of a predator can scare the birds from the area and keep them from inhabiting your porch. Move the plastic hawk periodically, so the birds do not become accustom to the plastic hawk, rendering it ineffective.ird nests can block your ventilation systems, are made from flammable materials, and bird droppings can transmit disease. You can keep birds from nesting on your porch with different products designed to scare birds away from your property.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 59
+  }
+ },
+ {
+  "uid": "ragtruth_000036",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how can i keep birds from building a nest on my porch",
+  "answer": "Based on the given passages, here are some ways to keep birds from building a nest on your porch:\n\n1. Attach bird netting to the eaves around the perimeter of your porch with a staple gun.\n2. Install bird netting over the top of the light fixture to block the birds' access to it.\n3. Mount a plastic hawk on or near your porch to scare the birds away.\n\nTherefore, the answer to the question of how to keep birds from building a nest on your porch is:\n\nAttach bird netting to the eaves or install bird netting over the light fixture, and/or mount a plastic hawk on or near your porch.",
+  "label": null,
+  "passage": "passage 1:4. Attach bird netting to the eves around the perimeter of your porch with a staple gun. If your porch has open rafters, use the staple gun to attach the netting to the top of the porch. The netting keeps the birds from reaching those spaces they often choose to build their nests.ird nests can block your ventilation systems, are made from flammable materials, and bird droppings can transmit disease. You can keep birds from nesting on your porch with different products designed to scare birds away from your property.\n\npassage 2:1. Install bird netting over the top of the light fixture to block the birds' access to it. Choose a netting that is nonflammable and safe to use around light bulbs. Beware that the netting is installed so that it doesn't entangle birds. If you can't use netting on your light fixture, try another method.nstall bird netting over the top of the light fixture to block the birds' access to it. Choose a netting that is nonflammable and safe to use around light bulbs. Beware that the netting is installed so that it doesn't entangle birds.\n\npassage 3:1. Mount a plastic hawk on or near your porch. The sight of a predator can scare the birds from the area and keep them from inhabiting your porch. Move the plastic hawk periodically, so the birds do not become accustom to the plastic hawk, rendering it ineffective.ird nests can block your ventilation systems, are made from flammable materials, and bird droppings can transmit disease. You can keep birds from nesting on your porch with different products designed to scare birds away from your property.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 60
+  }
+ },
+ {
+  "uid": "ragtruth_000038",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "set default browser to windows",
+  "answer": "Sure, I can help you with that! Based on the given passages, here are the steps to set the default browser to Windows:\n\nMethod 1:\n\n1. Open the Settings app by clicking the Start menu and then clicking the Settings icon, or by using the Windows + I keyboard shortcut.\n2. In the Settings app, click the first option titled System (display, notifications, apps, power).\n3. In the left-pane, click Default apps.\n4. On the right-side, scroll down the page to see Web browser section.\n5. Click on the Edge browser entry (or any browser other than Chrome) to reveal Choose an app, and then click Google Chrome to set it as default browser.\n\nAlternatively, you can also set Mozilla Firefox as your default Windows browser by following these steps:\n\n1. Open your Firefox browser.\n2. Click on the Firefox menu button, represented by three horizontal lines and located in the upper right-hand corner of the browser window.\n3. When the pop-out menu appears, select Options.\n\nI hope this helps! Let me know if you have any further questions.",
+  "label": null,
+  "passage": "passage 1:How To: Set the Default Web Browser in Windows 7. CMU Help Desk: 970-248-2111 or http://whd.coloradomesa.edu Page 1. This document explains how to set the default web browser in Windows 7. Once set, any hyperlink that is selected. will cause the default browser to open and the address of the link will be retrieved. Decide which browser you. want to be your default and perform the respective steps below for the chosen browser.\n\npassage 2:Method 1 of 2. Step 1: Open Settings app. To do so, open Start menu and then click Settings icon. Alternatively, you can use Windows + I keyboard shortcut to quickly open Settings app. Step 2: Click the first option titled System (display, notifications, apps, power). Step 3: In the left-pane, click Default apps. Step 4: Now, on the right-side, scroll down the page to see Web browser section. Step 5: Click on the Edge browser entry (or any browser other than Chrome) to reveal Choose an app, and then click Google Chrome to set it as default browser.\n\npassage 3:To set Mozilla Firefox as your default Windows browser, take the following steps. 1  Open your Firefox browser. 2  Click on the Firefox menu button, represented by three horizontal lines and located in the upper right hand corner of the browser window. 3  When the pop-out menu appears, select Options.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 63
+  }
+ },
+ {
+  "uid": "ragtruth_000041",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "what is the proper way to dispose of a worn usa flag",
+  "answer": "Based on the given passages, the proper way to dispose of a worn US flag is to either:\n\n1. Burn it in a peaceful manner, removing the blue field first and burying the ashes, or\n2. Perform a proper ceremony by folding the flag in a triangle fold before burning it.\n\nTherefore, the answer is: \"Option 1 or Option 2.\"",
+  "label": null,
+  "passage": "passage 1:Disposal of a faded or worn American flag is to be done in one of three ways. You can, if necessary, put the flag out for collection only after you have removed the blue field from the flag. The blue field is to be burned in a peaceful manner and the ashes buried.\n\npassage 2:“This Flag has served its nation long and well. It has worn to a condition to which it should no longer be used to represent the nation. This Flag represents all of the Flags collected and being retired from service today. We honor them all as we salute one Flag.”.\n\npassage 3:The other method is to burn the flag yourself in a proper ceremony. If you are able to personally discharge your worn flag from service the ceremony that follows is the proper way. The flag must be folded in the customary triangle fold.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 67
+  }
+ },
+ {
+  "uid": "ragtruth_000062",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "typical weather in indiana",
+  "answer": "Based on the given passages, the typical weather in Indiana includes long, warm, humid, and wet summers, and chilly and windy winters. The temperature ranges from 22°F to 85°F throughout the year. The passages also mention snowfall and snow accumulation in specific cities, but do not provide a comprehensive overview of the typical weather in Indiana. Therefore, it is not possible to provide a complete answer based solely on the given passages.",
+  "label": null,
+  "passage": "passage 1:When, how much and how often Indianapolis, Indiana has snow — with monthly and yearly averages for total days and inches of snowfall, snow accumulation, heavy snowstorms and first snowfall. Snowfall and snow accumulation averages for: Fort Wayne Gary & Michigan City South Bend. Hot, Humid Weather in Indiana\n\npassage 2:Average Weather in Indianapolis Indiana, United States. In Indianapolis, the summers are long, warm, humid, and wet; the winters are chilly and windy; and it is partly cloudy year round. Over the course of the year, the temperature typically varies from 22°F to 85°F and is rarely below 3°F or above 92°F.\n\npassage 3:Wettest year was recorded in 1876 at Indianapolis : 57.65 inches of measured rain. 1  Driest year was recorded in 1934 at Indianapolis : 24.97 inches of measured rain. 2  Most snow fall recorded in 1979 in Rockford : 74.5 inches in one season. 3  Maximum monthly precipitation: over 16 inches in July 2003 and 2004 at Kokomo .\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 97
+  }
+ },
+ {
+  "uid": "ragtruth_000065",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to sync audiobook from iphone to itunes",
+  "answer": "Based on the given passages, here's how to sync audiobooks from iPhone to iTunes:\n\n1. Connect your iPhone to your computer using a USB cable.\n2. Open iTunes on your computer.\n3. Click on the \"Audiobooks\" tab on the left side of the iTunes window.\n4. Check the boxes next to the audiobooks you want to sync to your iPhone.\n5. Click the \"Sync Audiobooks\" button and choose the audiobooks you want to transfer or select \"All Audiobooks\" to transfer all of them to your iPhone.\n6. Click \"Apply\" at the bottom of the screen to finish the syncing process.\n\nAlternatively, you can use Syncios Audiobook Transfer to transfer audiobooks from your computer to your iOS device. To do this, follow these steps:\n\n1. Launch Syncios Audiobook Transfer on your computer.\n2. Connect your iPhone to your computer using a USB cable.\n3. Click on the \"Books\" tab on the top menu bar.\n4. Select the audiobooks you want to transfer from your computer to your iPhone.\n5. Click the \"Import\" button to transfer the selected audiobooks to your iPhone.\n\nI hope this helps! Let me know if you have any further questions.",
+  "label": null,
+  "passage": "passage 1:How to transfer audiobooks to an iPhone, iPad, or iPod using OverDrive for Windows. You can transfer audiobooks from your computer to your Apple device (iPhone, iPad, or iPod) using OverDrive for Windows (desktop) . In iTunes, turn on the Manually manage music setting. 2  This is a one-time step that is required to transfer audiobooks to your Apple device from OverDrive for Windows. 3  If you'd prefer to import an MP3 audiobook into your iTunes library directly so you can sync it to your device, follow these instructions instead.\n\npassage 2:Instructions. Download the audiobook you want from iTunes. Click on “Audiobooks” on the left task pane of the iTunes window. You should see your downloaded audiobook there.Click the box next to the title of the book to make a check mark next to it. Connect your iPhone to the USB cable and plug the other end of the USB cable into a USB port on the computer. Wait for iTunes to sync.After the sync is complete, the audiobook will be on your iPhone.nstructions. Download the audiobook you want from iTunes. Click on “Audiobooks” on the left task pane of the iTunes window. You should see your downloaded audiobook there.\n\npassage 3:Step 1: Launch iTunes on your computer, and then connect iPod/iPad/iPhone to PC. Step 2: Click the name of your iPhone/iPod/iPod under Devices in the left column. Step 3: Choose Books above the main iTunes window. Step 4: Select audiobooks you want to transfer.*Click Sync Audiobooks and then choose the audiobooks you want to transfer or select All Audiobooks to transfer all of them to the iPhone/iPod/iPad. Click Apply at the bottom of the screen, you can finish syncing process.) Click Import, you can add new audiobooks from PC to your iOS devices. Syncios Audiobook Transfer is a two ways transfer for all files, so you can not only backup files to PC, transfer audiobooks from PC to your iPod/iPhone/iPad is also available.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 102
+  }
+ },
+ {
+  "uid": "ragtruth_000066",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how the body systems work together",
+  "answer": "The various systems in the human body work together to ensure its normal functioning. For instance, the urinary system works with all other systems to clean the blood by removing waste products from the skeletal, muscular, digestive, respiratory, circulatory, and nervous systems. This includes organs like the kidneys and lower intestines. Similarly, the respiratory system also collaborates with all other systems to provide oxygen to all body parts and remove carbon dioxide from the muscular, digestive, skeletal, circulatory, urinary, and nervous systems. The respiratory system comprises the nose, larynx, trachea, and lungs.",
+  "label": null,
+  "passage": "passage 1:The Systems. Several systems in the human body work together to help keep it functioning normally. These systems are the skeletal, muscular, digestive, respiratory, circulatory, urinary, endocrine, lymphatic, immune, reproductive and the nervous.\n\npassage 2:The urinary system also works closely with all other systems of the body. It is used to clean blood from the body. This system cleans waste products from the skeletal, muscular, digestive, respiratory, circulatory and nervous systems. The system includes the kidneys and lower intestines.\n\npassage 3:The respiratory system also works closely with all other systems of the body. The respiratory system provides oxygen for all body parts. It also removes carbon dioxide from the muscular, digestive, skeletal, circulatory, urinary and nervous systems. This system includes the nose, larynx, trachea and the lungs.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 103
+  }
+ },
+ {
+  "uid": "ragtruth_000068",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how the body systems work together",
+  "answer": "Based on the provided passages, here's how the body systems work together:\n\n1. The skeletal, muscular, digestive, respiratory, circulatory, urinary, endocrine, lymphatic, immune, and nervous systems all work together to help keep the body functioning normally. (Passage 1)\n2. The urinary system works closely with all other systems of the body to clean blood from the body and remove waste products from the skeletal, muscular, digestive, respiratory, circulatory, and nervous systems. (Passage 2)\n3. The respiratory system provides oxygen for all body parts and removes carbon dioxide from the muscular, digestive, skeletal, circulatory, urinary, and nervous systems. (Passage 3)\n\nTherefore, the body systems work together in the following ways:\n\n* The skeletal system provides support and structure for the body, while the muscular system helps move the body and its parts.\n* The digestive system breaks down food into nutrients that can be absorbed and used by the body, while the respiratory system provides oxygen for energy production.\n* The circulatory system delivers oxygenated blood to the body's cells and removes carbon dioxide, while the urinary system removes waste products from the blood.\n* The endocrine system produces hormones that regulate various bodily functions, including growth and development, metabolism, and reproductive processes.\n* The lymphatic system helps defend the body against infection and disease, while the immune system fights off foreign invaders.\n* The nervous system controls and coordinates the body's functions, including movement, sensation, and thought processes.\n\nOverall, the body's systems work together in a complex interplay to maintain homeostasis and ensure the proper functioning of the body.",
+  "label": null,
+  "passage": "passage 1:The Systems. Several systems in the human body work together to help keep it functioning normally. These systems are the skeletal, muscular, digestive, respiratory, circulatory, urinary, endocrine, lymphatic, immune, reproductive and the nervous.\n\npassage 2:The urinary system also works closely with all other systems of the body. It is used to clean blood from the body. This system cleans waste products from the skeletal, muscular, digestive, respiratory, circulatory and nervous systems. The system includes the kidneys and lower intestines.\n\npassage 3:The respiratory system also works closely with all other systems of the body. The respiratory system provides oxygen for all body parts. It also removes carbon dioxide from the muscular, digestive, skeletal, circulatory, urinary and nervous systems. This system includes the nose, larynx, trachea and the lungs.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 105
+  }
+ },
+ {
+  "uid": "ragtruth_000069",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how the body systems work together",
+  "answer": "Based on the given passages, the body systems work together as follows:\n\nThe skeletal, muscular, digestive, respiratory, circulatory, urinary, endocrine, lymphatic, immune, and reproductive systems all work together to help keep the body functioning normally. The urinary system helps to clean waste products from the other systems, while the respiratory system provides oxygen for all body parts and removes carbon dioxide from the other systems. The nervous system plays a crucial role in coordinating the functions of all the other systems.",
+  "label": null,
+  "passage": "passage 1:The Systems. Several systems in the human body work together to help keep it functioning normally. These systems are the skeletal, muscular, digestive, respiratory, circulatory, urinary, endocrine, lymphatic, immune, reproductive and the nervous.\n\npassage 2:The urinary system also works closely with all other systems of the body. It is used to clean blood from the body. This system cleans waste products from the skeletal, muscular, digestive, respiratory, circulatory and nervous systems. The system includes the kidneys and lower intestines.\n\npassage 3:The respiratory system also works closely with all other systems of the body. The respiratory system provides oxygen for all body parts. It also removes carbon dioxide from the muscular, digestive, skeletal, circulatory, urinary and nervous systems. This system includes the nose, larynx, trachea and the lungs.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 106
+  }
+ },
+ {
+  "uid": "ragtruth_000074",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "what is the difference between the leeward and windward islands?",
+  "answer": "Based on the given passages, the main difference between the Windward Islands and the Leeward Islands is their exposure to the northeast trade winds (northeasterlies). The Windward Islands are exposed to the wind and are therefore wetter and receive more rainfall, while the Leeward Islands are away from the wind and are drier, but still receive some rainfall. Additionally, the Windward Islands are located southeast of the Caribbean Sea, while the Leeward Islands are located northwest of the Caribbean Sea.",
+  "label": null,
+  "passage": "passage 1:They’re called the Windward Islands because they’re exposed to the wind (“windward”) of the northeast trade winds (northeasterlies). Windward and Leeward Islands of the Lesser Antilles The Windward Islands include. The Leeward Islands are the northwestern islands of the Lesser Antilles. They’re called the Leeward Islands because they’re away from the wind (“lee”).\n\npassage 2:exists and is an alternate of . The difference is that windward gets more rain, is wetter, and is the side of the mountain that is closest to the ocean. On the other hand the leeward is the farthest from shore and is drier but still gets rain.\n\npassage 3:The Windward Islands and the Leeward Islands are part of the Lesser Antilles of the Caribbean Sea. The Windward Islands are southeastern islands of the Caribbean. They’re called the Windward Islands because they’re exposed to the wind (“windward”) of the northeast trade winds (northeasterlies). Martinique.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 112
+  }
+ },
+ {
+  "uid": "ragtruth_000076",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how are water shares transferred",
+  "answer": "Water shares are transferred by following a set of steps. The seller must return the Water Stock Certificate and sign the back of the certificate. The new owner of the property must provide proof of ownership. A fee of $75.00 must be paid to process the transfer. After completing these steps, a new Water Stock Certificate will be issued to the new owner of record.",
+  "label": null,
+  "passage": "passage 1:1 A fee of $75.00 must be paid to process a Water Stock Certificate transfer. 2  A new Water Stock Certificate will be issued to the new owner of record. 3  An additional fee of $75.00 must be paid when filing a Lost Certificate Affidavit form. 4  This document is furnished by the Company and must be signed and notarized.\n\npassage 2:The following steps are required to transfer a Water Stock Certificate: 1  Seller must return the Water Stock Certificate that was assigned to them and sign the back of the certificate. 2  The new owner of the property must provide proof of ownership. 3  A fee of $75.00 must be paid to process a Water Stock Certificate transfer. 4  A new Water Stock 5  ... An ...\n\npassage 3:Buying a home with water shares or rights can be exciting but sometimes stressful if you do not have all the information. This article will help buyer and sellers better understand how to deal with water when purchasing or selling a home. There are 3 types of water rights in the state of Utah. If your home has water rights or shares you will want to understand the steps it will take to transfer the water rights into your name.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 114
+  }
+ },
+ {
+  "uid": "ragtruth_000078",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how are water shares transferred",
+  "answer": "Based on the provided passages, here's how water shares are transferred:\n\n1. Passage 1 states that a fee of $75.00 must be paid to process a Water Stock Certificate transfer. The passage also mentions that a new Water Stock Certificate will be issued to the new owner of record.\n2. Passage 2 outlines the steps required to transfer a Water Stock Certificate: (a) The seller must return the Water Stock Certificate and sign the back of the certificate, (b) the new owner of the property must provide proof of ownership, (c) a fee of $75.00 must be paid to process the transfer, and (d) a new Water Stock Certificate will be issued to the new owner.\n3. Passage 3 provides general information about buying a home with water shares or rights, including the need to understand the steps involved in transferring water rights into the buyer's name. However, this passage does not provide specific instructions for transferring water shares.\n\nTherefore, based on the provided passages, the answer to the question is:\n\nTransferring water shares involves paying a fee of $75.00 to process the transfer, returning the Water Stock Certificate to the company, providing proof of ownership, and obtaining a new Water Stock Certificate in the new owner's name.",
+  "label": null,
+  "passage": "passage 1:1 A fee of $75.00 must be paid to process a Water Stock Certificate transfer. 2  A new Water Stock Certificate will be issued to the new owner of record. 3  An additional fee of $75.00 must be paid when filing a Lost Certificate Affidavit form. 4  This document is furnished by the Company and must be signed and notarized.\n\npassage 2:The following steps are required to transfer a Water Stock Certificate: 1  Seller must return the Water Stock Certificate that was assigned to them and sign the back of the certificate. 2  The new owner of the property must provide proof of ownership. 3  A fee of $75.00 must be paid to process a Water Stock Certificate transfer. 4  A new Water Stock 5  ... An ...\n\npassage 3:Buying a home with water shares or rights can be exciting but sometimes stressful if you do not have all the information. This article will help buyer and sellers better understand how to deal with water when purchasing or selling a home. There are 3 types of water rights in the state of Utah. If your home has water rights or shares you will want to understand the steps it will take to transfer the water rights into your name.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 116
+  }
+ },
+ {
+  "uid": "ragtruth_000081",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "teresa name meaning",
+  "answer": "The name Teresa is of Greek, American, Italian, and Spanish origin. In Greek and American, it means 'Reap; from Therasia.' In Italian, it is interpreted as 'Harvester.' In Spanish, the name is associated with two popular saints, 'Teresa of Avila' and 'Therese of Lisieux.' The name is also thought to originate from the Greek “therizein” meaning “to harvest, harvester” or from the Greek “theros” meaning “summer”.",
+  "label": null,
+  "passage": "passage 1:Greek Meaning: The name Teresa is a Greek baby name. In Greek the meaning of the name Teresa is: Reap; from Therasia. American Meaning: The name Teresa is an American baby name.In American the meaning of the name Teresa is: Reap; from Therasia. Italian Meaning: The name Teresa is an Italian baby name. In Italian the meaning of the name Teresa is: Harvester.Spanish Meaning: The name Teresa is a Spanish baby name. In Spanish the meaning of the name Teresa is: Name of two popular saints 'Teresa of Avila' and 'Therese of Lisieux'.he name Teresa is an Italian baby name. In Italian the meaning of the name Teresa is: Harvester. Spanish Meaning: The name Teresa is a Spanish baby name. In Spanish the meaning of the name Teresa is: Name of two popular saints 'Teresa of Avila' and 'Therese of Lisieux'.\n\npassage 2:The name Theresa is a Greek baby name. In Greek the meaning of the name Theresa is: Reaper; from Therasia.American Meaning: The name Theresa is an American baby name. In American the meaning of the name Theresa is: Reaper; from Therasia.he name Theresa is a Greek baby name. In Greek the meaning of the name Theresa is: Reaper; from Therasia.\n\npassage 3:Etymology & Historical Origin-Teresa. Teresa is the Spanish, Portuguese and Italian form of Theresa, a name of uncertain etymology. It is thought to come from the Greek “therizein” meaning “to harvest, harvester” or from the Greek “theros” meaning “summer”.Therasia is also the name of a Greek island.Usage of Teresa as a female given name can find its roots in Spain and Portugal pre-Middle Ages.t is thought to come from the Greek “therizein” meaning “to harvest, harvester” or from the Greek “theros” meaning “summer”. Therasia is also the name of a Greek island. Usage of Teresa as a female given name can find its roots in Spain and Portugal pre-Middle Ages.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 119
+  }
+ },
+ {
+  "uid": "ragtruth_000082",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "teresa name meaning",
+  "answer": "The name Teresa is of Greek origin and means \"Reap; from Therasia\" or \"Harvester\". It is also a Spanish and Italian name and is associated with two popular saints, Teresa of Avila and Therese of Lisieux. The name Theresa is a variation of Teresa and also means \"Reaper; from Therasia\". The etymology of the name is uncertain, but it is thought to come from the Greek words \"therizein\" meaning \"to harvest, harvester\" or \"theros\" meaning \"summer\".",
+  "label": null,
+  "passage": "passage 1:Greek Meaning: The name Teresa is a Greek baby name. In Greek the meaning of the name Teresa is: Reap; from Therasia. American Meaning: The name Teresa is an American baby name.In American the meaning of the name Teresa is: Reap; from Therasia. Italian Meaning: The name Teresa is an Italian baby name. In Italian the meaning of the name Teresa is: Harvester.Spanish Meaning: The name Teresa is a Spanish baby name. In Spanish the meaning of the name Teresa is: Name of two popular saints 'Teresa of Avila' and 'Therese of Lisieux'.he name Teresa is an Italian baby name. In Italian the meaning of the name Teresa is: Harvester. Spanish Meaning: The name Teresa is a Spanish baby name. In Spanish the meaning of the name Teresa is: Name of two popular saints 'Teresa of Avila' and 'Therese of Lisieux'.\n\npassage 2:The name Theresa is a Greek baby name. In Greek the meaning of the name Theresa is: Reaper; from Therasia.American Meaning: The name Theresa is an American baby name. In American the meaning of the name Theresa is: Reaper; from Therasia.he name Theresa is a Greek baby name. In Greek the meaning of the name Theresa is: Reaper; from Therasia.\n\npassage 3:Etymology & Historical Origin-Teresa. Teresa is the Spanish, Portuguese and Italian form of Theresa, a name of uncertain etymology. It is thought to come from the Greek “therizein” meaning “to harvest, harvester” or from the Greek “theros” meaning “summer”.Therasia is also the name of a Greek island.Usage of Teresa as a female given name can find its roots in Spain and Portugal pre-Middle Ages.t is thought to come from the Greek “therizein” meaning “to harvest, harvester” or from the Greek “theros” meaning “summer”. Therasia is also the name of a Greek island. Usage of Teresa as a female given name can find its roots in Spain and Portugal pre-Middle Ages.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 120
+  }
+ },
+ {
+  "uid": "ragtruth_000084",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "building a lean-to shed",
+  "answer": "To build a lean-to shed, start by preparing the site with a 4\" layer of compacted gravel. Cut two 4 x 4 skids to a length of 70 2/4\" and set and level them according to the shed building plans. Cut two 2 x 6 rim joists at 7 3/4\" and six joists at 44 3/4\". Assemble the floor and place it on the skids as indicated in the floor framing section of the plans. Check for squareness and anchor the frame to the skids with four joist clip angles. Cut two more 4 x 4s to a length of 6 feet for the skids and, when the frame is square, toenail the floor joists to the skids. Attach 3/4-inch tongue-and-groove plywood flooring onto the frame. The walls for the shed are constructed separately and then raised onto the frame. The size of the shed can be adjusted as needed.",
+  "label": null,
+  "passage": "passage 1:Lean To Shed Plans – Step By Step Instructions For Building A Lean-To Shed. 1. Prepare the site with a 4″ layer of compacted gravel. Cut the two 4 x 4 skids at 70 2/4″. Set and level the skids following the shed building plans. Cut two 2 x 6 rim joists at 7 3/4 ” and six joists at 44 3/4″. Assemble the floor and set it on the skids as shown in the floor framing section of the lean to shed plans. Check for square, and then anchor the frame to the skids with four joist clip angles.\n\npassage 2:Cut two pressure-treated 4 by 4s to a length of 6 feet for the skids. Position the frame on the skids, and, when square, toenail the floor joists to the skids. Attach 3/4-inch tongue-and-groove plywood flooring onto the frame. 2he walls for the shed are constructed separately and then raised onto the frame.\n\npassage 3:Building the Shed. The shed shown here is 6 feet long by 4 feet wide. You can easily expand its dimensions in increments of 2 or 4 feet. 1To construct the framing for the shed’s floor, cut two pressure-treated 2 by 4s to a length of 6 feet for the rim joists.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 124
+  }
+ },
+ {
+  "uid": "ragtruth_000085",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "building a lean-to shed",
+  "answer": "Based on the given passages, the process of building a lean-to shed involves preparing the site with compacted gravel, cutting and setting the 4 x 4 skids, cutting and assembling the floor with 2 x 6 rim joists and joists, anchoring the frame to the skids, attaching tongue-and-groove plywood flooring, constructing the walls separately, and raising them onto the frame.",
+  "label": null,
+  "passage": "passage 1:Lean To Shed Plans – Step By Step Instructions For Building A Lean-To Shed. 1. Prepare the site with a 4″ layer of compacted gravel. Cut the two 4 x 4 skids at 70 2/4″. Set and level the skids following the shed building plans. Cut two 2 x 6 rim joists at 7 3/4 ” and six joists at 44 3/4″. Assemble the floor and set it on the skids as shown in the floor framing section of the lean to shed plans. Check for square, and then anchor the frame to the skids with four joist clip angles.\n\npassage 2:Cut two pressure-treated 4 by 4s to a length of 6 feet for the skids. Position the frame on the skids, and, when square, toenail the floor joists to the skids. Attach 3/4-inch tongue-and-groove plywood flooring onto the frame. 2he walls for the shed are constructed separately and then raised onto the frame.\n\npassage 3:Building the Shed. The shed shown here is 6 feet long by 4 feet wide. You can easily expand its dimensions in increments of 2 or 4 feet. 1To construct the framing for the shed’s floor, cut two pressure-treated 2 by 4s to a length of 6 feet for the rim joists.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 125
+  }
+ },
+ {
+  "uid": "ragtruth_000086",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "building a lean-to shed",
+  "answer": "Building a lean-to shed involves preparing the site, cutting and assembling the skids, flooring, and walls. To prepare the site, a 4\" layer of compacted gravel is recommended. The skids are cut to 70 2/4\" and set and leveled according to the shed building plans. Two 2 x 6 rim joists are cut at 7 3/4\" and six joists at 44 3/4\". The floor is assembled and set on the skids, checked for square, and anchored to the skids with four joist clip angles. The walls are constructed separately and then raised onto the frame. Pressure-treated 4 by 4s are used for the skids, while 2 by 4s are used for the rim joists and flooring. 3/4-inch tongue-and-groove plywood is attached to the frame for the flooring.",
+  "label": null,
+  "passage": "passage 1:Lean To Shed Plans – Step By Step Instructions For Building A Lean-To Shed. 1. Prepare the site with a 4″ layer of compacted gravel. Cut the two 4 x 4 skids at 70 2/4″. Set and level the skids following the shed building plans. Cut two 2 x 6 rim joists at 7 3/4 ” and six joists at 44 3/4″. Assemble the floor and set it on the skids as shown in the floor framing section of the lean to shed plans. Check for square, and then anchor the frame to the skids with four joist clip angles.\n\npassage 2:Cut two pressure-treated 4 by 4s to a length of 6 feet for the skids. Position the frame on the skids, and, when square, toenail the floor joists to the skids. Attach 3/4-inch tongue-and-groove plywood flooring onto the frame. 2he walls for the shed are constructed separately and then raised onto the frame.\n\npassage 3:Building the Shed. The shed shown here is 6 feet long by 4 feet wide. You can easily expand its dimensions in increments of 2 or 4 feet. 1To construct the framing for the shed’s floor, cut two pressure-treated 2 by 4s to a length of 6 feet for the rim joists.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 126
+  }
+ },
+ {
+  "uid": "ragtruth_000087",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "building a lean-to shed",
+  "answer": "Sure! Here's my attempt to answer your question based on the provided passages:\n\nHow do you prepare the site for building a lean-to shed?\n\nAccording to passage 1, step 1, you should prepare the site by laying down a 4\" layer of compacted gravel. This will provide a stable base for the shed's foundation. Additionally, passage 2 mentions cutting two pressure-treated 4x4s to a length of 6 feet for the skids, which will serve as the foundation for the shed. Finally, passage 3 provides instructions for building the shed's floor, including cutting rim joists to a length of 6 feet. Based on these passages, it appears that preparing the site involves laying down a layer of gravel and setting the skids in place before constructing the floor.",
+  "label": null,
+  "passage": "passage 1:Lean To Shed Plans – Step By Step Instructions For Building A Lean-To Shed. 1. Prepare the site with a 4″ layer of compacted gravel. Cut the two 4 x 4 skids at 70 2/4″. Set and level the skids following the shed building plans. Cut two 2 x 6 rim joists at 7 3/4 ” and six joists at 44 3/4″. Assemble the floor and set it on the skids as shown in the floor framing section of the lean to shed plans. Check for square, and then anchor the frame to the skids with four joist clip angles.\n\npassage 2:Cut two pressure-treated 4 by 4s to a length of 6 feet for the skids. Position the frame on the skids, and, when square, toenail the floor joists to the skids. Attach 3/4-inch tongue-and-groove plywood flooring onto the frame. 2he walls for the shed are constructed separately and then raised onto the frame.\n\npassage 3:Building the Shed. The shed shown here is 6 feet long by 4 feet wide. You can easily expand its dimensions in increments of 2 or 4 feet. 1To construct the framing for the shed’s floor, cut two pressure-treated 2 by 4s to a length of 6 feet for the rim joists.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 127
+  }
+ },
+ {
+  "uid": "ragtruth_000088",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "building a lean-to shed",
+  "answer": "What are the dimensions of the shed in passage 3?\n\nThe dimensions of the shed in passage 3 are 6 feet long by 4 feet wide.",
+  "label": null,
+  "passage": "passage 1:Lean To Shed Plans – Step By Step Instructions For Building A Lean-To Shed. 1. Prepare the site with a 4″ layer of compacted gravel. Cut the two 4 x 4 skids at 70 2/4″. Set and level the skids following the shed building plans. Cut two 2 x 6 rim joists at 7 3/4 ” and six joists at 44 3/4″. Assemble the floor and set it on the skids as shown in the floor framing section of the lean to shed plans. Check for square, and then anchor the frame to the skids with four joist clip angles.\n\npassage 2:Cut two pressure-treated 4 by 4s to a length of 6 feet for the skids. Position the frame on the skids, and, when square, toenail the floor joists to the skids. Attach 3/4-inch tongue-and-groove plywood flooring onto the frame. 2he walls for the shed are constructed separately and then raised onto the frame.\n\npassage 3:Building the Shed. The shed shown here is 6 feet long by 4 feet wide. You can easily expand its dimensions in increments of 2 or 4 feet. 1To construct the framing for the shed’s floor, cut two pressure-treated 2 by 4s to a length of 6 feet for the rim joists.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 129
+  }
+ },
+ {
+  "uid": "ragtruth_000095",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "what is the treatment when asset is discarded as per income tax act",
+  "answer": "Based on the Income Tax Act, when an asset is discarded but not sold, the scrap value of the asset can be reduced from the block in the previous year in which the asset is discarded as per section 43(6). This is done under the block concept, where all assets of the same class and subject to the same rate of depreciation are considered as a single asset. Any changes to the block's value must abide by the provisions of Chapter IV D of the Income Tax Act, 1961. Additionally, the assessee can claim depreciation on the residual value of such discarded asset, even if it's not used for the purposes of business or profession in that year and subsequent years.",
+  "label": null,
+  "passage": "passage 1:For the purposes of Income Tax Act, a previous year is a distinct unit. In case an asset is discarded by the business but not sold, section 43(6) permits the scrap value of the asset to be reduced from the block in the previous year in which such asset is discarded.nder the block concept, all the assets falling within the same class and subject to same rate of depreciation are clubbed together and considered as single asset. Any alterations to the value of the block have to be strictly in accordance with the provisions of Chapter IV D of Income Tax Act, 1961.\n\npassage 2:Illustration 4 Note: The purpose of this illustration is to assist in clarifying the meaning of the explanation toparagraph 13 of theStandard. Facts: 1. The income before depreciation and tax of an enterprise for 15 years is Rs. 1000 lakhs per year, both as per the booksof account and for income-tax purposes.2. The enterprise is subject to 100 percent tax-holiday for the first 10 years under section 80-IA.llustration 4 Note: The purpose of this illustration is to assist in clarifying the meaning of the explanation toparagraph 13 of theStandard. Facts: 1. The income before depreciation and tax of an enterprise for 15 years is Rs. 1000 lakhs per year, both as per the booksof account and for income-tax purposes.\n\npassage 3:Pavan Jain S. Depreciation – a non cash expenditure allowed under Income Tax Act, 1961 following block concept. Under the block concept, all the assets falling within the same class and subject to same rate of depreciation are clubbed together and considered as single asset.he assessee is entitled to claim depreciation on the residual value of such discarded asset [ie., Opening WDV of such asset less scrap value] even though such discarded asset is not used for the purposes of business or profession in such year and subsequent years.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 138
+  }
+ },
+ {
+  "uid": "ragtruth_000096",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "what is the treatment when asset is discarded as per income tax act",
+  "answer": "Based on the given passages, when an asset is discarded but not sold, the scrap value of the asset can be reduced from the block in the previous year in which the asset is discarded. The block concept is followed, where assets of the same class and subject to the same rate of depreciation are grouped together and considered as a single asset. The assessee is entitled to claim depreciation on the residual value of the discarded asset, even if it is not used for business or profession in that year and subsequent years.",
+  "label": null,
+  "passage": "passage 1:For the purposes of Income Tax Act, a previous year is a distinct unit. In case an asset is discarded by the business but not sold, section 43(6) permits the scrap value of the asset to be reduced from the block in the previous year in which such asset is discarded.nder the block concept, all the assets falling within the same class and subject to same rate of depreciation are clubbed together and considered as single asset. Any alterations to the value of the block have to be strictly in accordance with the provisions of Chapter IV D of Income Tax Act, 1961.\n\npassage 2:Illustration 4 Note: The purpose of this illustration is to assist in clarifying the meaning of the explanation toparagraph 13 of theStandard. Facts: 1. The income before depreciation and tax of an enterprise for 15 years is Rs. 1000 lakhs per year, both as per the booksof account and for income-tax purposes.2. The enterprise is subject to 100 percent tax-holiday for the first 10 years under section 80-IA.llustration 4 Note: The purpose of this illustration is to assist in clarifying the meaning of the explanation toparagraph 13 of theStandard. Facts: 1. The income before depreciation and tax of an enterprise for 15 years is Rs. 1000 lakhs per year, both as per the booksof account and for income-tax purposes.\n\npassage 3:Pavan Jain S. Depreciation – a non cash expenditure allowed under Income Tax Act, 1961 following block concept. Under the block concept, all the assets falling within the same class and subject to same rate of depreciation are clubbed together and considered as single asset.he assessee is entitled to claim depreciation on the residual value of such discarded asset [ie., Opening WDV of such asset less scrap value] even though such discarded asset is not used for the purposes of business or profession in such year and subsequent years.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 139
+  }
+ },
+ {
+  "uid": "ragtruth_000099",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "what is the treatment when asset is discarded as per income tax act",
+  "answer": "Based on the given passages, the treatment for an asset that is discarded as per the Income Tax Act is as follows:\n\nThe scrap value of the asset can be reduced from the block in the previous year in which the asset is discarded, as per Section 43(6) of the Income Tax Act. The block concept applies to all assets falling within the same class and subject to the same rate of depreciation, and any alterations to the value of the block must be made in accordance with the provisions of Chapter IV D of the Income Tax Act. The assessee can claim depreciation on the residual value of the discarded asset (i.e., opening WDV of such asset less scrap value) even if the asset is not used for business or professional purposes in that year or subsequent years.\n\nTherefore, the treatment for an asset that is discarded as per the Income Tax Act is to reduce the scrap value from the block in the previous year and claim depreciation on the residual value.",
+  "label": null,
+  "passage": "passage 1:For the purposes of Income Tax Act, a previous year is a distinct unit. In case an asset is discarded by the business but not sold, section 43(6) permits the scrap value of the asset to be reduced from the block in the previous year in which such asset is discarded.nder the block concept, all the assets falling within the same class and subject to same rate of depreciation are clubbed together and considered as single asset. Any alterations to the value of the block have to be strictly in accordance with the provisions of Chapter IV D of Income Tax Act, 1961.\n\npassage 2:Illustration 4 Note: The purpose of this illustration is to assist in clarifying the meaning of the explanation toparagraph 13 of theStandard. Facts: 1. The income before depreciation and tax of an enterprise for 15 years is Rs. 1000 lakhs per year, both as per the booksof account and for income-tax purposes.2. The enterprise is subject to 100 percent tax-holiday for the first 10 years under section 80-IA.llustration 4 Note: The purpose of this illustration is to assist in clarifying the meaning of the explanation toparagraph 13 of theStandard. Facts: 1. The income before depreciation and tax of an enterprise for 15 years is Rs. 1000 lakhs per year, both as per the booksof account and for income-tax purposes.\n\npassage 3:Pavan Jain S. Depreciation – a non cash expenditure allowed under Income Tax Act, 1961 following block concept. Under the block concept, all the assets falling within the same class and subject to same rate of depreciation are clubbed together and considered as single asset.he assessee is entitled to claim depreciation on the residual value of such discarded asset [ie., Opening WDV of such asset less scrap value] even though such discarded asset is not used for the purposes of business or profession in such year and subsequent years.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 142
+  }
+ },
+ {
+  "uid": "ragtruth_000103",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to factory reset a htc one vx",
+  "answer": "To factory reset an HTC One VX, you can follow the steps mentioned in passage 3. Slide the Notifications panel open, tap on Storage, then Factory data reset, and finally tap on Reset phone and Erase everything.",
+  "label": null,
+  "passage": "passage 1:1 In order to switch off the device, hold down the Power button for a while. 2  Then press and hold the Volume Down + Power key for a couple of seconds. 3  When you see Bootloader Mode menu release held buttons. 4  From the menu choose option  RECOVERY MODE  by using Volume buttons to scroll and Power key to select options. Then press and hold the Volume Down + Power key for a couple of seconds. 2  When you see Bootloader Mode menu release held buttons. 3  From the menu choose option  RECOVERY MODE  by using Volume buttons to scroll and Power key to select options. 4  Congratulations! 5  You should be right now in the expected mode.\n\npassage 2:1 First of all, switch off the phone by using the Power rocker. 2  After that, press and hold Volum Down and Power buttons together for a couple of seconds. 3  You can release all keys when the Bootloader Mode appears on the screen. 4  Choose the Factory Reset by pressing the Volum Down button to scroll and Power key to select. Then press and hold the Volume Down + Power key for a couple of seconds. 2  When you see Bootloader Mode menu release held buttons. 3  From the menu choose option  RECOVERY MODE  by using Volume buttons to scroll and Power key to select options. 4  Congratulations! 5  You should be right now in the expected mode.\n\npassage 3:Be sure to back up any data and files you want to keep before you do a factory reset. Hard reset your HTC One VX as follows: 1  Slide the Notifications panel open, and then tap.2  Tap Storage Factory data reset. 3  Tap Reset phone, and then tap Erase everything.e sure to back up any data and files you want to keep before you do a factory reset. Hard reset your HTC One VX as follows: 1  Slide the Notifications panel open, and then tap.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 158
+  }
+ },
+ {
+  "uid": "ragtruth_000105",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "what is psa levels mean",
+  "answer": "PSA, or Prostate-specific antigen, is a protein produced by cells of the prostate gland. The level of PSA in a man's blood is measured by the PSA test, which involves sending a blood sample to a laboratory for analysis. The results are usually reported as nanograms of PSA per milliliter (ng/mL) of blood. Elevated PSA levels may indicate conditions such as prostate cancer, a noncancerous condition like prostatitis, or an enlarged prostate. Total PSA levels between 4.0 ng/ml and 10.0 ng/ml may indicate prostate cancer, benign prostate hyperplasia, or inflammation of the prostate.",
+  "label": null,
+  "passage": "passage 1:Prostate-specific antigen, or PSA, is a protein produced by cells of the prostate gland. The PSA test measures the level of PSA in a man’s blood.For this test, a blood sample is sent to a laboratory for analysis. The results are usually reported as nanograms of PSA per milliliter (ng/mL) of blood.The blood level of PSA is often elevated in men with prostate cancer, and the PSA test was originally approved by the FDA in 1986 to monitor the progression of prostate cancer in men who had already been diagnosed with the disease.he PSA test measures the level of PSA in a man’s blood. For this test, a blood sample is sent to a laboratory for analysis. The results are usually reported as nanograms of PSA per milliliter (ng/mL) of blood.\n\npassage 2:A. A. A. Prostate-specific antigen (PSA) is a substance produced by the prostate gland. Elevated PSA levels may indicate prostate cancer, a noncancerous condition such as prostatitis, or an enlarged prostate.. A. A. Prostate-specific antigen (PSA) is a substance produced by the prostate gland. Elevated PSA levels may indicate prostate cancer, a noncancerous condition such as prostatitis, or an enlarged prostate.\n\npassage 3:1 Total PSA levels between 4.0 ng/ml and 10.0 ng/ml may indicate prostate cancer (about a 25% chance, according to the ACS), benign prostate hyperplasia (BPH) , or inflammation of the prostate. 2  These conditions are more common in the elderly, as is a general increase in PSA levels.f the DRE is normal but the PSA is moderately elevated, a free PSA test may be used to look at the ratio of free to total PSA. This can help to distinguish between prostate cancer and other non-cancer causes of elevated PSA.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 162
+  }
+ },
+ {
+  "uid": "ragtruth_000107",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "show me how can i make gragh for my research",
+  "answer": "To create a graph for your research, you first need to collect all of your data, remembering that the graph should show a comparison among categories. If you are creating a bar graph, you will use rectangular bars to represent different values. You need to title your graph and determine how high your graph needs to go. If your data points are substantially different in scale, you can use a pie chart. The y-axis of your graph will have a scale, and each bar’s height should be proportionate to the size of the category it represents. Make sure to consider any disproportionate responses that might impact the scale of your graph. Regardless of the type of graph you choose, it should provide a clear visual representation of your information.",
+  "label": null,
+  "passage": "passage 1:A bar graph, also known as a bar chart, is a graph that uses rectangular bars to represent different values to show comparisons among categories, such as the amount of rainfall that occurred during different months of a year, or the average salary in different states.ollect your data. The first thing you have to do is to collect all of your data. Remember that a bar graph should show a comparison among categories. Let's say your goal is to organize data on how many inches of rainfall a city received between the months of February 2005 and February 2006.\n\npassage 2:And now we'll learn how to make a graph. In science, graphs normally show comparisons of two or more things. Two types of graphs that are often used in science fair projects are bar graphs and line graphs. If you want, you may use graph paper to help you make a great graph you can be proud of.Let's go over how to make a graph both ways. Bar graph. Normally used to compare groups or types, a really nice bar graph will give great visual visual representation of your information and add color to your display.Here's how to make one... 1. First, you'll need to title it and find out how high your graph needs to go.ar graph. Normally used to compare groups or types, a really nice bar graph will give great visual visual representation of your information and add color to your display. Here's how to make one... 1. First, you'll need to title it and find out how high your graph needs to go.\n\npassage 3:If you still think the story of the data is unclear, you can always use the pie chart as your backup. With that said, here are a few cases when pie charts work best: 1  When you have only a few data points to display, and each one is substantially different in scale.he y-axis will have a scale, and each bar’s height should be proportionate to the size of the category it represents. This can create a problem if you have very disproportionate responses that impact the scale of your graph, so keep that in mind when formatting.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 167
+  }
+ },
+ {
+  "uid": "ragtruth_000116",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "psychological effects of hugging",
+  "answer": "Based on the given passages, we can see that the physiological effects of hugging are numerous and significant. Hugs affect the entire body and can potentially be compared to the effects of multiple drugs operating at once. Furthermore, the act of hugging can also have psychological effects. Empathic listening can lead to emotional intimacy and happy relationships, as well as making conversation partners feel like they are receiving a hug, which can provide comfort and ease their existential fears. Overall, the psychological effects of hugging are positive and suggest that this simple gesture can have a significant impact on our emotional and physical wellbeing.",
+  "label": null,
+  "passage": "passage 1:The physiological benefits of hugging. Hugs make you feel good for a reason and it's not just the loving embrace that gives us that warm feeling in our hearts. It's much more. It affects the entire body to such an extent that many scientists claim it is equivalent to the effect of many different drugs operating on the body simultaneously.\n\npassage 2:Empathy and Listening Skills. and. Psychological Hugs. The use of empathy and listening skills--empathic listening--sometimes leads to good relationships, emotional intimacy, and happy marriages. Their use may also lead to a conversation partner feeling like she or he is receiving a hug--a psychological hug..\n\npassage 3:In a study on fears and self-esteem, research published in the journal Psychological Science revealed that hugs and touch significantly reduce worry of mortality. The studies found that hugging -- even if it was just an inanimate object like a teddy bear -- helps soothe individuals' existential fears.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 182
+  }
+ },
+ {
+  "uid": "ragtruth_000117",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to cook a small prime rib roast in oven",
+  "answer": "Before cooking the prime rib roast, let it stand at room temperature for at least 1 hour. Preheat the oven to 375 degrees F. Season the roast with a small amount of salt and lots of fresh ground black pepper. Place the roast on a rack in a pan with the rib side down and the fatty side up. Roast it in the oven for 1 hour. After cooking, you can prepare au jus by placing the roasting pan on the stove over high heat. Add wine and cook for 8-10 minutes, stirring and scraping any brown bits. Add beef stock and cook to reduce the juice by half, which might take about 20 minutes. Add salt and pepper to taste.",
+  "label": null,
+  "passage": "passage 1:Directions. Allow roast to stand at room temperature for at least 1 hour. Preheat the oven to 375 degree F. Rub roast with House Seasoning; place roast on a rack in the pan with the rib side down and the fatty side up.Roast for 1 hour.Turn off oven.irections. Allow roast to stand at room temperature for at least 1 hour. Preheat the oven to 375 degree F. Rub roast with House Seasoning; place roast on a rack in the pan with the rib side down and the fatty side up.\n\npassage 2:1 Set oven to 450°F and allow the oven to preheat for a minimum of 15 minutes. 2  Season the roast with only a small amount of salt but lots of fresh ground black pepper pepper (that's all nothing else but a little salt and fresh ground black pepper, using any other spices will take away the flavor from the prime rib!). Set oven to 450°F and allow the oven to preheat for a minimum of 15 minutes. 2  Season the roast with only a small amount of salt but lots of fresh ground black pepper pepper (that's all nothing else but a little salt and fresh ground black pepper, using any other spices will take away the flavor from the prime rib!).\n\npassage 3:1 While the roast is resting prepare the au jus; place the roasting pan on top of the stove over high heat. 2  Add in the wine; cook for 8-10 minutes, stirring and scraping any brown bits. 3  Add in the beef stock; cook and reduce the juice by half (this might take about 20 minutes). 4  Add salt and pepper to taste. Set oven to 450°F and allow the oven to preheat for a minimum of 15 minutes. 2  Season the roast with only a small amount of salt but lots of fresh ground black pepper pepper (that's all nothing else but a little salt and fresh ground black pepper, using any other spices will take away the flavor from the prime rib!).\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 183
+  }
+ },
+ {
+  "uid": "ragtruth_000118",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how long does it take to make chicken tender in crock pot",
+  "answer": "To make chicken tender in a crock pot, you can cook it on low for 6 - 8 hours or until done. Alternatively, you can cook it on high for 1 hour, then on low for about 5 hours or until done. Another option is cooking it for 4 hours on high.",
+  "label": null,
+  "passage": "passage 1:Place any root vegetable such as onions, potatoes and carrots in the crock pot and set the chicken on top of the vegetables. Add half a cup of broth, white wine or water to the pot. Cook on low for 6 - 8 hours or until done. (you may cook on high for 1 hour, then on low about 5 hours or until done. ).dd half a cup of broth, white wine or water to the pot. Cook on low for 6 - 8 hours or until done. (you may cook on high for 1 hour, then on low about 5 hours or until done.\n\npassage 2:Add half a cup of broth, white wine or water to the pot. Cook on low for 6 - 8 hours or until done. (you may cook on high for 1 hour, then on low about 5 hours or until done.dd half a cup of broth, white wine or water to the pot. Cook on low for 6 - 8 hours or until done. (you may cook on high for 1 hour, then on low about 5 hours or until done.\n\npassage 3:Rating Newest Oldest. Best Answer: You would cook 8 chicken breasts on low for 8 hours in a slow cooker. I make chicken tacos a lot, and this is how I do it. You can cook it for 4 hours on high if your pinched for time.It will still turn out fine.Most generally, chicken breast will always come out tender, as long as there is enough moisture.It also works for beef, for shredded beef tacos and taquitos. make chicken tacos a lot, and this is how I do it. You can cook it for 4 hours on high if your pinched for time. It will still turn out fine. Most generally, chicken breast will always come out tender, as long as there is enough moisture. It also works for beef, for shredded beef tacos and taquitos.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 185
+  }
+ },
+ {
+  "uid": "ragtruth_000119",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how long does it take to make chicken tender in crock pot",
+  "answer": "Based on the given passages, the answer to the question \"How long does it take to make chicken tender in a crock pot?\" is:\n\n6-8 hours on low heat, or 4 hours on high heat if you're short on time.\n\nThe first passage suggests cooking the chicken on low for 6-8 hours, or 1 hour on high and then 5 hours on low. The second passage repeats the same information. The third passage provides additional information that chicken breast will always come out tender as long as there is enough moisture, and suggests cooking it for 4 hours on high if you're short on time.\n\nTherefore, the answer to the question is 6-8 hours on low heat, or 4 hours on high heat if you're short on time.",
+  "label": null,
+  "passage": "passage 1:Place any root vegetable such as onions, potatoes and carrots in the crock pot and set the chicken on top of the vegetables. Add half a cup of broth, white wine or water to the pot. Cook on low for 6 - 8 hours or until done. (you may cook on high for 1 hour, then on low about 5 hours or until done. ).dd half a cup of broth, white wine or water to the pot. Cook on low for 6 - 8 hours or until done. (you may cook on high for 1 hour, then on low about 5 hours or until done.\n\npassage 2:Add half a cup of broth, white wine or water to the pot. Cook on low for 6 - 8 hours or until done. (you may cook on high for 1 hour, then on low about 5 hours or until done.dd half a cup of broth, white wine or water to the pot. Cook on low for 6 - 8 hours or until done. (you may cook on high for 1 hour, then on low about 5 hours or until done.\n\npassage 3:Rating Newest Oldest. Best Answer: You would cook 8 chicken breasts on low for 8 hours in a slow cooker. I make chicken tacos a lot, and this is how I do it. You can cook it for 4 hours on high if your pinched for time.It will still turn out fine.Most generally, chicken breast will always come out tender, as long as there is enough moisture.It also works for beef, for shredded beef tacos and taquitos. make chicken tacos a lot, and this is how I do it. You can cook it for 4 hours on high if your pinched for time. It will still turn out fine. Most generally, chicken breast will always come out tender, as long as there is enough moisture. It also works for beef, for shredded beef tacos and taquitos.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 189
+  }
+ },
+ {
+  "uid": "ragtruth_000121",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to attach multiple picture frames together",
+  "answer": "Based on the provided passages, here are some steps for attaching multiple picture frames together:\n\nPassage 1: Table-Stand Grouping\nTo join two or three frames together, you can use identical frames or one larger frame as the middle piece. Place the frames beside each other to see if you like the effect, and then mark the hinge placement on the connecting sides. Attach two small hinges to the marked areas to join the frames together.\n\nPassage 2: Hanging Multiple Pictures Together\nBefore attaching the frames together, test different arrangements of the group of multiple pictures on the floor. Once you have decided on the layout, screw the frames to the backer board, repeating the process for each frame. Attach a hanging wire to the back of the frames and hang them on the wall to enjoy the finished result.\n\nPassage 3: Attaching Frames Together\nTo attach two frames together, place them back to back and mark the hinge placement on the connecting sides. The placement should be the same distance from the bottom edge of each frame to ensure stability when the grouped pictures are placed on a table. Attach two small hinges to the marked areas to join the frames together.\n\nIn conclusion, the recommended method for attaching multiple picture frames together involves using identical or matching frames, marking the hinge placement on the connecting sides, and attaching small hinges to join the frames together. It's also important to test different arrangements of the group of pictures on the floor before attaching the frames together, and to ensure that the frames are securely attached to the backer board before hanging them on the wall.",
+  "label": null,
+  "passage": "passage 1:Table-stand Grouping. Select two or three frames of the same wood molding. For joining two together, use identical frames. For joining three together, choose either three of the same or one which is larger to be the middle frame. Lay them beside each other to see if you like the effect.Put two frames together back to back, and mark the hinge placement.The placement must be the same distance from the bottom edges of each frame to ensure that the grouped pictures stand securely on the table top. Attach two small hinges to the connecting sides of the frames.ut two frames together back to back, and mark the hinge placement. The placement must be the same distance from the bottom edges of each frame to ensure that the grouped pictures stand securely on the table top. Attach two small hinges to the connecting sides of the frames.\n\npassage 2:Figuring out how to hang multiple pictures together can be a little overwhelming. With these tips, however, you can make short order of the mission and transform your space with a stunning group of wall art.Test ideas by laying the group of multiple pictures out on the floor first.iguring out how to hang multiple pictures together can be a little overwhelming. With these tips, however, you can make short order of the mission and transform your space with a stunning group of wall art. Test ideas by laying the group of multiple pictures out on the floor first.\n\npassage 3:Screw the frame to the backer board. Repeat with each frame. Save time by having the pictures all ready in the frames. You can always unscrew them at a later date to change the picture if you want. Attach a hanging wire to the back, hang it up and step back and enjoy the results.ut two frames together back to back, and mark the hinge placement. The placement must be the same distance from the bottom edges of each frame to ensure that the grouped pictures stand securely on the table top. Attach two small hinges to the connecting sides of the frames.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 193
+  }
+ },
+ {
+  "uid": "ragtruth_000124",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "leasing meaning",
+  "answer": "Leasing refers to a process in which a firm obtains the use of fixed assets by making contractual, periodic, and tax-deductible payments to the owner of those assets. The lessee is the party receiving the services or assets under the lease contract, while the lessor is the owner of the assets.",
+  "label": null,
+  "passage": "passage 1:Freebase (0.00 / 0 votes) Rate this definition: Leasing. Leasing is a process by which a firm can obtain the use of a certain fixed assets for which it must pay a series of contractual, periodic, tax deductible payments. The lessee is the receiver of the services or the assets under the lease contract and the lessor is the owner of the assets. The relationship between the tenant and the landlord is called a tenancy, and can be for a fixed or an indefinite period of time. The consideration for the lease is called rent.\n\npassage 2:Freebase(0.00 / 0 votes)Rate this definition: Leasing. Leasing is a process by which a firm can obtain the use of a certain fixed assets for which it must pay a series of contractual, periodic, tax deductible payments. The lessee is the receiver of the services or the assets under the lease contract and the lessor is the owner of the assets.\n\npassage 3:A lease is a contractual arrangement calling for the lessee to pay the lessor for use of an asset. Property, buildings and vehicles are common assets that are leased. Industrial or business equipment is also leased. Broadly put, a lease agreement is a contract between two parties, the lessor and the lessee. The lessor is the legal owner of the asset; the lessee obtains the right to use the asset in return for regular rental payments. The lessee also agrees to abide by various conditions regardin\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 197
+  }
+ },
+ {
+  "uid": "ragtruth_000128",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "what is chard vegetable",
+  "answer": "Chard is a vegetable that has large, fleshy but tender deep green leaves and thick, crisp stalks. It is similar to spinach but has a stronger, more assertive flavor. Fresh young chard can be used raw in salads, while mature chard leaves and stalks are typically cooked or sautéed. Chard is in the same subspecies as beetroot and is cultivated for leaf production. It can be harvested while the leaves are young and tender or after maturity when the stems are slightly tougher. Chard is perishable and should be stored in the refrigerator for a minimum amount of time.",
+  "label": null,
+  "passage": "passage 1:Swiss chard. Pronounce it: swiss shard. Also known as just plain chard, swiss chard has large, fleshy but tender deep green leaves and thick, crisp stalks. Although they're unrelated, chard is similar to spinach, but with a stronger, more assertive (some think, bitter) flavour.wiss chard. Pronounce it: swiss shard. Also known as just plain chard, swiss chard has large, fleshy but tender deep green leaves and thick, crisp stalks. Although they're unrelated, chard is similar to spinach, but with a stronger, more assertive (some think, bitter) flavour.\n\npassage 2:Fresh young chard can be used raw in salads. Mature chard leaves and stalks are typically cooked (like in pizzoccheri) or sauteed; their bitterness fades with cooking, leaving a refined flavor which is more delicate than that of cooked spinach.hard is in the same subspecies as beetroot (garden beet) and all other beet cultivars. They are cultivated descendants of the sea beet, Beta vulgaris subsp. maritima.\n\npassage 3:Chard. Chard is a beet that has been chosen for leaf production at the expense of storage root formation. Chard will produce fresh white, yellow or red leaf stalks. It is an attractive ornamental that adds color to the vegetable garden.hard can be harvested while the leaves are young and tender or after maturity when larger have slightly tougher stems. Chard is extremely perishable, so keep refrigerator storage time to a minimum. Store unwashed leaves in plastic bags in the crisper for 2 to 3 days.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 205
+  }
+ },
+ {
+  "uid": "ragtruth_000130",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "what is chard vegetable",
+  "answer": "Based on the provided passages, here is what can be inferred about the vegetable \"chard\":\n\n* Chard is a type of beet (Beta vulgaris subsp. maritima) that has been chosen for leaf production over storage root formation.\n* Chard has large, fleshy but tender deep green leaves and thick, crisp stalks.\n* The flavor of chard is similar to spinach but with a stronger, more assertive taste (some consider it bitter).\n* Fresh young chard can be used raw in salads, while mature chard leaves and stalks are typically cooked to reduce bitterness and bring out a refined flavor.\n* Chard is an attractive ornamental plant that adds color to the vegetable garden.\n* Chard is perishable and should be stored in the refrigerator to minimize spoilage.\n\nTherefore, the answer to the question \"What is chard vegetable?\" is: A beet variety (Beta vulgaris subsp. maritima) grown for leaf production, characterized by large, fleshy leaves and stalks with a strong, bitter flavor that becomes more refined with cooking.",
+  "label": null,
+  "passage": "passage 1:Swiss chard. Pronounce it: swiss shard. Also known as just plain chard, swiss chard has large, fleshy but tender deep green leaves and thick, crisp stalks. Although they're unrelated, chard is similar to spinach, but with a stronger, more assertive (some think, bitter) flavour.wiss chard. Pronounce it: swiss shard. Also known as just plain chard, swiss chard has large, fleshy but tender deep green leaves and thick, crisp stalks. Although they're unrelated, chard is similar to spinach, but with a stronger, more assertive (some think, bitter) flavour.\n\npassage 2:Fresh young chard can be used raw in salads. Mature chard leaves and stalks are typically cooked (like in pizzoccheri) or sauteed; their bitterness fades with cooking, leaving a refined flavor which is more delicate than that of cooked spinach.hard is in the same subspecies as beetroot (garden beet) and all other beet cultivars. They are cultivated descendants of the sea beet, Beta vulgaris subsp. maritima.\n\npassage 3:Chard. Chard is a beet that has been chosen for leaf production at the expense of storage root formation. Chard will produce fresh white, yellow or red leaf stalks. It is an attractive ornamental that adds color to the vegetable garden.hard can be harvested while the leaves are young and tender or after maturity when larger have slightly tougher stems. Chard is extremely perishable, so keep refrigerator storage time to a minimum. Store unwashed leaves in plastic bags in the crisper for 2 to 3 days.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 207
+  }
+ },
+ {
+  "uid": "ragtruth_000132",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "differences between elements compounds and mixtures",
+  "answer": "Elements are the purest form of a chemical substance and are composed of only one type of atom, meaning all the atoms in an element have the same number of protons. Compounds, on the other hand, are substances composed of two or more different elements and are also pure substances. Mixtures are physical combinations of elements or compounds where the parts of the mixture are not chemically bonded and so retain their own identity. The individual components of a mixture can be physically separated from each other. Mixtures have variable compositions and show the properties of their constituent substances. Elements and compounds just mix together to form a mixture and no new compound is formed.",
+  "label": null,
+  "passage": "passage 1:Another difference between compounds and mixtures of elements is the ease with which the elements can be separated. Mixtures, such as the atmosphere, contain two or more substances that are relatively easy to separate.The individual components of a mixture can be physically separated from each other.nother difference between compounds and mixtures of elements is the ease with which the elements can be separated. Mixtures, such as the atmosphere, contain two or more substances that are relatively easy to separate.\n\npassage 2:Best Answer: mixtures 1) elements and compounds just mix together to form a mixture and no new compound is formed. 2)A mixture has a variable composition. 3)A mixture shows the properties of constituent substances 4)The constiuents can be seperated easily byphysical method.est Answer: mixtures 1) elements and compounds just mix together to form a mixture and no new compound is formed. 2)A mixture has a variable composition. 3)A mixture shows the properties of constituent substances 4)The constiuents can be seperated easily byphysical method.\n\npassage 3:Compounds are substances composed of two or more different elements. Compounds are also pure substances. A mixture is a physical combination of elements or compunds where the parts of the mixture are not chemically bonded and so retain their own identity.These elements and compounds can be separated by physical means.Answer #2). We are looking at the difference between elements, compounds, and mixtures. Elements are the purest form of a chemical substance and are composed of only one type of atom. In other words, all of the atoms in an element will have the same number of protons.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 210
+  }
+ },
+ {
+  "uid": "ragtruth_000138",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to wash wine glasses properly",
+  "answer": "Based on the provided passages, here are the steps to properly wash wine glasses:\n\n1. If hot water and mild detergent cannot remove wine residue, use baking soda to dissolve and loosen the adhesive residue (Passage 1).\n2. To clean the inside of a glass, use a stemware brush with soft-foam bristles and rinse thoroughly with hot water (Passage 2).\n3. For hand cleaning, lay a towel in the sink before filling with hot water and wash one wine glass at a time to avoid damage (Passage 3). Use a small amount of detergent and only in the bottom of the glass and around the rim to avoid flavoring future wine. Cradle the bowl of the glass in one hand while washing to protect the stem.\n\nUnable to answer based on given passages.",
+  "label": null,
+  "passage": "passage 1:1 If hot water and mild detergent can’t get your glasses clean, use baking soda to remove any stubborn wine residue. 2  Dissolve a small amount of soda with hot water and let it stand in the glass for a few minutes. 3  The soda will dissolve any residual wine adhering to the glass.\n\npassage 2:3. To clean the inside of a glass, use a stemware brush with soft-foam bristles. 4. After rinsing thoroughly with hot water, dry the wine glasses with a smooth lint-free cloth, such as a microfiber or flour sack towel. Editor's Tip: Red wine can leave stains if left overnight.\n\npassage 3:Clean Your Wine Glasses by Hand. The safest cleaning method for your wine glasses is to scrub them by hand. Follow these tips to avoid chips and spots. 1. Lay a towel in the sink before filling with hot water. Wash one wine glass at a time to avoid damage. 2. To keep soap from flavoring your next glass of wine, use a small amount of detergent and use it only where it's needed -- in the bottom of the glass and around the rim. Cradle the bowl of the glass in one hand while washing to protect the stem.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 216
+  }
+ },
+ {
+  "uid": "ragtruth_000139",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to peel potatoes fast",
+  "answer": "Based on the given passages, here's how to peel potatoes fast:\n\n1. Score the potatoes all the way around the center with a knife.\n2. Boil the potatoes for about 15 minutes.\n3. Place the potatoes in a bowl of ice water and swish them around for a few seconds.\n4. Remove the potatoes from the water and remove the skin.\n\nAlternatively, you can also try the following method:\n\n1. Cut the potato skin, making a cut all around the potato lengthwise.\n2. Boil the potato in a pot of boiling water.\n3. Plunge the potato in ice water for 10 seconds.\n4. Rub the potato with both hands, and the skin should fall right off.\n\nThese methods should help you peel potatoes quickly and efficiently.",
+  "label": null,
+  "passage": "passage 1:Place washed whole, unpeeled potatoes into a pot and cover with cold water. The “shocking” process of going from the hot boiling water to the cold ice water helps release the skin from the flesh and makes the potato quite easy to peel.\n\npassage 2:True the skin comes off fairly easy but it takes so freakin long! Especially if you are peeling a crap load of potatoes. Here is the easiest way (or at least the easiest way I’ve discovered) to peel a cooked potato. Step 1.) Bring a pot of water to a boil. Step 2.) With a knife, score your potatoes all the way around the center. Step 3.) Place your potatoes in the pot and boil for about 15 minutes or so. Step 4.) Prepare a bowl of ice water and place your potatoes in the water. Step 5.) Swish it around for a few seconds just enough so that it’s cool enough to handle. Step 6.) Remove your potatoe from the water and remove the skin.\n\npassage 3:You will need. Step 1 Cut the potato skin Make a cut all around the potato, lengthwise. Try to slice only the skin, not the actual potato. Step 2 Boil it Put the potato in a pot of boiling water. Step 3 Cool it off Plunge the potato in ice water for 10 seconds. The surface of the potato will shrink, while the center remains hot. Step 4 Remove the skin Rub the potato with both hands and watch the skin fall right off.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 221
+  }
+ },
+ {
+  "uid": "ragtruth_000142",
+  "dataset": "ragtruth",
+  "task_type": "descriptive",
+  "modality": "text",
+  "answer_space": "free_text",
+  "question": "how to fix lift valve in toilet",
+  "answer": "Based on the provided passages, here's how to fix a lift valve in a toilet:\n\n1. Shut off the water supply valve to the toilet before starting the repair (Passage 1).\n2. Remove the old flapper valve by slipping it off the mounting arms, and remove any remaining broken lift chain from the lift arm (Passage 1).\n3. Open the water valve to fill the tank and flush the toilet to check for correct operation. If necessary, readjust the lift chain by moving the metal clip up or down a couple of links (Passage 2).\n4. Connect the chain to the third hole on the lift arm, which is the hole closest to the edge of the lift arm (Passage 3). Secure it using pliers to ensure it is tightly fastened.\n5. Turn the water valve back on and test the toilet's flush function. If the toilet flushes slowly, adjust the chain to make it a little tighter on the lift arm (Passage 3).\n\nUnable to answer based on the given passages. The passages do not provide instructions on how to fix a specific issue with the lift valve, such as a stuck or leaking valve.",
+  "label": null,
+  "passage": "passage 1:The new flapper valve and chain for a 1.6 gallon per flush toilet. Step 1: Shutoff the water supply valve to the toilet. Step 2: Remove the old flapper valve by slipping it off the mounting arms. Remove what’s left of the broken lift chain from the lift arm.\n\npassage 2:Step 4: Open the water valve to fill the tank. Flush the toilet to check for correct operation. If needed, readjust the lift chain by moving the metal clip up or down a couple of links. When you’re satisfied, cut off the excess lift chain to prevent it from getting tangled.\n\npassage 3:Push the small solid end of the toilet lift arm into the flush handle. If a screw is included with your part, screw it in tightly. Push it until there is no more give and it is secure. The other end will hang freely in the air. Connect the chain to the third hole on the lift arm. This is the hole closest to the edge of the lift arm. Use the pliers to make sure it is securely fastened. Turn the water valve back on and test out the flush of the toilet. If the toilet flushes slowly, adjust the chain to make it a little tighter on the lift arm.\n\n",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 225
+  }
+ }
+]

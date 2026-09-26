@@ -44,7 +44,7 @@ import json as _json
 import torch
 
 REPO = os.environ.get('NEMO_REPO', '/home/tsq/rhq/omniconfess/OmniConfess')
-DEFAULT_MODEL = '/ultrafast_share/tsq/MODELS/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16'
+DEFAULT_MODEL = '/slow_share/tsq/MODELS/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16'
 
 
 def _repair_buffers(model, model_path, device):
@@ -166,7 +166,7 @@ def get_layers(model):
 # branch (video_pruning_rate is forced to 0.0 at load, so it never triggers and
 # the reshape-to-(B,N,C) path is taken). Kept in one place so cad/dola agree.
 
-def fuse_inputs_embeds(model, inputs):
+def _fuse_impl(model, inputs):
     """Build the fused text+media inputs_embeds for a processor `inputs` dict.
 
     Returns (inputs_embeds[B,N,C], attention_mask, input_ids). For text-only
@@ -248,6 +248,20 @@ def fuse_inputs_embeds(model, inputs):
 
     inputs_embeds = inputs_embeds.reshape(B, N, C)
     return inputs_embeds, attention_mask, input_ids
+
+
+def fuse_inputs_embeds(model, inputs):
+    """inference_mode wrapper around _fuse_impl.
+
+    Without it the C-RADIO video encode builds an autograd graph that the
+    returned embeds keep alive (~12.8 GB on a 20-frame 448x576 item:
+    61.5G model -> 74.3G allocated BEFORE any LLM prefill), which OOM'd
+    AVCD's multi-branch prefill on 80 GB cards (2026-08-30 empty-run
+    diagnosis; bisect outputs/smoke_nemotron_fix_20260830/fuse_bisect.log).
+    The wrapper's own generate() fuses under no_grad, which is why the base
+    runners never saw this."""
+    with torch.inference_mode():
+        return _fuse_impl(model, inputs)
 
 
 def new_cache(model, batch_size=1):

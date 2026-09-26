@@ -10,7 +10,7 @@ Why not vLLM (the model card's primary path): on this host
   * the official cu129 container needs ~15-20 GB on /, which is 100% full.
 The repo ships full HF remote code (modeling.py NemotronH_Nano_Omni_Reasoning_V3
 + processing.py + Parakeet audio + C-RADIO vision) that targets transformers
-5.x, so we run it in the dedicated /ultrafast_share/tsq/venvs/nemotron-hf venv
+5.x, so we run it in the dedicated /slow_share/tsq/venvs/nemotron-hf venv
 (torch 2.6.0+cu124, transformers 5.6.2) — driver-compatible and GPFS-local.
 
 Structural mirror of methods/base_model_qwen3_omni.py: same shared v1 prompts,
@@ -31,7 +31,7 @@ Lives on GPFS (repo / is 100% full): sys.path picks up the repo's
 OmniConfess package via NEMO_REPO or the default below.
 
 Usage:
-  CUDA_VISIBLE_DEVICES=5 /ultrafast_share/tsq/venvs/nemotron-hf/bin/python \
+  CUDA_VISIBLE_DEVICES=5 /slow_share/tsq/venvs/nemotron-hf/bin/python \
       base_model_nemotron_hf.py --datasets pubmedqa \
       --data_path $REPO/OmniConfess/OmniHalluBench/pubmedqa/pubmedqa.json \
       --output_dir ./outputs/pubmedqa_nemotron --dry_run
@@ -51,7 +51,7 @@ from shared import (
 )
 from shared.data_loader import load_image
 
-DEFAULT_MODEL = '/ultrafast_share/tsq/MODELS/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16'
+DEFAULT_MODEL = '/slow_share/tsq/MODELS/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16'
 AUDIO_SR = 16000          # config sound_config.sampling_rate
 VIDEO_FPS = 2             # model-card guidance for <=720p video
 VIDEO_MAX_FRAMES = 64     # our videos are ~10s -> ~20 frames

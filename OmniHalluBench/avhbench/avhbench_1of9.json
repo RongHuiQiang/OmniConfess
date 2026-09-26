@@ -1,0 +1,1442 @@
+[
+ {
+  "uid": "avhbench_000004",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In a tiled bathroom, a person lifts the toilet lid as tapping noises are heard, followed by the sound of a toilet flushing.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00024.mp4",
+   "audio": "videos/00024.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000006",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The tribal drums beat as a green frog sits in a natural environment, surrounded by the sounds of shuffling footsteps, chirping crickets, and wet dirt.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00037.mp4",
+   "audio": "videos/00037.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000007",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A small dog sitting in a basket with a leash on the floor, accompanied by the sound of a person snoring.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00041.mp4",
+   "audio": "videos/00041.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000008",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A red and blue helicopter landing on a runway as a small plane sits nearby.and some poles are visible.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00047.mp4",
+   "audio": "videos/00047.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000013",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A small frog sits in the leaves of a green bush at night, surrounded by the soothing sounds of frogs and crickets chirping and croaking.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00079.mp4",
+   "audio": "videos/00079.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000017",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A man discusses as footsteps crunch on dirt and gravel, and birds chirp, while a pile of food and bags, a bag of trash, and other litter lay scattered on the ground.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00094.mp4",
+   "audio": "videos/00094.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000019",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In a blurry room, a man shouts before and after a person belches loudly, while a young woman in a black kitchen smiles by a plate of food with meat and onions.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00098.mp4",
+   "audio": "videos/00098.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000023",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In the video, a woman delivers a speech at an event, standing at a podium with a microphone in front of a flag.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00104.mp4",
+   "audio": "videos/00104.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000025",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In a bustling studio, the sound of aluminum cans clanking and compressed air spraying mingles with the gentle rattling of plastic as artists work on their paintings of various subjects.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00117.mp4",
+   "audio": "videos/00117.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000026",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The eerie sound of a beep is accompanied by retching and muffled speech, as a young child in a stroller holds a blanket .",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00119.mp4",
+   "audio": "videos/00119.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000028",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The woman and child speak as the little boy in a green shirt holds his hands to his ears while sitting on the couch.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00123.mp4",
+   "audio": "videos/00123.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000030",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In a bustling kitchen, the sound of a machine clicking is heard as a person mixes pink cotton candy in a bowl.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00127.mp4",
+   "audio": "videos/00127.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000031",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A woman's voice narrates as a man works diligently on a sewing machine at a wooden table.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00131.mp4",
+   "audio": "videos/00131.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000033",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The muffled sound of an aircraft engine hums as the wing of an airplane flies through a blue sky with clouds.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00141.mp4",
+   "audio": "videos/00141.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000034",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A man revs a vehicle engine as a woman with a microphone stands in the street, surrounded by a crowd of people talking and whistling and a some people are cleaning a road.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00147.mp4",
+   "audio": "videos/00147.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000039",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In a garage, an old car and truck are parked as a loud bang is heard, followed by an engine idling loudly.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00169.mp4",
+   "audio": "videos/00169.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000041",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In the bustling kitchen, a man's voice narrates as he prepares a meal, cutting shrimp and  while water sprays into the sink and drains.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00177.mp4",
+   "audio": "videos/00177.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000049",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The whimpering of several small dogs can be heard as a group of puppies play together in the grass.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00202.mp4",
+   "audio": "videos/00202.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000050",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In front of a blue house with a red front door, a man stands as a toy helicopter powers down before starting up.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00210.mp4",
+   "audio": "videos/00210.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000051",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The man whistled as the small dogs on the bed looked into a mirror, followed by a yell as plastic rustled and clanked in the background.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00212.mp4",
+   "audio": "videos/00212.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000060",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A man is using a tool to fix the engine of a motorcycle while speaking with distant hums and horns of passing traffic in the background.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00233.mp4",
+   "audio": "videos/00233.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000066",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "An adult female speaks as a blue and white bus idles at a stop, with passengers boarding and vehicle traffic passing by on the city street.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00255.mp4",
+   "audio": "videos/00255.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000068",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A man's voice narrates as a child yells, with an aircraft flying in the distance, while a little girl stands on a swing overlooking the ocean and a young boy rides a skateboard on a boat deck.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00263.mp4",
+   "audio": "videos/00263.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000069",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A white sports car accelerates down the highway, passing a train and a truck, with the wind roaring and the sun shining through the windshield.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00265.mp4",
+   "audio": "videos/00265.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000070",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A muffled helicopter engine flying over a tree-filled lake in a park.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00267.mp4",
+   "audio": "videos/00267.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000072",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In the video, a young woman in a blue skirt is seen holding a paper as a speech in front of a door.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00275.mp4",
+   "audio": "videos/00275.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000075",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In the serene ambiance of a bathroom, water softly flows as a man speaks amidst the presence of a shower head, a toothbrush, an umbrella on a tripod, and a person holding a plunger.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00293.mp4",
+   "audio": "videos/00293.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000082",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In the midst of hissing background noises, a man speaks under a night sky resembling a block of cheese, with a view of the moon and stars twinkling above.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00331.mp4",
+   "audio": "videos/00331.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000083",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A young man in a hat and t-shirt sits on a couch holding a white tablet, speaking followed by a digital beep.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00332.mp4",
+   "audio": "videos/00332.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000084",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In a dimly lit room, a young woman with glasses holding a smartphone bursts into laughter after taking a picture, accompanied by loud burps and giggles from her friends.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00334.mp4",
+   "audio": "videos/00334.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000087",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The chaotic night scene is filled with the deafening wail of an emergency siren and the roaring engine of a large truck as vehicles speed down the street.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00342.mp4",
+   "audio": "videos/00342.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000092",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In the audio, two men are chatting and laughing, while in the visual, a person is holding a controller and playing a free video game available on operating system software.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00360.mp4",
+   "audio": "videos/00360.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000098",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The muffled sound of a vehicle engine revving and running idle as cloth rustles, with a modern car dashboard displaying the speedometer and tachometer.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00377.mp4",
+   "audio": "videos/00377.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000105",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In a dark room at night, a man stands alone holding a cell phone in front of a crescent moon, while speaking with the humming of an engine and some rustling.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00415.mp4",
+   "audio": "videos/00415.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000107",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A young girl talks, followed by another young girl laughing, and a young man yelling as a train crosses a wooden bridge over a river with a crowd of people talking in the background.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00422.mp4",
+   "audio": "videos/00422.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000108",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "As the wind blows, a young man wearing glasses and a black jacket with a hood walks in the park, whistling a tune.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00424.mp4",
+   "audio": "videos/00424.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000110",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The ticking of a clock  through a metal sculpture  with gears and wires.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00430.mp4",
+   "audio": "videos/00430.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000111",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A young man in a black shirt operates a sewing machine, the hum of the machine followed by a metal click.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00433.mp4",
+   "audio": "videos/00433.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000113",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A  helicopter flies with loud chopping noises over a city with tall buildings.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00443.mp4",
+   "audio": "videos/00443.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000125",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The cooing of pigeons echoes through a room filled with a bunch of  animals in a cage.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00481.mp4",
+   "audio": "videos/00481.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000126",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In a small bedroom with a bed and closet, a young girl in a pink dress stands while clattering and banging occur, as a strong breeze blows through the wind.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00485.mp4",
+   "audio": "videos/00485.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000128",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The church bells ring as a man stands on a balcony in front of a building with clock.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00491.mp4",
+   "audio": "videos/00491.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000131",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The baby cries as a woman speaks, while a little girl in a pink dress sits on a red chair with a small child.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00500.mp4",
+   "audio": "videos/00500.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000133",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A black sports car speeds down a curvy road with the sound of humming and revving engine, accompanied by squealing tires.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00507.mp4",
+   "audio": "videos/00507.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000138",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "As a man talks, footsteps on dirt are heard amidst buzzing insects and chirping birds, while a beekeeper inspects a frame of bees inside a wooden beehive.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00515.mp4",
+   "audio": "videos/00515.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000139",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "Birds quack amidst passing traffic as they stand on the ground near a small garden with a bird bath and potted plants, while a black bird perches on a fence nearby.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00521.mp4",
+   "audio": "videos/00521.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000143",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A person on a boat catches a bass with a hook in its mouth, as water splashes, a duck quacks, and the person laughs.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00530.mp4",
+   "audio": "videos/00530.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000149",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "As the man's voice blends with the sound of ocean waves trickling and splashing, the bow of a sailboat navigates through the open sea with the wind and waves.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00544.mp4",
+   "audio": "videos/00544.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000150",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In a bathroom with a white urinal and a black drain, a man's voice is muffled by the camera as water gurgles in the drain, followed by the sound of a toilet flushing.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00548.mp4",
+   "audio": "videos/00548.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000151",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In a bustling city, a man in a suit and tie walks down a train as a woman gazes out the window, while a group of people chat amidst the sound of a crying infant and a muffled bus engine.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00550.mp4",
+   "audio": "videos/00550.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000154",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The audio whooshes as a woman speaks, followed by digital beeps and men talking, while a person stands on a boat in the ocean next to a logo for a technology company.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00558.mp4",
+   "audio": "videos/00558.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000156",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A man's voice echoes as race cars speed and the engine humming sound through turns on the track.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00568.mp4",
+   "audio": "videos/00568.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000164",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "As the man talks, a swarm of insects buzz around him.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00600.mp4",
+   "audio": "videos/00600.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000167",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A man speaks as a stream of water trickles in the background, while a young man rides a boat with a camera on board.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00619.mp4",
+   "audio": "videos/00619.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000168",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The sound of rushing water fills the room, as a  wooden shelf surrounded by books and a clock on the wall.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00623.mp4",
+   "audio": "videos/00623.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000172",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The microwave oven hums loudly as an adult male and a child chat, while a sudden beep interrupts the conversation, with a TV playing in the background.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00636.mp4",
+   "audio": "videos/00636.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000173",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The cordless drill with a battery in it is being used to work on something, creating vibrations and humming as it starts and stops several times.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00639.mp4",
+   "audio": "videos/00639.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000174",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In a serene farm setting, a man's voice is heard speaking as goats and a cow make their sounds, while a little white lamb  stand near a wooden fence in the grass.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00641.mp4",
+   "audio": "videos/00641.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000176",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The church bells ring amidst audio static as a man stands under a wooden roof in the attic.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00647.mp4",
+   "audio": "videos/00647.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000180",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A toy helicopter flies over a green field with trees and mountains in the background, as muffled plastic clacking is heard.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00659.mp4",
+   "audio": "videos/00659.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000182",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In the immersive game world, thunder roars in the distance as rain lightly pours, while a man yells and another hums in a room captured.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00667.mp4",
+   "audio": "videos/00667.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000183",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In the video, a crying baby sitting in a yellow high chair looks at the camera and makes a funny face, while in the background, a young woman talking.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00669.mp4",
+   "audio": "videos/00669.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000184",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The man inside the building rings a bell, while the church's bell tower chimes in unison.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00671.mp4",
+   "audio": "videos/00671.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000196",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The sound of frogs chirping fills the night as men speak and bang, while a man plays guitar next to a campfire.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00703.mp4",
+   "audio": "videos/00703.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000197",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "As the mid-size motor vehicle engine accelerates with a slight rattling sound, a driver wearing a helmet shifts gears downward inside the cockpit of the car.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00705.mp4",
+   "audio": "videos/00705.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000200",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The vehicle engine revs loudly as the camera shows the car's engine compartment with the hood up, revealing a cluttered engine bay.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00717.mp4",
+   "audio": "videos/00717.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000205",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In the video, a helicopter with a flag flies in the sky as a man talks in the background it show on a television nwes.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00738.mp4",
+   "audio": "videos/00738.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000206",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A woman cuts fabric with red scissors and a iron scale on a sewing machine while vibrations from the machine are heard with a woman speaking.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00742.mp4",
+   "audio": "videos/00742.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000210",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "In the midst of clanking plastic and a car engine revving, holding a white paper and a purple wire.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00755.mp4",
+   "audio": "videos/00755.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000211",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The woman on the couch is seen blowing her nose into a napkin while repeatedly sneezing and coughing.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00757.mp4",
+   "audio": "videos/00757.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000212",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "The sound of whooshing and humming fills the air as a man speaks, accompanied by distant squeaks, while young men play basketball on the court, with a logo-adorned speaker nearby.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00763.mp4",
+   "audio": "videos/00763.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ },
+ {
+  "uid": "avhbench_000213",
+  "dataset": "avhbench",
+  "task_type": "descriptive",
+  "modality": "visual+audio",
+  "answer_space": "free_text",
+  "question": "Describe what you see and hear in a single sentence.",
+  "answer": "A man in a hat cooks food on a grill outside, accompanied by the sizzle of frying food and music as he speaks.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": "videos/00765.mp4",
+   "audio": "videos/00765.mp4",
+   "image": null
+  },
+  "facets": {
+   "task": "AV Captioning"
+  },
+  "source": {}
+ }
+]
