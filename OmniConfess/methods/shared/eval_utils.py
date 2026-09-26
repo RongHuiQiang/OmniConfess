@@ -14,7 +14,7 @@ import os
 
 # Datasets that produce binary Yes/No answers
 # Only cmm and phd are judgment tasks (yes/no); all others preserve raw_output
-BINARY_DATASETS = {"cmm", "phd"}
+BINARY_DATASETS = {"cmm", "phd", "pope"}
 
 
 def _parse_binary(text):

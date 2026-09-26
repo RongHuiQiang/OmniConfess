@@ -46,15 +46,48 @@ def load_video_frames(video_path, num_frames=None):
     return np.array(frames) if frames else None
 
 
+def _load_audio_pyav(audio_path, sr=24000):
+    """Decode audio from a media container (e.g. .mp4) with PyAV, resampled to
+    mono float32 at ``sr``. Fallback for when libsndfile/audioread cannot open
+    the container (this environment lost its ffmpeg audioread backend, so
+    librosa.load fails on avhbench's mp4 files that carry the audio track)."""
+    try:
+        import av
+        import numpy as _np
+        container = av.open(audio_path)
+        if not any(s.type == 'audio' for s in container.streams):
+            container.close()
+            return None
+        resampler = av.audio.resampler.AudioResampler(
+            format='flt', layout='mono', rate=sr)
+        chunks = []
+        for frame in container.decode(audio=0):
+            for rf in resampler.resample(frame):
+                chunks.append(rf.to_ndarray().reshape(-1))
+        container.close()
+        if not chunks:
+            return None
+        a = _np.concatenate(chunks).astype('float32')
+        return a if len(a) > 0 else None
+    except Exception:
+        return None
+
+
 def load_audio_data(audio_path, sr=24000):
-    """Load audio as numpy array at 24kHz, verified pattern from GUARD."""
+    """Load audio as numpy array at 24kHz, verified pattern from GUARD.
+
+    Tries librosa (soundfile -> audioread) first; if that fails (e.g. no
+    ffmpeg/audioread backend for an .mp4 container) falls back to PyAV, which
+    decodes the mp4's audio track in-process."""
     if not audio_path or not os.path.exists(audio_path):
         return None
     try:
         audio, _ = librosa.load(audio_path, sr=sr)
-        return audio if (audio is not None and len(audio) > 0) else None
+        if audio is not None and len(audio) > 0:
+            return audio
     except Exception:
-        return None
+        pass
+    return _load_audio_pyav(audio_path, sr=sr)
 
 
 def load_image(image_path):

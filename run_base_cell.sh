@@ -12,8 +12,8 @@
 #     [max_samples]: optional; if set, only first N samples (for 1/3 degenerate cells)
 set -u
 cd "$(dirname "$0")"
-PY=/ultrafast_share/tsq/venvs/omniconfess/bin/python
-export MMHALU_MODEL_ROOT=/ultrafast_share/tsq/MODELS
+PY=/slow_share/tsq/venvs/omniconfess/bin/python
+export MMHALU_MODEL_ROOT=/slow_share/tsq/MODELS
 
 GPU=$1; DS=$2; METHOD=$3; DATA=$4; PV=$5; MAXS=${6:-0}
 
@@ -28,7 +28,20 @@ if [ "$MAXS" -gt 0 ]; then EXTRA="--max_samples $MAXS"; fi
 
 echo "[cell $(date +%T)] $CELL gpu=$GPU pv=$PV maxs=$MAXS data=$DATA" | tee -a "$LOG"
 
-CUDA_VISIBLE_DEVICES=$GPU $PY OmniConfess/methods/base_${METHOD}.py \
+# pd 特例:base_pd.py 本体不动,用盘上既有 wrapper 修两个已知序列化/媒体 bug:
+#   (a) np.int64 泄进 record_process 轨迹,json.dumps 必炸 -> pd_wrapper.py(numpy-safe dumps)
+#   (b) fps 列表 vs 标量(transformers>=4.53 Qwen2.5-Omni processor 视频路) -> pd_wrapper_cmm.py
+#       (含 a;无视频数据集只用 a,avhbench/cmm 有视频要 b)
+if [ "$METHOD" = "pd" ]; then
+  case "$DS" in
+    avhbench|cmm) RUNSRC=/home/tsq/rhq/omniconfess/pd_wrapper_cmm.py ;;
+    *)            RUNSRC=/home/tsq/rhq/omniconfess/pd_wrapper.py ;;
+  esac
+else
+  RUNSRC="OmniConfess/methods/base_${METHOD}.py"
+fi
+
+CUDA_VISIBLE_DEVICES=$GPU $PY "$RUNSRC" \
     --datasets "$DS" \
     --data_path "$DATA" \
     --data_root ./OmniHalluBench/ \

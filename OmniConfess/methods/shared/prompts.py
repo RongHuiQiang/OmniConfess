@@ -683,6 +683,9 @@ def get_system_prompt(dataset_name, prompt_version='v1'):
                 "factually consistent with the document. Answer only 'Yes' if the summary is consistent, "
                 "or 'No' if it contains any factual inconsistency."
             )
+        if 'pope' in ds:
+            return ("You are a helpful assistant. Look at the image and answer the "
+                    "question. Answer with a single word, either Yes or No.")
         return _DEFAULT_SYSTEM_V0
 
     # v1+
@@ -740,6 +743,11 @@ def get_system_prompt(dataset_name, prompt_version='v1'):
             "factually consistent with the document. Answer only 'Yes' if the summary is consistent, "
             "or 'No' if it contains any factual inconsistency."
         )
+    # POPE (public-benchmark arm): standard object-hallucination yes/no QA
+    # (Li et al., EMNLP 2023). Same template for v0 and v1 -- nothing tuned.
+    if 'pope' in ds:
+        return ("You are a helpful assistant. Look at the image and answer the "
+                "question. Answer with a single word, either Yes or No.")
     return _DEFAULT_SYSTEM
 
 
@@ -765,6 +773,8 @@ def get_user_prompt(q_text, dataset_name, prompt_version='v1', passage=None):
             return q_text
         if 'phd' in ds or 'halo' in ds:
             return f"Question: {q_text}\nAnswer:"
+        if 'pope' in ds:
+            return f"Question: {q_text}\nAnswer with Yes or No."
         if 'summedits' in ds:
             return f"Document: {passage_str}\n\n{q_text}\n\nFinal Answer:"
         # Text datasets: HaluEval / RAGTruth / PubMedQA
@@ -952,6 +962,8 @@ def get_user_prompt(q_text, dataset_name, prompt_version='v1', passage=None):
         )
     if prompt_version == 'v3':
         return f"Document: {passage_str}\nQuestion: {q_text}\nAnswer:"
+    if 'pope' in ds:
+        return f"Question: {q_text}\nAnswer with Yes or No."
 
     # v1
     return (

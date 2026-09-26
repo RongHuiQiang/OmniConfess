@@ -161,6 +161,9 @@ def main():
     ap.add_argument('--control', choices=['none', 'random_sign'], default='none')
     ap.add_argument('--record_process', action=argparse.BooleanOptionalAction, default=True)
     ap.add_argument('--dry_run', action='store_true')
+    ap.add_argument('--limit', type=int, default=0,
+                    help='first N items only (smoke; added 2026-08-31 for the '
+                         'CF_OVERRIDE unified smoke, run semantics unchanged)')
     args = ap.parse_args()
 
     set_seed(args.seed)
@@ -186,6 +189,8 @@ def main():
     data = load_dataset(args.data_path, args.data_root)
     if args.dry_run:
         data = data[:3]
+    if args.limit:
+        data = data[:args.limit]
 
     system_prompt = get_system_prompt(args.datasets, args.prompt_version)
 

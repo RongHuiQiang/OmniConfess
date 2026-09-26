@@ -30,6 +30,7 @@ import os, sys, time, json, argparse, random
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                 'OmniConfess', 'methods'))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import numpy as np
 import torch
@@ -40,6 +41,7 @@ from shared import (
     prepare_for_thinker, build_user_content_with_media_tokens, make_messages,
     get_system_prompt, get_user_prompt, make_result, save_result,
 )
+from gamma_operator import relevant_modalities_cmm   # Stage-2 R-selection
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
@@ -61,10 +63,20 @@ def build_view(processor, model, system_prompt, pv, av, iv, user_prompt):
 
 
 class CFConfessProcessor(LogitsProcessor):
-    """Intervenes exactly once, at the decision token (see module docstring)."""
+    """Intervenes exactly once, at the decision token.
+
+    Three-stage confession:
+      Stage 1 — base generation under full A+V (happens outside this class).
+      Stage 2 — at the decision token, compute per-channel kappa contributions
+                 and restrict the confession signal to the question-relevant
+                 modality set R (via relevant_modalities_cmm).
+      Stage 3 — force the decision token using only the R-channel signal,
+                 stripping the over-relied channel's influence.
+    """
 
     def __init__(self, model, tokenizer, cf_noaudio, cf_novideo, prompt_len,
-                 lam, w_audio=1.0, w_video=1.0, control_rng=None):
+                 lam, w_audio=1.0, w_video=1.0, control_rng=None,
+                 question=None, group_key=None):
         self.model = model
         self.tokenizer = tokenizer
         self.cf_noaudio = cf_noaudio
@@ -74,6 +86,8 @@ class CFConfessProcessor(LogitsProcessor):
         self.w_audio = w_audio
         self.w_video = w_video
         self.control_rng = control_rng      # None => real Delta; else sign flip
+        # Stage 2: determine relevant modality set R for this sample
+        self.R, self.R_source = relevant_modalities_cmm(question, group_key)
         self.used = False
         self.record = None
 
@@ -115,9 +129,21 @@ class CFConfessProcessor(LogitsProcessor):
         ly_full, ln_full = lp[YES_ID].item(), lp[NO_ID].item()
         margin_full = ly_full - ln_full
 
+        # Stage 2: compute per-channel kappa contributions
         d_audio = self._cf_lp_yes(self.cf_noaudio, gen) - ly_full
         d_video = self._cf_lp_yes(self.cf_novideo, gen) - ly_full
-        delta = self.w_audio * d_audio + self.w_video * d_video
+
+        # Restrict confession signal to R (relevant channels only).
+        # kappa^(audio) = margin_full - margin_noaudio = -d_audio  (sign: positive
+        # kappa means audio raised Yes relative to no-audio baseline)
+        # We use the λ-weighted delta formulation (lambda-δ, best for CMM at 81.3%)
+        # but sum ONLY over R to strip the over-relied channel's contribution.
+        delta = 0.0
+        if 'audio' in self.R:
+            delta += self.w_audio * d_audio
+        if 'video' in self.R:
+            delta += self.w_video * d_video
+
         delta_eff = delta
         if self.control_rng is not None:
             delta_eff = delta * self.control_rng.choice([-1.0, 1.0])
@@ -137,6 +163,8 @@ class CFConfessProcessor(LogitsProcessor):
             margin_full=round(margin_full, 4),
             d_cf_audio=round(d_audio, 4), d_cf_video=round(d_video, 4),
             w_audio=self.w_audio, w_video=self.w_video,
+            # Stage 2 confession: which channels are relevant for this sample
+            R=sorted(self.R), R_source=self.R_source,
             delta=round(delta, 4),
             delta_eff=round(delta_eff, 4),
             margin_adj=round(margin_adj, 4),
@@ -227,7 +255,9 @@ def main():
 
             cf_proc = CFConfessProcessor(model, tokenizer, clean_a, clean_v,
                                          input_len, args.lambda_cf,
-                                         args.w_audio, args.w_video, control_rng)
+                                         args.w_audio, args.w_video, control_rng,
+                                         question=item.get('question', ''),
+                                         group_key=item.get('group_key', ''))
 
             with torch.inference_mode():
                 out = model.thinker.generate(

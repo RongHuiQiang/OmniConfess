@@ -1,0 +1,1042 @@
+[
+ {
+  "uid": "pubmedqa_000000",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is ganglionated plexi ablation during Maze IV procedure beneficial for postoperative long-term stable sinus rhythm?",
+  "answer": "No. GP ablation did not prove to be beneficial for postoperative stable NSR. A complete left atrial lesion set and biatrial ablation are advisable for improving rhythm outcomes. Randomized controlled trials are necessary to confirm our findings.",
+  "label": "no",
+  "passage": "We investigated the role of surgical ablation targeting the autonomous nervous system during a Cox-Maze IV procedure in the maintenance of sinus rhythm at long-term follow-up.\nThe patient population consisted of 519 subjects with persistent or long-standing persistent atrial fibrillation (AF) undergoing radiofrequency Maze IV during open heart surgery between January 2006 and July 2013 at three institutions without (Group 1) or with (Group 2) ganglionated plexi (GP) ablation. Recurrence of atrial fibrillation off-antiarrhythmic drugs was the primary outcome. Predictors of AF recurrence were evaluated by means of competing risk regression. Median follow-up was 36.7 months.\nThe percentage of patients in normal sinus rhythm (NSR) off-antiarrhythmic drugs did not differ between groups (Group 1-75.5%, Group 2-67.8%, p = 0.08). Duration of AF ≥ 38 months (p = 0.01), left atrial diameter ≥ 54 mm (0.001), left atrial area ≥ 33 cm(2) (p = 0.005), absence of connecting lesions (p= 0.04), and absence of right atrial ablation (p<0.001) were independently associated with high incidence of AF recurrence. In contrast the absence of GP ablation was not a significant factor (p = 0.12).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 1
+  }
+ },
+ {
+  "uid": "pubmedqa_000001",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Production of chemokines by perivascular adipose tissue: a role in the pathogenesis of atherosclerosis?",
+  "answer": "Yes. Human pWAT has chemotactic properties through the secretion of different chemokines, and we propose that pWAT might contribute to the progression of obesity-associated atherosclerosis.",
+  "label": "yes",
+  "passage": "Obesity is associated with an increased risk for cardiovascular disease. Although it is known that white adipose tissue (WAT) produces numerous proinflammatory and proatherogenic cytokines and chemokines, it is unclear whether adipose-derived chemotactic signals affect the chronic inflammation in atherosclerosis.\nHistological examination showed that perivascular WAT (pWAT) is in close proximity to vascular walls, particularly at sites that have a tendency to develop atherosclerosis. In rodents, the amount of pWAT is markedly increased by a high-fat diet. At a functional level, supernatant from subcutaneous and pWAT strongly induced the chemotaxis of peripheral blood leukocytes. The migration of granulocytes and monocytes was mostly mediated by interleukin-8 and monocyte chemoattractant protein-1, respectively, whereas both chemokines contributed to the migration of activated T cells. Moreover, pWAT produces these chemokines, as shown by immunohistochemistry and by explant culture. The accumulation of macrophages and T cells at the interface between pWAT and the adventitia of human atherosclerotic aortas may reflect this prochemotactic activity of pWAT.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 2
+  }
+ },
+ {
+  "uid": "pubmedqa_000009",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does Mammographic Density have an Impact on the Margin Re-excision Rate After Breast-Conserving Surgery?",
+  "answer": "No. Mammographic density is not associated with an increased need for re-excision or resection of unnecessary margins at initial BCS.",
+  "label": "no",
+  "passage": "Limited and conflicting data exist on an association between mammographic density (MD) and re-excision rates after breast-conserving surgery (BCS). Additionally, the correlation of MD with resection of unnecessary margins during initial BCS is unknown.\nAll women with a diagnosis of breast cancer from 2003 to 2012 and enrolled in a larger study on MD were evaluated. Operative and pathology reports were reviewed to determine margin resection and involvement. Mammographic density was determined both by breast imaging-reporting and data system (BI-RADS) classification and by an automated software program (Volpara Solutions). Additional margins were deemed unnecessary if the lumpectomy specimen margin was free of invasive tumor [≥2 mm for ductal carcinoma in situ (DCIS)] or if further re-excision was needed.\nOf 655 patients, 398 (60.8%) had BCS, whereas 226 (34.5%) underwent initial mastectomy. The women with denser breasts (BI-RADS 3 or 4) underwent initial mastectomy more frequently than the women with less dense breasts (40.0 vs. 30.5%, respectively; p = 0.0118). Of the patients with BCS, 166 (41.7%) required separate re-excision. Additional margins were taken during BCS in 192 (48.2%) patients, with 151 (78.6%) proving to be unnecessary. In the bivariable analysis, the patients with denser breasts according to BI-RADS classification and volumetric density showed a trend toward requiring more frequent re-excision, but this association was not seen in the multivariable analysis. The rate of unnecessary margins did not differ by breast density. In the multivariate analysis, the re-excision rates increased with DCIS (p<0.0003) and decreased with resection of additional margins (p = 0.0043).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 13
+  }
+ },
+ {
+  "uid": "pubmedqa_000016",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does prior benign prostate biopsy predict outcome for patients treated with radical perineal prostatectomy?",
+  "answer": "Yes. A prior benign prostate biopsy may be independently associated with more favorable surgical and biochemical outcomes after prostatectomy. Additional studies are needed to confirm these findings.",
+  "label": "yes",
+  "passage": "To determine the effect of prior benign prostate biopsies on the surgical and clinical outcomes of patients treated with radical perineal prostatectomy for prostate cancer.\nA total of 1369 patients with clinically localized prostate cancer underwent radical prostatectomy by a single surgeon between 1991 and 2001. A subset of 203 patients (14.9%), who had undergone at least one prior benign prostate biopsy for a rising prostate-specific antigen and/or abnormal digital rectal examination, constituted our study population. A total of 1115 patients with no prior biopsy represented our control group. After prostatectomy, patients were evaluated at 6-month intervals for biochemical evidence of recurrence, defined as a prostate-specific antigen level of 0.5 ng/mL or greater.\nPatients with a prior benign biopsy had more favorable pathologic features with more organ-confined (74% versus 64%; P<0.001) and less margin-positive (9.8% versus 18%) disease. Only 24 patients (12%) in the study group (versus 20% in control group; P = 0.01) had eventual evidence of biochemical failure. Kaplan-Meier analyses suggested that patients with prior benign biopsies have improved biochemical disease-free survival, especially for those with more aggressive disease (Gleason sum 7 or greater; P<0.01). Overall, patients in the study group had lower probability (odds ratio 0.57, P<0.001) of biochemical failure compared with those in the control group.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 21
+  }
+ },
+ {
+  "uid": "pubmedqa_000019",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does birth center care during a woman's first pregnancy have any impact on her future reproduction?",
+  "answer": "No. A woman's model of care, such as birth center care, during her first pregnancy does not seem to be a sufficiently important factor to affect subsequent reproduction in Sweden.",
+  "label": "no",
+  "passage": "Women's experiences of childbirth may affect their future reproduction, and the model of care affects their experiences, suggesting that a causal link may exist between model of care and future reproduction. The study objective was to examine whether the birth center model of care during a woman's first pregnancy affects whether or not she has a second baby, and on the spacing to the next birth.\nBetween October 1989 and July 1993, a total of 1860 women at low medical risk in early pregnancy, who participated in a randomized controlled trial of in-hospital birth center care versus standard care, gave birth. The 1063 primiparas in the trial, 543 in the birth center group and 520 in the standard care group, were included in a secondary analysis in which women's personal identification codes were linked to the Swedish National Birth Register, which included information about their subsequent birth during the following 7 to 10 years. Time to an event curves were constructed by means of the Kaplan Meier method.\nThe observation period after the first birth was on average 8.8 years in the birth center group and 8.7 years in the standard care group. No statistical difference was found between the groups in time to second birth, which was 2.85 and 2.82 years, respectively (median; log-rank 1.26; p=0.26).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 25
+  }
+ },
+ {
+  "uid": "pubmedqa_000022",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Can homemade alcohol (Raksi) be useful for preserving dead bodies?",
+  "answer": "Yes. It is concluded from the study that this knowledge if applied to dead human subjects, may preserve dead bodies temporarily allowing delayed funeral.",
+  "label": "yes",
+  "passage": "Embalming is the through disinfection and art of preserving bodies after death using chemical substances. It keeps a body life like in appearance during the time it lies in a state prior to funeral.\nThis study was undertaken to investigate the effectiveness of Raksi in sacrificed rats in arresting postmortem changes and establishing scientific fact whether Raksi can be an alternative to standard embalming constituent if it is not available.\n50 albino rats were systematically randomized into control and experiment groups. Raksi and distilled water were injected for embalming purpose intraventricularly in experiment and control groups of rats respectively and kept for 48 to 96 hours for observation for postmortem changes.\nObservations made at 48 and 72 hours of embalming revealed that Raksi can arrest postmortem changes in the rats up to 72 hours (3rd day) successfully in the experimental group whereas moderate to severe postmortem changes were seen in the control group. The experimental group showed mild degree of putrefactive changes, liberation of gases and liquefaction of tissues only at 96 hours (4th day) of embalming.\nThe Raksi used in this experiment contained 34% of alcohol, which was determined by an alcohol hydrometer. Experiment clearly demonstrated from its result that raksi can be utilised temporarily for embalming since it contains alcohol and has preservative, bactericidal and disinfectant properties.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 28
+  }
+ },
+ {
+  "uid": "pubmedqa_000024",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does an additional antirotation U-Blade (RC) lag screw improve treatment of AO/OTA 31 A1-3 fractures with gamma 3 nail?",
+  "answer": "No. In our study the U-Blade (RC) lag screw did not reduce the cut-out in treatment of OTA/AO 31A1-3 fractures at all. Considering the longer duration of surgery and the higher costs of the U-Blade (RC) lag screw, our results do not justify its use. However, further prospective randomized studies will be necessary.",
+  "label": "no",
+  "passage": "Poor bone quality and unstable fractures increase the cut-out rate in implants with gliding lag screws. The U-Blade (RC) lag screw for the Gamma3®nail was introduced to provide monoaxial rotational stability of the femoral head and neck fragment. The purpose of this study was to evaluate whether the use of the U-Blade (RC) lag screw is associated with reduced cut-out in patients with OTA/AO 31A1-3 fractures.MATERIAL &\nBetween 2009 and 2014, 751 patients with OTA/AO 31A1-3 fractures were treated with a Gamma3®nail at our institution. Out of this sample 199 patients were treated with U-blade (RC) lag screws. A total of 135 patients (117 female, 18 male) with standard lag screw (treatment group A) were matched equally regarding age (±4 years) sex, fracture type and location to 135 patients with U-blade (RC) lag screw (treatment group B). Within a mean follow up of 9.2 months (range 6-18 months) we assessed the cut-out rate, the calTAD, lag screw migration, the Parker's mobility score and the Parker's ratio at postoperatively, six and 12 months following surgery. Furthermore we recorded all complications, ASA-Score, hospital stay and duration of surgery retrospectively.\nThe most common fracture among group B with a cut-out of the lag screw were AO/OTA 2.3 and 3.2 fractures whereas in group A cut-out was most commonly seen in AO/OTA 2.1, 2.2 and 2.3 fractures, there was no significant reduction of the cut-out rate in group B 2.2% (n=3) compared to group A 3.7% (n=5). The duration of surgery was significantly shorter in group A (p<0.05). There was no significant difference in lag screw placement, the Parker's ratio and mobilization.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 30
+  }
+ },
+ {
+  "uid": "pubmedqa_000026",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "May mean platelet volume levels be a predictor in the diagnosis of pelvic inflammatory disease?",
+  "answer": "Yes. Since the MPV value was significantly decreased in patients with PID, it may serve as an additional and even more valuable marker than leukocyte count in the diagnosis of PID.",
+  "label": "yes",
+  "passage": "Our aim in this study was to investigate whether mean platelet volume (MPV) value could be used as an early marker to predict pelvic inflammatory disease (PID).\nOverall, 44 patients with PID and 44 healthy women were included in the study. The control group consisted of 44 women who applied to the clinic for a routine gynaecological check-up, without chronic disease or a history of medication use. Owing to the fact that it would affect thrombocyte function, women who have the following conditions were excluded from the study: women who were taking anticoagulant therapy, oral contraceptives, nonsteroid anti-inflammatory medications and who had chronic diseases. The leukocyte count, platelet count, neutrophil ratio and MPV values were collected from PID and the control group. C reactive protein values of patients with PID were also noted.\nMPV values in patients with PID were lower than those in the control group. This reduction in MPV is statistically significant when the PID patient group is compared with the control group (p < 0.001). A negative correlation was discovered between platelet count and MPV values (p = 0.019, r = - 0.425). Receiver-operating curve analysis pointed out that MPV has greater area under curve value than neutrophil rate, leukocyte and platelet count (0.73, 0.64, 0.72 and 0.49 respectively).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 32
+  }
+ },
+ {
+  "uid": "pubmedqa_000032",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "c-Kit-dependent growth of uveal melanoma cells: a potential therapeutic target?",
+  "answer": "Yes. The results confirm that c-kit is vastly expressed in uveal melanoma, suggest that the c-kit molecular pathway may be important in uveal melanoma growth, and point to its use as a target for therapy with STI571.",
+  "label": "yes",
+  "passage": "This study was conducted to investigate the expression and functional impact of the proto-oncogene c-kit in uveal melanoma.\nBased on immunohistochemical (IHC) study of paraffin-embedded specimens from 134 uveal melanomas and Western blot analysis on eight fresh-frozen samples the expression of c-kit in uveal melanoma was studied. Furthermore, the phosphorylation of c-kit and the impact of the tyrosine kinase inhibitor STI571 was examined in the three uveal melanoma cell lines OCM-1, OCM-3, and 92-1.\nEighty-four of 134 paraffin-embedded samples and six of eight fresh-frozen samples expressed c-kit. c-Kit was strongly expressed and tyrosine phosphorylated in cultured uveal melanoma cells compared with cutaneous melanoma cells. Moreover, in contrast to cutaneous melanoma cell lines c-kit maintained a high phosphorylation level in serum-depleted uveal melanoma cells. No activation-related mutations in exon 11 of the KIT gene were found. On the contrary, expression of the stem cell growth factor (c-kit ligand) was detected in all three uveal melanoma cell lines, suggesting the presence of autocrine (paracrine) stimulation pathways. Treatment of uveal melanoma cell lines with STI571, which blocks c-kit autophosphorylation, resulted in cell death. The IC(50) of the inhibitory effects on c-kit phosphorylation and cell proliferation was of equal size and less than 2.5 microM.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 38
+  }
+ },
+ {
+  "uid": "pubmedqa_000033",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is the type of remission after a major depressive episode an important risk factor to relapses in a 4-year follow up?",
+  "answer": "Yes. At medium term, relapse rates for a major depressive episode are high. Partial remission after a depressive episode seems to be an important predictive factor for relapses in a 4-year follow-up.",
+  "label": "yes",
+  "passage": "Rates of relapse and predictive relapse factors were studied over more than 4 years in a sample of Spanish outpatients with DSM-III-R criteria for unipolar major depressive episode.\nA final sample of 139 outpatient was followed monthly in a naturalistic study. The Structured Clinical Interview for DSM-III-R was used. Phases of evolution were recorded using the Hamilton Depression Rating Scale, applying the Frank criteria. Survival analysis, Kaplan-Meier product limit and proportional hazards models were used.\nA higher rate of relapses was observed in the partial remission group (91.4%) compared to the complete remission one (51.3%). The four factors with predictive relapse value were: \"partial remission versus complete remission\", \"the intensity of clinical symptoms\", \"the age\" and \"the number of previous depressive episodes\". The existence of partial remission was the most powerful predictive factor.\nThe decreasing sample size during the follow-up and the difficulty in warranting the treatment compliance.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 39
+  }
+ },
+ {
+  "uid": "pubmedqa_000042",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Combining process indicators to evaluate quality of care for surgical patients with colorectal cancer: are scores consistent with short-term outcome?",
+  "answer": "Maybe. For individual patients, a high score on the composite measures based on process indicators is not associated with better short-term outcome. However, at the hospital level, a good score on the composite measures based on process indicators was consistent with more favourable risk-adjusted short-term outcome rates.",
+  "label": "maybe",
+  "passage": "To determine if composite measures based on process indicators are consistent with short-term outcome indicators in surgical colorectal cancer care.\nLongitudinal analysis of consistency between composite measures based on process indicators and outcome indicators for 85 Dutch hospitals.\nThe Dutch Surgical Colorectal Audit database, the Netherlands.\n4732 elective patients with colon carcinoma and 2239 with rectum carcinoma treated in 85 hospitals were included in the analyses.\nAll available process indicators were aggregated into five different composite measures. The association of the different composite measures with risk-adjusted postoperative mortality and morbidity was analysed at the patient and hospital level.\nAt the patient level, only one of the composite measures was negatively associated with morbidity for rectum carcinoma. At the hospital level, a strong negative association was found between composite measures and hospital mortality and morbidity rates for rectum carcinoma (p<0.05), and hospital morbidity rates for colon carcinoma.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 49
+  }
+ },
+ {
+  "uid": "pubmedqa_000044",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is anorectal endosonography valuable in dyschesia?",
+  "answer": "Yes. Linear anorectal endosonography demonstrated incomplete or even absent relaxation of the anal sphincter and the m. puborectalis during a defecation movement in the majority of our patients with dyschesia. This study highlights the value of this elegant ultrasonographic technique in the diagnosis of \"pelvic floor dyssynergia\" or \"anismus\".",
+  "label": "yes",
+  "passage": "Dyschesia can be provoked by inappropriate defecation movements. The aim of this prospective study was to demonstrate dysfunction of the anal sphincter and/or the musculus (m.) puborectalis in patients with dyschesia using anorectal endosonography.\nTwenty consecutive patients with a medical history of dyschesia and a control group of 20 healthy subjects underwent linear anorectal endosonography (Toshiba models IUV 5060 and PVL-625 RT). In both groups, the dimensions of the anal sphincter and the m. puborectalis were measured at rest, and during voluntary squeezing and straining. Statistical analysis was performed within and between the two groups.\nThe anal sphincter became paradoxically shorter and/or thicker during straining (versus the resting state) in 85% of patients but in only 35% of control subjects. Changes in sphincter length were statistically significantly different (p<0.01, chi(2) test) in patients compared with control subjects. The m. puborectalis became paradoxically shorter and/or thicker during straining in 80% of patients but in only 30% of controls. Both the changes in length and thickness of the m. puborectalis were significantly different (p<0.01, chi(2) test) in patients versus control subjects.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 51
+  }
+ },
+ {
+  "uid": "pubmedqa_000045",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is fear of anaphylactic shock discouraging surgeons from more widely adopting percutaneous and laparoscopic techniques in the treatment of liver hydatid cyst?",
+  "answer": "Yes. The seemingly exaggerated traditional fear of anaphylaxis seems to discourage surgeons from more widely adopting minimal access techniques for the treatment of hydatid cyst.",
+  "label": "yes",
+  "passage": "Sources of reports about laparoscopic and percutaneous treatment of liver hydatid cysts are limited to just a few countries. To address the reason behind this, we carried out a survey of 30 surgeons in northern Jordan.\nA questionnaire was distributed to collect data regarding the surgical technique preferred by each surgeon. Further information was collected from those not adopting minimal-access techniques to determine their reasons for not doing so.\nOnly 3 surgeons (10%) considered laparoscopy as the first line of treatment. Of the 27 surgeons who did not consider percutaneous or laparoscopic treatment, fear of anaphylaxis and/or dissemination was the main reason given by 21 surgeons (78%) for not using minimal access techniques.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 53
+  }
+ },
+ {
+  "uid": "pubmedqa_000046",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is intensive chemotherapy safe for rural cancer patients?",
+  "answer": "Yes. It appears safe to administer intensive chemotherapy regimens at standard doses to rural patients without increased morbidity or mortality. Support for general practitioners through phone or videoconferencing may reduce the safety concerns.",
+  "label": "yes",
+  "passage": "To provide equality of cancer care to rural patients, Townsville Cancer Centre administers intensive chemotherapy regimens to rural patients with node-positive breast and metastatic colorectal cancers at the same doses as urban patients. Side-effects were usually managed by rural general practitioners locally.AIM: The aim is to determine the safety of this practice by comparing the profile of serious adverse events and dose intensities between urban and rural patients at the Townsville Cancer Centre.\nA retrospective audit was conducted in patients with metastatic colorectal and node-positive breast cancers during a 24-month period. Fisher's exact test was used for analysis. Rurality was determined as per rural, remote and metropolitan classification.\nOf the 121 patients included, 70 and 51 patients had breast and colon cancers respectively. The urban versus rural patient split among all patients, breast and colorectal cancer subgroups was 68 versus 53, 43 versus 27 and 25 versus 26 respectively. A total of 421 cycles was given with dose intensity of>95% for breast cancer in both groups (P>0.05). Rate of febrile neutropenia was 9.3% versus 7.4% (P = 0.56). For XELOX, rate of diarrhoea was 20% versus 19% (P = 0.66) and rate of vomiting was 20% versus 11% (P = 0.11). Only two patients were transferred to Townsville for admission. No toxic death occurred in either group.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 54
+  }
+ },
+ {
+  "uid": "pubmedqa_000047",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Do people who were passive smokers during childhood have increased risk of long-term work disability?",
+  "answer": "Yes. The study supports the hypothesis that nurses' aides who were exposed to ETS at home during childhood have an increased risk of long-term sickness absence.",
+  "label": "yes",
+  "passage": "Regular inhalation of tobacco smoke, whether it be voluntary or not, may have profound negative effects on the body. Also intervertebral discs may be affected. The objective of the present study was to test the hypothesis that nurses' aides who were exposed to environmental tobacco smoke (ETS) at home during childhood have an increased risk of long-term sick leave.\nThe sample comprised 5563 Norwegian nurses' aides, not on sick leave when they completed a mailed questionnaire in 1999. Of these, 4744 (85.3%) completed a second questionnaire 15 months later. The outcome measure was the incidence proportion of long-term sick leave during the 12 months prior to the follow-up.\nRespondents who reported at baseline that they had been exposed to ETS at home during childhood had increased risk of sick leave exceeding 14 days attributed to neck pain (odds ratio (OR) = 1.34; 95% confidence interval (CI): 1.04-1.73), high back pain (OR=1.49; CI: 1.07-2.06), low back pain (OR=1.21; CI: 0.97-1.50), and any illness (OR=1.23; CI: 1.07-1.42), after adjustments for demographic and familial characteristics, former smoking, current smoking, physical leisure-time activities, work factors, prior neck injury, and affective symptoms. They also had increased risk of sick leave exceeding 8 weeks (OR=1.29; CI: 1.08-1.55).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 55
+  }
+ },
+ {
+  "uid": "pubmedqa_000048",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does higher body mass index contribute to worse asthma control in an urban population?",
+  "answer": "No. Using 4 validated asthma control questionnaires, we failed to find an association between obesity and asthma control in an urban population with asthma. Weight loss may not be an appropriate strategy to improve asthma control in this population.",
+  "label": "no",
+  "passage": "Epidemiologic findings support a positive association between asthma and obesity.\nDetermine whether obesity or increasing level of body mass index (BMI) are associated with worse asthma control in an ethnically diverse urban population.\nCross-sectional assessment of asthma control was performed in patients with asthma recruited from primary care offices by using 4 different validated asthma control questionnaires: the Asthma Control and Communication Instrument (ACCI), the Asthma Control Test (ACT), the Asthma Control Questionnaire (ACQ), and the Asthma Therapy Assessment Questionnaire (ATAQ). Multiple linear regression analysis was performed to evaluate the association between obesity and increasing BMI level and asthma control.\nOf 292 subjects with a mean age of 47 years, the majority were women (82%) and African American (67%). There was a high prevalence of obesity with 63%, with only 15% normal weight. The mean score from all 4 questionnaires showed an average suboptimal asthma control (mean score/maximum possible score): ACCI (8.3/19), ACT (15.4/25), ACQ (2.1/6), and ATAQ (1.3/4). Regression analysis showed no association between obesity or increasing BMI level and asthma control using all 4 questionnaires. This finding persisted even after adjusting for FEV(1), smoking status, race, sex, selected comorbid illnesses, and long-term asthma controller use.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 56
+  }
+ },
+ {
+  "uid": "pubmedqa_000052",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is low serum chloride level a risk factor for cardiovascular mortality?",
+  "answer": "Yes. This s the first report from a population-based study to indicate that there is an association between serum chloride level and the incidence of total, CVD and non-CVD mortalities. The risk ratio for CVD mortality associated with a low serum chloride level was comparable to or higher than those observed for well-established CVD risk factors.",
+  "label": "yes",
+  "passage": "Serum chloride level is routinely assayed in clinical laboratories in the management of patients with kidney disorders and with metabolic diseases. It is a biological parameter that is easily, precisely and relatively cheaply measured. The epidemiological features of serum chloride levels have not been studied before.\nFor the random sample of men and women from the Belgian Interuniversity Research on Nutrition and Health aged 25-74 years, free of symptomatic coronary heart disease at baseline, serum chloride concentrations were measured, among those of other electrolytes. The cohort was followed up for 10 years with respect to subsequent cause-specific mortality.\nThe results are based on observations of 4793 men and 4313 women. According to Cox regression analysis serum chloride level was one of the strongest predictors of total, cardiovascular disease (CVD) and non-CVD mortalities independently of age, body mass index, sex, smoking, systolic blood pressure, levels of total and high-density lipoprotein cholesterol, uric acid, serum creatinine and serum total proteins and intake of diuretics. This relation was proved to be independent of levels of other serum electrolytes and similar for men and women. The estimated adjusted risk ratio for CVD death for subjects with a serum chloride level<or =100 mmol/l compared with those with levels above that limit was 1.65 (95% confidence interval 1.06-2.57) for men and 2.16 (95% confidence interval 1.11-4.22) for women. The study of adjusted risk ratios for four groups of subjects defined on the basis of their baseline serum chloride levels revealed a decreasing log-linear 'dose-response' relation to total and cardiovascular mortalities.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 60
+  }
+ },
+ {
+  "uid": "pubmedqa_000060",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does the severity of obstructive sleep apnea predict patients requiring high continuous positive airway pressure?",
+  "answer": "Maybe. Severe OSA patients are much more likely to need high CPAP levels. However, because of the low positive predictive value (only 28.6%), the clinical value of such information is limited. ESS and MSLT did not increase the predictive value for the need for high CPAP.",
+  "label": "maybe",
+  "passage": "To investigate polysomnographic and anthropomorphic factors predicting need of high optimal continuous positive airway pressure (CPAP).\nRetrospective data analysis.\nThree hundred fifty-three consecutive obstructive sleep apnea (OSA) patients who had a successful manual CPAP titration in our sleep disorders unit.\nThe mean optimal CPAP was 9.5 +/- 2.4 cm H2O. The optimal CPAP pressure increases with an increase in OSA severity from 7.79 +/- 2.2 in the mild, to 8.7 +/- 1.8 in the moderate, and to 10.1 +/- 2.3 cm H2O in the severe OSA group. A high CPAP was defined as the mean + 1 standard deviation (SD;>or =12 cm H2O). The predictor variables included apnea-hypopnea index (AHI), age, sex, body mass index (BMI), Epworth Sleepiness Scale (ESS), and the Multiple Sleep Latency Test (MSLT). High CPAP was required in 2 (6.9%), 6 (5.8%), and 63 (28.6%) patients with mild, moderate, and severe OSA, respectively. On univariate analysis, AHI, BMI, ESS score, and the proportion of males were significantly higher in those needing high CPAP. They also have a lower MSLT mean. On logistic regression, the use of high CPAP was 5.90 times more frequent (95% confidence interval 2.67-13.1) in severe OSA patients after adjustment for the other variables. The area under the receiver operator curve was 72.4%, showing that the model was adequate.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 70
+  }
+ },
+ {
+  "uid": "pubmedqa_000061",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does SYNTAX score predict in-hospital outcomes in patients with ST elevation myocardial infarction undergoing primary percutaneous coronary intervention?",
+  "answer": "Yes. SxS is a useful tool that can predict in-hospital outcomes of patients with STEMI undergoing pPCI.",
+  "label": "yes",
+  "passage": "SYNTAX score (SxS) has been demonstrated to predict long-term outcomes in stable patients with coronary artery disease. But its prognostic value for patients with acute coronary syndrome remains unknown.AIM: To evaluate whether SxS could predict in-hospital outcomes for patients admitted with ST elevation myocardial infarction (STEMI) who undergo primary percutaneous coronary intervention (pPCI).\nThe study included 538 patients with STEMI who underwent pPCI between January 2010 and December 2012. The patients were divided into two groups: low SxS (<22) and high SxS (>22). The SxS of all patients was calculated from aninitial angiogram and TIMI flow grade of infarct related artery was calculated after pPCI. Left ventricular systolic functions of the patients were evaluated with an echocardiogram in the following week. The rates of reinfarction and mortality during hospitalisation were obtained from the medical records of our hospital.\nThe high SxS group had more no-reflow (41% and 25.1%, p<0.001, respectively), lower ejection fraction (38.2 ± 7.5% and 44.6 ± 8.8%, p<0.001, respectively), and greater rates of re-infarction (9.5% and 7.3%, p = 0.037, respectively) and mortality (0.9% and 0.2%, p = 0.021, respectively) during hospitalisation compared to the low SxS group. On multivariate logistic regression analysis including clinical variables, SxS was an independent predictor of no-reflow (OR 1.081, 95% CI 1.032-1.133, p = 0.001).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 72
+  }
+ },
+ {
+  "uid": "pubmedqa_000064",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Can calprotectin predict relapse risk in inflammatory bowel disease?",
+  "answer": "Maybe. Measuring calprotectin may help to identify UC and colonic CD patients at higher risk of clinical relapse.",
+  "label": "maybe",
+  "passage": "Assessing the clinical course of inflammatory bowel disease (IBD) patients consists of periodical clinical evaluations and laboratory tests. We aimed to assess the role of calprotectin tests in predicting clinical relapse in IBD patients.\nNinety-seven patients with ulcerative colitis (UC) and 65 with Crohn's disease (CD) in clinical remission were prospectively included in the study. A 10-g stool sample was collected for calprotectin assay. The cutoff level was set at 130 mg/kg of feces. Patients were followed up for 1 yr after the test or until relapse. The cumulative proportion of relapses was estimated by the Kaplan-Meier analysis. Statistics for equality of survival distribution were tested using the log-rank test.\nThe calprotectin test was positive in 44 UC patients and 26 of them relapsed within a year, while 11 of 53 UC patients with a negative calprotectin test relapsed within the same time frame. Thirty CD patients had a positive calprotectin test and 13 of them relapsed within a year, as did 7 of the 35 with a negative test result. A significant correlation emerged between a positive calprotectin test and the probability of relapse in UC patients (P= 0.000). In CD patients, only cases of colonic CD showed a significant correlation between a positive calprotectin test and the probability of relapse, i.e., 6 colonic CD patients were positive for the calprotectin test and 4 relapsed (P= 0.02).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 75
+  }
+ },
+ {
+  "uid": "pubmedqa_000065",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does increased use of private health care reduce the demand for NHS care?",
+  "answer": "No. Increased private health care activity does not reduce the demand for NHS care: NHS and private referral rates were positively associated with each other after adjusting for age, deprivation and practice.",
+  "label": "no",
+  "passage": "The use of the private sector for health care is increasing, but it is unclear whether this will reduce demand on the NHS. The aim of this study was to examine the relationship between private and NHS outpatient referral rates accounting for their association with deprivation.\nThis is a prospective survey of general practitioner referrals to private and NHS consultant-led services between 1 January and 31 December 2001 from 10 general practices in the Trent Focus Collaborative Research Network, United Kingdom. Patient referrals were aggregated to give private and NHS referral rates for each electoral ward in each practice.\nOf 17,137 referrals, 90.4 percent (15,495) were to the NHS and 9.6 percent (1642) to the private sector. Private referral rates were lower in patients from the most deprived fifth of wards compared with the least deprived fifth (rate ratio 0.25, 95 percent CI 0.15 to 0.41, p<0.001), whereas NHS referral rates were slightly higher in patients in the most deprived fifth of wards (rate ratio 1.18, 95 percent CI 0.98 to 1.42, p = 0.08) both after age standardisation and adjustment for practice. The NHS referral rate was significantly higher (rate ratio 1.40, 95 percent CI 1.15 to 1.71, p = 0.001) in wards with private referral rates in the top fifth compared with the bottom fifth after adjustment for deprivation and practice.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 76
+  }
+ },
+ {
+  "uid": "pubmedqa_000068",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Do ART patients face higher C-section rates during their stage of delivery?",
+  "answer": "Yes. Patients after ART treatment suffer from higher C-section rates during their stage of delivery.",
+  "label": "yes",
+  "passage": "The mode of delivery depends on multiple parameters. After assisted reproductive technology (ART), previous studies have shown elevated C-section rates but few studies differentiated between elective and emergency operations and different protocols of cryopreservation. Because these studies did not use multiparity as exclusion criteria which reduces confounding with previous pregnancies, aim of this study is to compare mode of delivery of different techniques of ART using data of primiparae only [1, 2].\nRetrospective analysis of patient data treated at the university hospital of Luebeck in a period of 12 years. Patients were divided in different groups according to their way of conception: spontaneous conception and conception after ART. The group of ART was further divided into: (a) a group of fresh transferred embryos (IVF/ICSI), (b) vitrification and (c) slow freezing. Exclusion criteria were defined as: multiparity, delivery<24. + 0 p.m., incomplete data and treatment outside university of Luebeck. Main parameter of this study was mode of delivery which was divided into spontaneous delivery or C-section. C-sections were further differentiated into elective or emergency C-sections.\nThe group of fresh transferred embryos and slow freezing showed higher risks for elective and emergency C-sections (elective C-sections odds ratio 2.0, CI 95% 1.6-2.6, emergency C-sections odds ratio 1.4, CI 95% 1.1-1.9). Moreover, all groups of ART show enhanced risk of significant perinatal bleeding.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 79
+  }
+ },
+ {
+  "uid": "pubmedqa_000070",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Analysis of the epidemiological pattern of Shigellosis in Barcelona between 1988 and 2012: Is it an emerging sexually transmitted infection?",
+  "answer": "Yes. An increased trend was detected in men who had no history of food poisoning or travel to endemic areas. This increase points to a change in the pattern of shigellosis, becoming predominantly male and its main mechanism probably by sexual transmission.",
+  "label": "yes",
+  "passage": "The aim of this study was to describe the evolution and epidemiologic characteristics of shigellosis patients over a 25 year period in a large city.\nShigellosis is a notifiable disease in Spain since 1988. Cases are analyzed in Barcelona residents included in the registry between 1988-2012. A descriptive analysis by sex, age, mode of transmission and Shigella species is presented. Trend analysis and time series were performed.\nOf the 559 cases analyzed, 60.15% were males. A sustained increase was observed in the trend since 2008 in males (p<0,05), especially at the expense of males who had no history of food poisoning or travel to endemic areas. The increasing tendency was greater in males from 21 to 60 years, both for S. flexneri (since 2009), and for S. sonnei (since 2004). In 2012 it was noted that in the men with S. flexneri, the 63% were men who have sex with men.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 81
+  }
+ },
+ {
+  "uid": "pubmedqa_000071",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does the manic/mixed episode distinction in bipolar disorder patients run true over time?",
+  "answer": "Yes. These data suggest a pattern of diagnostic stability over time for manic and mixed episodes in patients with bipolar disorder. Careful prospective studies of this issue are needed.",
+  "label": "yes",
+  "passage": "The authors sought to determine whether the manic/mixed episode distinction in patients with bipolar disorder runs true over time.\nOver an 11-year period, the observed distribution of manic and mixed episodes (N=1,224) for patients with three or more entries in the management information system of a community mental health center (N=241) was compared to the expected distribution determined by averaging 1,000 randomly generated simulations.\nEpisodes were consistent (all manic or all mixed) in significantly more patients than would be expected by chance.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 82
+  }
+ },
+ {
+  "uid": "pubmedqa_000080",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Double reading of barium enemas: is it necessary?",
+  "answer": "No. Although feasible, double reading of barium enemas does not improve sensitivity for detection of polyps and produces a higher false-positive rate.",
+  "label": "no",
+  "passage": "The purpose of our study was to determine the effectiveness, clinical impact, and feasibility of double reading barium enemas.\nIndependent double readings of 1,003 consecutive barium enemas (822 double- and 181 single-contrast examinations) were prospectively performed. From this pool of 1,003 examinations, 994 were included in our study. Examinations showing at least one polyp or carcinoma 5 mm or larger were considered to have positive results. For combined readings, results were considered positive if either of the two interpreters reported finding a polyp or carcinoma. A McNemar test was used to compare the first reader's results with the combined results of the first and second readers. Results were retrospectively correlated with endoscopic or surgical results in 360 patients, and agreement between first and combined readings and endoscopic results was determined.\nAdding a second reader increased the number of positive results on examinations from 249 to 315 (p<0.0001) and resulted in potential alteration of clinical treatment in 98 patients (9.9%). Sensitivity of the first and combined readings for detection of all lesions was identical, 76.3% (95% CI, 65.4-87.1%). Specificity decreased from 91.0% (95% CI, 87.9-94.3%) for the first reading to 86.4% (95% CI, 82.2-90.0%) for the combined reading. The overall measurement of agreement decreased from a kappa value of 61.8 (95% CI, 51.2-72.4%) for the first reading to 52.9 (95% CI, 42.2-63.6%) for the combined reading. The second reading required an average of 3.3 min. Sensitivity for the detection of adenocarcinomas was 100%.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 93
+  }
+ },
+ {
+  "uid": "pubmedqa_000081",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Multidisciplinary decisions in breast cancer: does the patient receive what the team has recommended?",
+  "answer": "Yes. The vast majority of MDT decisions are implemented. Management alteration was most often due to patient choice or additional information available after the MDT. A minority of management alterations were 'unjustifiable' and the authors recommend that any patient whose treatment is subsequently changed should have MDT rediscussion prior to treatment.",
+  "label": "yes",
+  "passage": "A multidisciplinary team (MDT) approach to breast cancer management is the gold standard. The aim is to evaluate MDT decision making in a modern breast unit.\nAll referrals to the breast MDT where breast cancer was diagnosed from 1 July 2009 to 30 June 2011 were included. Multidisciplinary team decisions were compared with subsequent patient management and classified as concordant or discordant.\nOver the study period, there were 3230 MDT decisions relating to 705 patients. Overall, 91.5% (2956 out of 3230) of decisions were concordant, 4.5% (146 out of 3230), were discordant and 4% (128 out of 3230) had no MDT decision. Of 146 discordant decisions, 26 (17.8%) were considered 'unjustifiable' as there was no additional information available after the MDT to account for the change in management. The remaining 120 discordant MDT decisions were considered 'justifiable', as management was altered due to patient choice (n=61), additional information available after MDT (n=54) or MDT error (n=5).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 94
+  }
+ },
+ {
+  "uid": "pubmedqa_000082",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does a family meetings intervention prevent depression and anxiety in family caregivers of dementia patients?",
+  "answer": "No. This study did not demonstrate preventive effects of family meetings on the mental health of family caregivers. Further research should determine whether this intervention might be more beneficial if provided in a more concentrated dose, when applied for therapeutic purposes or targeted towards subgroups of caregivers.",
+  "label": "no",
+  "passage": "Family caregivers of dementia patients are at increased risk of developing depression or anxiety. A multi-component program designed to mobilize support of family networks demonstrated effectiveness in decreasing depressive symptoms in caregivers. However, the impact of an intervention consisting solely of family meetings on depression and anxiety has not yet been evaluated. This study examines the preventive effects of family meetings for primary caregivers of community-dwelling dementia patients.\nA randomized multicenter trial was conducted among 192 primary caregivers of community dwelling dementia patients. Caregivers did not meet the diagnostic criteria for depressive or anxiety disorder at baseline. Participants were randomized to the family meetings intervention (n = 96) or usual care (n = 96) condition. The intervention consisted of two individual sessions and four family meetings which occurred once every 2 to 3 months for a year. Outcome measures after 12 months were the incidence of a clinical depressive or anxiety disorder and change in depressive and anxiety symptoms (primary outcomes), caregiver burden and quality of life (secondary outcomes). Intention-to-treat as well as per protocol analyses were performed.\nA substantial number of caregivers (72/192) developed a depressive or anxiety disorder within 12 months. The intervention was not superior to usual care either in reducing the risk of disorder onset (adjusted IRR 0.98; 95% CI 0.69 to 1.38) or in reducing depressive (randomization-by-time interaction coefficient = -1.40; 95% CI -3.91 to 1.10) or anxiety symptoms (randomization-by-time interaction coefficient = -0.55; 95% CI -1.59 to 0.49). The intervention did not reduce caregiver burden or their health related quality of life.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 95
+  }
+ },
+ {
+  "uid": "pubmedqa_000083",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Can computerised tomography replace bone scintigraphy in detecting bone metastases from breast cancer?",
+  "answer": "Yes. Our findings suggest routine BS of patients presenting with MBC is not required if CT (thorax, abdomen, and pelvis) is performed.",
+  "label": "yes",
+  "passage": "The aim of this study was to determine whether bone scans (BS) can be avoided if pelvis was included in CT thorax and abdomen to detect bony metastases from breast cancer.\nResults of 77 pairs of CT (thorax, abdomen, and pelvis) and BS in newly diagnosed patients with metastatic breast cancer (MBC) were compared prospectively for 12 months. Both scans were blindly assessed by experienced radiologists and discussed at multidisciplinary team meetings regarding the diagnosis of bone metastases.\nCT detected metastatic bone lesions in 43 (98%) of 44 patients with bone metastases. The remaining patient had a solitary, asymptomatic bony metastasis in shaft of femur. BS was positive in all patients with bone metastases. There were 11 cases of false positive findings on BS.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 96
+  }
+ },
+ {
+  "uid": "pubmedqa_000084",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Metastatic carcinoma to the cervical nodes from an unknown head and neck primary site: Is there a need for neck dissection?",
+  "answer": "No. In our experience, definitive radiotherapy to the neck and the potential mucosal sites, whether preceded by neck dissection or not, is effective to achieve a good local control rate in the unknown primary cancer of the head and neck. The indication for neck dissection, in particular for early nodal stage, is controversial.",
+  "label": "no",
+  "passage": "The aim of the study was to evaluate the outcomes and patterns of failure in patients with metastatic carcinoma to cervical lymph nodes from an unknown head and neck primary origin, who were treated curatively with radiotherapy, with or without neck dissection.\nThe study included 61 patients referred to the McGill University Hospital Centers from 1987 to 2002. The median age was 57 years, with male to female ratio of 4:1. Distribution of patients by N status was as follows: N1, 16 patients (26%); N2a, 18 (30%); N2b, 13 (22%); N2c, 7 (11%); and N3, 7 (11%). Twenty patients underwent neck dissection (11 radical, 9 functional) and 41 patients had biopsy (9 fine-needle aspiration and 32 excisional biopsy). All patients received radiotherapy. The median dose to the involved node(s) was 64 Gy, and 60 Gy to the rest of the neck. Treatment of the neck was bilateral in 50 patients (82%) and ipsilateral in 11 (18%). The minimum duration of the follow-up was 12 months, with the median of 32 months.\nThe 5- and 8-year overall survival for the whole population was 79% and 67%, respectively. There was no statistically significant difference in the 8-year actuarial overall survival (64.8% and 67.6%, respectively, p = .64) and local relapse-free survival (75% vs 74.5%, respectively, p = .57), among patients who had biopsy versus those who had neck dissection.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 97
+  }
+ },
+ {
+  "uid": "pubmedqa_000085",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Household and food shopping environments: do they play a role in socioeconomic inequalities in fruit and vegetable consumption?",
+  "answer": "No. Improving access to FV in the household and food shopping environments will only make a small contribution to improving population consumption levels, and may only have a limited effect in reducing socioeconomic inequalities in their consumption.",
+  "label": "no",
+  "passage": "Fruit and vegetables are protective of a number of chronic diseases; however, their intakes have been shown to vary by socioeconomic position (SEP). Household and food shopping environmental factors are thought to contribute to these differences. To determine whether household and food shopping environmental factors are associated with fruit and vegetable (FV) intakes, and contribute to socioeconomic inequalities in FV consumption.\nCross-sectional data were obtained by a postal questionnaire among 4333 adults (23-85 years) living in 168 neighbourhoods in the south-eastern Netherlands. Participants agreed/disagreed with a number of statements about the characteristics of their household and food shopping environments, including access, prices and quality. Education was used to characterise socioeconomic position (SEP). Main outcome measures were whether or not participants consumed fruit or vegetables on a daily basis. Multilevel logistic regression models examined between-area variance in FV consumption and associations between characteristics of the household and food shopping environments and FV consumption.\nOnly a few household and food shopping environmental factors were significantly associated with fruit and vegetable consumption, and their prevalence was low. Participants who perceived FV to be expensive were more likely to consume them. There were significant socioeconomic inequalities in fruit and vegetable consumption (ORs of not consuming fruit and vegetables were 4.26 and 5.47 among the lowest-educated groups for fruit and vegetables, respectively); however, these were not explained by any household or food shopping environmental factors.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 98
+  }
+ },
+ {
+  "uid": "pubmedqa_000088",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does targeting the oncogenic MUC1-C protein inhibit mutant EGFR-mediated signaling and survival in non-small cell lung cancer cells?",
+  "answer": "Yes. These findings indicate that targeting MUC1-C inhibits mutant EGFR signaling and survival, and thus represents a potential approach alone and in combination for the treatment of NSCLCs resistant to EGFR kinase inhibitors.",
+  "label": "yes",
+  "passage": "Non-small cell lung cancers (NSCLC) that express EGF receptor with activating mutations frequently develop resistance to EGFR kinase inhibitors. The mucin 1 (MUC1) heterodimeric protein is aberrantly overexpressed in NSCLC cells and confers a poor prognosis; however, the functional involvement of MUC1 in mutant EGFR signaling is not known.\nTargeting the oncogenic MUC1 C-terminal subunit (MUC1-C) in NSCLC cells harboring mutant EGFR was studied for effects on signaling, growth, clonogenic survival, and tumorigenicity.\nStable silencing of MUC1-C in H1975/EGFR(L858R/T790M) cells resulted in downregulation of AKT signaling and inhibition of growth, colony formation, and tumorigenicity. Similar findings were obtained when MUC1-C was silenced in gefitinib-resistant PC9GR cells expressing EGFR(delE746_A750/T790M). The results further show that expression of a MUC1-C(CQC → AQA) mutant, which blocks MUC1-C homodimerization, suppresses EGFR(T790M), AKT and MEK → ERK activation, colony formation, and tumorigenicity. In concert with these results, treatment of H1975 and PC9GR cells with GO-203, a cell-penetrating peptide that blocks MUC1-C homodimerization, resulted in inhibition of EGFR, AKT, and MEK → ERK signaling and in loss of survival. Combination studies of GO-203 and afatinib, an irreversible inhibitor of EGFR, further demonstrate that these agents are synergistic in inhibiting growth of NSCLC cells harboring the activating EGFR(T790M) or EGFR(delE746-A750) mutants.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 101
+  }
+ },
+ {
+  "uid": "pubmedqa_000093",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does the molecular biology of the olive fly come of age?",
+  "answer": "Yes. Several years of molecular studies on the olive fly can now be combined with new information from whole transcriptome analyses and lead to a deep understanding of the biology of this notorious insect pest. This is a prerequisite for the development of novel embryonic lethality female sexing strains for successful SIT efforts which, combined with improved mass-reared conditions, give new hope for efficient SIT applications for the olive fly.",
+  "label": "yes",
+  "passage": "Olive cultivation blends with the history of the Mediterranean countries since ancient times. Even today, activities around the olive tree constitute major engagements of several people in the countryside of both sides of the Mediterranean basin. The olive fly is, beyond doubt, the most destructive pest of cultivated olives. The female fly leaves its eggs in the olive fruit. Upon emergence, the larvae feed on the olive sap, thus destroying the fruit. If untreated, practically all olives get infected. The use of chemical insecticides constitutes the principal olive fly control approach. The Sterile Insect Technique (SIT), an environmentally friendly alternative control method, had been tried in pilot field applications in the 1970's, albeit with no practical success. This was mainly attributed to the low, non-antagonistic quality of the mixed-sex released insects. Many years of experience from successful SIT applications in related species, primarily the Mediterranean fruit fly, Ceratitis capitata, demonstrated that efficient SIT protocols require the availability of fundamental genetic and molecular information.\nAmong the primary systems whose understanding can contribute towards novel SIT approaches (or its recently developed alternative RIDL: Release of Insects carrying a Dominant Lethal) is the reproductive, since the ability to manipulate the reproductive system would directly affect the insect's fertility. In addition, the analysis of early embryonic promoters and apoptotic genes would provide tools that confer dominant early-embryonic lethality during mass-rearing. Here we report the identification of several genes involved in these systems through whole transcriptome analysis of female accessory glands (FAGs) and spermathecae, as well as male testes. Indeed, analysis of differentially expressed genes in these tissues revealed higher metabolic activity in testes than in FAGs/spermathecae. Furthermore, at least five olfactory-related genes were shown to be differentially expressed in the female and male reproductive systems analyzed. Finally, the expression profile of the embryonic serendipity-α locus and the pre-apoptotic head involution defective gene were analyzed during embryonic developmental stages.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 106
+  }
+ },
+ {
+  "uid": "pubmedqa_000094",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is mRI Background Parenchymal Enhancement Associated with Breast Cancer?",
+  "answer": "No. Based on our data, neither BPE nor FGT independently correlate with breast cancer risk in non-high-risk patients at MRI. Our model retained only age as an independent risk factor for breast cancer in this setting.",
+  "label": "no",
+  "passage": "Previously, a strong positive association between background parenchymal enhancement (BPE) at magnetic resonance imaging (MRI) and breast cancer was reported in high-risk populations. We sought to determine, whether this was also true for non-high-risk patients.\n540 consecutive patients underwent breast MRI for assessment of breast findings (BI-RADS 0-5, non-high-risk screening (no familial history of breast cancer, no known genetic mutation, no prior chest irradiation, or previous breast cancer diagnosis)) and subsequent histological work-up. For this IRB-approved study, BPE and fibroglandular tissue FGT were retrospectively assessed by two experienced radiologists according to the BI-RADS lexicon. Pearson correlation coefficients were calculated to explore associations between BPE, FGT, age and final diagnosis of breast cancer. Subsequently, multivariate logistic regression analysis, considering covariate colinearities, was performed, using final diagnosis as the target variable and BPE, FGT and age as covariates.\nAge showed a moderate negative correlation with FGT (r = -0.43, p<0.001) and a weak negative correlation with BPE (r = -0.28, p<0.001). FGT and BPE correlated moderately (r = 0.35, p<0.001). Final diagnosis of breast cancer displayed very weak negative correlations with FGT (r = -0.09, p = 0.046) and BPE (r = -0.156, p<0.001) and weak positive correlation with age (r = 0.353, p<0.001). On multivariate logistic regression analysis, the only independent covariate for prediction of breast cancer was age (OR 1.032, p<0.001).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 107
+  }
+ },
+ {
+  "uid": "pubmedqa_000096",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is postconditioning of sevoflurane and propofol associated with mitochondrial permeability transition pore?",
+  "answer": "Yes. Postconditioning of sevoflurane and propofol has cardioprotective effect against ischemia-reperfusion injury of heart, which is associated with inhibition of MPTP opening. Compared to propofol, sevoflurane provides superior protection of functional recovery and infarct size.",
+  "label": "yes",
+  "passage": "Sevoflurane and propofol are effective cardioprotective anaesthetic agents, though the cardioprotection of propofol has not been shown in humans. Their roles and underlying mechanisms in anesthetic postconditioning are unclear. Mitochondrial permeability transition pore (MPTP) opening is a major cause of ischemia-reperfusion injury. Here we investigated sevoflurane- and propofol-induced postconditioning and their relationship with MPTP.\nIsolated perfused rat hearts were exposed to 40 min of ischemia followed by 1 h of reperfusion. During the first 15 min of reperfusion, hearts were treated with either control buffer (CTRL group) or buffer containing 20 micromol/L atractyloside (ATR group), 3% (v/v) sevoflurane (SPC group), 50 micromol/L propofol (PPC group), or the combination of atractyloside with respective anesthetics (SPC+ATR and PPC+ATR groups). Infarct size was determined by dividing the total necrotic area of the left ventricle by the total left ventricular slice area (percent necrotic area).\nHearts treated with sevoflurane or propofol showed significantly better recovery of coronary flow, end-diastolic pressures, left ventricular developed pressure and derivatives compared with controls. Sevoflurane resulted in more protective alteration of hemodynamics at most time point of reperfusion than propofol. These improvements were paralleled with the reduction of lactate dehydrogenase release and the decrease of infarct size (SPC vs CTRL: (17.48+/-2.70)% vs (48.47+/-6.03)%, P<0.05; PPC vs CTRL: (35.60+/-2.10)% vs (48.47+/-6.03)%, P<0.05). SPC group had less infarct size than PPC group (SPC vs PPC: (17.48+/-2.70)% vs (35.60+/-2.10)%, P<0.05). Atractyloside coadministration attenuated or completely blocked the cardioprotective effect of postconditioning of sevoflurane and propofol.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 109
+  }
+ },
+ {
+  "uid": "pubmedqa_000103",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does quadriceps fatigue alter human muscle performance during a novel weight bearing task?",
+  "answer": "Yes. Quadriceps muscle fatigue alters the patterns of coordinated muscle activity and may render subjects less able to cope with unexpected perturbations during weight-bearing tasks.",
+  "label": "yes",
+  "passage": "Limited information is currently available regarding muscle synergistic patterns and triggered reflex responses during dynamic weight-bearing activities in the presence of muscle fatigue.\nThe purpose of this study was to examine the effects of quadriceps muscle fatigue on patterns of muscle activation and performance in response to sudden, unexpected perturbations during a weight-bearing task.\nMotion of the knee was measured as subjects were asked to track a visual target as accurately as possible while performing a resisted single leg squat task. Random perturbations were delivered in 20% of the trials by unexpectedly releasing the resistance during the flexion phase of the exercise. Absolute and constant errors were calculated to evaluate target tracking performance. Quadriceps and hamstring muscle activity was recorded during both perturbed and unperturbed trials. Twelve healthy women were tested before and after completing a repetitive submaximal eccentric quadriceps fatigue protocol. A second group of 12 women served as controls. Unexpected perturbations elicited long-latency responses characterized by facilitation of the quadriceps and inhibition of the hamstrings.\nMuscle fatigue increased the amplitude of the long-latency response in vastus lateralis by 4.3% maximum voluntary isometric contraction (P = 0.004). Changes in tracking error occurred in response to perturbations after fatigue in spite of significantly increased quadriceps muscle activity, especially during the extension phase of the exercise.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 116
+  }
+ },
+ {
+  "uid": "pubmedqa_000107",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does increased response to prostaglandin H2 precede changes in PGH synthase-1 expression in the SHR aorta?",
+  "answer": "Yes. In the aorta of 20-wk-old SHR, endothelium-dependent contractions to acetylcholine are observed only when the production of nitric oxide is prevented. They are associated with an augmented sensitivity of the smooth muscle to PGH2, but not with an increased expression of PGH synthase-1.",
+  "label": "yes",
+  "passage": "To determine the expression of PGH synthase-1 and the sensitivity of vascular smooth muscle to PGH2 in the aorta from the SHR at an age when no endothelium-dependent contractions to acetylcholine are observed under control conditions.\nAll experiments were performed in parallel on aortas from 20-wk-old SHR and Wistar-Kyoto normotensive rats (WKY). Rings, with or without endothelium, were suspended in conventional organ chambers for the recording of changes in isometric force. The expression of PGH synthase-1 was evaluated by reverse transcription-polymerase chain reaction (RT-PCR) and Western blot analysis.\nUnder control conditions acetylcholine did not cause contractions of rings with or without endothelium. However, in the presence of nitro-L-arginine (NLA, an inhibitor of nitric-oxide synthase), it evoked endothelium-dependent contraction in the SHR but not in the WKY aortas. The expression of PGH synthase-1 was comparable in the aortas of both strains (with and without endothelium). PGH2 caused greater contractions in rings without endothelium from the SHR than those from WKY, while U46,619 evoked a comparable response, in aortas from both strains.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 120
+  }
+ },
+ {
+  "uid": "pubmedqa_000109",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is the combination of cobinamide and sulfanegen highly effective in mouse models of cyanide poisoning?",
+  "answer": "Yes. The combination of cobinamide and sulfanegen shows great promise as a new approach to treating cyanide poisoning.",
+  "label": "yes",
+  "passage": "Cyanide is a component of smoke in residential and industrial fires, and accidental exposure to cyanide occurs in a variety of industries. Moreover, cyanide has the potential to be used by terrorists, particularly in a closed space such as an airport or train station. Current therapies for cyanide poisoning must be given by intravenous administration, limiting their use in treating mass casualties.\nWe are developing two new cyanide antidotes--cobinamide, a vitamin B(12) analog, and sulfanegen, a 3-mercaptopyruvate prodrug. Both drugs can be given by intramuscular administration, and therefore could be used to treat a large number of people quickly. We now asked if the two drugs would have an augmented effect when combined.\nWe used a non-lethal and two different lethal models of cyanide poisoning in mice. The non-lethal model assesses neurologic recovery by quantitatively evaluating the innate righting reflex time of a mouse. The two lethal models are a cyanide injection and a cyanide inhalation model.\nWe found that the two drugs are at least additive when used together in both the non-lethal and lethal models: at doses where all animals died with either drug alone, the combination yielded 80 and 40% survival in the injection and inhalation models, respectively. Similarly, drug doses that yielded 40% survival with either drug alone, yielded 80 and 100% survival in the injection and inhalation models, respectively. As part of the inhalation model, we developed a new paradigm in which animals are exposed to cyanide gas, injected intramuscularly with an antidote, and then re-exposed to cyanide gas. This simulates cyanide exposure of a large number of people in a closed space, because people would remain exposed to cyanide, even after receiving an antidote.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 122
+  }
+ },
+ {
+  "uid": "pubmedqa_000112",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is total serum transforming growth factor-β1 elevated in the entire spectrum of genetic aortic syndromes?",
+  "answer": "Yes. tsTGF-β1 is elevated in the entire spectrum of genetic aortic syndromes. However, gradual differences in the increases of tsTGF-β1 levels may mirror different degrees of alteration of tsTGF-β1 signaling in different genetic aortic syndromes.",
+  "label": "yes",
+  "passage": "Total serum transforming growth factor-beta 1 (tsTGF-β1) is increased in patients with Marfan syndrome (MFS), but it has not been assessed in thoracic aortic aneurysm and dissection (TAAD), Loeys-Dietz syndrome (LDS), and bicuspid aortic valve disease (BAVD).\ntsTGF-β1 is increased in genetic aortic syndromes including TAAD, LDS, MFS, and BAVD.\nWe measured tsTGF-β1 and performed sequencing of the genes FBN1, TGFBR1, and TGFBR2 in 317 consecutive patients with suspected or known genetic aortic syndrome (167 men, 150 women; mean age 43 ± 14 years). TAAD was diagnosed in 20, LDS in 20, MFS in 128, and BAVD in 30 patients, and genetic aortic syndrome was excluded in 119 patients.\nElevated tsTGF-β1 levels were associated with causative gene mutations (P = 0.008), genetic aortic syndrome (P = 0.009), and sporadic occurrence of genetic aortic syndrome (P = 0.048), whereas only genetic aortic syndrome qualified as an independent predictor of tsTGF-β1 (P = 0.001). The tsTGF-β1 levels were elevated in FBN1 and NOTCH1 mutations vs patients without mutations (both P = 0.004), and in NOTCH1 mutations vs ACTA2/MYH11 mutations (P = 0.015). Similarly, tsTGF-β1 levels were elevated in MFS (P = 0.003) and in BAVD (P = 0.006) vs patients without genetic aortic syndrome. In contrast to specific clinical features of MFS, FBN1 in-frame mutations (P = 0.019) were associated with increased tsTGF-β1 levels.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 125
+  }
+ },
+ {
+  "uid": "pubmedqa_000113",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Are methylenetetrahydrofolate reductase and thymidylate synthase polymorphisms associated with breast cancer risk or phenotype?",
+  "answer": "No. The common MTHFR C677T and TS enhancer region polymorphisms were not risk factors for breast cancer in this patient cohort nor were they associated with phenotypic features or with prognosis.",
+  "label": "no",
+  "passage": "Aberrations in folate metabolism contribute to the risk of cancer via effects on the synthesis, methylation and repair of DNA. Functional genetic variants in the methylene tetrahydrofolate reductase (MTHFR) and thymidylate synthase (TS) genes may be risk factors for breast cancer because of their central roles in cellular folate metabolism.\nThe MTHFR C677T and TS tandem repeat polymorphisms were investigated in a case-control study of 339 women with breast cancer for possible associations with the risk of this disease, tumor phenotype and patient survival.\nThe MTHFR and TS polymorphisms were not associated with a significantly increased risk of breast cancer. No associations were observed with any pathological or molecular feature and neither polymorphism was associated with survival from this disease.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 126
+  }
+ },
+ {
+  "uid": "pubmedqa_000114",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is pretransplant administration of a single donor class I major histocompatibility complex molecule sufficient for the indefinite survival of fully allogeneic cardiac allografts : evidence for linked epitope suppression?",
+  "answer": "Yes. These data provide clear evidence for linked epitope suppression in the induction of operational tolerance in vivo.",
+  "label": "yes",
+  "passage": "Allograft survival can be prolonged by the administration of alloantigen(s) before transplantation. Blood transfusion is the commonest form of alloantigen pretreatment currently used in clinical practice. However, for recipients of organs from cadaver donors, it is not possible to predict the identity of the organ donor in advance. Therefore, it is highly unlikely that all the alloantigens expressed by a cadaver organ donor will be represented in the alloantigen pretreatment inoculum. We have previously shown that it is not necessary to expose the recipient to the full complement of donor alloantigens to induce long-term survival of a subsequent cardiac allograft. Here, we investigated the in vivo mechanism responsible for this phenomena.\nUnresponsiveness to the mouse MHC class I molecule Kb was induced in CBA.Ca (H2k) recipients by administration of bone marrow cells from transgenic CBA mice, CBK (H2k + Kb) before transplantation of fully allogeneic and F1 vascularized cardiac allografts.\nPretreatment with CBK bone marrow cells resulted in the long-term survival of all cardiac allografts expressing H2-Kb. For example, C57BL/10 (H2b) and (CBKxBALB/c) F1 (H2k,d + Kb) cardiac allografts were accepted by recipients treated with CBK bone marrow cells before transplantation. In contrast, allografts that did not express Kb, such as BALB/c (H2d) or (CBAxBALB/c) F1 (H2k,d), were rejected acutely, with a median survival time (MST) of 7 and 6 days, respectively, in recipients treated with CBK bone marrow cells. Furthermore, when recipients pretreated with CBK bone marrow cells were grafted with a BALB/c heart and a CBK heart simultaneously, the BALB/c hearts were rejected (MST=10 days), whereas the CBK hearts were accepted. By contrast, in the maintenance phase (i.e., after transplantation), recipients with long-term surviving (CBKxBALB/c) F1 hearts (> 100 days) were found to accept BALB/c hearts indefinitely, whereas fourth-party B10.S (H2s) grafts were rejected (MST=7.5 days). This indicated that the allografts bearing Kb could tolerize recipients to other alloantigens expressed by the transplanted heart.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 127
+  }
+ },
+ {
+  "uid": "pubmedqa_000116",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does vitamin E dose-dependently reduce aortic fatty lesion formation in orchidectomized aged rats?",
+  "answer": "Yes. The findings of this study suggest that dietary vitamin E supplementation in Orx aged rats provide anti-atherogenic effects, in part, due to vitamin E's antioxidative properties. Clinical studies are needed to confirm whether supplemental doses of vitamin E can prevent the development of atherosclerosis in older men particularly with low testosterone level.",
+  "label": "yes",
+  "passage": "Although the cardioprotective effects of supplemental doses of vitamin E have been investigated in several conditions, its role in gonadectomy- induced fatty lesion formation is unclear. The present study was designed to examine the efficacy of vitamin E in a dose-dependent manner on indices of oxidative stress and in preventing the formation of aortic fatty lesions in orchidectomized (Orx) aged rats.\nForty 12-month old male Sprague-Dawley rats were either sham-operated (Sham) or Orx and fed a semi-purified control diet for 120 days. Thereafter, rats were assigned to four treatment groups (n=10): Sham and one Orx group received 75 IU vitamin E and served as controls, and the other two Orx groups received either 250 or 500 IU vitamin E per kg diet for 90 days.\nVitamin E at the highest dose (500 IU) was able to lower serum total cholesterol by 16% and significantly increase superoxide dismutase by 9% compared to Orx controls. Similarly, this dose was able to significantly reduce the development of atherosclerotic lesion formation and aortic fatty streak area by 93% compared to Orx controls.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 129
+  }
+ },
+ {
+  "uid": "pubmedqa_000118",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Are endotoxin levels associated with high-density lipoprotein , triglycerides , and troponin in patients with acute coronary syndrome and angina : possible contributions from periodontal sources?",
+  "answer": "Yes. Results showed more alveolar bone loss in patients with cardiac disease than in patients without cardiac disease, but there was no difference between the groups in the serum levels of endotoxin/LPS or IgG antibody to P. gingivalis. However, there were associations between endotoxin/LPS and levels of serum triglycerides, troponin, and HDL.",
+  "label": "yes",
+  "passage": "Recent studies have reported an association between poor dental health and acute coronary syndrome (ACS). The purpose of this study was to correlate the presence of periodontitis with serum endotoxin/lipopolysaccharides (LPS), lipid profiles, troponin, and immunoglobulin G (IgG) antibody to Porphyromonas gingivalis in control patients or patients with ACS or angina at the time of hospital admission.\nBlood samples from 194 subjects presenting with ACS, angina, or non-cardiac chest pain were analyzed for endotoxin/LPS (Limulus amebocyte lysate assay), lipid profile, troponin, and IgG antibody to P. gingivalis. Data were collected from hospital charts and dental records, and health questionnaire responses.\nSubjects with ACS or angina were more likely to have poor oral care, fewer remaining teeth, and increased alveolar radiographic bone loss compared to subjects with chest pain. In all subjects, endotoxin/LPS and IgG antibody to P. gingivalis tended to increase in association with increased radiographic bone loss. Endotoxin/LPS increased directly with triglyceride and troponin levels (P = 0.04 and P = 0.006, respectively) and inversely with high-density lipoprotein (HDL) levels (P = 0.002). IgG antibody to P. gingivalis levels was directly correlated with very low-density lipoprotein (P = 0.03) and triglycerides (P = 0.06) and inversely with low-density lipoprotein (P = 0.01).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 132
+  }
+ },
+ {
+  "uid": "pubmedqa_000120",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does diagnostic yield improve with collection of 2 samples in fecal immunochemical test screening without affecting attendance?",
+  "answer": "Yes. There is no difference in attendance for subjects offered 1- or 2-sample FIT screening. The results allow for the development of efficient FIT screening strategies that can be adapted for local colonoscopy capacities, rather than varying the cut-off value in a 1-sample strategy.",
+  "label": "yes",
+  "passage": "The fecal immunochemical test (FIT) is superior to the guaiac-based fecal occult blood test in detecting neoplasia. There are not much data on the optimal number of FITs to perform. We conducted a population-based trial to determine attendance and diagnostic yield of 1- and 2-sample FIT screening.\nThe study included 2 randomly selected groups of subjects aged 50-74 years (1-sample FIT, n=5007; 2-sample FIT, n=3197). The 2-sample group was instructed to collect fecal samples on 2 consecutive days. Subjects were referred for colonoscopy when at least 1 sample tested positive (≥50 ng hemoglobin/mL).\nAttendance was 61.5% in the 1-sample group (2979 of 4845; 95% confidence interval, 60.1%-62.9%) and 61.3% in the 2-sample group (1875 of 3061; 95% confidence interval, 59.6%-63.0%; P=.84). In the 1-sample group 8.1% tested positive, and in the 2-sample group 12.8% had at least 1 positive test outcome and 5.0% had 2 positive test outcomes (P<.05). When the mean from both test results in the 2-sample group was used, 10.1% had a positive test outcome (P<.05). The detection rates for advanced neoplasia were 3.1% in the 1-sample group, 4.1% in the 2-sample group with at least 1 positive test outcome, 2.5% when both test results were positive, and 3.7% among subjects with the mean from both test results being positive.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 134
+  }
+ },
+ {
+  "uid": "pubmedqa_000125",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is myocardial cytokine gene expression higher in aortic stenosis than in idiopathic dilated cardiomyopathy?",
+  "answer": "Yes. TNFalpha gene expression is significantly higher in patients with pressure overload than in normal hearts, in patients with idiopathic DCM, and in patients with compensated versus decompensated heart failure. Secondly, in patients with AS proinflammatory cytokine gene expression did not affect systolic performance. The higher TNFalpha gene expression in patients with compensated heart failure suggests that cytokine gene expression has an adaptive role in the early phase of LV remodelling.",
+  "label": "yes",
+  "passage": "To investigate cytokine gene expression in patients with aortic valve stenosis (AS) and with idiopathic dilated cardiomyopathy (DCM), and to correlate wall stress with myocardial proinflammatory cytokine gene expression.\nHuman left ventricular (LV) myocardial biopsies were obtained for subsequent reverse transcription polymerase chain reaction of tumour necrosis factor alpha (TNFalpha), interleukin (IL)-1beta, and IL-6 mRNA. The study population consisted of 24 patients with AS and 10 patients with idiopathic DCM.\nPatients with AS had a larger ejection fraction (56 (5) v 37 (4)%, p < 0.01), smaller LV end diastolic volumes (146 (11) v 267 (21) ml, p < 0.01), and lower end systolic wall stress (44 (7) v 112 (11) kdyn/cm2, p < 0.001). Upregulation of TNFalpha, IL-1beta, and IL-6 gene expression was detected in both groups. However, TNFalpha gene expression was significantly higher in AS than in DCM (p = 0.009). No correlation was found between haemodynamic parameters and TNFalpha gene expression. In patients with AS there was a strong inverse relation between circulating TNFalpha and TNFalpha gene expression (r = -0.685, p = 0.014), between circulating TNFalpha and IL-1beta gene expression (r = -0.664, p = 0.018), and between soluble TNF receptor 2 and TNFalpha gene expression (r = -0.685, p = 0.020). Myocardial gene expression of TNFalpha was significantly higher in patients with well compensated AS than in patients with decompensated AS (p = 0.017). Similarly, patients with decompensated DCM were characterised by significantly lower TNFalpha gene expression than were patients with well compensated DCM (p = 0.011).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 139
+  }
+ },
+ {
+  "uid": "pubmedqa_000126",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is the Brazilian policy of withholding treatment for ADHD probably increasing health and social costs?",
+  "answer": "Yes. By increasing investments on MPH-IR treatment for ADHD to around R$ 377 million/year, the country would save approximately 3.1 times more than is currently spent on the consequences of not treating ADHD in patients aged 5 to 19 years.",
+  "label": "yes",
+  "passage": "To estimate the economic consequences of the current Brazilian government policy for attention-deficit/hyperactivity disorder (ADHD) treatment and how much the country would save if treatment with immediate-release methylphenidate (MPH-IR), as suggested by the World Health Organization (WHO), was offered to patients with ADHD.\nBased on conservative previous analyses, we assumed that 257,662 patients aged 5 to 19 years are not receiving ADHD treatment in Brazil. We estimated the direct costs and savings of treating and not treating ADHD on the basis of the following data: a) spending on ADHD patients directly attributable to grade retention and emergency department visits; and b) savings due to impact of ADHD treatment on these outcomes.\nConsidering outcomes for which data on the impact of MPH-IR treatment are available, Brazil is probably wasting approximately R$ 1.841 billion/year on the direct consequences of not treating ADHD in this age range alone. On the other hand, treating ADHD in accordance with WHO recommendations would save approximately R$ 1.163 billion/year.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 140
+  }
+ },
+ {
+  "uid": "pubmedqa_000136",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does the Model for End-stage Liver Disease accurately predict 90-day liver transplant wait-list mortality in Atlantic Canada?",
+  "answer": "Yes. Both the MELD and the MELDNa accurately predicted the occurrence of 90-day wait-list mortality in the study cohort and, therefore, are generalizable to Atlantic Canadians with end-stage liver disease awaiting LT.",
+  "label": "yes",
+  "passage": "To determine the generalizability of the predictions for 90-day mortality generated by Model for End-stage Liver Disease (MELD) and the serum sodium augmented MELD (MELDNa) to Atlantic Canadian adults with end-stage liver disease awaiting liver transplantation (LT).\nThe predictive accuracy of the MELD and the MELDNa was evaluated by measurement of the discrimination and calibration of the respective models' estimates for the occurrence of 90-day mortality in a consecutive cohort of LT candidates accrued over a five-year period. Accuracy of discrimination was measured by the area under the ROC curves. Calibration accuracy was evaluated by comparing the observed and model-estimated incidences of 90-day wait-list failure for the total cohort and within quantiles of risk.\nThe area under the ROC curve for the MELD was 0.887 (95% CI 0.705 to 0.978) - consistent with very good accuracy of discrimination. The area under the ROC curve for the MELDNa was 0.848 (95% CI 0.681 to 0.965). The observed incidence of 90-day wait-list mortality in the validation cohort was 7.9%, which was not significantly different from the MELD estimate of 6.6% (95% CI 4.9% to 8.4%; P=0.177) or the MELDNa estimate of 5.8% (95% CI 3.5% to 8.0%; P=0.065). Global goodness-of-fit testing found no evidence of significant lack of fit for either model (Hosmer-Lemeshow c2 [df=3] for MELD 2.941, P=0.401; for MELDNa 2.895, P=0.414).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 150
+  }
+ },
+ {
+  "uid": "pubmedqa_000138",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is the human G-protein beta3 subunit C825T polymorphism associated with coronary artery vasoconstriction?",
+  "answer": "Yes. The C825T polymorphism of the G-protein beta3 subunit may be a genetic determinant of coronary artery vasomotion in humans.",
+  "label": "yes",
+  "passage": "Abnormal coronary vasomotion plays a role in the clinical expression of coronary artery disease. We hypothesized that the functional C825T polymorphism located in the ubiquitous G-protein beta3 subunit, implicated in the cellular signal transduction of many receptors, could modify artery coronary vasomotion. We assessed the potential association of the pertussis toxin-sensitive G protein beta3 subunit (GNB3) gene C825T polymorphism on coronary vasomotion in humans.\nWe examined the response of angiographically normal human coronary arteries (n=131) after intravenous injection of methylergonovine maleate, a vasoconstrictor, followed by injection of isosorbide dinitrate, a vasodilator, according to GNB3 genotypes. Coronary vasomotion was assessed with quantitative coronary angiography. Subjects bearing at least one T allele had greater susceptibility to vasoconstriction in response to methylergonovine maleate than CC subjects, whereas vasodilation in response to isosorbide dinitrate did not differ among the different genotypes.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 152
+  }
+ },
+ {
+  "uid": "pubmedqa_000139",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does oncological impact of endoscopic bladder cuff management during nephroureterectomy vary according to upper urinary tract tumor location?",
+  "answer": "Yes. There are similar oncological outcomes after nephroureterectomy combined with extravesical or endoscopic bladder cuff management for patients with upper urinary tract urothelial cancer above the low ureter. However, there is a higher incidence of bladder tumor recurrence for the low ureteral tumor after nephroureterectomy with endoscopic bladder cuff excision.",
+  "label": "yes",
+  "passage": "To compare the oncological outcome between extravesical excision and transurethral excision for bladder cuff management in patients undergoing nephroureterectomy with upper urinary tract urothelial cancer.\nFrom January 2005 to December 2010, 396 patients were enrolled in the present retrospective study. Nephroureterectomy was carried out either by endoscopic or extravesical bladder cuff excision. The oncological outcome between these two procedures was analyzed in patients with different tumor locations.\nThe average age of the patients was 66.41 ± 10.52 years, and the median follow-up duration was 40.65 ± 23.84 months. For upper urinary tract urothelial cancer management, extravesical bladder cuff excision was carried out in 240 patients, whereas the endoscopic method was carried out in 156 patients. Previous bladder cancer is still the most independent predictor for bladder recurrence (P < 0.001). In addition, endoscopic bladder cuff management for low ureteral tumor was also independently associated with more bladder tumor recurrence (P = 0.017). Non-organ confined pathological stage still independently predicted metastasis (P < 0.001) and cancer-specific death (P < 0.001).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 153
+  }
+ },
+ {
+  "uid": "pubmedqa_000147",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is expression level of novel tumor suppressor gene FATS associated with the outcome of node positive breast cancer?",
+  "answer": "Yes. FATS is involved in the carcinogenesis and development of breast cancer and could be a potential biomarker and prognostic factor for breast cancer therapy.",
+  "label": "yes",
+  "passage": "Recently, we reported the identification of a previously uncharacterized and evolutionarily conserved gene, fragile-site associated tumor suppressor (FATS), at a frequently deleted region in irradiation (IR)-induced tumors. However, the role of FATS in breast cancer development and its clinical significance has not been defined. The aim of this study was to determine the role of FATS in breast cancer development and to evaluate its clinical significance in breast cancer.\nThe expression level of FATS mRNA was determined in 106 breast carcinomas and 23 paired normal breast tissues using quantitative real time reverse transcription-polymerase chain reaction (RT-PCR). The relationship between FATS expression and clinicopathological parameters were also analyzed.\nThe mRNA level of FATS was down-regulated in breast cancer compared with paired normal tissues. Low expression of FATS was correlated with high nuclear grade. There was a tendency to a favorable outcome for patients with high expression of FATS (P = 0.346). However, low expression of FATS was associated with poor outcome of breast cancer patients with node positive (P = 0.011). Furthermore, the mRNA level of FATS showed an independent value in predicting the outcome of breast cancer patients with positive lymph nodes.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 161
+  }
+ },
+ {
+  "uid": "pubmedqa_000151",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Do advanced oxidation protein products accelerate atherosclerosis through promoting oxidative stress and inflammation?",
+  "answer": "Yes. This study provides in vivo evidence for a causal relationship between chronic AOPPs accumulation and atherosclerosis.",
+  "label": "yes",
+  "passage": "Increased level of plasma advanced oxidation protein products (AOPPs) has been found in patients with uremia and nonuremic subjects with coronary artery disease. This study was conducted to test the hypothesis that AOPPs play a causal role in atherosclerosis.\nHypercholesterolemic (0.5% wt/wt diet) or normal rabbits received either repeated intravenous injections of AOPPs modified rabbit serum albumin (AOPPs-RSA) or unmodified RSA for 8 weeks. Compared with RSA- or vehicle-treated hypercholesterolemic rabbits, AOPPs-RSA-treated animals displayed increased atherosclerotic plaque area oxidized low-density lipoprotein (oxLDL) deposition, macrophage infiltration, and smooth muscle cell proliferation. Aortic sections from AOPPs-RSA-treated normal rabbits showed significant focal intima proliferation and mild Oil-Red-O staining lipid deposition in the affected areas, a phenomenon not observed in the RSA- or vehicle-treated controls. Plasma AOPPs levels in AOPPs-treated groups significantly increased in both hypercholesterolemic and normal rabbits compared with their relevant controls. Close correlations were found between plasma levels of AOPPs and the parameters of oxidative stress, eg, oxLDL and thiobarbituric acid reactive substances levels, or glutathione peroxidase activity. A highly significant correlation was also observed between plasma AOPPs and tumor necrosis factor (TNF)-alpha levels.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 165
+  }
+ },
+ {
+  "uid": "pubmedqa_000154",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Does fyn regulate eosinophil infiltration into the conjunctiva by downregulating the Th2 response?",
+  "answer": "Yes. Fyn regulates infiltration of eosinophils into the conjunctiva through downregulation of Th2 responses. This negative regulation is exerted only during the induction phase of EC.",
+  "label": "yes",
+  "passage": "Under certain circumstances, fyn may serve to negatively regulate the differentiation of naïve helper T (Th) cells into Th2 cells. This study aimed to investigate whether fyn negatively regulates the development of experimental immune-mediated blepharoconjunctivitis (EC), in which Th2 cells play an important role in C57BL/6 mice.\nC57BL/6 background wild-type (WT) or fyn knockout (fyn-/-) mice were subcutaneously immunized with ragweed (RW) adsorbed in aluminum hydroxide. Ten days later the mice were challenged with RW in eye drops, and 24 h after challenge, eyes, blood and spleens were harvested for histology, measurement of serum IgE, and proliferation or cytokine assays, respectively. RW-primed splenocytes from WT and fyn-/- mice were cultured in the presence of RW. Seventy-two hours later, either whole splenocytes or isolated CD4+T cells were transferred into syngeneic WT mice. Four days after the transfer, the recipient mice were challenged with RW and evaluated as described above.\nInfiltration of eosinophils into the conjunctiva induced by active immunization was significantly increased in fyn-/- mice relative to WT mice. Total serum IgE was also significantly higher in fyn-/- mice than in WT mice. In parallel, a higher level of IL-4 production from splenocytes was induced by concanavalin A stimulation in fyn-/- mice than in WT mice. In contrast to active immunization, transfer of whole splenocytes or separated CD4+T cells derived from WT or fyn-/- mice induced similar levels of eosinophilic infiltration in WT mice.",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 168
+  }
+ },
+ {
+  "uid": "pubmedqa_000155",
+  "dataset": "pubmedqa",
+  "task_type": "judgement",
+  "modality": "text",
+  "answer_space": "yes_no_maybe",
+  "question": "Is in vitro susceptibility to thrombin-induced platelet microbicidal protein associated with reduced disease progression and complication rates in experimental Staphylococcus aureus endocarditis : microbiological , histopathologic , and echocardiographic analyses?",
+  "answer": "Yes. The in vitro tPMP-susceptibility profile in S aureus substantially affects a number of well-defined cardiac and microbiological parameters related to disease severity and prognosis in IE. These findings underscore the likelihood that platelets mitigate the pathogenesis of endovascular infections via local secretion of antimicrobial peptides.",
+  "label": "yes",
+  "passage": "Mammalian platelets contain small, cationic, staphylocidal peptides, termed thrombin-induced platelet-microbicidal proteins (tPMPs). Evidence suggests that tPMPs play a key role in host defense against endovascular infections, such as infective endocarditis (IE). In the present study, we evaluated the influence of differences in staphylococcal tPMP-susceptibility profiles in vitro on disease severity in experimental IE.\nExperimental IE was induced in rabbits with either a tPMP-susceptible or an isogenic tPMP-resistant Staphylococcus aureus strain. Vegetation size, left ventricular fractional shortening, and onset of aortic valvular regurgitation were serially assessed by echocardiography over an 11-day postinfection period. In addition, blood cultures were performed daily. Parameters delineated at autopsy included vegetation weights; bacterial densities in vegetations, myocardium, and kidneys; extent of valvular and perivalvular tissue damage; and renal embolization. The following significant differences were observed in animals infected with the tPMP-susceptible versus the tPMP-resistant S aureus strain: substantially lower bacteremia rates (P=0.02); reduced vegetation growth (P<0.001) and weight (P<0.001); a later onset of aortic valvular regurgitation (P=0.0039); increased preservation of left ventricular function (P<0.001); reduced valvular tissue damage (P=0.01) and perivalvular inflammation (P=0.015); and reduced bacterial densities in vegetations (P<0.001) and kidneys (P<0.01).",
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": null
+  },
+  "facets": {},
+  "source": {
+   "orig_id": 169
+  }
+ }
+]

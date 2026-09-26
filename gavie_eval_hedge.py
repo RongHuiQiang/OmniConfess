@@ -51,14 +51,28 @@ from probe_claim_cf import content_words  # noqa: E402
 ZHIPU_KEY = os.environ.get('ZHIPU_API_KEY')
 assert ZHIPU_KEY, 'source /home/tsq/rhq/omniconfess/.env_zhipu first'
 
+# gavie-judge-v2 (four-element audit 2026-08-24; v1 = the registry-frozen text in
+# eval/single_eval.py, kept byte-identical there because every already-published
+# GAVIE number was scored under it). v2 changes ONLY element-2 (input relation:
+# Reference is the sole ground truth, Prediction is under review) and tightens
+# the two element-3 rubric lines to anchor both dimensions to the Reference.
+# The output-format clause is byte-identical to v1. See prompts/registry_peripheral.json.
 GAVIE_PROMPT = (
     "Reference: {gt}\nModel Prediction: {pred}\n"
+    "You are a strict judge. The Reference is the ONLY ground truth; the "
+    "Model Prediction is the answer under review: check it only against the "
+    "Reference, never against your own knowledge, and never reward fluency "
+    "or plausibility alone.\n"
     "Score the prediction (0.0-10.0) on:\n"
-    "1. relevancy: Main event coverage.\n"
-    "2. accuracy: Detail correctness.\n"
+    "1. relevancy: how much of the Reference's main content the Model "
+    "Prediction covers.\n"
+    "2. accuracy: how many details in the Model Prediction are consistent "
+    "with the Reference; any detail that contradicts or is absent in the "
+    "Reference is a hallucination and lowers accuracy even if plausible.\n"
     "Use decimal points for partial correctness (e.g. 7.4). "
     "Output strictly in this format: relevancy: X.X, accuracy: Y.Y"
 )
+GAVIE_PROMPT_VERSION = 'gavie-judge-v2'
 
 
 def gavie_call(client, gt, pred, retries=3):
@@ -391,7 +405,8 @@ def run_field(args):
         return {'n': int(m.sum()), 'mean_diff': round(float(d.mean()), 4),
                 'p': round(float(p), 5)}
 
-    stats = {'field': args.field, 'n_samples': len(rows), 'taus': taus}
+    stats = {'field': args.field, 'n_samples': len(rows), 'taus': taus,
+             'judge_prompt': GAVIE_PROMPT_VERSION}
     stats['gavie'] = {
         'acc_base': round(float(arr('acc_base')[arr('acc_base') >= 0].mean()), 3),
         'rel_base': round(float(arr('rel_base')[arr('rel_base') >= 0].mean()), 3),

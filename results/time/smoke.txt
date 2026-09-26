@@ -1,0 +1,8 @@
+total_time: 90.43s
+step_beam_size: 1
+num_rollout: 4
+num_foresight: 3
+cluster_num: 2
+sigma_rate: 1.0
+total_input_tokens: 2859
+total_output_tokens: 2554

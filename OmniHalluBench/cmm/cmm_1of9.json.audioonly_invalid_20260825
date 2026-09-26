@@ -1,0 +1,1602 @@
+[
+ {
+  "uid": "cmm_000001",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/H3huJ0.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/H3huJ0.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000004",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/BcHtQM.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/BcHtQM.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000010",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/3809lq.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/3809lq.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000012",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see water in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/mSqMuV.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/mSqMuV.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000015",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see rain in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/FlbmAS.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/FlbmAS.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000017",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see squirrel in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/DBj2XF.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/DBj2XF.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000018",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/rQnFUm.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/rQnFUm.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000019",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/CmofTR.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/CmofTR.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000020",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/qdlTo6.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/qdlTo6.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000022",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see car in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/4O4cFp.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/4O4cFp.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000023",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see car in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/gweQQE.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/gweQQE.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000027",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/unhmgQ.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/unhmgQ.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000028",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/QhIDdD.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/QhIDdD.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000031",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/xP9Vl9.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/xP9Vl9.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000033",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see rain in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8VXDbj.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8VXDbj.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000036",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/mHkp4Y.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/mHkp4Y.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000037",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see thunder in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/GQ6reQ.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/GQ6reQ.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000045",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see gun in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/3IgwpE.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/3IgwpE.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000050",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see rain in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/3MagDF.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/3MagDF.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000051",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see thunder in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/ZuTkUj.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/ZuTkUj.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000055",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/oxZyQb.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/oxZyQb.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000058",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/aeFTld.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/aeFTld.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000061",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see dog in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/rEsMkw.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/rEsMkw.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000070",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bee in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/ccbZ5f.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/ccbZ5f.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000072",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see basin in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/sHY5p0.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/sHY5p0.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000075",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see violin in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/THTChx.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/THTChx.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000077",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/40spt5.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/40spt5.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000081",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bee in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/tWetMH.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/tWetMH.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000085",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see car in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/g4OnQ7.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/g4OnQ7.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000086",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/KviPDq.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/KviPDq.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000088",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see thunder in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/qT3Gsg.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/qT3Gsg.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000089",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see tire in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/4bamoR.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/4bamoR.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000091",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see door in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/Xx1kn0.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/Xx1kn0.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000092",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/Xer3hN.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/Xer3hN.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000093",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see car in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/wMe1QD.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/wMe1QD.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000098",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/UxA6tO.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/UxA6tO.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000101",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bee in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/BWOK9q.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/BWOK9q.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000104",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/ThG6WR.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/ThG6WR.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000105",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/r9VsG0.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/r9VsG0.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000106",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bee in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/Rq1NOC.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/Rq1NOC.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000107",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/mtXPNP.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/mtXPNP.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000111",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/osRjFh.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/osRjFh.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000113",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see rain in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/JJHtsb.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/JJHtsb.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000116",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/neKzWB.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/neKzWB.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000120",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bee in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/95OVnP.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/95OVnP.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000122",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see clock in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/KgB8IQ.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/KgB8IQ.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000126",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see car in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/X86LLu.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/X86LLu.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000127",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see thunder in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/smjRrj.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/smjRrj.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000128",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see motorcycle in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/y7Gs2w.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/y7Gs2w.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000129",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/QlamIQ.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/QlamIQ.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000131",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/fLmPeJ.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/fLmPeJ.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000137",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see car in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/aCurpt.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/aCurpt.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000138",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see train in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/UCSDdD.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/UCSDdD.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000139",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see guitar in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/MlO0xd.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/MlO0xd.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000151",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/uBYG9i.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/uBYG9i.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000153",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bee in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/RNqioU.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/RNqioU.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000154",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see car in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/psoTI9.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/psoTI9.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000157",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/7S8aJe.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/7S8aJe.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000158",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see car in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/PjhSbu.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/PjhSbu.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000159",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/bNYYnt.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/bNYYnt.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000163",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/p1WCBK.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/p1WCBK.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000168",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see thunder in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/zMpC5b.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/zMpC5b.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000177",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/FFYExQ.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/FFYExQ.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000183",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/iI6XJM.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/iI6XJM.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000184",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see train in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/s5e7KN.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/s5e7KN.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000185",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/NyG8tW.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/NyG8tW.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000186",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see rain in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/j1PI4d.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/j1PI4d.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000187",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see door in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/rnFlFz.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/rnFlFz.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000189",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see dog in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/2IZtuL.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/2IZtuL.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000192",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8ObsnY.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8ObsnY.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000197",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see person in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/VpI84x.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/VpI84x.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000208",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/VOrPrH.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/VOrPrH.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000214",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bee in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/K4S2ZZ.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/K4S2ZZ.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000215",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see bird in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/hRZ3np.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/hRZ3np.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000220",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see cannon in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8Ewh4k.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/8Ewh4k.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000228",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see sheep in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/jKgP1i.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/jKgP1i.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000232",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see gun in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/5BwCUw.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/5BwCUw.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000236",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see door in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/cuBWLY.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/cuBWLY.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000238",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see phone in the video?",
+  "answer": "no",
+  "label": "no",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/agUdF1.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/agUdF1.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ },
+ {
+  "uid": "cmm_000239",
+  "dataset": "cmm",
+  "task_type": "judgement",
+  "modality": "visual+audio",
+  "answer_space": "yes_no",
+  "question": "Did you see dog in the video?",
+  "answer": "yes",
+  "label": "yes",
+  "passage": null,
+  "media": {
+   "video": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/eJqcHb.mp4",
+   "audio": "./reorg_raw_files/over-reliance_unimodal_priors/overrely_audio_ignore_visual/eJqcHb.wav",
+   "image": null
+  },
+  "facets": {
+   "hallucination_type": "overrely_audio_ignore_visual"
+  },
+  "source": {}
+ }
+]

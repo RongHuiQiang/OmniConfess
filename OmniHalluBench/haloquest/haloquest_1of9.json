@@ -1,0 +1,945 @@
+[
+ {
+  "uid": "haloquest_000008",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What kind of fruit is the younger, smaller animal holding with the tip of its tail?",
+  "answer": "The younger, smaller animal doesn't appear to be holding any fruit with the tip of its tail.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/adventures_at_Maku_pixar_white_cat_with_blue_eyes_hugging_a_sma_b81f1e03-8980-4cea-a9d2-01f70480a865.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 11
+  }
+ },
+ {
+  "uid": "haloquest_000009",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What shade of pink is the woman's hair in the image?",
+  "answer": "There is no pink in the image; The woman hair is not pink; The woman hair black",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/c52c5a52-3883-4cdc-94ea-a482c7050d6f.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 12
+  }
+ },
+ {
+  "uid": "haloquest_000012",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Is the dog behind the kittens grey or black?",
+  "answer": "There is no dog in the image.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/ad38768c-7fdf-45bc-9040-1b5c9260cec3.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 16
+  }
+ },
+ {
+  "uid": "haloquest_000013",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Is her necklace gold or silver?",
+  "answer": "The person in the image is not wearing a necklace.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/ab269f2b-44a5-4372-8859-e40b0f7dedca.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 17
+  }
+ },
+ {
+  "uid": "haloquest_000017",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "How many slices of pizza are on the table?",
+  "answer": "No pizza slices are visible in the image.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/ahmed.serbest_traditional_oil_painting_hamsters_eating_in_a_ram_538ebaf7-b5ed-4366-804c-258663f960d8.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 26
+  }
+ },
+ {
+  "uid": "haloquest_000019",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "How many letters are shown on the individual's hat?",
+  "answer": "The individual in the picture is not wearing a hat; There is no hat; She is not wearing a hat",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/b9e77bd2-0168-416a-ab79-9aa673278deb.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 28
+  }
+ },
+ {
+  "uid": "haloquest_000023",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "How many mice is the cat holding in this picture?",
+  "answer": "The cat is not holding any mice.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/ajohnsonbarroso_gigantic_house_cat_walking_in_between_massive_m_f1d8ee5c-feac-45a7-9570-2da87e025c4d.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 32
+  }
+ },
+ {
+  "uid": "haloquest_000024",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What color is the man's scarf?",
+  "answer": "The man in the image is not wearing a scarf.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/byt3_m3chanic_realistic_felt_puppet_detailed_full_body_foam_cra_355a541b-03ad-4661-8e5b-ddf9d37c92de.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 33
+  }
+ },
+ {
+  "uid": "haloquest_000028",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "How many camels are in the caravan pictured?",
+  "answer": "There is no caravan or camels in this picture; There is no camels in the picture; no camels; There is no caravan",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/chaunceydavs_the_white_sands_new_mexico_landscape_with_a_sunset_50517782-ba02-41f5-8b1c-2eeabb158df9.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 38
+  }
+ },
+ {
+  "uid": "haloquest_000029",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What kind of flower is the little girl holding?",
+  "answer": "The little girl is not holding any kind of flower.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/aeef457c-53cb-4ab0-9878-acbe2b307c0a.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 40
+  }
+ },
+ {
+  "uid": "haloquest_000033",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Is the mouse in the cat's pocket wearing a hat?",
+  "answer": "There is no mouse in the cat's pocket.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/afbe2386-420f-477d-8ae6-2bd5743ca45d.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 44
+  }
+ },
+ {
+  "uid": "haloquest_000035",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What color is the astronaut's eyes?",
+  "answer": "the astronaut's eyes aren't visible",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/bef136f1-bcd8-4aca-bf2c-13b40a18c608.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 46
+  }
+ },
+ {
+  "uid": "haloquest_000039",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What color is the hair tie the man is using?",
+  "answer": "The man is not using any hair ties.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/a001241e-009b-40fa-8c1c-af34bfcdfcfb.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 52
+  }
+ },
+ {
+  "uid": "haloquest_000042",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What is the color of the woman's eyes?",
+  "answer": "The image does not show the woman's eyes; The woman eyes are closed so we can not say the color; we can not see the color of eyes",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/57e617f7-0674-4d17-b0b6-7e06edea3005.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "insufficient context"
+  },
+  "source": {
+   "orig_id": 55
+  }
+ },
+ {
+  "uid": "haloquest_000048",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What color are the stars in the image?",
+  "answer": "There are no stars in the image.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/TehKaoZ__trending_on_artstation_vertical_kowloon_walled_city_bu_55fe3b3b-784b-47f2-9021-d725416ce6a9.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 64
+  }
+ },
+ {
+  "uid": "haloquest_000051",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Is the cactus green or brown?",
+  "answer": "There is no cactus in the image.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/The_Mayor_mirror_shined_chrome_metal_women_sculpture_ka_in_the__e936986b-dfc5-45e5-9bcc-d71f1186c12f.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 70
+  }
+ },
+ {
+  "uid": "haloquest_000052",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What kind of hat is the man in blue wearing?",
+  "answer": "The man in blue is not wearing a hat in this image.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/Shaba_Koffi_Olomide_realistic_photorealistic_in_Paris_with_bale_53102963-4d21-4a2d-aac2-47fe4e7d8166.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 71
+  }
+ },
+ {
+  "uid": "haloquest_000061",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What color are the dog's ears?",
+  "answer": "The dog's ears are not visible.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/7aec45d1-2c7d-4aef-b1f3-333f75d2cdc8.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "insufficient context"
+  },
+  "source": {
+   "orig_id": 84
+  }
+ },
+ {
+  "uid": "haloquest_000062",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Is the man wearing the helmet on the left or the right?",
+  "answer": "The man wearing the helmet is on the right.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/cWaveDave_A_BMW_Motorbike_and_a_KTM_Motorbike_facing_off_agains_a31a9387-3380-497e-82d4-4b029c51ed22.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "visual challenge"
+  },
+  "source": {
+   "orig_id": 85
+  }
+ },
+ {
+  "uid": "haloquest_000063",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What color are the two dot next to the figures nose in the image?",
+  "answer": "The two dots next to the figure's nose are blue.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/c52c5a52-3883-4cdc-94ea-a482c7050d6f.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "visual challenge"
+  },
+  "source": {
+   "orig_id": 87
+  }
+ },
+ {
+  "uid": "haloquest_000070",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What is the lion wearing on its face?",
+  "answer": "The lion is wearing a pair of glasses.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/Venox_lion_hipster_portrait_with_beannie_and_glasses_b28d6805-39fe-4167-96c9-ee7f19360c43.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "visual challenge"
+  },
+  "source": {
+   "orig_id": 96
+  }
+ },
+ {
+  "uid": "haloquest_000072",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What color is the young girl's hair tie?",
+  "answer": "Her hair tie is red.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/Visual_Poetry_a_35_year_old_father_and_his_14_year_old_daughter_b2847a99-b2e8-42a0-9533-00abb93ff7c6.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "visual challenge"
+  },
+  "source": {
+   "orig_id": 98
+  }
+ },
+ {
+  "uid": "haloquest_000074",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Does the person on the left have facial hair?",
+  "answer": "Yes the person on the left has a beard.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/Kthanks_create_a_4_panel_poster_of_players_from_the_New_York_Is_0db45046-a527-4114-a018-00a26f95a270.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "visual challenge"
+  },
+  "source": {
+   "orig_id": 103
+  }
+ },
+ {
+  "uid": "haloquest_000075",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "How many pairs of sunglasses are visible in the image?",
+  "answer": "There are three visible pairs of sunglasses in the image.",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/Shaba_Koffi_Olomide_realistic_photorealistic_in_Paris_with_bale_53102963-4d21-4a2d-aac2-47fe4e7d8166.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "visual challenge"
+  },
+  "source": {
+   "orig_id": 105
+  }
+ },
+ {
+  "uid": "haloquest_000083",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "How many pillows are on the bed?",
+  "answer": "There are no pillows visible on the bed; There aren't any pillows on the bed, only a blanket; We cannot see any pillows on the bed",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/mehdiberbs_a_mid-century_modern_cantilevered_brutalist_house_de_22524805-7cbd-4b58-8c65-e3a0fc6c8dc1.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 118
+  }
+ },
+ {
+  "uid": "haloquest_000085",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What color are their boots?",
+  "answer": "The picture doesn't show them wearing boots ; The picture only shows the top half of the group ; We are not able to see the bottom half because the picture only shows the top",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/m0us316_A_gang_of_dangerous_gritty_dirty_outlaw_criminal_cowboy_0b247dad-9950-4f96-bff9-f2b7d4e8ed62.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 120
+  }
+ },
+ {
+  "uid": "haloquest_000086",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Is her necklace diamonds or pearls?",
+  "answer": "She is not wearing a necklace; We do not see a necklace in this image; She is not wearing a visible necklace",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/haleypoling2665_older_woman_smiling_at_herself_in_the_mirror_4fc594af-d689-410d-8b08-4b81800cfffa.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 121
+  }
+ },
+ {
+  "uid": "haloquest_000088",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Is the driver male or female?",
+  "answer": "There is no driver; We cannot see a driver; No one is driving the car",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/Jurra_scandinavian_style_of_the_Miami_city_68067c5d-52c1-42ea-b7c3-99b61c6727f8.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 123
+  }
+ },
+ {
+  "uid": "haloquest_000089",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What city is this photo taken in?",
+  "answer": "The name of the city is not included in the image; The city is not specified in the image; The town's name is not visible in the photo",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/Dai_Another_Dave_an_enormous_crocodile_dinosaur_eating_school_c_339d1668-2d30-4172-9029-3c09b4551d10.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "insufficient context"
+  },
+  "source": {
+   "orig_id": 124
+  }
+ },
+ {
+  "uid": "haloquest_000090",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Is the astronaut smiling?",
+  "answer": "We cannot see the astronaut's face ; The helmet is blocking the astronaut’s face  ; Their face is covered",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/MVP__xkerod_a_20_year_old_man_welcomed_by_a_civilization_on_a_n_69d22341-1229-46d8-9a52-d640df55d7af.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 125
+  }
+ },
+ {
+  "uid": "haloquest_000091",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Is the girl's hat brown or yellow?",
+  "answer": "The girl doesn't have a hat; There is no hat on the girl; There is not hat visible",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/MVP__xkerod_a_20_year_old_man_welcomed_by_a_civilization_on_a_n_69d22341-1229-46d8-9a52-d640df55d7af.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 126
+  }
+ },
+ {
+  "uid": "haloquest_000092",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "How many coyotes are there?",
+  "answer": "Zero coyotes; There are no coyotes; Zero coyotes in this image",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/Dariaarch_photorealistic_photo_of_the_interior_of_bedroom_plywo_5043d052-ddfd-4c06-909b-684dd2e455d4.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 127
+  }
+ },
+ {
+  "uid": "haloquest_000093",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What is playing on the television in the room?",
+  "answer": "There is not a television in the room; There is not a TV; A TV is not visible in the image",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/Dariaarch_photorealistic_photo_of_the_interior_of_bedroom_plywo_5043d052-ddfd-4c06-909b-684dd2e455d4.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "insufficient context"
+  },
+  "source": {
+   "orig_id": 128
+  }
+ },
+ {
+  "uid": "haloquest_000096",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Is the bird on the roof black or blue?",
+  "answer": "There is not a bird on the roof; There is no bird in the image; There is no bird",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/andersonmarquesphotography_paper_quilling_of_a_house_72c02328-e2e3-49c6-9599-dedbc4ae550b.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 132
+  }
+ },
+ {
+  "uid": "haloquest_000097",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "How many zippers are on her coat?",
+  "answer": "There are no zippers on her coat; We do not see any zippers on her coat; There are no zippers visibly shown in the picture",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/0_1.webp"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 134
+  }
+ },
+ {
+  "uid": "haloquest_000101",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What is the color of the boys hat?",
+  "answer": "The boy isn't wearing a hat; No hat in the image; No hat",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/MidCorniy_a_little_european_boy_drawing_at_table_and_his_sister_0663bba5-bdce-4909-994c-728bca9bda35.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 139
+  }
+ },
+ {
+  "uid": "haloquest_000102",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What is the name of this city?",
+  "answer": "It is unclear what is the name of the city; I do not know the name of the city; The city name is unknown",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/TehKaoZ__trending_on_artstation_vertical_kowloon_walled_city_bu_55fe3b3b-784b-47f2-9021-d725416ce6a9.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "insufficient context"
+  },
+  "source": {
+   "orig_id": 140
+  }
+ },
+ {
+  "uid": "haloquest_000108",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "How many shields do the soldiers have?",
+  "answer": "There are no shields visible ; We cannot see any shields; There are no shields in this picture",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/m0us316_A_group_of_ancient_Egyptian_male_warriors_huddled_toget_0a4fa258-472f-4429-b84f-60f390547f65.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 148
+  }
+ },
+ {
+  "uid": "haloquest_000109",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "Are her gloves black or brown?",
+  "answer": "She is not wearing gloves; The person is not wearing gloves; There are no gloves in the image",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/ejthdfr111_Grandmas_Pictures_57867716-3b35-4ee5-a581-c994bfcf5a8c.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 149
+  }
+ },
+ {
+  "uid": "haloquest_000114",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "What brand of watch is the man wearing?",
+  "answer": "The man is not wearing a watch; He is not wearing a watch; He does not have a watch on",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/photo-photographer-old-photos-preview.webp"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 156
+  }
+ },
+ {
+  "uid": "haloquest_000121",
+  "dataset": "haloquest",
+  "task_type": "descriptive",
+  "modality": "visual",
+  "answer_space": "free_text",
+  "question": "How many blue antennas does the robot have?",
+  "answer": "None; There are no blue antennas; He does not have any blue antennas",
+  "label": null,
+  "passage": null,
+  "media": {
+   "video": null,
+   "audio": null,
+   "image": "images/Swoletony_1950s_retrofuturism_terminator_by_Ludwig_Bemelmans_b1363313-603b-4358-958e-04ab281500cc.png"
+  },
+  "facets": {
+   "image_source": "generated",
+   "question_type": "false premises"
+  },
+  "source": {
+   "orig_id": 163
+  }
+ }
+]
