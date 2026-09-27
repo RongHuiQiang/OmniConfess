@@ -68,7 +68,8 @@ class CFConfessProcessor(LogitsProcessor):
     """
 
     def __init__(self, model, tokenizer, cf_clean, prompt_len,
-                 lam, control_rng=None, decision='gamma', gate_tau=1.4, w_extrap=2.0):
+                 lam, control_rng=None, decision='gamma', gate_tau=1.4, w_extrap=4.0,
+                 yes_thr=-1.6):
         self.model = model
         self.tokenizer = tokenizer
         self.cf_clean = cf_clean
@@ -77,7 +78,8 @@ class CFConfessProcessor(LogitsProcessor):
         self.control_rng = control_rng      # None => real Delta; else sign flip
         self.decision = decision
         self.gate_tau = gate_tau            # legacy v3 gate (unused by v4 rule)
-        self.w_extrap = w_extrap            # v4: context-strip extrapolation weight
+        self.w_extrap = w_extrap            # v5: context-strip extrapolation weight
+        self.yes_thr = yes_thr              # v5: yes decision threshold on margin'
         self.used = False
         self.record = None
 
@@ -116,7 +118,8 @@ class CFConfessProcessor(LogitsProcessor):
         if self.decision == 'gamma' and self.control_rng is None:
             margin_prime, forced = gamma_extrapolated_phd(ly_full, ln_full,
                                                           ly_cf, ln_cf,
-                                                          w=self.w_extrap)
+                                                          w=self.w_extrap,
+                                                          thr=self.yes_thr)
             return forced, margin_prime, delta
         delta_eff = delta
         if self.control_rng is not None:
@@ -191,10 +194,13 @@ def main():
                          "(default), 'lambda' = legacy margin+lambda*Delta.")
     ap.add_argument('--gate_tau', type=float, default=1.4,
                     help="legacy v3 gate (unused by v4 extrapolation rule).")
-    ap.add_argument('--w_extrap', type=float, default=2.0,
-                    help="v4 phd rule: margin' = margin_full + w*(margin_cf - "
-                         "margin_full); w=1 = literal gamma, w=2 = deployed "
-                         "(n=200 F1-yes 82.95).")
+    ap.add_argument('--w_extrap', type=float, default=4.0,
+                    help="v5 phd rule: margin' = margin_full + w*(margin_cf - "
+                         "margin_full); w=1 = literal gamma, w=4 = deployed "
+                         "(full-906 F1-yes 86.84).")
+    ap.add_argument('--yes_thr', type=float, default=-1.6,
+                    help="v5 phd rule: predict yes iff margin' > yes_thr. "
+                         "Deployed -1.6 (nested-CV modal point).")
     ap.add_argument('--control', choices=['none', 'random_sign'], default='none')
     ap.add_argument('--record_process', action=argparse.BooleanOptionalAction, default=True)
     ap.add_argument('--dry_run', action='store_true')
@@ -253,7 +259,8 @@ def main():
                                          args.lambda_cf, control_rng,
                                          decision=args.decision,
                                          gate_tau=args.gate_tau,
-                                         w_extrap=args.w_extrap)
+                                         w_extrap=args.w_extrap,
+                                         yes_thr=args.yes_thr)
 
             with torch.inference_mode():
                 out = model.thinker.generate(

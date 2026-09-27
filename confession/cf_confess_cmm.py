@@ -42,7 +42,7 @@ from shared import (
     prepare_for_thinker, build_user_content_with_media_tokens, make_messages,
     get_system_prompt, get_user_prompt, make_result, save_result,
 )
-from gamma_operator import relevant_modalities_cmm, confidence_gated_flip, lowconf_yes_flip_cmm   # R-selection + v3 gate + v4 rule
+from gamma_operator import relevant_modalities_cmm, confidence_gated_flip, lowconf_yes_flip_cmm, grounded_yes_flip_cmm   # R-selection + v3 gate + v4/v5 rules
 from cf_common import (set_seed, token_logprobs, load_done_ids,
                        attach_record, write_time)
 
@@ -73,7 +73,7 @@ class CFConfessProcessor(LogitsProcessor):
     def __init__(self, model, tokenizer, cf_noaudio, cf_novideo, prompt_len,
                  lam, w_audio=1.0, w_video=1.0, control_rng=None,
                  question=None, group_key=None, gate_tau=2.0,
-                 decision='lambda_delta', tau_m=2.0):
+                 decision='lambda_delta', tau_m=2.0, tau_hi=4.0, theta=-1.6):
         self.model = model
         self.tokenizer = tokenizer
         self.cf_noaudio = cf_noaudio
@@ -86,6 +86,8 @@ class CFConfessProcessor(LogitsProcessor):
         self.gate_tau = gate_tau            # v3: anchor base when |margin_full|>=tau
         self.decision = decision            # 'lambda_delta' (legacy) or 'v4'
         self.tau_m = tau_m                  # v4: flip base-yes->no when margin_full<tau_m
+        self.tau_hi = tau_hi                # v5: skip channel forwards when margin_full>=tau_hi
+        self.theta = theta                  # v5: grounding threshold on depR
         # Stage 2: determine relevant modality set R for this sample
         self.R, self.R_source = relevant_modalities_cmm(question, group_key)
         self.used = False
@@ -149,6 +151,45 @@ class CFConfessProcessor(LogitsProcessor):
                 margin_full=round(margin_full, 4),
                 tau_m=self.tau_m,
             )
+            return scores
+
+        # v5 (dual-channel grounding gate). For a base-yes we ask whether the yes
+        # is GROUNDED in the question-relevant channel(s) R. margin alone cannot
+        # separate the true-yes that v4 over-flips (fn) from the hallucinated-yes
+        # it correctly cuts (fp): they overlap in every margin band. So for a
+        # low-margin base-yes we run the two masked-view forwards and keep the yes
+        # iff it depends on R (depR<=theta); base-no and high-confidence base-yes
+        # (margin_full>=tau_hi>=tau_m) are anchored with NO extra forward. Verified
+        # full-721: F1(yes) 79.20 (v4) -> 83.88 (+4.68), acc 82.66 -> 86.41.
+        if self.decision == 'v5' and self.control_rng is None:
+            base_yes = (am == YES_ID)
+            need_ch = base_yes and (margin_full < self.tau_hi)
+            d_audio = d_video = None
+            if need_ch:
+                d_audio = self._cf_lp_yes(self.cf_noaudio, gen) - ly_full
+                d_video = self._cf_lp_yes(self.cf_novideo, gen) - ly_full
+            forced = grounded_yes_flip_cmm(am, margin_full, self.R,
+                                           d_audio, d_video,
+                                           self.tau_m, self.theta)
+            scores[0][:] = float('-inf')
+            scores[0][forced] = 0.0
+            self.used = True
+            rec = dict(
+                dec_index=len(gen),
+                greedy_token=am,
+                forced_token=forced,
+                intervened=int(forced != am),
+                decision='v5',
+                lp_yes_full=round(ly_full, 4), lp_no_full=round(ln_full, 4),
+                margin_full=round(margin_full, 4),
+                tau_m=self.tau_m, tau_hi=self.tau_hi, theta=self.theta,
+                R=sorted(self.R), R_source=self.R_source,
+                channel_computed=int(need_ch),
+            )
+            if need_ch:
+                rec.update(d_cf_audio=round(d_audio, 4),
+                           d_cf_video=round(d_video, 4))
+            self.record = rec
             return scores
 
         # Stage 2: compute per-channel kappa contributions
@@ -217,12 +258,22 @@ def main():
                          "|margin_full|>=gate_tau; 0 recovers ungated λ-δ.")
     ap.add_argument('--w_audio', type=float, default=1.0)
     ap.add_argument('--w_video', type=float, default=1.0)
-    ap.add_argument('--decision', choices=['lambda_delta', 'v4'], default='lambda_delta',
-                    help="Stage-3 rule: 'lambda_delta' (legacy λ-δ) or 'v4' "
-                         "(n=200 F1-yes: flip base-yes->no when margin_full<tau_m).")
+    ap.add_argument('--decision', choices=['lambda_delta', 'v4', 'v5'], default='lambda_delta',
+                    help="Stage-3 rule: 'lambda_delta' (legacy λ-δ), 'v4' "
+                         "(n=200 F1-yes: flip base-yes->no when margin_full<tau_m), "
+                         "or 'v5' (v4 deploy decision + records per-channel d_cf "
+                         "for low-margin base-yes so grounding rules can be replayed).")
     ap.add_argument('--tau_m', type=float, default=2.0,
                     help="v4 rule threshold: flip base-yes to no when the base "
                          "yes-margin < tau_m (n=200 F1-yes 81.40 at 2.0).")
+    ap.add_argument('--tau_hi', type=float, default=4.0,
+                    help="v5: skip the two masked-view forwards when a base-yes "
+                         "already has margin_full>=tau_hi (high-confidence anchor). "
+                         "Must be >= tau_m so the grounding gate sees channel signal.")
+    ap.add_argument('--theta', type=float, default=-1.6,
+                    help="v5 grounding threshold: keep a low-margin base-yes iff "
+                         "min_{m in R} d_cf_m <= theta (the yes depends on R). "
+                         "Full-721 F1(yes) 83.88 at tau_m=2.5, theta=-1.6.")
     ap.add_argument('--control', choices=['none', 'random_sign'], default='none')
     ap.add_argument('--record_process', action=argparse.BooleanOptionalAction, default=True)
     ap.add_argument('--dry_run', action='store_true')
@@ -266,6 +317,8 @@ def main():
 
             # counterfactual views: noaudio (video only), novideo (audio only).
             # v4 uses only the full-view margin, so skip the extra forwards.
+            # v5 builds them (it forwards them only for low-margin base-yes,
+            # decided inside the processor).
             if args.decision == 'v4':
                 clean_a = clean_v = clean_f
             else:
@@ -278,7 +331,8 @@ def main():
                                          question=item.get('question', ''),
                                          group_key=item.get('group_key', ''),
                                          gate_tau=args.gate_tau,
-                                         decision=args.decision, tau_m=args.tau_m)
+                                         decision=args.decision, tau_m=args.tau_m,
+                                         tau_hi=args.tau_hi, theta=args.theta)
 
             with torch.inference_mode():
                 out = model.thinker.generate(

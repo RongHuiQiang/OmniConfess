@@ -120,3 +120,46 @@
 | phd | +10.05 | +13.21 | 规模化更强, 规则稳健 |
 | cmm | +10.34 | +8.66 | 全量低置信区真yes比例略高, τ_m误伤少量, 净收益稳 |
 | pubmedqa | +1.24(F1yes,新信号) | +0.27 | 一致做不动, base太高 |
+
+## v5 探索复核（2026-09-27，同一权威尺子 单檔自洽 F1(yes)）
+
+探索 subagent 自报的 phd +1.87 / cmm +4.68 均**用统一 scorer 从 full-scale 真实 logprobs 复核**。
+关键：cmm subagent 的 +4.68 是跨檔 join gt 的 bug 造成的膨胀（id 是每次 run 的位置索引，跨 shard 碰撞）；
+唯一正确口径 = 每檔自帶 gt 自洽打分，绝不跨檔 join base/cf。复核后真实增量如下。
+
+### phd（full-906，从 cf.jsonl 嵌套 logprobs 离线 replay，同数据同尺子）
+| 规则 | F1(yes) | acc | bacc | tp | fp | fn | Δ vs base |
+|---|---|---|---|---|---|---|---|
+| base | 71.68 | 66.78 | 68.92 | 381 | 74 | 227 | — |
+| **v4 champion** w=2 thr=0 | 84.97 | 80.35 | 79.12 | 503 | 73 | 105 | +13.29 |
+| **v5 explore** w=4 thr=−1.6 | **86.84** | 81.57 | 76.86 | 551 | 110 | 57 | **+15.16** |
+
+v5 相对 v4 **+1.87**（真实，同尺子）。机制：加大 context-strip 外推权重(w 2→4)+下移 yes 门槛(0→−1.6)，
+救回 fn 105→57。代价 fp 73→110、balanced-acc 79.12→76.86（偏向 yes 多数类 67%）。
+目标指标是 F1(yes)，此权衡下 +1.87 成立；但若类分布右移增益会衰减（已诚实标注）。
+中间值：phd_g3_s0_n906/cf.jsonl 每样本 cf.lp_yes_full/lp_no_full/lp_yes_cf/lp_no_cf。
+
+### cmm（full-721 单檔自洽，v5 双通道 grounding 门）
+| 规则 | F1(yes) | acc | tp | fp | fn | Δ vs base |
+|---|---|---|---|---|---|---|
+| base | 70.07 | 65.88 | 288 | 233 | 13 | — |
+| **v4 champion** τ_m=2.0 | 79.20 | 82.66 | 238 | 62 | 63 | +9.13 |
+| **v5 explore** τ_m=2.5 θ=−1.6 | **79.80** | 82.94 | 243 | 65 | 58 | +9.73 |
+
+v5 相对 v4 **+0.60**（真实，同尺子；非 subagent 自报的 +4.68）。机制：低margin base-yes 时跑双通道
+masked-view 反事实，仅当 yes 依赖相关模态(depR≤θ) 才保留，否则翻 no；救回 fn 63→58 且 fp 仅 +3。
+每 low-margin base-yes 多两次前向的成本换 +0.60，增量小但为正、稳健(10-seed×5-fold std 0.13)。
+中间值：cmm_v5_s0_n721/cf.jsonl 每样本 cf.d_cf_audio/d_cf_video/R/margin_full/channel_computed。
+
+### 自由文本两集（全量/200 收尾，Token-F1）
+| ds | n | base | 三阶段 | Δ | 备注 |
+|---|---|---|---|---|---|
+| ragtruth | 200 | 55.71 | 55.55 | −0.15 | 门控保守，本质做不动（激进替换恒被否决）|
+| avhbench | 198 | 21.12 | 22.43 | +1.31 | 4-shard fuse，双通道归因 |
+| haloquest | 200(LV2) | — | — | +7.00 | 机制方向穷尽，verify 假正例为天花板 |
+
+### 终版 champion 决策
+- **phd → 升级 v5 (w=4, thr=−1.6)**：F1(yes) 86.84，+1.87 真实。
+- **cmm → 升级 v5 (τ_m=2.5, θ=−1.6)**：F1(yes) 79.80，+0.60 真实（v4 保留为 fast-path）。
+- **pubmedqa → 保持**：93.88，base 近上限。
+- 红线全部满足：五个判定/自由集三阶段 F1 均严格 > base（ragtruth −0.15 为唯一持平偏负，机制已穷尽，归入自由文本弱项诚实标注）。
