@@ -1,8 +1,0 @@
-time: 659.1s
-total_samples: 3
-num_beams: 5
-scale_factor: 50.0
-num_attn_candidates: 5
-penalty_weights: 1.0
-threshold: 15
-window_size: 512

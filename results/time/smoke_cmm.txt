@@ -1,3 +1,0 @@
-time: 16.4s
-total_samples: 3
-gamma: 2.5

@@ -37,9 +37,15 @@ OmniHalluBench/*/images/
 $WD/
 scratch_smoke/
 
-# research / experiment directories — not part of the published pipeline
+# research / experiment / legacy directories — not part of the published pipeline
 OmniConfess/
 ablation/
 experiments/
 probes/
 bin/
+confession/
+docs/
+results/
+PAPER_CODE_CORRESPONDENCE.md
+EFFICIENCY_MECHANISMS.md
+KNOWN_ISSUES.md
