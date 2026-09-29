@@ -78,7 +78,8 @@ from .backbone import (
 )
 from .common import (set_seed, token_logprobs, split_question,
                      load_done_ids, attach_record, write_time)
-from .spine import ThreeStageConfessProcessor, teacher_force_lp
+from .spine import ThreeStageConfessProcessor, teacher_force_lp, teacher_force_seq_lp
+from .spine_freeform import FreeformThreeStageDriver, lowest_delta_span, word_overlap
 from .operators import (
     gamma_extrapolated_phd, relevant_modalities_cmm, confidence_gated_flip,
     grounded_yes_flip_cmm, gamma_margin_cmm, gamma_scores_pubmedqa,
@@ -792,30 +793,495 @@ def run_ragtruth(args):
 # ===========================================================================
 # DATASET 5: HaloQuest  (free-form generation)
 # ===========================================================================
-# Same three-stage confession narrative; only the Stage-3 output type differs
-# (corrected free text, not a forced token):
-#
-# Stage 1  Generate   the engineering-prompt base answer.
-# Stage 2  Confess     delta_img_tok over the committed answer tokens
-#                      (lp_full - lp_noimg), always-on. Low delta = the token was
-#                      driven by text priors rather than the image (ungrounded).
-# Stage 3  Decide      bucket-routed span correction on item['sub_category']:
-#                        visual challenge -> delta-driven directed regeneration
-#                                            of the lowest-delta span.
-#                        false premises   -> route to the fp candidate pool.
-#                        insufficient ctx -> keep base.
-#
-# The authoritative implementation lives in cf_confess_haloquest.py
-# (HaloQuestConfessDriver subclassing FreeformThreeStageDriver); this entry is a
-# thin wrapper so all six datasets run from one CLI.
+# Stage 1  Generate   greedy-decode the base answer live from the image view;
+#                     full-view per-token log-probs captured during generation
+#                     (== full-view teacher-force) so Stage 2 needs only the
+#                     no-image forward -- one fewer model call per sample.
+# Stage 2  Confess    delta_img_tok = lp_full - lp_noimg, always-on. Low delta
+#                     = token driven by text priors, not the image (ungrounded).
+# Stage 3  Decide     bucket-routed (item['sub_category']) directed regen:
+#                       false premises / visual challenge -> regen at the span
+#                         with the lowest delta under the stronger v2 sys prompt.
+#                       insufficient context -> decline-steered regen.
+
+_HALO_REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_HALO_DATA_PATH = os.path.join(
+    _HALO_REPO, 'OmniHalluBench', 'haloquest', 'annotations', 'haloquest.json')
+_HALO_DATA_ROOT = os.path.join(_HALO_REPO, 'OmniHalluBench', 'haloquest')
+
+_HALO_EVADERE = re.compile(
+    r"\b(cannot|can't|unable|impossible|not (possible|able)|"
+    r"no (information|data|detail)|not (visible|present|shown|clear|"
+    r"available|enough|sufficient)|unclear|don't know|I('m| am) not sure|"
+    r"hard to (tell|say|determine)|difficult to|cannot determine|"
+    r"not (in|from) the (image|picture|photo)|"
+    r"image does not|picture does not|photo does not|"
+    r"I (can't|cannot) see|not (show|visible|apparent)|"
+    r"outside (the|my)|beyond (the|my)|based on (the|this) image)",
+    re.IGNORECASE)
+
+_HALO_NEG = (' no ', ' not ', "n't", 'none', 'nothing', 'isn', 'aren', 'doesn',
+             'cannot', "can't", 'without', 'there is no', 'does not', 'do not',
+             'never', 'not visible', 'not present', 'not shown')
+
+_HALO_TERSE_STOP = {'is', 'are', 'the', 'a', 'an', 'it', 'its', 'this', 'that',
+                    'to', 'and'}
+
+_HALO_NUM_WORDS = {'0': 'zero', '1': 'one', '2': 'two', '3': 'three',
+                   '4': 'four', '5': 'five', '6': 'six', '7': 'seven',
+                   '8': 'eight', '9': 'nine', '10': 'ten', '11': 'eleven',
+                   '12': 'twelve', '13': 'thirteen', '14': 'fourteen',
+                   '15': 'fifteen', '16': 'sixteen', '17': 'seventeen',
+                   '18': 'eighteen', '19': 'nineteen', '20': 'twenty'}
+
+
+def _halo_is_refusal(txt):
+    return bool(_HALO_EVADERE.search(str(txt)))
+
+
+def _halo_is_negation(txt):
+    s = ' ' + str(txt).lower() + ' '
+    return any(n in s for n in _HALO_NEG)
+
+def _halo_content_len(txt):
+    ws = re.sub(r'[^\w\s]', ' ', str(txt).lower()).split()
+    return len([w for w in ws if w not in _HALO_TERSE_STOP])
+
+
+def _halo_count_noun(question):
+    m = re.search(r'how many ([a-z][a-z ]*?)'
+                  r'(?: are| is| can| do| does| seen| visible|\?|$)',
+                  str(question).lower())
+    return m.group(1).strip() if m else ''
+
+
+def _halo_normalize_number_answer(pred, question):
+    """Bare integer answers score ~0 Token-F1 against HaloQuest refs (which spell
+    numbers out). Spell the digit; wrap with counted noun for 'how many' questions.
+    Model-free and idempotent — only rewrites exact bare integers."""
+    p = str(pred).strip().rstrip('.')
+    if re.fullmatch(r'\d+', p) and p in _HALO_NUM_WORDS:
+        noun = _halo_count_noun(question)
+        return (f"There are {_HALO_NUM_WORDS[p]} {noun}."
+                if noun else f"{_HALO_NUM_WORDS[p].capitalize()}.")
+    return pred
+
+
+def _halo_build_view_img(processor, model, sys_prompt, image, up):
+    uc = build_user_content_with_media_tokens(None, None, image, up)
+    raw = build_inputs(processor, model, make_messages(sys_prompt, uc),
+                       None, None, image, 'haloquest')
+    return prepare_for_thinker(raw, model)
+
+
+def _halo_build_view_noimg(processor, model, sys_prompt, up):
+    uc = build_user_content_with_media_tokens(None, None, None, up)
+    raw = build_inputs(processor, model, make_messages(sys_prompt, uc),
+                       None, None, None, 'haloquest')
+    return prepare_for_thinker(raw, model)
+
+
+def _halo_greedy(model, tokenizer, clean, max_new_tokens):
+    with torch.inference_mode():
+        out = model.thinker.generate(
+            **clean, max_new_tokens=max_new_tokens,
+            do_sample=False, pad_token_id=tokenizer.eos_token_id)
+    return tokenizer.decode(out[0][clean['input_ids'].shape[1]:],
+                            skip_special_tokens=True).strip()
+
+
+def _halo_greedy_with_lp(model, tokenizer, clean, max_new_tokens):
+    """Stage-1 generate that also returns Stage-2 full-view log-probs.
+
+    Greedy decoding is self-teacher-forced, so each emitted token's log-prob
+    under the image view equals teacher_force_seq_lp on the same prefix — we
+    fold Stage-2's full-view teacher-force into this pass and save one forward.
+    """
+    eos = tokenizer.eos_token_id
+    with torch.inference_mode():
+        out = model.thinker.generate(
+            **clean, max_new_tokens=max_new_tokens,
+            do_sample=False, pad_token_id=eos,
+            return_dict_in_generate=True, output_scores=True)
+    input_len = clean['input_ids'].shape[1]
+    gen_ids = out.sequences[0][input_len:]
+    scores = out.scores
+    n = min(gen_ids.shape[0], len(scores))
+    lp_full = []
+    for i in range(n):
+        lsm = torch.log_softmax(scores[i][0].float(), dim=-1)
+        lp_full.append(float(lsm[gen_ids[i]]))
+    gen_ids = gen_ids[:n]
+    if gen_ids.numel() and int(gen_ids[-1]) == eos:
+        gen_ids = gen_ids[:-1]
+        lp_full = lp_full[:-1]
+    text = tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
+    return text, gen_ids.detach(), lp_full
+
+def _halo_vc_regen_prompt(question, base_pred, span):
+    return (
+        "Look at the image and answer the question with one short, direct "
+        "sentence.\n"
+        f"Question: {question}\n"
+        f"A draft answer said: \"{base_pred}\"\n"
+        f"Double-check only this detail against the image: \"{span}\". "
+        "If the image confirms it, keep the same answer. Only change it if the "
+        "image clearly shows something different. State the single correct "
+        "value, reusing the wording of the question. Give the answer directly, "
+        "with no extra description, no hedging, and no phrases like "
+        "\"in the image\".")
+
+
+def _halo_ic_regen_prompt(question, base_pred):
+    return (
+        "Look at the image and answer the question with one short, direct "
+        "sentence.\n"
+        f"Question: {question}\n"
+        f"A draft answer said: \"{base_pred}\"\n"
+        "Answer using ONLY what is actually visible in the image. If the image "
+        "does not clearly show the answer, do not guess: say that it cannot be "
+        "determined from the image, reusing the subject named in the question. "
+        "For example, \"What color are her shoes?\" becomes \"Her shoes are not "
+        "visible in the image, so the color cannot be determined.\", and "
+        "\"Who made this sculpture?\" becomes \"We cannot tell from the image "
+        "who made the sculpture.\" Do not add extra description.")
+
+
+def _halo_fp_regen_prompt(question, base_pred, span):
+    return (
+        "Look at the image and answer the question with one short, direct "
+        "sentence.\n"
+        f"Question: {question}\n"
+        f"A draft answer said: \"{base_pred}\"\n"
+        f"Check whether the image really contains: \"{span}\". "
+        "If the question takes for granted something that is not actually in "
+        "the image, do NOT accept it: answer by turning the question into a "
+        "negative statement that reuses the question's own subject and verb. "
+        "For example, \"What kind of hat is the man wearing?\" becomes "
+        "\"The man is not wearing a hat.\", and \"What color is the woman's "
+        "necklace?\" becomes \"The woman is not wearing a necklace.\" "
+        "Do not add extra description and do not use phrases like "
+        "\"there is no ... visible in the image\".")
+
+
+def _halo_premise_extract_prompt(question):
+    return (
+        "A question can presuppose that something exists or is true in an image.\n"
+        f"Question: \"{question}\"\n"
+        "In a few words, state the key thing this question ASSUMES is present "
+        "or true in the image (the presupposition). Reply with just that "
+        "assumed entity or fact, nothing else.")
+
+
+def _halo_premise_answer_prompt(question, presupposition):
+    return (
+        "Look at the image carefully.\n"
+        f"Question: {question}\n"
+        f"This question assumes: \"{presupposition}\".\n"
+        "Based ONLY on what the image actually shows, answer the question in "
+        "ONE short sentence. If that assumption is not actually true in the "
+        "image, simply state what is really there (e.g. \"There is no ... in "
+        "the image\" or \"The ... is not visible\"). Do NOT explain your "
+        "reasoning, do NOT say \"the assumption is false\" -- give only the "
+        "direct answer sentence.")
+
+class HaloQuestConfessDriver(FreeformThreeStageDriver):
+    """Stage 2 = delta_img_tok confession; Stage 3 = bucket-routed directed regen
+    with heuristic accept guard. Subclasses FreeformThreeStageDriver so the
+    three-stage loop is shared with the other free-form datasets."""
+
+    def __init__(self, model, processor, tokenizer, sys_prompt,
+                 overlap_threshold=0.10, regen_max_tokens=64,
+                 fp_mode='directed_regen', regen_sys_prompt=None):
+        super().__init__(model, processor, tokenizer)
+        self.sys_prompt = sys_prompt
+        self.regen_sys_prompt = regen_sys_prompt or sys_prompt
+        self.overlap_threshold = overlap_threshold
+        self.regen_max_tokens = regen_max_tokens
+        self.fp_mode = fp_mode
+        self._image_values = None
+        # Stage-1 generation stashes full-view lp here; Stage 2 reuses it.
+        self._lp_full = None
+
+    def confess(self, base_pred, clean_full, clean_noimg, gen_ids, item):
+        """Stage 2. Full-view lp was already captured during Stage-1 generation
+        (_lp_full), so only the no-image teacher-force is run here."""
+        toks = [self.tokenizer.decode([t]) for t in gen_ids.tolist()]
+        lp_full = self._lp_full
+        if lp_full is None:
+            lp_full = teacher_force_seq_lp(self.model, clean_full, gen_ids)
+        lp_noimg = teacher_force_seq_lp(self.model, clean_noimg, gen_ids)
+        delta = [f - n for f, n in zip(lp_full, lp_noimg)]
+        return dict(tokens=toks, delta_img_tok=delta, lp_full=lp_full,
+                    n_tok=len(toks))
+
+    def _accept(self, base_pred, cand, qt):
+        """Bucket-aware heuristic guard. Returns (accepted: bool, reason).
+
+        Two refinements over a plain overlap gate:
+          revert-if-both-decline: base already declines and cand also declines
+            -> keep base (regen only reshuffles vocabulary and loses Token-F1).
+          terse-base bypass (VC): a 1-2-word base ("2", "Tree") has ~0
+            word-overlap with any full-sentence regen, so the overlap gate would
+            wrongly reject a good rewrite -> trust the candidate when base is terse.
+        """
+        if not cand or cand.strip() == base_pred.strip():
+            return False, 'nochange'
+        ov = word_overlap(cand, base_pred)
+        b_decl = _halo_is_negation(base_pred) or _halo_is_refusal(base_pred)
+        c_decl = _halo_is_negation(cand) or _halo_is_refusal(cand)
+        if qt == 'visual challenge':
+            if _halo_content_len(base_pred) <= 2:
+                if b_decl and c_decl:
+                    return False, 'keep_decline'
+                return True, 'vc_terse_base'
+            if ov < self.overlap_threshold:
+                return False, 'low_overlap'
+            if _halo_is_refusal(cand) and not _halo_is_refusal(base_pred):
+                return False, 'new_refusal'
+            if b_decl and c_decl:
+                return False, 'keep_decline'
+            return True, 'vc_ok'
+        if qt == 'false premises':
+            if b_decl and c_decl:
+                return False, 'keep_decline'
+            if ov >= self.overlap_threshold or _halo_is_negation(cand):
+                return True, 'fp_ok'
+            return False, 'low_overlap'
+        return False, 'none_bucket'
+
+    def decide(self, base_pred, confess_signal, item):
+        qt = item.get('sub_category', 'insufficient context')
+        toks = confess_signal['tokens']
+        delta = confess_signal['delta_img_tok']
+        span, span_delta, span_idx = lowest_delta_span(toks, delta, max_words=3)
+        question = item['question']
+
+        rec = dict(id=str(item['id']), question=question, gt=item.get('gt', ''),
+                   qt=qt, base_pred=base_pred, low_span=span,
+                   low_span_delta=span_delta, low_span_idx=span_idx,
+                   n_tok=confess_signal['n_tok'])
+
+        if qt == 'insufficient context':
+            cand = ''
+            try:
+                cl = _halo_build_view_img(
+                    self.processor, self.model, self.regen_sys_prompt,
+                    self._image_values, _halo_ic_regen_prompt(question, base_pred))
+                cand = _halo_greedy(self.model, self.tokenizer, cl,
+                                    self.regen_max_tokens)
+                del cl; torch.cuda.empty_cache()
+            except Exception as e:
+                rec.update(stage3='ic_regen_error', regen_done=False,
+                           regen_candidate='', accepted=False,
+                           accept_reason='error:' + str(e)[:80],
+                           edited=False, repaired_pred=base_pred,
+                           final_pred=base_pred)
+                return base_pred, rec
+            accept = bool(cand) and cand.strip() != base_pred.strip() and \
+                (_halo_is_refusal(cand) or _halo_is_negation(cand))
+            final = cand if accept else base_pred
+            rec.update(stage3='ic_regen', regen_done=True, regen_candidate=cand,
+                       cand_is_refusal=_halo_is_refusal(cand),
+                       cand_is_negation=_halo_is_negation(cand),
+                       accepted=accept,
+                       accept_reason='ic_decline' if accept else 'ic_keep_base',
+                       edited=accept, repaired_pred=final, final_pred=final)
+            return final, rec
+
+        if qt == 'false premises' and self.fp_mode == 'premise_check':
+            try:
+                cl_e = _halo_build_view_img(
+                    self.processor, self.model, self.regen_sys_prompt,
+                    self._image_values, _halo_premise_extract_prompt(question))
+                presup = _halo_greedy(self.model, self.tokenizer, cl_e, 32)
+                del cl_e
+                cl_a = _halo_build_view_img(
+                    self.processor, self.model, self.regen_sys_prompt,
+                    self._image_values,
+                    _halo_premise_answer_prompt(question, presup))
+                pc = _halo_greedy(self.model, self.tokenizer, cl_a,
+                                  self.regen_max_tokens)
+                del cl_a; torch.cuda.empty_cache()
+            except Exception as e:
+                rec.update(stage3='premise_check_error', regen_done=False,
+                           regen_candidate='', accepted=False,
+                           accept_reason='error:' + str(e)[:80],
+                           edited=False, repaired_pred=base_pred,
+                           final_pred=base_pred)
+                return base_pred, rec
+            accepted, reason = self._accept(base_pred, pc, 'false premises')
+            final = pc if accepted else base_pred
+            rec.update(stage3='fp_premise_check', regen_done=True,
+                       regen_candidate=pc, presupposition=presup,
+                       cand_is_negation=_halo_is_negation(pc),
+                       accepted=accepted, accept_reason=reason,
+                       edited=accepted, repaired_pred=final, final_pred=final)
+            return final, rec
+
+        if not span:
+            final = _halo_normalize_number_answer(base_pred, question)
+            rec.update(stage3='keep_base', regen_done=False, regen_candidate='',
+                       accepted=False, accept_reason='no_span',
+                       edited=(final.strip() != base_pred.strip()),
+                       repaired_pred=final, final_pred=final)
+            return final, rec
+
+        rp = (_halo_vc_regen_prompt(question, base_pred, span)
+              if qt == 'visual challenge'
+              else _halo_fp_regen_prompt(question, base_pred, span))
+        cand = ''
+        try:
+            cl = _halo_build_view_img(
+                self.processor, self.model, self.regen_sys_prompt,
+                self._image_values, rp)
+            cand = _halo_greedy(self.model, self.tokenizer, cl,
+                                self.regen_max_tokens)
+            del cl; torch.cuda.empty_cache()
+        except Exception as e:
+            rec.update(stage3='regen_error', regen_done=False, regen_candidate='',
+                       accepted=False, accept_reason='error:' + str(e)[:80],
+                       edited=False, repaired_pred=base_pred, final_pred=base_pred)
+            return base_pred, rec
+
+        accepted, reason = self._accept(base_pred, cand, qt)
+        final = cand if accepted else base_pred
+        final = _halo_normalize_number_answer(final, question)
+        rec.update(stage3='directed_regen', regen_done=True, regen_candidate=cand,
+                   cand_overlap=round(word_overlap(cand, base_pred), 4),
+                   cand_is_refusal=_halo_is_refusal(cand),
+                   cand_is_negation=_halo_is_negation(cand),
+                   accepted=accepted, accept_reason=reason,
+                   edited=(final.strip() != base_pred.strip()),
+                   repaired_pred=final, final_pred=final)
+        return final, rec
+
+def run_haloquest_pipeline(shard=0, nshards=8, outdir=None, fp_mode='directed_regen',
+                           overlap_threshold=0.10, regen_max_tokens=64,
+                           dry_run=False, file_name=None):
+    """Run the HaloQuest free-text three-stage pipeline over one shard.
+
+    Writes one JSONL per shard; returns its path. No-image samples keep base
+    (channel_computed=0) so a full run yields N=365.
+    """
+    if outdir is None:
+        outdir = os.path.join(_HALO_REPO, 'outputs', 'haloquest_freeform')
+    os.makedirs(outdir, exist_ok=True)
+    stem = file_name if file_name else f'freeform_s{shard}of{nshards}'
+    outfile = os.path.join(outdir, stem + '.jsonl')
+
+    data = load_dataset(_HALO_DATA_PATH, _HALO_DATA_ROOT)
+    by_id = {str(it['id']): it for it in data}
+    ids_all = sorted(by_id.keys(), key=lambda x: int(x))
+    ids_shard = [i for j, i in enumerate(ids_all) if j % nshards == shard]
+
+    if dry_run:
+        want = {'false premises': 2, 'visual challenge': 2, 'insufficient context': 1}
+        picked, seen = [], {k: 0 for k in want}
+        for i in ids_shard:
+            qt = by_id[i]['sub_category']
+            if seen.get(qt, 99) < want.get(qt, 0):
+                picked.append(i); seen[qt] += 1
+            if sum(seen.values()) >= sum(want.values()):
+                break
+        ids_shard = picked
+    print(f'[shard {shard}/{nshards}] {len(ids_shard)} samples -> {outfile}', flush=True)
+
+    done = set()
+    if os.path.exists(outfile):
+        for line in open(outfile, encoding='utf-8'):
+            try: done.add(str(json.loads(line)['id']))
+            except: pass
+
+    print('[model] loading Qwen2.5-Omni-7B...', flush=True)
+    processor, model = load_model()
+    tokenizer = processor.tokenizer
+    sys_prompt = get_system_prompt('haloquest', 'v2')
+    regen_sys_prompt = get_system_prompt('haloquest', 'v2')
+    print(f'[fp_mode={fp_mode}] Stage-1/Stage-3 prompt=v2; '
+          f'full-view lp folded into generation', flush=True)
+
+    driver = HaloQuestConfessDriver(model, processor, tokenizer, sys_prompt,
+                                    overlap_threshold=overlap_threshold,
+                                    regen_max_tokens=regen_max_tokens,
+                                    fp_mode=fp_mode,
+                                    regen_sys_prompt=regen_sys_prompt)
+
+    fout = open(outfile, 'a', encoding='utf-8')
+    n_done = 0
+    for sid in ids_shard:
+        if sid in done:
+            continue
+        item = by_id[sid]
+        qt = item['sub_category']
+        up = get_user_prompt(item['question'], 'haloquest', 'v1')
+        try:
+            _, _, image_values = load_media_for_item(item, _HALO_DATA_PATH, _HALO_DATA_ROOT)
+        except Exception as e:
+            image_values = None
+            print(f'  [warn {sid}] media err {e}', flush=True)
+
+        if image_values is None:
+            try:
+                cl_noimg = _halo_build_view_noimg(processor, model, sys_prompt, up)
+                base_pred = _halo_greedy(model, tokenizer, cl_noimg, regen_max_tokens)
+                del cl_noimg; torch.cuda.empty_cache()
+            except Exception as e:
+                print(f'  [skip {sid}] noimg base err {e}', flush=True); continue
+            rec = dict(id=sid, question=item['question'], gt=item.get('gt', ''),
+                       qt=qt, base_pred=base_pred, low_span='', low_span_delta=0.0,
+                       low_span_idx=[], n_tok=0, stage3='keep_base_noimg',
+                       regen_done=False, regen_candidate='', accepted=False,
+                       accept_reason='no_image', edited=False,
+                       repaired_pred=base_pred, final_pred=base_pred,
+                       delta_img_tok=[], delta_img_agg_mean=0.0,
+                       delta_img_agg_min=0.0, channel_computed=0)
+            fout.write(json.dumps(rec, ensure_ascii=False) + '\n'); fout.flush()
+            n_done += 1
+            print(f'  [{sid}] {qt[:4]} no-image -> keep base', flush=True)
+            continue
+
+        try:
+            clean_full = _halo_build_view_img(processor, model, sys_prompt,
+                                              image_values, up)
+        except Exception as e:
+            print(f'  [skip {sid}] view err {e}', flush=True); continue
+        base_pred, gen_ids, lp_full = _halo_greedy_with_lp(model, tokenizer,
+                                                            clean_full, regen_max_tokens)
+        del clean_full; torch.cuda.empty_cache()
+        if gen_ids.numel() == 0:
+            print(f'  [skip {sid}] empty base tokens', flush=True); continue
+        gen_ids = gen_ids.to(model.device)
+
+        try:
+            clean_noimg = _halo_build_view_noimg(processor, model, sys_prompt, up)
+        except Exception as e:
+            print(f'  [skip {sid}] noimg view err {e}', flush=True); continue
+
+        driver._image_values = image_values
+        driver._lp_full = lp_full
+        try:
+            final_pred, rec = driver.run_sample(base_pred, None, clean_noimg,
+                                                gen_ids, item)
+        except Exception as e:
+            import traceback; traceback.print_exc()
+            print(f'  [error {sid}] {e}', flush=True)
+            del clean_noimg; torch.cuda.empty_cache(); continue
+        del clean_noimg; torch.cuda.empty_cache()
+
+        fout.write(json.dumps(rec, ensure_ascii=False) + '\n'); fout.flush()
+        n_done += 1
+        print(f'[{sid}] {qt[:4]} span={rec.get("low_span")!r}'
+              f'({rec.get("low_span_delta")}) '
+              f'edit={rec.get("edited")} final={final_pred[:50]!r}', flush=True)
+
+    fout.close()
+    print(f'[shard {shard}] done, wrote {n_done} new -> {outfile}', flush=True)
+    return outfile
 
 
 def run_haloquest(args):
-    """HaloQuest free-text three-stage arm (Stage 1 generate -> Stage 2 confess
-    delta_img_tok -> Stage 3 bucket-routed span correction). Delegates to the
-    authoritative pipeline in cf_confess_haloquest.run_haloquest_pipeline so the
-    unified CLI and the standalone module run the same logic."""
-    from .datasets.haloquest import run_haloquest_pipeline
+    """HaloQuest free-text three-stage arm (pipeline entry point)."""
     run_haloquest_pipeline(
         shard=args.halo_shard, nshards=args.halo_nshards,
         outdir=args.output_dir, fp_mode=args.halo_fp_mode,

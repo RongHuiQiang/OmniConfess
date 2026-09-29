@@ -3,10 +3,12 @@ import json
 import re
 import csv
 import glob
+import math
+import random
 import numpy as np
 import string
-import io  
-import contextlib 
+import io
+import contextlib
 from tqdm import tqdm
 from collections import Counter
 from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score
@@ -223,12 +225,13 @@ class UnifiedEvaluator:
     def evaluate_descriptive_tasks(self, file_path, save_single=False):
         data = self._load_data(file_path)
         metrics = {"f1": [], "rel": [], "acc": []}
-        scored_data = [] 
+        scored_data = []
 
-        for idx, item in enumerate(tqdm(data, desc=f"NLP eval ({os.path.basename(file_path)})", disable=not save_single)): 
+        for idx, item in enumerate(tqdm(data, desc=f"NLP eval ({os.path.basename(file_path)})", disable=not save_single)):
             status = str(item.get('status', 'success')).lower()
             gt = self._get_value(item, ['gt', 'ground_truth', 'answer'])
-            pred = self._get_value(item, ['pred', 'response', 'output'])
+            # confession outputs use final_pred / repaired_pred; generic outputs use pred
+            pred = self._get_value(item, ['final_pred', 'repaired_pred', 'pred', 'response', 'output'])
             
             item_f1 = self._compute_token_f1(pred, gt)
             item_rel, item_acc = -1.0, -1.0
@@ -266,7 +269,6 @@ class UnifiedEvaluator:
             "GAVIE-Acc": round(np.mean(metrics["acc"]), 2) if metrics["acc"] else 0.0
         }]
         # ================= stage 2: compute CIDEr globally =================
-        cider_score = 0.0
         individual_cider_scores = [0.0] * len(data)
         
         with contextlib.redirect_stdout(io.StringIO()):
@@ -304,13 +306,95 @@ class UnifiedEvaluator:
             "GAVIE-Acc": round(np.mean(metrics["acc"]), 2) if metrics["acc"] else 0.0
         }]
 
-# ================= [main: dynamic grouping and report generation] =================
+    # ================= [3. HaloQuest confession evaluation] =================
+    @staticmethod
+    def _bootstrap_ci(scores, n_boot=2000, alpha=0.05, seed=42):
+        rng = random.Random(seed)
+        n = len(scores)
+        means = [sum(rng.choices(scores, k=n)) / n for _ in range(n_boot)]
+        means.sort()
+        return means[int(alpha / 2 * n_boot)], means[int((1 - alpha / 2) * n_boot)]
+
+    def evaluate_haloquest_confession(self, file_path, csv_out=False):
+        """Evaluate a HaloQuest confession JSONL (base_pred vs repaired_pred).
+
+        Reports Token-F1 for base and confession outputs, the delta with a
+        95% bootstrap CI, and the edited-only subset delta. Mirrors the logic
+        of the former standalone eval_haloquest.py.
+        """
+        from pathlib import Path
+        path = Path(file_path)
+        rows = [json.loads(l) for l in path.open(encoding='utf-8') if l.strip()]
+        n_total = len(rows)
+
+        base_f1s, rep_f1s, edited_flags, ids = [], [], [], []
+        for r in rows:
+            gt = r.get('gt', '')
+            bp = r.get('base_pred', '')
+            rp = r.get('repaired_pred', bp)
+            base_f1s.append(self._compute_token_f1(bp, gt))
+            rep_f1s.append(self._compute_token_f1(rp, gt))
+            edited_flags.append(bool(r.get('edited', False)))
+            ids.append(r.get('id', ''))
+
+        n_edited = sum(edited_flags)
+        mean_base = 100 * sum(base_f1s) / n_total
+        mean_rep = 100 * sum(rep_f1s) / n_total
+        delta = mean_rep - mean_base
+        delta_per = [100 * (r - b) for r, b in zip(rep_f1s, base_f1s)]
+        lo_d, hi_d = self._bootstrap_ci(delta_per)
+
+        edited_base = [b for b, e in zip(base_f1s, edited_flags) if e]
+        edited_rep = [r for r, e in zip(rep_f1s, edited_flags) if e]
+        if edited_base:
+            mean_base_ed = 100 * sum(edited_base) / len(edited_base)
+            mean_rep_ed = 100 * sum(edited_rep) / len(edited_rep)
+            delta_ed = mean_rep_ed - mean_base_ed
+            lo_ed, hi_ed = self._bootstrap_ci(
+                [100 * (r - b) for r, b in zip(edited_rep, edited_base)])
+        else:
+            mean_base_ed = mean_rep_ed = delta_ed = lo_ed = hi_ed = float('nan')
+
+        if csv_out:
+            print('id,base_f1,rep_f1,delta,edited')
+            for i, (bf, rf, ef) in enumerate(zip(base_f1s, rep_f1s, edited_flags)):
+                print(f'{ids[i]},{100*bf:.4f},{100*rf:.4f},{100*(rf-bf):.4f},{int(ef)}')
+            return []
+
+        print('=' * 60)
+        print('HaloQuest confession Token-F1 evaluation')
+        print(f'  Input : {path}')
+        print(f'  N     : {n_total}')
+        print('=' * 60)
+        print(f'  base_pred    Token-F1 : {mean_base:.2f}')
+        print(f'  confession   Token-F1 : {mean_rep:.2f}')
+        print(f'  Delta                 : {delta:+.2f}  95% CI [{lo_d:+.2f}, {hi_d:+.2f}]')
+        print()
+        print(f'  Edited samples        : {n_edited} / {n_total} ({100*n_edited/n_total:.1f}%)')
+        if not math.isnan(delta_ed):
+            print(f'  Edited-only delta     : {delta_ed:+.2f}  95% CI [{lo_ed:+.2f}, {hi_ed:+.2f}]')
+        print('=' * 60)
+        return [{
+            'File Name': os.path.basename(file_path),
+            'Samples': n_total,
+            'base Token-F1': round(mean_base, 2),
+            'Token-F1': round(mean_rep, 2),
+            'Delta': round(delta, 2),
+            'CI-lo': round(lo_d, 2),
+            'CI-hi': round(hi_d, 2),
+            'Edited': n_edited,
+        }]
+
 # ================= [main: dynamic grouping and report generation] =================
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--target_folder', type=str, default=None, help="Aggregate evaluation over every file in the folder")
-    parser.add_argument('--target_files', type=str, nargs='+', default=None, help="Per-sample evaluation of one or more files, writing new files carrying eval_metrics")
+    parser.add_argument('--target_folder', type=str, default=None,
+                        help="Aggregate evaluation over every file in the folder")
+    parser.add_argument('--target_files', type=str, nargs='+', default=None,
+                        help="Per-sample evaluation of one or more files")
+    parser.add_argument('--csv', action='store_true',
+                        help="Dump per-sample CSV (haloquest confession only)")
     args = parser.parse_args()
 
     if not args.target_folder and not args.target_files:
@@ -319,7 +403,7 @@ if __name__ == "__main__":
 
     zhipu_key = os.environ.get("ZHIPU_API_KEY")
     evaluator = UnifiedEvaluator(zhipu_key=zhipu_key)
-    
+
     files_to_eval = []
     is_single_file_mode = False
 
@@ -328,14 +412,14 @@ if __name__ == "__main__":
         is_single_file_mode = True
     elif args.target_folder:
         files_to_eval = glob.glob(os.path.join(args.target_folder, "*.json*"))
-    
 
     all_reports = {}
 
     for f in files_to_eval:
-        if "_scored" in f: continue
+        if "_scored" in f:
+            continue
         name = os.path.basename(f).lower()
-        
+
         if "cmm" in name:
             target_cat, mode = "cmm", "judgement"
         elif "phd" in name:
@@ -345,7 +429,7 @@ if __name__ == "__main__":
         elif "summedits" in name:
             target_cat, mode = "summedits", "judgement"
         elif "halo" in name:
-            target_cat, mode = "halo", "descriptive"
+            target_cat, mode = "halo", "halo_confession"
         elif "avh" in name:
             target_cat, mode = "avh", "descriptive"
         else:
@@ -354,7 +438,8 @@ if __name__ == "__main__":
                 if other in name:
                     target_cat, mode, detected = other, "descriptive", True
                     break
-            if not detected: continue
+            if not detected:
+                continue
 
         report_key = (mode, target_cat)
         if report_key not in all_reports:
@@ -363,6 +448,8 @@ if __name__ == "__main__":
         try:
             if mode == "judgement":
                 results = evaluator.evaluate_judgment_tasks(f, save_single=True)
+            elif mode == "halo_confession":
+                results = evaluator.evaluate_haloquest_confession(f, csv_out=args.csv)
             else:
                 results = evaluator.evaluate_descriptive_tasks(f, save_single=True)
             all_reports[report_key].extend(results)
@@ -370,10 +457,18 @@ if __name__ == "__main__":
             print(f"[error] evaluation failed for {f}: {e}")
 
     for (mode, cat), data in all_reports.items():
-        if not data: continue
-        filename = f"{mode}_{cat}.csv"
-        headers = ["File Name", "Samples", "Categorical-F1", "PhD-Index"] if mode == "judgement" else \
-                  ["File Name", "Samples", "Token-F1", "GAVIE-Rel", "GAVIE-Acc"]
+        if not data:
+            continue
+        if mode == "halo_confession":
+            filename = f"halo_confession.csv"
+            headers = ["File Name", "Samples", "base Token-F1", "Token-F1",
+                       "Delta", "CI-lo", "CI-hi", "Edited"]
+        elif mode == "judgement":
+            filename = f"{mode}_{cat}.csv"
+            headers = ["File Name", "Samples", "Categorical-F1", "PhD-Index"]
+        else:
+            filename = f"{mode}_{cat}.csv"
+            headers = ["File Name", "Samples", "Token-F1", "GAVIE-Rel", "GAVIE-Acc"]
         with open(filename, 'a', newline='') as csvfile:
             w = csv.DictWriter(csvfile, fieldnames=headers)
             if csvfile.tell() == 0:
