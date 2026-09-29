@@ -1,0 +1,41 @@
+# =============================================================================
+# ragtruth -- descriptive-text cell, output-contract layer
+# =============================================================================
+# TERMINAL VALUES (paper numbers, Qwen2.5-Omni-7B, n=435):
+#   base_model + prompt v4  ->  Token-F1 51.58 (GAVIE pending: -1 sentinel,
+#   zhipu queue). Contract chain: v1 38.25 -> v2 45.87 -> v3 49.40 -> v4 51.58.
+#   base arm stays 38.25; BoN-on-v3 was judged negative (48.55 < 49.40), so the
+#   ragtruth terminal form is the contract layer alone (RESULTS.md 2026-08-15
+#   BoN x contract v3 row).
+#   PROVENANCE: RESULTS.md rows 2026-08-15 (v2/v3) + the v4 full run,
+#     artifact   outputs/ragtruth_contract_v4/ragtruth_contract_v4_full_single_scored.jsonl
+#     launcher   ../run_contract_v2.sh ragtruth v4 contract_v4 (2 shards, GPUs 0-1)
+#     operator   OmniConfess/methods/base_model.py (merged into
+#                confess_pipeline.py as the contract layer)
+#
+# PROMPT: v4 = v3 + consecutive-line numbered-list rule (keeps the whole answer
+# inside the extractor window; 57/108 dev outputs matched
+# r'\n\n\s*\d+\.\s' and the ">500 chars -> last paragraph" path dropped up to
+# 92% of the words). v5 additionally bans blank lines after the last item --
+# registered but not the terminal cell. Registry: ragtruth/baseline/v4,
+# 1188 chars, md5 f3884f93; user template = v2/v3/v4/v5 shared branch.
+#
+# KNOWN CAVEAT (registry_verdicts.json ragtruth): Token-F1 here rewards length
+# (gt mean 102.4 words). Do not report "first place on Token-F1" without the
+# equal-length control recorded there.
+# =============================================================================
+
+task_type: descriptive-text
+dataset: ragtruth
+
+data_path: OmniHalluBench/ragtruth/ragtruth.json   # 435 items
+data_root: OmniHalluBench
+
+prompt_version: v4        # terminal contract version
+seed: 42
+max_new_tokens: 512
+record_process: true
+
+output_dir: outputs/pipeline/ragtruth
+time_path: outputs/pipeline/ragtruth/time
+file_name: ragtruth_contract_v4

@@ -1,0 +1,50 @@
+# =============================================================================
+# pubmedqa -- judgement cell, CF-Confess operator (3-class, text-only view)
+# =============================================================================
+# TERMINAL VALUES (paper numbers, Qwen2.5-Omni-7B, n=460 of 468; 8 maybe-gt
+# excluded by the scorer):
+#   CF-Confess lambda=0.25 + prompt v5  ->  F1 94.58 / PhD-Index 82.96
+#   (r_yes 92.82 / r_no 75.00); vs CF v1 95.26 / 81.38 = Idx +1.58 / F1 -0.68.
+#   base_model v1 95.14 / 80.21.
+#   PROVENANCE: RESULTS.md row 2026-08-16 (full 460 final validation),
+#     artifact   outputs/pubmedqa_cf_confess_v5full/pubmedqa_cf_v5_lam0.25_full_single_scored.jsonl
+#     launcher   run_cf_pubmedqa_gpus0123.sh (lam=0.25 by the pre-registered
+#                phd rule: max dev Youden under yes-rate move <= +-5pp)
+#     operator   cf_confess_pubmedqa.py  (merged into confess_pipeline.py)
+#
+# PROMPT: v5 = retained v3 system bytes (v4 rolled back) + user-template surgery
+# only ("based on the provided passage and your general knowledge" ->
+# "based only on the provided passage"). The system md5 therefore ALIASES v3 --
+# the real v5 bytes live in the user template (registry sub-record
+# user_prompt). v6 (v1 system + v5 user) is the attribution arm: F1 95.27 /
+# Idx 80.30, isolating the user fix as a no-op (paired p=1.0) and v5's +1.58
+# Idx as an interaction effect. Registry: pubmedqa/baseline/v5 + v6 notes.
+# Adoption note (RESULTS.md): v5 was selected on dev 115 (Idx +7.94) and shrank
+# to +1.58 on full 460 -- kept here as the terminal version per the
+# coordinator's list; the F1 tolerance (-0.5) was missed by 0.18 on full.
+# =============================================================================
+
+task_type: judgement
+dataset: pubmedqa
+
+data_path: OmniHalluBench/pubmedqa/pubmedqa.json   # 468 items
+data_root: OmniHalluBench
+
+prompt_version: v5        # terminal (dev-selected); v1 = pre-program arm
+seed: 42
+max_new_tokens: 300
+record_process: true
+
+output_dir: outputs/pipeline/pubmedqa
+time_path: outputs/pipeline/pubmedqa/time
+file_name: cf_confess_pubmedqa
+
+cf:
+  variant: pubmedqa
+  # d_cf = log P(Yes | no-passage view) - log P(Yes | full view), decision at
+  # step 0 only; yes' = lp_yes_full + lambda * d_cf, argmax over
+  # {yes', lp_no_full, lp_maybe_full}, hard-forced token.
+  lambda_cf: 0.25         # terminal (pre-registered phd rule on the dev probe)
+  w_audio: 1.0            # unused by the pubmedqa variant
+  w_video: 1.0
+  control: none

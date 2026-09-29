@@ -31,3 +31,7 @@ CLAUDE.md
 OmniHalluBench/*/reorg_raw_files/
 OmniHalluBench/*/videos/
 OmniHalluBench/*/images/
+
+# accidental shell-unexpanded dir + scratch
+$WD/
+scratch_smoke/

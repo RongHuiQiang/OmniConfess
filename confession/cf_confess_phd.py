@@ -1,35 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""cf_confess_phd.py -- three-stage counterfactual confession operator for PhD.
+"""cf_confess_phd.py -- three-stage counterfactual confession for PHD.
 
-The misleading text CONTEXT is the irrelevant channel that must be stripped;
-the image is the relevant channel and is never ablated. The three stages:
+The misleading text CONTEXT is the irrelevant channel; the image is the
+relevant channel and is never ablated. The three stages:
 
   Stage 1  Generate   greedy decode under the full view (image + context +
-                      marker + question, identical to base_model) until the
-                      decision token (bare Yes/No at step 0, or right after
-                      `\\boxed{`).
-  Stage 2  Confess     at the decision token, teacher-force the context-removed
-                      view (image + question only) on the SAME prefix and read
-                      its Yes/No logprobs. This is the model's confession: what
-                      it would decide with no misleading text prior.
-  Stage 3  Decide      strip the irrelevant context channel and keep the image
-                      contribution, then hard-force the decision token.
+                      question) until the decision token.
+  Stage 2  Confess    teacher-force the context-removed view (image + question
+                      only) on the same prefix and read its Yes/No logprobs.
+  Stage 3  Decide     strip the irrelevant context channel; force the token.
 
-Two decision rules (Stage 3), selected by --decision:
-  gamma  (default, deployed)  margin' = F_d(X^{-context}) = ly_cf - ln_cf,
-         force Yes iff margin' > 0. Zero-lambda; this is the accepted Method-A
-         deployment decision (offline-validated acc 79.5% vs base 78.5%).
-  lambda (ablation / control)  margin' = margin_full + lambda * Delta_cf, with
-         Delta_cf = ly_cf - ly_full. The --control random_sign arm flips the
-         sign of Delta per sample and therefore always uses this rule.
+Stage 3 rules (--decision):
+  gamma  (default, champion)  margin' = margin_full + w*(margin_cf - margin_full);
+         force yes iff margin' > tau_p. w>1 extrapolates the context-removal
+         signal (phd context is adversarial misinformation).
+  lambda (ablation / control) margin' = margin_full + lambda * Delta_cf.
+         --control random_sign flips Delta per sample.
 
 Views:
-  full : image + context + marker + question   (== base_model input)
-  cf   : image + question only (context & marker sentence removed)
+  full : image + context + question   (== base_model input)
+  cf   : image + question only        (context removed)
 
-Interface compatible with run_text_8gpu.sh / shard_data.py
-(--data_path/--file_name/--output_dir/--time_path) and base_model.py resume.
+Interface compatible with run_text_8gpu.sh / shard_data.py.
 """
 import os, sys, time, argparse, random
 
@@ -38,129 +31,75 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import torch
-from transformers import LogitsProcessor
 
 from shared import (
     load_dataset, load_media_for_item, load_model, build_inputs,
     prepare_for_thinker, build_user_content_with_media_tokens, make_messages,
     get_system_prompt, get_user_prompt, make_result, save_result,
 )
-from gamma_operator import gamma_extrapolated_phd  # Stage-3 v4 (n=200 F1-yes rule)
+from gamma_operator import gamma_extrapolated_phd
 from cf_common import (set_seed, token_logprobs, split_question,
                        load_done_ids, attach_record, write_time)
+from three_stage import ThreeStageConfessProcessor, teacher_force_lp
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 YES_ID, NO_ID = 9454, 2753
 
 
-class CFConfessProcessor(LogitsProcessor):
-    """Runs Stage 2 (Confess) and Stage 3 (Decide) once, at the decision token.
+class CFConfessProcessor(ThreeStageConfessProcessor):
+    """PHD three-stage confession processor.
 
-    Stage 1 (Generate) is the surrounding greedy generate() loop. This class
-    intervenes exactly once, when generation reaches the decision step:
-        (no tokens generated yet and greedy argmax is Yes/No)
-        or (generated text so far ends with `\\boxed{`).
+    Stage 2 (confess): teacher-force the context-removed view, return
+        (lp_yes_cf, lp_no_cf) at the decision token.
 
-    decision:
-        'gamma'  -> lambda-free gamma_margin_phd (deployed rule, tau=0).
-        'lambda' -> margin_full + lam * Delta_cf (ablation / random_sign arm).
+    Stage 3 (decide):
+        gamma  -- margin' = margin_full + w*(margin_cf - margin_full);
+                  force yes iff margin' > tau_p  (champion rule).
+        lambda -- margin' = margin_full + lam * Delta_cf  (ablation).
     """
 
     def __init__(self, model, tokenizer, cf_clean, prompt_len,
-                 lam, control_rng=None, decision='gamma', gate_tau=1.4, w_extrap=4.0,
-                 yes_thr=-1.6):
+                 lam, control_rng=None, decision='gamma', w_extrap=4.0,
+                 tau_p=-1.6):
+        super().__init__(tokenizer, prompt_len)
         self.model = model
-        self.tokenizer = tokenizer
         self.cf_clean = cf_clean
-        self.prompt_len = prompt_len
         self.lam = lam
-        self.control_rng = control_rng      # None => real Delta; else sign flip
+        self.control_rng = control_rng
         self.decision = decision
-        self.gate_tau = gate_tau            # legacy v3 gate (unused by v4 rule)
-        self.w_extrap = w_extrap            # v5: context-strip extrapolation weight
-        self.yes_thr = yes_thr              # v5: yes decision threshold on margin'
-        self.used = False
-        self.record = None
+        self.w_extrap = w_extrap   # context-strip extrapolation weight
+        self.tau_p = tau_p         # yes decision threshold on margin'
 
-    @torch.inference_mode()
-    def _confess_lp_yes_no(self, prefix_ids):
-        """Stage 2: teacher-force the context-removed view on the same prefix
-        and return its (lp_yes, lp_no) at the decision token."""
-        ids = torch.cat([self.cf_clean['input_ids'][0],
-                         torch.tensor(prefix_ids, dtype=torch.long,
-                                      device=self.cf_clean['input_ids'].device)],
-                        dim=0).unsqueeze(0)
-        kw = dict(input_ids=ids, attention_mask=torch.ones_like(ids))
-        for k in ('pixel_values_images', 'pixel_values', 'image_grid_thw',
-                  'pixel_values_videos', 'video_grid_thw',
-                  'video_second_per_grid', 'input_features',
-                  'feature_attention_mask'):
-            if k in self.cf_clean:
-                kw[k] = self.cf_clean[k]
-        logits = self.model.thinker(**kw).logits[0, -1].float()
-        lp = torch.log_softmax(logits, dim=-1)
-        return lp[YES_ID].item(), lp[NO_ID].item()
+    def confess(self, prefix_ids):
+        """Stage 2: teacher-force the context-removed view on the same prefix."""
+        ly_cf, ln_cf = teacher_force_lp(self.model, self.cf_clean, prefix_ids,
+                                        (YES_ID, NO_ID))
+        return dict(ly_cf=ly_cf, ln_cf=ln_cf)
 
-    def _decide(self, am, ly_full, ln_full, ly_cf, ln_cf):
-        """Stage 3: return (forced_token, margin', delta_eff).
+    def decide(self, full_view, confess_signal):
+        """Stage 3: strip the context channel, force the token."""
+        am = full_view['am']
+        ly_full, ln_full = full_view['ly_full'], full_view['ln_full']
+        margin_full = full_view['margin_full']
+        ly_cf, ln_cf = confess_signal['ly_cf'], confess_signal['ln_cf']
 
-        gamma  v4 (n=200 F1-yes): margin' = margin_full + w*(margin_cf -
-               margin_full) with margin_cf = ly_cf - ln_cf the context-stripped
-               margin; force yes iff margin' > 0. w>1 extrapolates past the clean
-               view because phd's context is adversarial misinformation, so
-               amplifying how far context-removal moves the decision is the right
-               correction (base 72.57 -> 82.95 on n=200).
-        lambda keeps the full margin plus a scaled confession pull; the
-               random_sign control flips Delta before applying it.
-        """
         delta = ly_cf - ly_full
         if self.decision == 'gamma' and self.control_rng is None:
             margin_prime, forced = gamma_extrapolated_phd(ly_full, ln_full,
                                                           ly_cf, ln_cf,
                                                           w=self.w_extrap,
-                                                          thr=self.yes_thr)
-            return forced, margin_prime, delta
-        delta_eff = delta
-        if self.control_rng is not None:
-            delta_eff = delta * self.control_rng.choice([-1.0, 1.0])
-        margin_adj = (ly_full - ln_full) + self.lam * delta_eff
-        forced = YES_ID if margin_adj > 0 else NO_ID
-        return forced, margin_adj, delta_eff
-
-    @torch.inference_mode()
-    def __call__(self, input_ids, scores):
-        if self.used:
-            return scores
-        gen = input_ids[0, self.prompt_len:].tolist()
-        logits = scores[0].float()
-        am = int(logits.argmax().item())
-
-        at_decision = False
-        if len(gen) == 0:
-            at_decision = am in (YES_ID, NO_ID)          # bare immediate answer
+                                                          tau_p=self.tau_p)
+            delta_eff = delta
         else:
-            tail = self.tokenizer.decode(gen[-4:])
-            at_decision = tail.endswith('\\boxed{') or tail.endswith('\\boxed{{')
+            delta_eff = delta
+            if self.control_rng is not None:
+                delta_eff = delta * self.control_rng.choice([-1.0, 1.0])
+            margin_prime = (ly_full - ln_full) + self.lam * delta_eff
+            forced = YES_ID if margin_prime > 0 else NO_ID
 
-        if not at_decision:
-            return scores
-
-        # Stage 2 (Confess): full-view margin + context-removed confession.
-        lp = torch.log_softmax(logits, dim=-1)
-        ly_full, ln_full = lp[YES_ID].item(), lp[NO_ID].item()
-        margin_full = ly_full - ln_full
-        ly_cf, ln_cf = self._confess_lp_yes_no(gen)
-
-        # Stage 3 (Decide): strip the irrelevant channel, hard-force the token.
-        forced, margin_prime, delta_eff = self._decide(am, ly_full, ln_full,
-                                                        ly_cf, ln_cf)
-        scores[0][:] = float('-inf')
-        scores[0][forced] = 0.0          # hard-force the decision token
-
-        self.used = True
-        self.record = dict(
-            dec_index=len(gen),
+        record = dict(
+            dec_index=full_view['dec_index'],
             greedy_token=am,
             forced_token=forced,
             intervened=int(forced != am),
@@ -171,10 +110,10 @@ class CFConfessProcessor(LogitsProcessor):
             delta_cf=round(ly_cf - ly_full, 4),
             delta_eff=round(delta_eff, 4),
             margin_adj=round(margin_prime, 4),
-            gate_tau=self.gate_tau,
             w_extrap=self.w_extrap,
+            tau_p=self.tau_p,
         )
-        return scores
+        return forced, record
 
 
 def main():
@@ -190,17 +129,14 @@ def main():
     ap.add_argument('--prompt_version', type=str, default='v1')
     ap.add_argument('--lambda_cf', type=float, default=2.0)
     ap.add_argument('--decision', choices=['gamma', 'lambda'], default='gamma',
-                    help="Stage-3 rule: 'gamma' = deployed lambda-free rule "
-                         "(default), 'lambda' = legacy margin+lambda*Delta.")
-    ap.add_argument('--gate_tau', type=float, default=1.4,
-                    help="legacy v3 gate (unused by v4 extrapolation rule).")
+                    help="Stage-3 rule: 'gamma' = champion lambda-free rule, "
+                         "'lambda' = legacy margin+lambda*Delta.")
     ap.add_argument('--w_extrap', type=float, default=4.0,
-                    help="v5 phd rule: margin' = margin_full + w*(margin_cf - "
-                         "margin_full); w=1 = literal gamma, w=4 = deployed "
-                         "(full-906 F1-yes 86.84).")
-    ap.add_argument('--yes_thr', type=float, default=-1.6,
-                    help="v5 phd rule: predict yes iff margin' > yes_thr. "
-                         "Deployed -1.6 (nested-CV modal point).")
+                    help="Extrapolation weight: margin' = margin_full + "
+                         "w*(margin_cf - margin_full). Champion: 4.0.")
+    ap.add_argument('--tau_p', type=float, default=-1.6,
+                    help="Decision threshold: predict yes iff margin' > tau_p. "
+                         "Champion: -1.6.")
     ap.add_argument('--control', choices=['none', 'random_sign'], default='none')
     ap.add_argument('--record_process', action=argparse.BooleanOptionalAction, default=True)
     ap.add_argument('--dry_run', action='store_true')
@@ -238,7 +174,6 @@ def main():
             pv, av, iv = load_media_for_item(item, args.data_path, args.data_root)
             q_full, q_only = split_question(item['question'])
 
-            # full view (== base_model input)
             u_full = get_user_prompt(q_full, args.datasets, args.prompt_version)
             uc_full = build_user_content_with_media_tokens(pv, av, iv, u_full)
             clean_f = prepare_for_thinker(
@@ -247,7 +182,6 @@ def main():
                              pv, av, iv, args.datasets), model)
             input_len = clean_f['input_ids'].shape[1]
 
-            # counterfactual view: image + question only
             u_cf = get_user_prompt(q_only, args.datasets, args.prompt_version)
             uc_cf = build_user_content_with_media_tokens(pv, av, iv, u_cf)
             clean_cf = prepare_for_thinker(
@@ -258,9 +192,8 @@ def main():
             cf_proc = CFConfessProcessor(model, tokenizer, clean_cf, input_len,
                                          args.lambda_cf, control_rng,
                                          decision=args.decision,
-                                         gate_tau=args.gate_tau,
                                          w_extrap=args.w_extrap,
-                                         yes_thr=args.yes_thr)
+                                         tau_p=args.tau_p)
 
             with torch.inference_mode():
                 out = model.thinker.generate(

@@ -1,0 +1,561 @@
+{
+ "meta": {
+  "n": {
+   "phd_full": 906,
+   "cmm_full": 720,
+   "qonly": 906,
+   "phd_nemotron_dev": 100,
+   "phd_qwen3_dev": 100,
+   "cmm_nemotron_dev": 100,
+   "cmm_qwen3_dev": 98,
+   "avh": 120
+  },
+  "notes": [
+   "cmm_probe_full.jsonl has 720 rows (task sheet said 721); w5 shard has 89.",
+   "avh probes total 120 rows (4 shards x 30), not ~130.",
+   "phd ids are non-unique (114 unique / 906): phd_probe_qonly.jsonl used as standalone distribution only (no join); cmm handled by line position.",
+   "Nemotron probe AUCs absent from a3_dose_response.json -> computed here.",
+   "Cross-backbone rows use dev probes (n=100/98) vs Qwen2.5 full (906/720); dev-vs-full caveats apply.",
+   "bootstrap: 1000 resamples, seed=42."
+  ]
+ },
+ "panel_a_concentration": {
+  "lorenz_gini": {
+   "phd_q2.5_full_|delta_noctx|": {
+    "n": 906,
+    "gini": 0.5099040900790575,
+    "ci95": [
+     0.49296762769029573,
+     0.5278713121677471
+    ]
+   },
+   "phd_q2.5_full_|delta_noimg|": {
+    "n": 906,
+    "gini": 0.3889918702956865,
+    "ci95": [
+     0.37030202808507723,
+     0.40711456804540647
+    ]
+   },
+   "cmm_q2.5_full_|d_cf_sum|": {
+    "n": 720,
+    "gini": 0.2202408973956228,
+    "ci95": [
+     0.20756170115518374,
+     0.23277403946957803
+    ]
+   },
+   "cmm_q2.5_full_overrely_audio_ignore_visual_|d_cf_sum|": {
+    "n": 329,
+    "gini": 0.2398138027201873,
+    "ci95": [
+     0.21785744190865564,
+     0.2600115805706123
+    ]
+   },
+   "cmm_q2.5_full_overrely_visual_ignore_audio_|d_cf_sum|": {
+    "n": 391,
+    "gini": 0.16765333002272548,
+    "ci95": [
+     0.1563363727105981,
+     0.179066147748652
+    ]
+   },
+   "phd_delta_noctx_top_share": {
+    "top10pct_mass": 0.32914309097899147,
+    "top20pct_mass": 0.5355053051287703
+   },
+   "cmm_d_cf_sum_top_share": {
+    "top10pct_mass": 0.16980922730524667,
+    "top20pct_mass": 0.31085994445925097
+   }
+  },
+  "flippable_band": {
+   "phd": {
+    "0.5": 0.0673289183222958,
+    "1.0": 0.18432671081677704,
+    "2.0": 0.30353200883002207,
+    "4.0": 0.45364238410596025
+   },
+   "phd_ci": {
+    "0.5": [
+     0.05187637969094923,
+     0.0839128035320088
+    ],
+    "1.0": [
+     0.16222406181015453,
+     0.20863686534216333
+    ],
+    "2.0": [
+     0.27483443708609273,
+     0.3344370860927152
+    ],
+    "4.0": [
+     0.4227373068432671,
+     0.4867549668874172
+    ]
+   },
+   "cmm": {
+    "0.5": 0.3347222222222222,
+    "1.0": 0.5638888888888889,
+    "2.0": 0.875,
+    "4.0": 0.9861111111111112
+   },
+   "cmm_ci": {
+    "0.5": [
+     0.3013888888888889,
+     0.37083333333333335
+    ],
+    "1.0": [
+     0.5291319444444444,
+     0.6000347222222222
+    ],
+    "2.0": [
+     0.8513888888888889,
+     0.9000347222222222
+    ],
+    "4.0": [
+     0.9777777777777777,
+     0.9944444444444445
+    ]
+   }
+  },
+  "cross_backbone": {
+   "phd": {
+    "qwen2.5_full": {
+     "n": 906,
+     "gini": 0.5099040900790575,
+     "gini_ci95": [
+      0.4910633183524564,
+      0.5274831148602701
+     ],
+     "median_abs_d": 0.5478,
+     "band_lam2": 0.30353200883002207,
+     "band_lam2_ci95": [
+      0.27483443708609273,
+      0.33446467991169976
+     ]
+    },
+    "qwen3_dev": {
+     "n": 100,
+     "gini": 0.6869719372611167,
+     "gini_ci95": [
+      0.6130406692167515,
+      0.7515266798176994
+     ],
+     "median_abs_d": 0.2005,
+     "band_lam2": 0.09,
+     "band_lam2_ci95": [
+      0.04,
+      0.15
+     ]
+    },
+    "nemotron_dev": {
+     "n": 100,
+     "gini": 0.6989662335252489,
+     "gini_ci95": [
+      0.6286957090384404,
+      0.7651264898489304
+     ],
+     "median_abs_d": 0.125,
+     "band_lam2": 0.06,
+     "band_lam2_ci95": [
+      0.02,
+      0.12
+     ]
+    }
+   },
+   "cmm": {
+    "qwen2.5_full": {
+     "n": 720,
+     "gini": 0.2202408973956228,
+     "gini_ci95": [
+      0.20734479847731627,
+      0.23236211518239203
+     ],
+     "median_abs_d": 2.25815,
+     "band_lam2": 0.875,
+     "band_lam2_ci95": [
+      0.8513541666666666,
+      0.8986111111111111
+     ]
+    },
+    "qwen3_dev": {
+     "n": 98,
+     "gini": 0.79105984360812,
+     "gini_ci95": [
+      0.7332290849358378,
+      0.839916550985561
+     ],
+     "median_abs_d": 0.00365,
+     "band_lam2": 0.10204081632653061,
+     "band_lam2_ci95": [
+      0.05102040816326531,
+      0.16326530612244897
+     ]
+    },
+    "nemotron_dev": {
+     "n": 100,
+     "gini": 0.6637354300426596,
+     "gini_ci95": [
+      0.5920043944049874,
+      0.7166004242598791
+     ],
+     "median_abs_d": 0.34345000000000003,
+     "band_lam2": 0.15,
+     "band_lam2_ci95": [
+      0.09,
+      0.22
+     ]
+    }
+   }
+  },
+  "cross_backbone_dev": {
+   "_note": "Qwen2.5 dev point for panel (d). Primary = existing protocol-matched stratified dev probes (phd_probe.jsonl n=100, cmm_probe.jsonl n=87; same 25/cell seed-42 protocol as the Qwen3/Nemotron dev probes). dev100_ids.json indexes phd.json uid suffixes and does NOT match the probe id spaces, so filtering the full probes by it yields 136 rows /17 questions (phd) and 104 rows/13 questions (cmm) — kept as rejected alternative below.",
+   "phd": {
+    "n": 100,
+    "median_abs_d": 0.57025,
+    "band_lam2": 0.32,
+    "band_lam2_ci95": [
+     0.23,
+     0.42
+    ],
+    "source": "delta_noctx"
+   },
+   "cmm": {
+    "n": 87,
+    "median_abs_d": 2.332,
+    "band_lam2": 0.8620689655172413,
+    "band_lam2_ci95": [
+     0.7701149425287356,
+     0.9310344827586207
+    ],
+    "source": "d_cf_sum"
+   },
+   "alternative_dev100ids_intersection_rejected": {
+    "phd": {
+     "n": 136,
+     "median_abs_d": 0.5406,
+     "band_lam2": 0.3382352941176471,
+     "band_lam2_ci95": [
+      0.25735294117647056,
+      0.41911764705882354
+     ],
+     "source": "delta_noctx"
+    },
+    "cmm": {
+     "n": 104,
+     "median_abs_d": 2.1694500000000003,
+     "band_lam2": 0.8653846153846154,
+     "band_lam2_ci95": [
+      0.7980769230769231,
+      0.9326923076923077
+     ],
+     "source": "d_cf_sum"
+    }
+   }
+  }
+ },
+ "panel_b_channel": {
+  "cmm_2x2": {
+   "audio_group_|d_cf_audio|": 0.2694,
+   "audio_group_|d_cf_video|": 1.3729,
+   "visual_group_|d_cf_audio|": 0.514,
+   "visual_group_|d_cf_video|": 2.0794
+  },
+  "enrichment": {
+   "audio_channel_in_audio_group_vs_visual_group": 0.524124513618677,
+   "video_channel_in_visual_group_vs_audio_group": 1.5146041226600628,
+   "audio_ci95": [
+    0.4054152280574232,
+    0.6338985797665369
+   ],
+   "video_ci95": [
+    1.4096128288438246,
+    1.6775046047889806
+   ]
+  },
+  "avh": {
+   "n": 120,
+   "n_tokens": 3109,
+   "note": "delta_* are per-token lists; median/mean/frac_negative are token-level over all 120 samples; strata use per-sample median|d|",
+   "delta_audio": {
+    "median": 0.003599999938160181,
+    "mean": 0.35110611131668046,
+    "frac_negative": 0.4162110003216468
+   },
+   "delta_video": {
+    "median": 0.3449000120162964,
+    "mean": 1.2538946293745221,
+    "frac_negative": 0.15825024123512382
+   },
+   "low_f1_lt0.5": {
+    "n": 117,
+    "median_|delta_audio|": 0.11169999837875366,
+    "median_|delta_video|": 0.40895000100135803
+   },
+   "high_f1_ge0.5": {
+    "n": 3,
+    "median_|delta_audio|": 0.16529999673366547,
+    "median_|delta_video|": 0.40459999442100525
+   }
+  },
+  "phd_channels": {
+   "median_|delta_noctx|_text_prior_channel": 0.5478,
+   "median_|delta_noimg|_vision_channel": 2.0552,
+   "ratio_noctx_over_noimg": 0.2665434021019852,
+   "median_|margin_qonly|_question_only_prior": 0.75,
+   "ci95_noctx": [
+    0.5082949999999999,
+    0.58195
+   ],
+   "ci95_noimg": [
+    1.91614875,
+    2.2095849999999997
+   ]
+  },
+  "channel_matrix": {
+   "phd(q2.5,906)": {
+    "text_prior(noctx)": 0.5478,
+    "vision(noimg)": 2.0552
+   },
+   "cmm(q2.5,720)": {
+    "audio": 0.39359999999999995,
+    "video": 1.8249499999999999
+   },
+   "avh(q2.5,120)": {
+    "audio": 0.11385000124573708,
+    "video": 0.40677499771118164
+   },
+   "phd@qwen3(dev100)": {
+    "text_prior(noctx)": 0.2005
+   },
+   "phd@nemotron(dev100)": {
+    "text_prior(noctx)": 0.125
+   }
+  }
+ },
+ "panel_c_validity": {
+  "iou": {
+   "phd_top1pct_|delta_noctx|_vs_|margin_full|": {
+    "iou": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "phd_top5pct_|delta_noctx|_vs_|margin_full|": {
+    "iou": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "phd_top10pct_|delta_noctx|_vs_|margin_full|": {
+    "iou": 0.0055248618784530384,
+    "ci95": [
+     0.0,
+     0.01675977653631285
+    ]
+   },
+   "phd_top20pct_|delta_noctx|_vs_|margin_full|": {
+    "iou": 0.0111731843575419,
+    "ci95": [
+     0.002770083102493075,
+     0.028409090909090908
+    ]
+   },
+   "cmm_top1pct_|d_cf_sum|_vs_|margin_full|": {
+    "iou": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "cmm_top5pct_|d_cf_sum|_vs_|margin_full|": {
+    "iou": 0.02857142857142857,
+    "ci95": [
+     0.0,
+     0.07462686567164178
+    ]
+   },
+   "cmm_top10pct_|d_cf_sum|_vs_|margin_full|": {
+    "iou": 0.051094890510948905,
+    "ci95": [
+     0.02127659574468085,
+     0.09923664122137404
+    ]
+   },
+   "cmm_top20pct_|d_cf_sum|_vs_|margin_full|": {
+    "iou": 0.12062256809338522,
+    "ci95": [
+     0.08270676691729323,
+     0.16129032258064516
+    ]
+   }
+  },
+  "auroc_cited_from_a3": {
+   "phd_q2.5_dev": {
+    "name": "d_cf(noctx) dev100",
+    "n": 100,
+    "auc": 0.767,
+    "ci": [
+     0.663,
+     0.851
+    ]
+   },
+   "phd_q2.5_full": {
+    "name": "d_cf(noctx) full906",
+    "n": 906,
+    "auc": 0.68,
+    "ci": [
+     0.638,
+     0.72
+    ]
+   },
+   "phd_q2.5_full_noimg": {
+    "name": "d_cf(noimg) full906",
+    "n": 906,
+    "auc": 0.248,
+    "ci": [
+     0.216,
+     0.281
+    ]
+   },
+   "cmm_q2.5_full": {
+    "name": "-d_cf_sum full720",
+    "n": 720,
+    "auc": 0.595,
+    "ci": [
+     0.553,
+     0.634
+    ]
+   },
+   "phd_q2.5_full_margin_full": {
+    "name": "margin_full",
+    "n": 906,
+    "auc": 0.739,
+    "ci": [
+     0.704,
+     0.772
+    ]
+   },
+   "phd_q2.5_full_-margin_noctx": {
+    "name": "-margin_noctx",
+    "n": 906,
+    "auc": 0.161,
+    "ci": [
+     0.134,
+     0.188
+    ]
+   },
+   "pubmedqa_full": {
+    "name": "-d_cf(passage)",
+    "n": 460,
+    "auc": 0.585,
+    "ci": [
+     0.47,
+     0.698
+    ]
+   },
+   "phd_qwen3_dev": {
+    "name": "d_cf(noctx) dev100 qwen3",
+    "n": 100,
+    "auc": 0.557,
+    "ci": [
+     0.445,
+     0.676
+    ]
+   },
+   "cmm_qwen3_probe": {
+    "name": "-d_cf_sum qwen3",
+    "n": 98,
+    "auc": 0.721,
+    "ci": [
+     0.591,
+     0.84
+    ],
+    "margin_full_auc": 0.951
+   }
+  },
+  "cross_backbone_auc": {
+   "phd_d_cf_noctx": {
+    "qwen2.5_dev100(cited a3)": 0.767,
+    "qwen2.5_full906(cited a3)": 0.68,
+    "qwen3_dev100": 0.5572,
+    "nemotron_dev100": 0.6348
+   },
+   "cmm_neg_d_cf_sum": {
+    "qwen2.5_full720(cited a3)": 0.595,
+    "qwen3_dev98": 0.721366097459392,
+    "nemotron_dev100": 0.5932
+   },
+   "phd_d_cf_noctx_ci95": {
+    "qwen3_dev100": [
+     0.4401161131119114,
+     0.6650441589723003
+    ],
+    "nemotron_dev100": [
+     0.5197067395264117,
+     0.747548774711843
+    ]
+   },
+   "cmm_neg_d_cf_sum_ci95": {
+    "qwen3_dev98": [
+     0.6017019988433456,
+     0.8456155936454848
+    ],
+    "nemotron_dev100": [
+     0.4748858912919845,
+     0.7067471590909091
+    ]
+   }
+  },
+  "entropy_race": {
+   "ragtruth": {
+    "CE_top5mean": {
+     "auc": 0.5754172092477158,
+     "n": 1740,
+     "note": "CE features sign-flipped (low entropy = confident); good = per-sample F1 >= median"
+    },
+    "CE_max": {
+     "auc": 0.5634646379472291,
+     "n": 1740,
+     "note": "CE features sign-flipped (low entropy = confident); good = per-sample F1 >= median"
+    },
+    "g_content(delta)": {
+     "auc": 0.5062547211760483,
+     "n": 1737,
+     "note": "CE features sign-flipped (low entropy = confident); good = per-sample F1 >= median"
+    },
+    "g_mean_claim(delta)": {
+     "auc": 0.5078043383924697,
+     "n": 1737,
+     "note": "CE features sign-flipped (low entropy = confident); good = per-sample F1 >= median"
+    }
+   },
+   "haloquest": {
+    "CE_top5mean": {
+     "auc": 0.6238807863031072,
+     "n": 1460,
+     "note": "CE features sign-flipped (low entropy = confident); good = per-sample F1 >= median"
+    },
+    "CE_max": {
+     "auc": 0.5873280682538767,
+     "n": 1460,
+     "note": "CE features sign-flipped (low entropy = confident); good = per-sample F1 >= median"
+    },
+    "g_content(delta)": {
+     "auc": 0.4447517730496454,
+     "n": 1132,
+     "note": "CE features sign-flipped (low entropy = confident); good = per-sample F1 >= median"
+    },
+    "g_mean_claim(delta)": {
+     "auc": 0.4254401335002086,
+     "n": 1132,
+     "note": "CE features sign-flipped (low entropy = confident); good = per-sample F1 >= median"
+    }
+   }
+  }
+ }
+}
