@@ -28,8 +28,7 @@ scikit-learn>=1.5               # TF-IDF and k-means path clustering
 sentence-transformers           # only needed for --path_cluster_mode sbert
 
 # --- evaluation ---
-pycocoevalcap                   # BLEU / ROUGE / METEOR / CIDEr
-zhipuai>=2.1                    # LLM-as-a-judge (GAVIE); reads ZHIPU_API_KEY
+zhipuai>=2.1                    # LLM-as-a-judge (GAVIE); optional, reads ZHIPU_API_KEY
 tqdm
 
 # --- MiniCPM-o-2.6 backbone only ---
