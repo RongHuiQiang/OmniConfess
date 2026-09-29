@@ -133,8 +133,6 @@ OmniConfess/
 └── README.md
 ```
 
-The `confession/` directory is the original research codebase from which `omniconfess/` was extracted. It is preserved for historical traceability and is not a dependency of the published pipeline.
-
 ---
 
 ## Evaluation

@@ -6,10 +6,11 @@ All six benchmarks are scored through a single script: `eval_unified.py`.
 
 | Task type | Datasets | Metric |
 |---|---|---|
-| Judgment | PHD, CMM, PubMedQA | Categorical-F1(yes), PhD-Index |
-| Free-form | RAGTruth, HaloQuest, AVHBench | Token-F1 |
+| Judgment | PHD, CMM, PubMedQA | Yes-F1 (eq. 36), PhD-Index (eq. 37) |
+| Free-form | RAGTruth, HaloQuest, AVHBench | Token-F1 (eq. 38), GAVIE-Acc (eq. 39) |
+| Localization | span-annotated outputs | AUPRC (eq. 40) |
 
-**Categorical-F1(yes)** is the standard binary F1 on the yes class. **PhD-Index** is the harmonic mean of yes-recall and no-recall. **Token-F1** is content-word F1 against a 38-word stoplist (no/not are retained).
+**Yes-F1** is the standard binary F1 on the positive (yes) class. **PhD-Index** is the harmonic mean of yes-recall and no-recall. **Token-F1** is content-word F1 against a 38-word stoplist (no/not are retained). **GAVIE-Acc** is LLM-judged factual accuracy on a 0–10 scale (requires `ZHIPU_API_KEY`). **AUPRC** is the average precision over candidate spans ranked by predicted hallucination risk, pooled across all samples.
 
 PubMedQA has a three-way label set (yes / no / maybe). Rows whose ground truth is maybe are excluded from the binary metrics; a maybe prediction on a yes/no row is scored as a miss.
 

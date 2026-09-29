@@ -30,7 +30,7 @@ import string
 import numpy as np
 from tqdm import tqdm
 from collections import Counter
-from sklearn.metrics import f1_score, recall_score
+from sklearn.metrics import f1_score, recall_score, average_precision_score
 
 STOPWORDS = {
     "a", "an", "the", "and", "or", "but", "if", "because", "as", "what",
@@ -176,7 +176,7 @@ class UnifiedEvaluator:
             results.append({
                 "File Name": f"{name} [{cat}]",
                 "Samples": len(yt),
-                "Categorical-F1": round(f1_score(yt, yp, zero_division=0) * 100, 2),
+                "Yes-F1": round(f1_score(yt, yp, zero_division=0) * 100, 2),
                 "PhD-Index": round(phd * 100, 2),
             })
         return results
@@ -321,6 +321,52 @@ class UnifiedEvaluator:
 
         return [result]
 
+    # ---- localization task: span-level AUPRC (eq. 40) --------------------
+
+    def evaluate_localization_tasks(self, file_path, save_single=False):
+        """AUPRC for hallucination span localization.
+
+        Each JSONL row must carry span_scores (list[float]) and span_labels
+        (list[int], 1 = hallucinated).  All spans across every sample are
+        pooled and average precision is computed once over the full ranking.
+        """
+        data = self._load_data(file_path)
+        name = os.path.basename(file_path)
+        all_scores, all_labels = [], []
+        scored = []
+
+        for item in tqdm(data, desc=f"AUPRC ({name})"):
+            scores = item.get("span_scores", [])
+            labels = item.get("span_labels", [])
+            if len(scores) != len(labels) or not scores:
+                item["eval_metrics"] = {"AUPRC": None}
+                scored.append(item)
+                continue
+            all_scores.extend(scores)
+            all_labels.extend(labels)
+            item["eval_metrics"] = {}
+            scored.append(item)
+
+        if save_single:
+            out = file_path.rsplit('.', 1)[0] + "_single_scored.jsonl"
+            with open(out, 'w', encoding='utf-8') as f:
+                for d in scored:
+                    f.write(json.dumps(d, ensure_ascii=False) + '\n')
+            print(f"[ok] per-sample results -> {out}")
+
+        if not all_labels or sum(all_labels) == 0:
+            print(f"[warn] {name}: no positive spans found.")
+            return [{"File Name": name, "Samples": len(data), "AUPRC": None}]
+
+        auprc = average_precision_score(all_labels, all_scores)
+        result = {
+            "File Name": name,
+            "Samples":   len(data),
+            "Spans":     len(all_labels),
+            "AUPRC":     round(auprc * 100, 2),
+        }
+        return [result]
+
 
 # ---- CLI -----------------------------------------------------------------
 
@@ -354,6 +400,8 @@ if __name__ == "__main__":
         elif any(k in n for k in ("ragtruth",)):   mode, cat = "descriptive", "ragtruth"
         elif any(k in n for k in ("halo",)):       mode, cat = "descriptive", "haloquest"
         elif any(k in n for k in ("avh",)):        mode, cat = "descriptive", "avhbench"
+        elif any(k in n for k in ("local", "span", "auprc")):
+                                                   mode, cat = "localization", "localization"
         else:
             continue
 
@@ -362,6 +410,8 @@ if __name__ == "__main__":
         try:
             if mode == "judgement":
                 rows = evaluator.evaluate_judgment_tasks(f, save_single=True)
+            elif mode == "localization":
+                rows = evaluator.evaluate_localization_tasks(f, save_single=True)
             else:
                 rows = evaluator.evaluate_descriptive_tasks(f, save_single=True)
             all_reports[key].extend(rows)
@@ -373,7 +423,7 @@ if __name__ == "__main__":
             continue
         fname = f"{mode}_{cat}.csv"
         if mode == "judgement":
-            headers = ["File Name", "Samples", "Categorical-F1", "PhD-Index"]
+            headers = ["File Name", "Samples", "Yes-F1", "PhD-Index"]
         else:
             # write all keys present across rows
             headers = list(dict.fromkeys(k for r in rows for k in r))
