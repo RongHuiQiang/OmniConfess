@@ -20,6 +20,7 @@ runs/
 checkpoints/
 outputs/
 logs/
+results_shipped/
 .claude/
 CLAUDE.md
 .claude-code/
@@ -35,3 +36,10 @@ OmniHalluBench/*/images/
 # accidental shell-unexpanded dir + scratch
 $WD/
 scratch_smoke/
+
+# research / experiment directories — not part of the published pipeline
+OmniConfess/
+ablation/
+experiments/
+probes/
+bin/
