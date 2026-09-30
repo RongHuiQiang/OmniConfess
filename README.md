@@ -4,7 +4,7 @@ Official resources of **"OmniConfess: Counterfactual Channel Attribution for Mul
 
 ## Overview
 
-![](./figs/F1.png)
+![](./figs/figure4.png)
 
 ## Environment Setup
 
