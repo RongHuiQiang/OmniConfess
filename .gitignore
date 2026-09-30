@@ -20,6 +20,7 @@ runs/
 checkpoints/
 outputs/
 logs/
+results_shipped/
 .claude/
 CLAUDE.md
 .claude-code/
@@ -31,3 +32,24 @@ CLAUDE.md
 OmniHalluBench/*/reorg_raw_files/
 OmniHalluBench/*/videos/
 OmniHalluBench/*/images/
+
+# accidental shell-unexpanded dir + scratch
+$WD/
+scratch_smoke/
+
+# research / experiment / legacy directories — not part of the published pipeline
+OmniConfess/
+ablation/
+experiments/
+probes/
+bin/
+confession/
+docs/
+results/
+PAPER_CODE_CORRESPONDENCE.md
+EFFICIENCY_MECHANISMS.md
+KNOWN_ISSUES.md
+evaluation/eval_unified_legacy.py
+configs/
+scripts/aggregate_fullset.py
+scripts/tokenf1_fullset.py
