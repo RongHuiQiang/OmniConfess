@@ -1,10 +1,14 @@
 # OmniConfess
 
-Official resources of **"OmniConfess: Counterfactual Channel Attribution for Multimodal Hallucination Correction"**. Anonymous. **Preprint 2026**.
+[![arXiv](https://img.shields.io/badge/arXiv-2610.02999-b31b1b.svg)](https://arxiv.org/abs/2610.02999)
+
+Official resources of **"OmniConfess: Eliciting Token Confessions to Mitigate Omni-Modal Hallucination"**. Huiqiang Rong, Haoran Luo, Hui Feng, Zhonghong Ou, Kaiwen Xue, Guoxin Zhang, Yifan Zhu. **arXiv Preprint 2026** [[paper](https://arxiv.org/abs/2610.02999)].
 
 ## Overview
 
-![](./figs/figure4.png)
+<div align="center">
+  <img src="./figs/figure4.png" width="90%"/>
+</div>
 
 ## Environment Setup
 
@@ -53,11 +57,16 @@ $PY run_confess.py avhbench \
 
 ## BibTeX
 
+If you find this work helpful for your research, please cite:
+
 ```bibtex
-@article{omniconfess2026,
-  title   = {OmniConfess: Counterfactual Channel Attribution for Multimodal Hallucination Correction},
-  author  = {Anonymous},
-  journal = {Preprint},
-  year    = {2026}
+@misc{rong2026omniconfess,
+  title         = {OmniConfess: Eliciting Token Confessions to Mitigate Omni-Modal Hallucination},
+  author        = {Huiqiang Rong and Haoran Luo and Hui Feng and Zhonghong Ou and Kaiwen Xue and Guoxin Zhang and Yifan Zhu},
+  year          = {2026},
+  eprint        = {2610.02999},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2610.02999}
 }
 ```
