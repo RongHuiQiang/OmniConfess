@@ -1,6 +1,7 @@
 # OmniConfess
 
 [![arXiv](https://img.shields.io/badge/arXiv-2610.02999-b31b1b.svg)](https://arxiv.org/abs/2610.02999)
+[![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-OmniHalluBench-yellow)](https://huggingface.co/datasets/Eric1231/OmniHalluBench)
 
 Official resources of **"OmniConfess: Eliciting Token Confessions to Mitigate Omni-Modal Hallucination"**. Huiqiang Rong, Haoran Luo, Hui Feng, Zhonghong Ou, Kaiwen Xue, Guoxin Zhang, Yifan Zhu. **arXiv Preprint 2026** [[paper](https://arxiv.org/abs/2610.02999)].
 
@@ -9,6 +10,21 @@ Official resources of **"OmniConfess: Eliciting Token Confessions to Mitigate Om
 <div align="center">
   <img src="./figs/figure4.png" width="90%"/>
 </div>
+
+## Dataset
+
+**OmniHalluBench** is a unified evaluation benchmark for omni-modal hallucination, containing **3,540 evaluation examples** from six datasets spanning text, image, audio, and video, and covering both judgment and free-form generation.
+
+The benchmark is available on [Hugging Face](https://huggingface.co/datasets/Eric1231/OmniHalluBench). Download it with:
+
+```bash
+pip install -U huggingface_hub
+hf download Eric1231/OmniHalluBench \
+  --repo-type dataset \
+  --local-dir OmniHalluBench
+```
+
+For the dataset layout, source datasets, and usage instructions, please refer to the [dataset card](https://huggingface.co/datasets/Eric1231/OmniHalluBench).
 
 ## Environment Setup
 
