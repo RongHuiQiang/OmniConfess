@@ -1,11 +1,11 @@
-# OmniHalluBench
+# OmniGroundBench
 
-OmniHalluBench is a unified evaluation benchmark covering six multimodal hallucination datasets. Annotations are provided in this repository. Media files (images, videos, audio) must be downloaded separately from the original sources due to licensing constraints.
+OmniGroundBench is a unified evaluation benchmark covering six multimodal hallucination datasets. Annotations are provided in this repository. Media files (images, videos, audio) must be downloaded separately from the original sources due to licensing constraints.
 
 ## Structure
 
 ```
-OmniHalluBench/
+OmniGroundBench/
 ├── phd/annotations/phd.json           # 906 samples — image + text
 ├── cmm/annotations/cmm.json           # 721 samples — video + audio
 ├── pubmedqa/annotations/pubmedqa.json # 468 samples — text only
@@ -17,8 +17,8 @@ OmniHalluBench/
 Each annotation file contains the full sample set with media paths normalized to `media/` prefix. Evaluation scripts expect:
 
 ```
---data_path OmniHalluBench/<ds>/annotations/<ds>.json
---data_root OmniHalluBench/<ds>/
+--data_path OmniGroundBench/<ds>/annotations/<ds>.json
+--data_root OmniGroundBench/<ds>/
 ```
 
 ## Downloading Media Files
@@ -31,7 +31,7 @@ python scripts/download_media.py --dataset all
 python scripts/download_media.py --dataset haloquest
 ```
 
-Media files will be placed under `OmniHalluBench/<ds>/media/` to match the paths in the annotation files.
+Media files will be placed under `OmniGroundBench/<ds>/media/` to match the paths in the annotation files.
 
 ## Original Sources
 
